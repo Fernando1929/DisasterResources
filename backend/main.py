@@ -1,6 +1,4 @@
 from flask import Flask, jsonify, request
-#from handler.parts import PartHandler
-#from handler.supplier import SupplierHandler
 from handler.customer import CustomerHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
@@ -11,8 +9,6 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 # Apply CORS to this app
 CORS(app)
-
-#Example
 
 @app.route('/')
 def greeting():
