@@ -2,7 +2,7 @@ class CustomerDAO:
     def __init__(self):
         super().__init__()
 
-    # Customer = user_id, user_firstname, user_lastname, user_datebirth, user_email, user_phone, customer_id
+    # Customer = user_id, user_firstname, user_lastname, user_date_birth, user_email, user_phone, customer_id
     def getAllCustomers(self):
         result = [
             ["1", "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777" , "1"],
@@ -44,6 +44,10 @@ class CustomerDAO:
         customer_id = 1
         return customer_id
 
+    def update(self, customer_id):
+        user_id = 1
+        return user_id
+
     def delete(self, customer_id):
-        customer_id = 1
-        return customer_id
+        user_id = 1
+        return user_id
