@@ -25,9 +25,9 @@ class CustomerHandler:
         result['customer_phone'] = customer_phone
         return result
 
-    def getAllCustomers(self):
+    def getAllCustomer(self):
         dao = CustomerDAO()
-        customers_list = dao.getAllCustomers()
+        customers_list = dao.getAllCustomer()
         result_list = []
         for row in customers_list:
             result = self.build_customer_dict(row)
@@ -43,7 +43,7 @@ class CustomerHandler:
             customer = self.build_customer_dict(row)
             return jsonify(Customer = customer)
 
-    def searchCustomers(self, args):
+    def searchCustomer(self, args):
         customer_firstname = args.get("customer_firstname")
         customer_lastname = args.get("customer_lastname")
         customer_email = args.get("customer_email")
@@ -81,27 +81,25 @@ class CustomerHandler:
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
 
-    def updateCustomer(self, customer_id, form):
+    def updateCustomer(self, customer_id, json):
         customer_dao = CustomerDAO()
         if not customer_dao.getCustomerById(customer_id):
             return jsonify(Error = "Customer not found."), 404
         else:
-            if len(form) != 5:
-                return jsonify(Error = "Malformed update request."), 404
+            print(json)
+            customer_firstname = json["customer_firstname"]
+            customer_lastname = json["customer_lastname"]
+            customer_date_birth = json["customer_date_birth"]
+            customer_email = json["customer_email"]
+            customer_phone = json["customer_phone"]
+            if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
+                user_id = customer_dao.update(customer_id)
+                user_dao = UserDAO()
+                user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+                result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+                return jsonify(Customer = result), 200
             else:
-                customer_firstname = form["customer_firstname"]
-                customer_lastname = form["customer_lastname"]
-                customer_date_birth = form["customer_date_birth"]
-                customer_email = form["customer_email"]
-                customer_phone = form["customer_phone"]
-                if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
-                    user_id = customer_dao.update(customer_id)
-                    user_dao = UserDAO()
-                    user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
-                    result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
-                    return jsonify(Customer = result), 200
-                else:
-                    return jsonify(Error = "Unexpected attributes in update request"), 400
+                return jsonify(Error = "Unexpected attributes in update request"), 400
 
     def deleteCustomer(self, customer_id):
         customer_dao = CustomerDAO()

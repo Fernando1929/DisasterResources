@@ -2,6 +2,7 @@ class WaterDAO:
     def __init__(self):
         super().__init__()
 
+# water = water_id, supplier_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date
     def getAllWater(self):
         result = [
             ["1", "1", "Water", "Nikini", "10", "1.00", "16", "Bottle", "Purified", "02/12/2022"],

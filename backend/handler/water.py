@@ -103,30 +103,27 @@ class WaterHandler:
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
 
-    def updateWater(self, water_id, form):
+    def updateWater(self, water_id, json):
         water_dao = WaterDAO()
         if not water_dao.getWaterById(water_id):
             return jsonify(Error = "Water not found."), 404
         else:
-            if len(form) != 8:
-                return jsonify(Error = "Malformed update request."), 404
+            water_name = json["water_name"]
+            water_brand = json["water_brand"]
+            water_quantity = json["water_quantity"]
+            water_price = json["water_price"]
+            water_size = json["water_size"]
+            water_container = json["water_container"]
+            water_type = json["water_type"]
+            water_exp_date = json["water_exp_date"]
+            if water_name and water_brand and water_container and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
+                resource_id = water_dao.update(water_id, water_size, water_container, water_type, water_exp_date)
+                resource_dao = ResourceDAO()
+                resource_dao.update(resource_id, water_name, water_brand, water_quantity, water_price)
+                result = self.build_customer_attributes(resource_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
+                return jsonify(Water = result), 200
             else:
-                water_name = form["water_name"]
-                water_brand = form["water_brand"]
-                water_quantity = form["water_quantity"]
-                water_price = form["water_price"]
-                water_size = form["water_size"]
-                water_container = form["water_container"]
-                water_type = form["water_type"]
-                water_exp_date = form["water_exp_date"]
-                if water_name and water_brand and water_container and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
-                    resource_id = water_dao.update(water_id, water_size, water_container, water_type, water_exp_date)
-                    resource_dao = ResourceDAO()
-                    resource_dao.update(resource_id, water_name, water_brand, water_quantity, water_price)
-                    result = self.build_customer_attributes(resource_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
-                    return jsonify(Water = result), 200
-                else:
-                    return jsonify(Error = "Unexpected attributes in update request"), 400
+                return jsonify(Error = "Unexpected attributes in update request"), 400
 
     def deleteWater(self, water_id):
         water_dao = WaterDAO()

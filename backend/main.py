@@ -15,22 +15,22 @@ CORS(app)
 def greeting():
     return 'Hello, this is the parts DB App!'
 
-@app.route("/DRL/customers", methods=['GET', 'POST'])
+@app.route("/DRL/customer", methods=['GET', 'POST'])
 def getAllCustomers():
     if request.method == 'POST':
         return CustomerHandler().insertCustomer(request.json)
     else:
         if not request.args:
-            return CustomerHandler().getAllCustomers()
+            return CustomerHandler().getAllCustomer()
         else:
-            return CustomerHandler().searchCustomers(request.args)
+            return CustomerHandler().searchCustomer(request.args)
 
-@app.route('/DRL/customers/<int:customer_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/customer/<int:customer_id>', methods=['GET', 'PUT', 'DELETE'])
 def getCustomerById(customer_id):
     if request.method == 'GET':
         return CustomerHandler().getCustomerById(customer_id)
     elif request.method == 'PUT':
-        return CustomerHandler().updateCustomer(customer_id, request.form)
+        return CustomerHandler().updateCustomer(customer_id, request.json)
     elif request.method == 'DELETE':
         return CustomerHandler().deleteCustomer(customer_id)
     else:
@@ -52,7 +52,7 @@ def getWaterById(water_id):
     if request.method == 'GET':
         return WaterHandler().getWaterById(water_id)
     elif request.method == 'PUT':
-        return WaterHandler().updateWater(water_id, request.form)
+        return WaterHandler().updateWater(water_id, request.json)
     elif request.method == 'DELETE':
         return WaterHandler().deleteWater(water_id)
     else:

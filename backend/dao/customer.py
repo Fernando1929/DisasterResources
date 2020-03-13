@@ -3,7 +3,7 @@ class CustomerDAO:
         super().__init__()
 
     # Customer = user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone
-    def getAllCustomers(self):
+    def getAllCustomer(self):
         result = [
             ["1",  "1", "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
             ["2",  "2", "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
