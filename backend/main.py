@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from handler.customer import CustomerHandler
+from handler.water import WaterHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
@@ -35,64 +36,31 @@ def getCustomerById(customer_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-###############################################  Example  ######################################################
 
-@app.route('/PartApp/parts', methods=['GET', 'POST'])
-def getAllParts():
+@app.route("/DRL/water", methods=['GET', 'POST'])
+def getAllWater():
     if request.method == 'POST':
-        print("REQUEST: ", request.json)
-        return PartHandler().insertPartJson(request.json)
+        return WaterHandler().insertWater(request.json)
     else:
         if not request.args:
-            return PartHandler().getAllParts()
+            return WaterHandler().getAllWater()
         else:
-            return PartHandler().searchParts(request.args)
+            return WaterHandler().searchWater(request.args)
 
-@app.route('/PartApp/parts/<int:pid>', methods=['GET', 'PUT', 'DELETE'])
-def getPartById(pid):
+@app.route('/DRL/water/<int:water_id>', methods=['GET', 'PUT', 'DELETE'])
+def getWaterById(water_id):
     if request.method == 'GET':
-        return PartHandler().getPartById(pid)
+        return WaterHandler().getWaterById(water_id)
     elif request.method == 'PUT':
-        return PartHandler().updatePart(pid, request.form)
+        return WaterHandler().updateWater(water_id, request.form)
     elif request.method == 'DELETE':
-        return PartHandler().deletePart(pid)
+        return WaterHandler().deleteWater(water_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/PartApp/parts/<int:pid>/suppliers')
-def getSuppliersByPartId(pid):
-    return PartHandler().getSuppliersByPartId(pid)
-
-@app.route('/PartApp/suppliers', methods=['GET', 'POST'])
-def getAllSuppliers():
-    if request.method == 'POST':
-        return SupplierHandler().insertSupplier(request.form)
-    else :
-        if not request.args:
-            return SupplierHandler().getAllSuppliers()
-        else:
-            return SupplierHandler().searchSuppliers(request.args)
-
-@app.route('/PartApp/suppliers/<int:sid>',
-           methods=['GET', 'PUT', 'DELETE'])
-def getSupplierById(sid):
-    if request.method == 'GET':
-        return SupplierHandler().getSupplierById(sid)
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
-        pass
-    else:
-        return jsonify(Error = "Method not allowed"), 405
-
-
-@app.route('/PartApp/suppliers/<int:sid>/parts')
-def getPartsBySuplierId(sid):
-    return SupplierHandler().getPartsBySupplierId(sid)
-
-@app.route('/PartApp/parts/countbypartid')
-def getCountByPartId():
-    return PartHandler().getCountByPartId()
+@app.route('/DRL/water/supplier/<int:supplier_id>', methods = ['GET'])
+def getWaterBySupplierId(supplier_id):
+    return WaterHandler().getWaterBySupplierId(supplier_id)
 
 if __name__ == '__main__':
     app.run(debug=True)

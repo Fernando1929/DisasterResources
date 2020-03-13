@@ -1,40 +1,41 @@
-class WaterDAO:
+class MedDeviceDAO:
     def __init__(self):
         super().__init__()
 
-    def getAllWater(self):
+# water = resource_id, supplier_id, resource_name, resource_brand, resource_quantity, resource_price, device_type, device_capacity, device_condition, device_power_type
+    def getAllMedDevice(self):
         result = [
             ["1", "1", "Water", "Nikini", "10", "1.00", "16", "Bottle", "Purified", "02/12/2022"],
             ["2", "2", "Water", "Great Value", "5", "1.00", "8", "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
-    def getWaterById(self, resource_id):
+    def getMedDeviceById(self, resource_id):
         result = ["1", "1", "Water", "Nikini", "10", "1.00", "16", "Bottle", "Purified", "02/12/2022"]
         return result
 
-    def getWaterByBrand(self, resource_brand):
+    def getMedDeviceByBrand(self, resource_brand):
         result = [
             ["1", "1", "Water", "Nikini", "10", "1.00", "16", "Bottle", "Purified", "02/12/2022"],
             ["2", "2", "Water", "Great Value", "5", "1.00", "8", "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
-    def getWaterByContainer(self, water_container):
+    def getMedDeviceByCondition(self, water_container):
         result = [
             ["1", "1", "Water", "Nikini", "10", "1.00", "16", "Bottle", "Purified", "02/12/2022"],
             ["2", "2", "Water", "Great Value", "5", "1.00", "8", "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
-    def getWaterByType(self, water_container):
+    def getMedDeviceByType(self, water_container):
         result = [
             ["1", "1", "Water", "Nikini", "10", "1.00", "16", "Bottle", "Purified", "02/12/2022"],
             ["2", "2", "Water", "Great Value", "5", "1.00", "8", "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
-    def getWaterBySupplierId(self, supplier_id):
+    def getMedDeviceBySupplierId(self, supplier_id):
         result = [
             ["1", "1", "Water", "Nikini", "10", "1.00", "16", "Bottle", "Purified", "02/12/2022"],
             ["2", "2", "Water", "Great Value", "5", "1.00", "8", "Bottle", "Purified", "02/24/2024"]

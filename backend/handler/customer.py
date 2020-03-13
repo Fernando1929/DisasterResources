@@ -8,7 +8,7 @@ class CustomerHandler:
         result['user_id'] = row[0]
         result['customer_id'] = row[1]
         result['customer_firstname'] = row[2]
-        result['customer_lasname'] = row[3]
+        result['customer_lastname'] = row[3]
         result['customer_date_birth'] = row[4]
         result['customer_email'] = row[5]
         result['customer_phone'] = row[6]
@@ -19,7 +19,7 @@ class CustomerHandler:
         result['user_id'] = user_id
         result['customer_id'] = customer_id
         result['customer_firstname'] = customer_firstname
-        result['customer_lasname'] = customer_lastname
+        result['customer_lastname'] = customer_lastname
         result['customer_date_birth'] = customer_date_birth
         result['customer_email'] = customer_email
         result['customer_phone'] = customer_phone
@@ -65,50 +65,50 @@ class CustomerHandler:
             result_list.append(result)
         return jsonify(Customer=result_list)
 
-def insertCustomer(self, json):
-    customer_firstname = json['customer_firstname']
-    customer_lastname = json['customer_lastname']
-    customer_date_birth = json['customer_date_birth']
-    customer_email = json['customer_email']
-    customer_phone = json['customer_phone']
-    if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
-        user_dao = UserDAO()
-        user_id = user_dao.insert(customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)          
-        customer_dao = CustomerDAO()
-        customer_id = customer_dao.insert(user_id)
-        result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
-        return jsonify(Customer = result), 201
-    else:
-        return jsonify(Error = "Unexpected attributes in post request"), 400
-
-def updateCustomer(self, customer_id, form):
-    customer_dao = CustomerDAO()
-    if not customer_dao.getCustomerById(customer_id):
-        return jsonify(Error = "Customer not found."), 404
-    else:
-        if len(form) != 5:
-            return jsonify(Error = "Malformed update request."), 404
+    def insertCustomer(self, json):
+        customer_firstname = json['customer_firstname']
+        customer_lastname = json['customer_lastname']
+        customer_date_birth = json['customer_date_birth']
+        customer_email = json['customer_email']
+        customer_phone = json['customer_phone']
+        if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
+            user_dao = UserDAO()
+            user_id = user_dao.insert(customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)          
+            customer_dao = CustomerDAO()
+            customer_id = customer_dao.insert(user_id)
+            result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+            return jsonify(Customer = result), 201
         else:
-            customer_firstname = form["customer_firstname"]
-            customer_lastname = form["customer_lastname"]
-            customer_date_birth = form["customer_date_birth"]
-            customer_email = form["customer_email"]
-            customer_phone = form["customer_phone"]
-            if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
-                user_id = customer_dao.update(customer_id)
-                user_dao = UserDAO()
-                user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
-                result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
-                return jsonify(Customer = result), 200
-            else:
-                return jsonify(Error = "Unexpected attributes in update request"), 400
+            return jsonify(Error = "Unexpected attributes in post request"), 400
 
-def deleteCustomer(self, customer_id):
-    customer_dao = CustomerDAO()
-    if not customer_dao.getCustomerById(customer_id):
-        return jsonify(Error = "Customer not found."), 404
-    else:
-        user_id = customer_dao.delete(customer_id)
-        user_dao = UserDAO()
-        user_dao.delete(user_id)
-        return jsonify(DeleteStatus = "OK"), 200
+    def updateCustomer(self, customer_id, form):
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer not found."), 404
+        else:
+            if len(form) != 5:
+                return jsonify(Error = "Malformed update request."), 404
+            else:
+                customer_firstname = form["customer_firstname"]
+                customer_lastname = form["customer_lastname"]
+                customer_date_birth = form["customer_date_birth"]
+                customer_email = form["customer_email"]
+                customer_phone = form["customer_phone"]
+                if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
+                    user_id = customer_dao.update(customer_id)
+                    user_dao = UserDAO()
+                    user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+                    result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+                    return jsonify(Customer = result), 200
+                else:
+                    return jsonify(Error = "Unexpected attributes in update request"), 400
+
+    def deleteCustomer(self, customer_id):
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer not found."), 404
+        else:
+            user_id = customer_dao.delete(customer_id)
+            user_dao = UserDAO()
+            user_dao.delete(user_id)
+            return jsonify(DeleteStatus = "OK"), 200
