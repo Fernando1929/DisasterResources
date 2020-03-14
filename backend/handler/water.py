@@ -120,9 +120,9 @@ class WaterHandler:
             if water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
                 resource_id = water_dao.update(water_id, water_size, water_container, water_type, water_exp_date)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, water_name, water_brand, water_quantity, water_price)
+                resource_dao.update(resource_id, supplier_id, water_name, water_brand, water_quantity, water_price)
                 # Need to find supplier_id
-                result = self.build_customer_attributes(resource_id, supplier_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
+                result = self.build_water_attributes(resource_id, supplier_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
                 return jsonify(Water = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

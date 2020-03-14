@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from handler.customer import CustomerHandler
 from handler.water import WaterHandler
+from handler.cloth import ClothHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
@@ -14,6 +15,8 @@ CORS(app)
 @app.route('/')
 def greeting():
     return 'Hello, this is the parts DB App!'
+
+#################### Customer Routes ####################
 
 @app.route("/DRL/customer", methods=['GET', 'POST'])
 def getAllCustomers():
@@ -36,6 +39,7 @@ def getCustomerById(customer_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+#################### Water Routes ####################
 
 @app.route("/DRL/water", methods=['GET', 'POST'])
 def getAllWater():
@@ -61,6 +65,33 @@ def getWaterById(water_id):
 @app.route('/DRL/water/supplier/<int:supplier_id>', methods = ['GET'])
 def getWaterBySupplierId(supplier_id):
     return WaterHandler().getWaterBySupplierId(supplier_id)
+
+#################### Cloth Routes ####################
+
+@app.route("/DRL/cloth", methods=['GET', 'POST'])
+def getAllCloth():
+    if request.method == 'POST':
+        return ClothHandler().insertCloth(request.json)
+    else:
+        if not request.args:
+            return ClothHandler().getAllCloth()
+        else:
+            return ClothHandler().searchCloth(request.args)
+
+@app.route('/DRL/cloth/<int:cloth_id>', methods=['GET', 'PUT', 'DELETE'])
+def getClothById(cloth_id):
+    if request.method == 'GET':
+        return ClothHandler().getClothById(cloth_id)
+    elif request.method == 'PUT':
+        return ClothHandler().updateCloth(cloth_id, request.json)
+    elif request.method == 'DELETE':
+        return ClothHandler().deleteCloth(cloth_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/cloth/supplier/<int:supplier_id>', methods = ['GET'])
+def getClothBySupplierId(supplier_id):
+    return ClothHandler().getClothBySupplierId(supplier_id)
 
 if __name__ == '__main__':
     app.run(debug=True)

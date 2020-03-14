@@ -20,7 +20,7 @@ class ClothHandler:
         result['cloth_type'] = row[10]
         return result
 
-    def build_water_attributes(self, cloth_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
+    def build_cloth_attributes(self, cloth_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
         result = {}
         result['cloth_id'] = cloth_id
         result['supplier_id'] = supplier_id
@@ -46,14 +46,14 @@ class ClothHandler:
 
     def getClothById(self, cloth_id):
         dao = ClothDAO()
-        row = dao.getWaterById(cloth_id)
+        row = dao.getClothById(cloth_id)
         if not row:
             return jsonify(Error = "Cloth Not Found"), 404
         else:
             cloth = self.build_cloth_dict(row)
-            return jsonify(Water = cloth)
+            return jsonify(Cloth = cloth)
 
-    def getWaterBySupplierId(self, supplier_id):
+    def getClothBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO()
         #if not supplier_dao.getSupplierById(supplier_id):
         #    return jsonify(Error = "Supplier not found."), 404
@@ -126,7 +126,7 @@ class ClothHandler:
             if cloth_name and cloth_brand and cloth_quantity and cloth_price and cloth_size and cloth_material and cloth_condition and cloth_gender and cloth_type:
                 resource_id = cloth_dao.update(cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, cloth_name, cloth_brand, cloth_quantity, cloth_price)
+                resource_dao.update(resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price)
                 result = self.build_cloth_attributes(resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
                 return jsonify(Cloth = result), 200
             else:
@@ -134,7 +134,7 @@ class ClothHandler:
 
     def deleteCloth(self, cloth_id):
         cloth_dao = ClothDAO()
-        if not cloth_dao.getWaterById(cloth_id):
+        if not cloth_dao.getClothById(cloth_id):
             return jsonify(Error = "Cloth not found."), 404
         else:
             resource_id = cloth_dao.delete(cloth_id)

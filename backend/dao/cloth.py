@@ -14,7 +14,7 @@ class ClothDAO:
         result = ["2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
         return result
 
-    def getClotheByBrand(self, resource_brand):
+    def getClothByBrand(self, resource_brand):
         result = [
             ["1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
             ["2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
