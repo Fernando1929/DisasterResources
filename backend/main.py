@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from handler.customer import CustomerHandler
 from handler.water import WaterHandler
 from handler.cloth import ClothHandler
+from handler.heavyequip import HeavyEquipHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
@@ -92,6 +93,33 @@ def getClothById(cloth_id):
 @app.route('/DRL/cloth/supplier/<int:supplier_id>', methods = ['GET'])
 def getClothBySupplierId(supplier_id):
     return ClothHandler().getClothBySupplierId(supplier_id)
+
+#################### Heavy Equipment Routes ####################
+
+@app.route("/DRL/heavyequipment", methods=['GET', 'POST'])
+def getAllHeavyEquip():
+    if request.method == 'POST':
+        return HeavyEquipHandler().insertHeavyEquip(request.json)
+    else:
+        if not request.args:
+            return HeavyEquipHandler().getAllHeavyEquip()
+        else:
+            return HeavyEquipHandler().searchHeavyEquip(request.args)
+
+@app.route('/DRL/heavyequipment/<int:hequip_id>', methods=['GET', 'PUT', 'DELETE'])
+def getHeavyEquipById(hequip_id):
+    if request.method == 'GET':
+        return HeavyEquipHandler().getHeavyEquipById(hequip_id)
+    elif request.method == 'PUT':
+        return HeavyEquipHandler().updateHeavyEquip(hequip_id, request.json)
+    elif request.method == 'DELETE':
+        return HeavyEquipHandler().deleteHeavyEquip(hequip_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/heavyequipment/supplier/<int:supplier_id>', methods = ['GET'])
+def getHeavyEquipBySupplierId(supplier_id):
+    return HeavyEquipHandler().getHeavyEquipBySupplierId(supplier_id)
 
 if __name__ == '__main__':
     app.run(debug=True)

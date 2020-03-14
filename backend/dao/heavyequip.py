@@ -11,34 +11,34 @@ class HeavyEquipDAO:
         return result
 
     def getHeavyEquipById(self, resource_id):
-        result = ["2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+        result = ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"]
         return result
 
     def getHeavyEquipByBrand(self, resource_brand):
         result = [
-            ["1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
     def getHeavyEquipByCondition(self, heavyequip_condition):
         result = [
-            ["1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
     def getHeavyEquipByType(self, heavyequip_type):
         result = [
-            ["1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
-    def getClothBySupplierId(self, supplier_id):
+    def getHeavyEquipBySupplierId(self, supplier_id):
         result = [
-            ["1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
