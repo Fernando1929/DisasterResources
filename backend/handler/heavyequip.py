@@ -38,7 +38,7 @@ class HeavyEquipHandler:
         for row in hequip_list:
             result = self.build_hequip_dict(row)
             result_list.append(result)
-        return jsonify(HeavyEquipment = result_list)
+        return jsonify(Heavy_Equipment = result_list)
 
     def getHeavyEquipById(self, hequip_id):
         dao = HeavyEquipDAO()

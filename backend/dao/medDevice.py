@@ -2,7 +2,7 @@ class MedDeviceDAO:
     def __init__(self):
         super().__init__()
 
-# water = resource_id, supplier_id, resource_name, resource_brand, resource_quantity, resource_price, device_type, device_model, device_condition, device_power_type
+# mdevice = resource_id, supplier_id, resource_name, resource_brand, resource_quantity, resource_price, device_type, device_model, device_condition, device_power_type
     def getAllMedDevice(self):
         result = [
             ["1", "1", "Medical Device", "Forcemech", "1", "1900.00", "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
