@@ -4,6 +4,7 @@ from handler.water import WaterHandler
 from handler.cloth import ClothHandler
 from handler.heavyequip import HeavyEquipHandler
 from handler.medDevice import MedDeviceHandler
+from handler.request import RequestHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
@@ -151,10 +152,30 @@ def getMedDeviceBySupplierId(supplier_id):
 
 #################### Request Routes ####################
 
-# @app.route('DRL/customer/request', methods= ['GET', 'POST'])
-# @app.route('DRL/customer/request/id', methods= ['GET', 'POST'])
-# @app.route('DRL/customer/id/request', methods= ['GET', 'POST'])
-# @app.route('DRL/customer/id/request/id', methods= ['GET', 'POST'])
+@app.route('/DRL/customer/request', methods= ['GET', 'POST'])
+def getAllRequest():
+    if request.method == 'POST':
+        return RequestHandler().insertRequest(request.json)
+    else:
+        if not request.args:
+            return RequestHandler().getAllRequest()
+        else:
+            return RequestHandler().searchRequest(request.args)
+
+@app.route('/DRL/customer/request/<int:request_id>', methods= ['GET', 'PUT', 'DELETE'])
+def getRequestById(request_id):
+    if request.method == 'GET':
+        return RequestHandler().getRequestById(request_id)
+    elif request.method == 'PUT':
+        return RequestHandler().updateRequest(request_id, request.json)
+    elif request.method == 'DELETE':
+        return RequestHandler().deleteRequest(request_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/customer/<int:customer_id>/request', methods= ['GET'])
+def getRequestByCustomerId(customer_id):
+    return RequestHandler().getRequestByCustomerId(customer_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
