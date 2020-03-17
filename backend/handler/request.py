@@ -1,7 +1,6 @@
 from flask import jsonify
 from dao.request import RequestDAO
-
-# request = request_id, customer_id, resource_id, request_title, request_quantity, request_date
+from dao.customer import CustomerDAO
 
 class RequestHandler:
     def build_request_dict(self, row):
@@ -43,10 +42,10 @@ class RequestHandler:
             return jsonify(Request = request)
 
     def getRequestByCustomerId(self, customer_id):
-        #customer_dao = CustomerDAO()
-        #if not customer_dao.getCustomerById(customer_id):
-        #    return jsonify(Error = "Customer not found."), 404
-        #else:
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer not found."), 404
+        else:
             request_list = []
             result_list = []
             request_dao = RequestDAO()
