@@ -2,27 +2,27 @@ from flask import jsonify
 from dao.cloth import ClothDAO
 from dao.resource import ResourceDAO
 
-# cloth = resource_id, supplier_id, resource_name, resource_brand, resource_quantity, resource_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type
-
 class ClothHandler:
     def build_cloth_dict(self, row):
         result = {}
         result['cloth_id'] = row[0]
-        result['supplier_id'] = row[1]
-        result['cloth_name'] = row[2]
-        result['cloth_brand'] = row[3]
-        result['cloth_quantity'] = row[4]
-        result['cloth_price'] = row[5]
-        result['cloth_size'] = row[6]
-        result['cloth_material'] = row[7]
-        result['cloth_condition'] = row[8]
-        result['cloth_gender'] = row[9]
-        result['cloth_type'] = row[10]
+        result['resource_id'] = row[1]
+        result['supplier_id'] = row[2]
+        result['cloth_name'] = row[3]
+        result['cloth_brand'] = row[4]
+        result['cloth_quantity'] = row[5]
+        result['cloth_price'] = row[6]
+        result['cloth_size'] = row[7]
+        result['cloth_material'] = row[8]
+        result['cloth_condition'] = row[9]
+        result['cloth_gender'] = row[10]
+        result['cloth_type'] = row[11]
         return result
 
-    def build_cloth_attributes(self, cloth_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
+    def build_cloth_attributes(self, cloth_id, resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
         result = {}
         result['cloth_id'] = cloth_id
+        result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
         result['cloth_name'] = cloth_name
         result['cloth_brand'] = cloth_brand
@@ -103,7 +103,7 @@ class ClothHandler:
             resource_id = resource_dao.insert(supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price)
             cloth_dao = ClothDAO()
             cloth_id = cloth_dao.insert(resource_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
-            result = self.build_cloth_attributes(resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
+            result = self.build_cloth_attributes(cloth_id, resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
             return jsonify(Cloth = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -127,7 +127,7 @@ class ClothHandler:
                 resource_id = cloth_dao.update(cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price)
-                result = self.build_cloth_attributes(resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
+                result = self.build_cloth_attributes(cloth_id, resource_id, supplier_id, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
                 return jsonify(Cloth = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

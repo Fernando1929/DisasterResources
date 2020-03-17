@@ -2,51 +2,53 @@ class HeavyEquipDAO:
     def __init__(self):
         super().__init__()
 
-# h_equip = resource_id, supplier_id, resource_name, resource_brand, resource_quantity, resource_price, heavyequip_type, heavyequip_model, heavyequip_condition
     def getAllHeavyEquip(self):
         result = [
-            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
-            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
+            ["1", "1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
     def getHeavyEquipById(self, resource_id):
-        result = ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"]
+        result = ["1", "1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"]
         return result
 
     def getHeavyEquipByBrand(self, resource_brand):
         result = [
-            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
-            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
+            ["1", "1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
     def getHeavyEquipByCondition(self, heavyequip_condition):
         result = [
-            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
-            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
+            ["1", "1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
     def getHeavyEquipByType(self, heavyequip_type):
         result = [
-            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
-            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
+            ["1", "1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
     def getHeavyEquipBySupplierId(self, supplier_id):
         result = [
-            ["1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
-            ["2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
+            ["1", "1", "1", "Heavy Equipment", "Caterpillar", "1", "125000.00", "Excavator", "320D", "Used"],
+            ["2", "2", "2", "Heavy Equipment", "Clark", "1", "1500.00", "Elevator", "EC500-800 Type E", "Used"]
         ]
         return result
 
     def insert(self, resource_id, heavyequip_type, heavyequip_model, heavyequip_condition):
+        hequip_id = 1
+        return hequip_id
+
+    def update(self, hequip_id, heavyequip_type, heavyequip_model, heavyequip_condition):
+        resource_id = 1
         return resource_id
 
-    def update(self, resource_id, heavyequip_type, heavyequip_model, heavyequip_condition):
-        return resource_id
-
-    def delete(self, resource_id):
+    def delete(self, equip_id):
+        resource_id = 1
         return resource_id

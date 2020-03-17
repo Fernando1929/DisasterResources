@@ -149,5 +149,12 @@ def getMedDeviceById(mdevice_id):
 def getMedDeviceBySupplierId(supplier_id):
     return MedDeviceHandler().getMedDeviceBySupplierId(supplier_id)
 
+#################### Request Routes ####################
+
+# @app.route('DRL/customer/request', methods= ['GET', 'POST'])
+# @app.route('DRL/customer/request/id', methods= ['GET', 'POST'])
+# @app.route('DRL/customer/id/request', methods= ['GET', 'POST'])
+# @app.route('DRL/customer/id/request/id', methods= ['GET', 'POST'])
+
 if __name__ == '__main__':
     app.run(debug=True)
