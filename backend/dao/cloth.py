@@ -4,54 +4,54 @@ class ClothDAO:
 
     def getAllCloth(self):
         result = [
-            ["1", "1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         ]
         return result
 
     def getClothById(self, resource_id):
-        result = ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+        result = [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         return result
 
     def getClothByBrand(self, resource_brand):
         result = [
-            ["1", "1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         ]
         return result
 
     def getClothByCondition(self, cloth_condition):
         result = [
-            ["1", "1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         ]
         return result
 
     def getClothByGender(self, cloth_gender):
         result = [
-            ["1", "1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         ]
         return result
 
     def getClothBySize(self, cloth_size):
         result = [
-            ["1", "1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         ]
         return result
 
     def getClothByType(self, cloth_type):
         result = [
-            ["1", "1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         ]
         return result
 
     def getClothBySupplierId(self, supplier_id):
         result = [
-            ["1", "1", "1", "Cloth", "Aeropostal", "5", "10.00", "Medium", "Cotton", "New", "M", "T-shirts"],
-            ["2", "2", "2", "Cloth", "Adidas", "10", "15.00", "30", "Cotton", "New", "F", "Pants"]
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         ]
         return result
 

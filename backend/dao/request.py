@@ -5,26 +5,26 @@ class RequestDAO:
 
     def getAllRequest(self):
         result = [
-            ["1", "1", "1", "Water Request", "10", "3/16/2020"],
-            ["2", "1", "2", "Cloth Request", "2", "3/16/2020"]
+            [1, 1, 1, "Water Request", 10, "3/16/2020"],
+            [2, 1, 2, "Cloth Request", 2, "3/16/2020"]
         ]
         return result
 
     def getRequestById(self, request_id):
-        result = ["2", "1", "2", "Cloth Request", "2", "3/16/2020"]
+        result = [2, 1, 2, "Cloth Request", 2, "3/16/2020"]
         return result
 
     def getRequestByCustomerId(self, customer_id):
         result = [
-            ["1", "1", "1", "Water Request", "10", "3/16/2020"],
-            ["2", "1", "2", "Cloth Request", "2", "3/16/2020"]
+            [1, 1, 1, "Water Request", 10, "3/16/2020"],
+            [2, 1, 2, "Cloth Request", 2, "3/16/2020"]
         ]
         return result
 
     def getRequestByTitle(self, request_title):
         result = [
-            ["1", "1", "1", "Water Request", "10", "3/16/2020"],
-            ["2", "1", "2", "Cloth Request", "2", "3/16/2020"]
+            [1, 1, 1, "Water Request", 10, "3/16/2020"],
+            [2, 1, 2, "Cloth Request", 2, "3/16/2020"]
         ]
         return result
 
