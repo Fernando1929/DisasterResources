@@ -1,78 +1,130 @@
 from flask import Flask, jsonify, request
-from handler.parts import PartHandler
-from handler.supplier import SupplierHandler
-# Import Cross-Origin Resource Sharing to enable
-# services on other ports on this machine or on other
-# machines to access this app
+from handler.fuel import FuelHandler
+from handler.tools import ToolHandler
+from handler.food import FoodHandler
+from handler.medicine import MedicineHandler
+# from handler.reservation import ReservationHandler
+
 from flask_cors import CORS, cross_origin
 
-# Activate
 app = Flask(__name__)
-# Apply CORS to this app
 CORS(app)
-
-#Example
 
 @app.route('/')
 def greeting():
-    return 'Hello, this is the parts DB App!'
+    return 'Hello, this is the DRL App!'
 
-@app.route('/PartApp/parts', methods=['GET', 'POST'])
-def getAllParts():
+#################### Fuel Routes ####################
+
+@app.route("/DRL/fuel", methods=['GET', 'POST'])
+def getAllWater():
     if request.method == 'POST':
-        print("REQUEST: ", request.json)
-        return PartHandler().insertPartJson(request.json)
+        return FuelHandler().insertFuel(request.json)
     else:
         if not request.args:
-            return PartHandler().getAllParts()
+            return FuelHandler().getAllFuels()
         else:
-            return PartHandler().searchParts(request.args)
+            return FuelHandler().searchFuel(request.args)
 
-@app.route('/PartApp/parts/<int:pid>', methods=['GET', 'PUT', 'DELETE'])
-def getPartById(pid):
+@app.route('/DRL/fuel/<int:fuel_id>', methods=['GET', 'PUT', 'DELETE'])
+def getFuelById(fuel_id):
     if request.method == 'GET':
-        return PartHandler().getPartById(pid)
+        return FuelHandler().getFuelById(fuel_id)
     elif request.method == 'PUT':
-        return PartHandler().updatePart(pid, request.form)
+        return FuelHandler().updateFuel(fuel_id, request.json)
     elif request.method == 'DELETE':
-        return PartHandler().deletePart(pid)
+        return FuelHandler().deleteFuel(fuel_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/PartApp/parts/<int:pid>/suppliers')
-def getSuppliersByPartId(pid):
-    return PartHandler().getSuppliersByPartId(pid)
+@app.route('/DRL/fuel/supplier/<int:supplier_id>', methods = ['GET'])
+def getFuelBySupplierId(supplier_id):
+    return FuelHandler().getFuelBySupplierId(supplier_id)
 
-@app.route('/PartApp/suppliers', methods=['GET', 'POST'])
-def getAllSuppliers():
+#################### Tools Routes ####################
+
+@app.route("/DRL/tools", methods=['GET', 'POST'])
+def getAllTools():
     if request.method == 'POST':
-        return SupplierHandler().insertSupplier(request.form)
-    else :
-        if not request.args:
-            return SupplierHandler().getAllSuppliers()
-        else:
-            return SupplierHandler().searchSuppliers(request.args)
-
-@app.route('/PartApp/suppliers/<int:sid>',
-           methods=['GET', 'PUT', 'DELETE'])
-def getSupplierById(sid):
-    if request.method == 'GET':
-        return SupplierHandler().getSupplierById(sid)
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
-        pass
+        return ToolHandler().insertTool(request.json)
     else:
-        return jsonify(Error = "Method not allowed"), 405
+        if not request.args:
+            return ToolHandler().getAllTools()
+        else:
+            return ToolHandler().searchTool(request.args)
 
+@app.route('/DRL/tools/<int:tool_id>', methods=['GET', 'PUT', 'DELETE'])
+def getToolById(tool_id):
+    if request.method == 'GET':
+        return ToolHandler().getToolById(tool_id)
+    elif request.method == 'PUT':
+        return ToolHandler().updateTool(tool_id, request.json)
+    elif request.method == 'DELETE':
+        return ToolHandler().deleteTool(tool_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
-@app.route('/PartApp/suppliers/<int:sid>/parts')
-def getPartsBySuplierId(sid):
-    return SupplierHandler().getPartsBySupplierId(sid)
+@app.route('/DRL/tools/supplier/<int:supplier_id>', methods = ['GET'])
+def getToolBySupplierId(supplier_id):
+    return ToolHandler().getToolBySupplierId(supplier_id)
 
-@app.route('/PartApp/parts/countbypartid')
-def getCountByPartId():
-    return PartHandler().getCountByPartId()
+#################### Food Routes ####################
+
+@app.route("/DRL/food", methods=['GET', 'POST'])
+def getAllFoods():
+    if request.method == 'POST':
+        return FoodHandler().insertFood(request.json)
+    else:
+        if not request.args:
+            return FoodHandler().getAllFoods()
+        else:
+            return FoodHandler().searchFood(request.args)
+
+@app.route('/DRL/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
+def getFoodById(food_id):
+    if request.method == 'GET':
+        return FoodHandler().getFoodById(food_id)
+    elif request.method == 'PUT':
+        return FoodHandler().updateFood(food_id, request.json)
+    elif request.method == 'DELETE':
+        return FoodHandler().deleteFood(food_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/food/supplier/<int:supplier_id>', methods = ['GET'])
+def getFoodBySupplierId(supplier_id):
+    return FoodHandler().getFoodBySupplierId(supplier_id)
+
+#################### Medicine Routes ####################
+
+@app.route("/DRL/medicine", methods=['GET', 'POST'])
+def getAllMedicines():
+    if request.method == 'POST':
+        return MedicineHandler().insertMedicine(request.json)
+    else:
+        if not request.args:
+            return MedicineHandler().getAllMedicines()
+        else:
+            return MedicineHandler().searchMedicine(request.args)
+
+@app.route('/DRL/medicine/<int:med_id>', methods=['GET', 'PUT', 'DELETE'])
+def getMedicineById(med_id):
+    if request.method == 'GET':
+        return MedicineHandler().getMedicineById(med_id)
+    elif request.method == 'PUT':
+        return MedicineHandler().updateMedicine(med_id, request.json)
+    elif request.method == 'DELETE':
+        return MedicineHandler().deleteMedicine(med_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/medicine/supplier/<int:supplier_id>', methods = ['GET'])
+def getMedicineBySupplierId(supplier_id):
+    return MedicineHandler().getMedicineBySupplierId(supplier_id)
+
+#################### Reservation Routes ####################
+#
+#
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
