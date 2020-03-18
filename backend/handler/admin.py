@@ -1,0 +1,113 @@
+from flask import jsonify
+from dao.admin import AdminDAO
+from dao.user import UserDAO
+
+class AdminHandler:
+
+        #admin = user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone
+    def build_admin_attributes(self, user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone):
+        result = {}
+        result['user_id'] = user_id
+        result['admin_id'] = admin_id
+        result['admin_firstname'] = admin_firstname
+        result['admin_lastname'] = admin_lastname
+        result['admin_date_birth'] = admin_date_birth
+        result['admin_email'] = admin_email
+        result['admin_phone'] = admin_phone
+        return result
+
+    def build_admin_dict(self, row):
+        result = {}
+        result['user_id'] = row[0]
+        result['admin_id'] = row[1]
+        result['admin_firstname'] = row[2]
+        result['admin_lastname'] = row[3]
+        result['admin_date_birth'] = row[4]
+        result['admin_email'] = row[5]
+        result['admin_phone'] = row[6]
+        return result
+
+    def getAllAdmin(self):
+        dao = AdminDAO()
+        result = dao.getAllAdmin()
+        result_list = []
+        for row in result:
+            result = self.build_admin_dict(row)
+            result_list.append(result)
+        return jsonify(Admin=result_list)
+
+    def getAdminById(self,admin_id):
+        dao = AdminDAO()
+        row = dao.getAdminById(admin_id)
+        if not row:
+            return jsonify(Error = "Admin Not Found"), 404
+        else:
+            admin = self.build_admin_dict(row)
+            return jsonify(Admin = admin)
+
+    def searchAdmin(self, args):
+        admin_firstname = args.get("firstname")
+        admin_lastname = args.get("lastname")
+        admin_email = args.get('email')
+        dao = AdminDAO()
+        admin_list = []
+        if (len(args) == 2) and admin_firstname and admin_lastname:
+            admin_list = dao.getAdminByFirstnameAndLastname(admin_firstname , admin_lastname)
+        elif (len(args) == 1) and admin_firstname:
+            admin_list = dao.getAdminByFirstname(admin_firstname)
+        elif (len(args) == 1) and admin_lastname:
+            admin_list = dao.getAdminByLastname(admin_lastname)
+        elif(len(args) == 1) and admin_email:
+            admin_list = dao.getAdminByEmail(admin_email)
+        else:
+            return jsonify(Error = "Malformed query string"), 400
+        result_list = []
+        for row in admin_list:
+            result = self.build_admin_dict(row)
+            result_list.append(result)
+        return jsonify(Admin=result_list)
+
+    def insertAdmin(self, json):
+        admin_firstname = json['admin_firstname']
+        admin_lastname = json['admin_lastname']
+        admin_date_birth = json['admin_date_birth']
+        admin_email = json['admin_email']
+        admin_phone = json['admin_phone']
+        if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone:
+            dao_admin = AdminDAO()
+            dao_user = UserDAO()
+            user_id = dao_user.insert(admin_firstname, admin_lastname, admin_date_birth, admin_email,admin_phone)
+            admin_id = dao_admin.insert(user_id)
+            result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
+            return jsonify(Admin=result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def deleteAdmin(self, admin_id):
+        dao_admin = AdminDAO()
+        dao_user = UserDAO()
+        if not dao_admin.getAdminById(admin_id):
+            return jsonify(Error = "Admin not found."), 404
+        else:
+            user_id = dao_admin.delete(admin_id)
+            dao_user.delete(user_id)
+            return jsonify(DeleteStatus = "OK"), 200
+
+    def updateAdmin(self, admin_id, json):
+        dao_admin = AdminDAO()
+        dao_user = UserDAO()
+        if not dao_admin.getAdminById(admin_id):
+            return jsonify(Error = "Admin not found."), 404
+        else:
+            admin_firstname = json['admin_firstname']
+            admin_lastname = json['admin_lastname']
+            admin_date_birth = json['admin_date_birth']
+            admin_email = json['admin_email']
+            admin_phone = json['admin_phone']
+            if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone:
+                user_id = dao_admin.update(admin_id)
+                dao_user.update(user_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
+                result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
+                return jsonify(Admin=result), 200
+            else:
+                return jsonify(Error="Unexpected attributes in update request"), 400
