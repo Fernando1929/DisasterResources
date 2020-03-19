@@ -46,6 +46,24 @@ class BatteryHandler:
             result_list.append(result)
         return jsonify(Battery=result_list)
 
+    def getAllAvailableBattery(self): 
+        dao = BatteryDAO()
+        result = dao.getAllAvailableBattery()
+        result_list = []
+        for row in result:
+            result = self.build_battery_dict(row)
+            result_list.append(result)
+        return jsonify(Battery=result_list)
+
+    def getAllReservedBattery(self): 
+        dao = BatteryDAO()
+        result = dao.getAllReservedBattery()
+        result_list = []
+        for row in result:
+            result = self.build_battery_dict(row)
+            result_list.append(result)
+        return jsonify(Battery=result_list)
+
     def getBatteryById(self, resource_id): 
         dao = BatteryDAO()
         row = dao.getBatteryById(resource_id)

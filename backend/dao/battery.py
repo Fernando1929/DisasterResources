@@ -13,6 +13,20 @@ class BatteryDAO:
             ['2','3','4','5', 'Baterry', 'Energizer', ' 8', '$5','1.5V', 'new', 'AAA']
         ]
         return result
+    
+    def getAllAvailableBattery(self):
+        result = [
+            ['1','2','3','4', 'Battery', 'Duracel', '10', '$7', '1.20V', 'new', 'AA'],
+            ['2','3','4','5', 'Baterry', 'Energizer', ' 8', '$5','1.5V', 'new', 'AAA']
+        ]
+        return result
+    
+    def getAllReservedBattery(self):
+        result = [
+            ['1','2','3','4', 'Battery', 'Duracel', '10', '$7', '1.20V', 'new', 'AA'],
+            ['2','3','4','5', 'Baterry', 'Energizer', ' 8', '$5','1.5V', 'new', 'AAA']
+        ]
+        return result
 
     def getBatteryById(self,battery_id):
         result =  ['1','2','3','4', 'Battery', 'Duracel', '10', '$7', '1.20V', 'new', 'AA']
