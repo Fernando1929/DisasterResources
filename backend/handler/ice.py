@@ -39,6 +39,24 @@ class IceHandler:
             result_list.append(result)
         return jsonify(Ice=result_list)
     
+    def getAllAvailableIce(self):
+        dao = IceDAO()
+        result = dao.getAllAvailableIce()
+        result_list = []
+        for row in result:
+            result = self.build_ice_dict(row)
+            result_list.append(result)
+        return jsonify(Ice=result_list)
+    
+    def getAllReservedIce(self):
+        dao = IceDAO()
+        result = dao.getAllReservedIce()
+        result_list = []
+        for row in result:
+            result = self.build_ice_dict(row)
+            result_list.append(result)
+        return jsonify(Ice=result_list)
+    
     def getIceById(self, ice_id):
         dao = IceDAO()
         row = dao.getIceById(ice_id)

@@ -13,6 +13,20 @@ class IceDAO:
             ['2', '1', '2', 'ice', 'submarine', ' 8', '$2.50', '6lbs']
         ]
         return result
+    
+    def getAllAvailableIce(self):
+        result = [
+            ['1', '2', '1', 'ice', 'el angel', '10', '$2.50', '5lbs'],
+            ['2', '1', '2', 'ice', 'submarine', ' 8', '$2.50', '6lbs']
+        ]
+        return result
+    
+    def getAllReservedIce(self):
+        result = [
+            ['1', '2', '1', 'ice', 'el angel', '10', '$2.50', '5lbs'],
+            ['2', '1', '2', 'ice', 'submarine', ' 8', '$2.50', '6lbs']
+        ]
+        return result
 
     def getIceById(self,ice_id):
         result =  ['1', '2', '1', 'ice', 'el angel', '10', '$2.50', '5lbs']
