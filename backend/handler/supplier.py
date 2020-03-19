@@ -66,15 +66,6 @@ class SupplierHandler:
             result_list.append(result)
         return jsonify(Resources=result_list)
 
-    def getSupplierResourceById(self, supplier_id, resource_id):
-        dao = SupplierDAO()
-        row = dao.getSupplierResourceById(supplier_id,resource_id)
-        if not row:
-            return jsonify(Error = "Resoruce Not Found"), 404
-        else:
-            supplier = self.build_resource_dict(row)
-            return jsonify(Resources=supplier)
-
     def searchSupplier(self, args):
         supplier_firstname = args.get("firstname")
         supplier_lastname = args.get("lastname")
