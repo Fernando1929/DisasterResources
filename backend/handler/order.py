@@ -3,26 +3,26 @@ from dao.order import OrderDAO
 
 class OrderHandler:
 
-    #order = order_id, order_date, order_cuantity, order_totalprice, order_status
+    #order = order_id, order_date, order_quantity, order_totalprice, order_status
     def build_order_dict(self, row):
         result = {}
         result['order_id'] = row[0]
         result['order_date'] = row[1]
-        result['order_cuantity'] = row[2]
+        result['order_quantity'] = row[2]
         result['order_totalprice'] = row[3]
         result['order_status'] = row[4]
         return result
 
-    def build_order_attributes(self, order_id, order_date, order_cuantity, order_totalprice, order_status):
+    def build_order_attributes(self, order_id, order_date, order_quantity, order_totalprice, order_status):
         result = {}
         result['order_id'] = order_id 
         result['order_date'] = order_date
-        result['order_totalprice'] = order_cuantity 
-        result['order_cuantity'] = order_totalprice
+        result['order_totalprice'] = order_quantity 
+        result['order_quantity'] = order_totalprice
         result['order_status'] = order_status
         return result
 
-    def getAllOrders(self, customer_id):
+    def getAllOrders(self):
         dao = OrderDAO()
         result = dao.getAllOrders()
         result_list = []
@@ -59,9 +59,9 @@ class OrderHandler:
             result_list.append(result)
         return jsonify(Orders=result_list)
 
-    def getCustomerOrderById(self, customer_id,order_id):
+    def getOrderByCustomerId(self, customer_id):
         dao = OrderDAO()
-        row = dao.getCustomerOrderById(customer_id, order_id)
+        row = dao.getOrderByCustomerId(customer_id)
         if not row:
             return jsonify(Error = "Order Not Found"), 404
         else:
@@ -70,13 +70,13 @@ class OrderHandler:
 
     def insertOrder(self, json):
         order_date = json['order_date'] 
-        order_cuantity = json['order_totalprice'] 
-        order_totalprice = json['order_cuantity'] 
+        order_quantity = json['order_totalprice'] 
+        order_totalprice = json['order_quantity'] 
         order_status = json['order_status']
-        if order_date and order_cuantity and order_totalprice and order_status:
+        if order_date and order_quantity and order_totalprice and order_status:
             dao = OrderDAO()
-            order_id = dao.insert(order_date, order_cuantity, order_totalprice, order_status)
-            json = self.build_order_attributes(order_id, order_date, order_cuantity, order_totalprice, order_status) #change parameters
+            order_id = dao.insert(order_date, order_quantity, order_totalprice, order_status)
+            json = self.build_order_attributes(order_id, order_date, order_quantity, order_totalprice, order_status) #change parameters
             return jsonify(Order=json), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
@@ -96,13 +96,13 @@ class OrderHandler:
         else:
             order_id = json['order_id']
             order_date = json['order_date']
-            order_cuantity = json['order_cuantity']
+            order_quantity = json['order_quantity']
             order_totalprice = json['order_totalprice']
             order_status = json['order_status']
             
-            if order_id and order_date and order_cuantity and order_totalprice and order_status:
-                dao.update(order_id, order_date, order_cuantity, order_totalprice, order_status)
-                result = self.build_order_attributes(order_id, order_date, order_cuantity, order_totalprice, order_status)
+            if order_id and order_date and order_quantity and order_totalprice and order_status:
+                dao.update(order_id, order_date, order_quantity, order_totalprice, order_status)
+                result = self.build_order_attributes(order_id, order_date, order_quantity, order_totalprice, order_status)
                 return jsonify(Order=result), 200
             else:
                 return jsonify(Error="Unexpected attributes in update request"), 400

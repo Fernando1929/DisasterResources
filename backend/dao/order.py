@@ -7,7 +7,7 @@ class OrderDAO:
     def __init__(self):
         super().__init__()
 
-    #order = order_id, order_date, order_cuantity, order_totalprice, order_status
+    #order = order_id, order_date, order_quantity, order_totalprice, order_status
     def getAllOrders(self):
         result = [
             ['1', '12/3/20', '3', '$30', 'pending'],
@@ -15,13 +15,11 @@ class OrderDAO:
         ]
         return result
 
-    def getOrderById(self, pid):
-        result = [
-            ['1', '12/3/20', '3', '$30', 'pending']
-        ]
+    def getOrderById(self, order_id):
+        result = ['1', '12/3/20', '3', '$30', 'pending']
         return result
 
-    def getCustomerOrderById(self, customer_id, order_id):
+    def getOrderByCustomerId(self, customer_id):
         result = ['1', '12/3/20', '3', '$30', 'pending']
         return result
 
@@ -44,14 +42,14 @@ class OrderDAO:
         ]
         return result
 
-    def insert(self, pname, pcolor, pmaterial, pprice):
+    def insert(self, order_date, order_quantity, order_totalprice, order_status):
         resource_id =1
         return resource_id
 
-    def update(self, pid, pname, pcolor, pmaterial, pprice):
+    def update(self, order_id, order_date, order_quantity, order_totalprice, order_status):
         resource_id =1
         return resource_id
 
-    def delete(self, pid):
+    def delete(self, order_id):
         resource_id =1
         return resource_id
