@@ -47,6 +47,24 @@ class GeneratorHandler:
             result_list.append(result)
         return jsonify(Generator=result_list)
 
+    def getAllAvailableGenerator(self): 
+        dao = GeneratorDAO()
+        result = dao.getAllAvailableGenerator()
+        result_list = []
+        for row in result:
+            result = self.build_generator_dict(row)
+            result_list.append(result)
+        return jsonify(Generator=result_list)
+
+    def getAllReservedGenerator(self): 
+        dao = GeneratorDAO()
+        result = dao.getAllReservedGenerator()
+        result_list = []
+        for row in result:
+            result = self.build_generator_dict(row)
+            result_list.append(result)
+        return jsonify(Generator=result_list)
+
     def getGeneratorById(self, generator_id): 
         dao = GeneratorDAO()
         row = dao.getGeneratorById(generator_id)
