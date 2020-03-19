@@ -9,6 +9,20 @@ class MedDeviceDAO:
         ]
         return result
 
+    def getAllAvailableMedDevice(self):
+        result = [
+            [1, 1, 1, "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
+            [2, 2, 2, "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
+        ]
+        return result
+
+    def getAllReservedMedDevice(self):
+        result = [
+            [1, 1, 1, "Medical Device", "Forcemech", 1, 0.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
+            [2, 2, 2, "Medical Device", "Arm Style", 2, 0.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
+        ]
+        return result
+
     def getMedDeviceById(self, resource_id):
         result = [1, 1, 1, "Medical Device", "Forcemech", 1, 1900.00, "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"]
         return result

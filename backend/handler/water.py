@@ -40,7 +40,25 @@ class WaterHandler:
         for row in water_list:
             result = self.build_water_dict(row)
             result_list.append(result)
-        return jsonify(Waters = result_list)
+        return jsonify(Water = result_list)
+
+    def getAllAvailableWater(self):
+        dao = WaterDAO()
+        water_list = dao.getAllAvailableWater()
+        result_list = []
+        for row in water_list:
+            result = self.build_water_dict(row)
+            result_list.append(result)
+        return jsonify(Water = result_list)
+
+    def getAllReservedWater(self):
+        dao = WaterDAO()
+        water_list = dao.getAllReservedWater()
+        result_list = []
+        for row in water_list:
+            result = self.build_water_dict(row)
+            result_list.append(result)
+        return jsonify(Water = result_list)
 
     def getWaterById(self, water_id):
         dao = WaterDAO()

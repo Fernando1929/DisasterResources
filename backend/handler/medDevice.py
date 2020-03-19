@@ -42,6 +42,24 @@ class MedDeviceHandler:
             result_list.append(result)
         return jsonify(Medical_Device = result_list)
 
+    def getAllAvailableMedDevice(self):
+        dao = MedDeviceDAO()
+        mdevice_list = dao.getAllAvailableMedDevice()
+        result_list = []
+        for row in mdevice_list:
+            result = self.build_mdevice_dict(row)
+            result_list.append(result)
+        return jsonify(Medical_Device = result_list)
+
+    def getAllReservedMedDevice(self):
+        dao = MedDeviceDAO()
+        mdevice_list = dao.getAllReservedMedDevice()
+        result_list = []
+        for row in mdevice_list:
+            result = self.build_mdevice_dict(row)
+            result_list.append(result)
+        return jsonify(Medical_Device = result_list)
+
     def getMedDeviceById(self, mdevice_id):
         dao = MedDeviceDAO()
         row = dao.getMedDeviceById(mdevice_id)

@@ -40,6 +40,24 @@ class HeavyEquipHandler:
             result_list.append(result)
         return jsonify(Heavy_Equipment = result_list)
 
+    def getAllAvailableHeavyEquip(self):
+        dao = HeavyEquipDAO()
+        hequip_list = dao.getAllAvailableHeavyEquip()
+        result_list = []
+        for row in hequip_list:
+            result = self.build_hequip_dict(row)
+            result_list.append(result)
+        return jsonify(Heavy_Equipment = result_list)
+
+    def getAllReservedHeavyEquip(self):
+        dao = HeavyEquipDAO()
+        hequip_list = dao.getAllReservedHeavyEquip()
+        result_list = []
+        for row in hequip_list:
+            result = self.build_hequip_dict(row)
+            result_list.append(result)
+        return jsonify(Heavy_Equipment = result_list)
+
     def getHeavyEquipById(self, hequip_id):
         dao = HeavyEquipDAO()
         row = dao.getHeavyEquipById(hequip_id)

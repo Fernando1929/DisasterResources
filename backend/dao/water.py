@@ -9,6 +9,20 @@ class WaterDAO:
         ]
         return result
 
+    def getAllAvailableWater(self):
+        result = [
+            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+        ]
+        return result
+
+    def getAllReservedWater(self):
+        result = [
+            [1, 1, 1, "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
+        ]
+        return result
+
     def getWaterById(self, resource_id):
         result = [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
         return result

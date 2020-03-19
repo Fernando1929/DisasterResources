@@ -44,6 +44,24 @@ class ClothHandler:
             result_list.append(result)
         return jsonify(Cloth = result_list)
 
+    def getAllAvailableCloth(self):
+        dao = ClothDAO()
+        cloth_list = dao.getAllAvailableCloth()
+        result_list = []
+        for row in cloth_list:
+            result = self.build_cloth_dict(row)
+            result_list.append(result)
+        return jsonify(Cloth = result_list)
+
+    def getAllReservedCloth(self):
+        dao = ClothDAO()
+        cloth_list = dao.getAllReservedCloth()
+        result_list = []
+        for row in cloth_list:
+            result = self.build_cloth_dict(row)
+            result_list.append(result)
+        return jsonify(Cloth = result_list)
+
     def getClothById(self, cloth_id):
         dao = ClothDAO()
         row = dao.getClothById(cloth_id)
