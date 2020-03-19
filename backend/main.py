@@ -44,30 +44,10 @@ def getSupplierById(supplier_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/supplier/<int:supplier_id>/resources', methods=['GET','POST']) 
-def getAllSupplierResources(supplier_id):
-    if request.method == 'POST':
-        #adds resource 
-        pass
-    else:
-        if not request.args:
-            return SupplierHandler().getAllSupplierResources(supplier_id)
-        else:
-            return SupplierHandler().searchSupplier(request.args)
-
-@app.route('/DRL/supplier/<int:supplier_id>/resources/<int:order_id>',methods=['GET', 'PUT','DELETE'])
-def getSupplierResourcesById(supplier_id, order_id):
-    if request.method == 'GET':
-        return SupplierHandler().getSupplierResourceById(supplier_id,order_id)
-    elif request.method == 'PUT':
-        #return SupplierHandler().updateSupplierResource(supplier_id, request.json)
-        pass
-    elif request.method == 'DELETE':
-        #return SupplierHandler().deleteSupplierResource(supplier_id)
-        pass
-    else:
-        return jsonify(Error = "Method not allowed"), 405
-
+@app.route('/DRL/supplier/<int:supplier_id>/resources', methods=['GET']) 
+def getAllResourcesBySupplierId(supplier_id):
+    return SupplierHandler().getAllSupplierResources(supplier_id)
+       
 #################### Admin Routes ####################
 
 @app.route('/DRL/admin', methods = ['GET','POST'])
@@ -91,22 +71,22 @@ def getAdminById(admin_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-#################### Battery Routes ####################
+#################### Order Routes ####################
 
-@app.route('/DRL/customer/<int:customer_id>/order', methods=['GET','POST'])
-def getAllOrder(customer_id):
+@app.route('/DRL/customer/order', methods=['GET','POST'])
+def getAllOrder():
     if request.method == 'POST':
         return OrderHandler().insertOrder(request.json)
     else:
         if not request.args:
-            return OrderHandler().getAllOrders(customer_id)
+            return OrderHandler().getAllOrders()
         else:
             return OrderHandler().searchOrders(request.args)
 
-@app.route('/DRL/customer/<int:customer_id>/order/<int:order_id>', methods=['GET', 'PUT','DELETE'])
-def getOrderById(customer_id, order_id):
+@app.route('/DRL/customer/order/<int:order_id>', methods=['GET', 'PUT','DELETE']) #modify
+def getOrderById(order_id):
     if request.method == 'GET':
-        return OrderHandler().getCustomerOrderById(customer_id, order_id)
+        return OrderHandler().getOrderById(order_id)
     elif request.method == 'PUT':
         return OrderHandler().updateOrder(order_id, request.json)
     elif request.method == 'DELETE':
@@ -114,9 +94,13 @@ def getOrderById(customer_id, order_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/customer/<int:customer_id>/order', methods=['GET'])
+def getOrderByCustomerId(customer_id):
+    return OrderHandler().getOrderByCustomerId(customer_id)
+
 #################### Ice Routes ####################
 
-@app.route('/DRL/resources/ice', methods = ['GET','POST'])
+@app.route('/DRL/ice', methods = ['GET','POST'])
 def getAllIce():
     if request.method == 'POST':
         return IceHandler().insertIce(request.json)
@@ -126,7 +110,7 @@ def getAllIce():
         else:
             return IceHandler().searchIce(request.args)
 
-@app.route('/DRL/resources/ice/<int:ice_id>', methods = ['GET','PUT','DELETE'])
+@app.route('/DRL/ice/<int:ice_id>', methods = ['GET','PUT','DELETE'])
 def getIceById(ice_id):
     if request.method == 'GET':
         return IceHandler().getIceById(ice_id)
@@ -137,9 +121,17 @@ def getIceById(ice_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/ice/available', methods = ['GET'])
+def getAllAvailableIce():
+    return IceHandler().getAllAvailableIce()
+
+@app.route('/DRL/ice/reserved', methods = ['GET'])
+def getAllReservedIce():
+    return IceHandler().getAllReservedIce()
+
 #################### Battery Routes ####################
 
-@app.route('/DRL/resources/battery', methods = ['GET','POST'])
+@app.route('/DRL/battery', methods = ['GET','POST'])
 def getAllBattery():
     if request.method == 'POST':
         return BatteryHandler().insertBattery(request.json)
@@ -149,7 +141,7 @@ def getAllBattery():
         else:
             return BatteryHandler().searchBattery(request.args)
 
-@app.route('/DRL/resources/battery/<int:battery_id>', methods = ['GET','PUT','DELETE']) 
+@app.route('/DRL/battery/<int:battery_id>', methods = ['GET','PUT','DELETE']) 
 def getBatteryById(battery_id):
     if request.method == 'GET':
         return BatteryHandler().getBatteryById(battery_id)
@@ -160,9 +152,17 @@ def getBatteryById(battery_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/battery/available', methods = ['GET'])
+def getAllAvailableBattery():
+    return BatteryHandler().getAllAvailableBattery()
+
+@app.route('/DRL/battery/reserved', methods = ['GET'])
+def getAllReservedBattery():
+    return BatteryHandler().getAllReservedBattery()
+
 #################### Generator Routes ####################
 
-@app.route('/DRL/resources/generator',methods = ['GET','POST'])
+@app.route('/DRL/generator',methods = ['GET','POST'])
 def getAllGenerator():
     if request.method == 'POST':
         return GeneratorHandler().insertGenerator(request.json)
@@ -172,7 +172,7 @@ def getAllGenerator():
         else:
             return GeneratorHandler().searchGenerator(request.args)
 
-@app.route('/DRL/resources/generator/<int:generator_id>', methods = ['GET','PUT','DELETE'])
+@app.route('/DRL/generator/<int:generator_id>', methods = ['GET','PUT','DELETE'])
 def getGeneratorById(generator_id):
     if request.method == 'GET':
         return GeneratorHandler().getGeneratorById(generator_id)
@@ -183,6 +183,13 @@ def getGeneratorById(generator_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/generator/available',methods = ['GET'])
+def getAllAvailableGenerator():
+    return GeneratorHandler().getAllAvailableGenerator()
+
+@app.route('/DRL/generator/reserved',methods = ['GET'])
+def getAllReservedGenerator():
+    return GeneratorHandler().getAllReservedGenerator()
 
 if __name__ == '__main__':
     app.run(debug=True)
