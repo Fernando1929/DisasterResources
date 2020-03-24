@@ -27,11 +27,11 @@ class CreditCardDAO:
         ]
         return result
 
-    def insert(self, payment_id, creditcard_name, creditcard_number, creditcard_cvc, creditcard_exp_date):
+    def insert(self, payment_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date):
         creditcard_id = 1
         return creditcard_id
 
-    def update(self, creditcard_id):
+    def update(self, creditcard_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date):
         payment_id = 1
         return payment_id
 

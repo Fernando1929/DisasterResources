@@ -25,7 +25,7 @@ class PaypalDAO:
         paypal_id = 1
         return paypal_id
 
-    def update(self, paypal_id):
+    def update(self, paypal_id, paypal_username, paypal_password):
         payment_id = 1
         return payment_id
 

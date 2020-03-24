@@ -21,7 +21,7 @@ class AthMovilDAO:
         ath_movil_id = 1
         return ath_movil_id
 
-    def update(self, ath_movil_id):
+    def update(self, ath_movil_id, ath_movil_phone):
         payment_id = 1
         return payment_id
 

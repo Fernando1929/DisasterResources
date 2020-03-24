@@ -7,6 +7,7 @@ from handler.medDevice import MedDeviceHandler
 from handler.request import RequestHandler
 from handler.athMovil import AthMovilHandler
 from handler.paypal import PaypalHandler
+from handler.creditCard import CreditCardHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
@@ -254,6 +255,29 @@ def getPaypalById(paypal_id):
         return PaypalHandler().updatePaypal(paypal_id, request.json)
     elif request.method == 'DELETE':
         return PaypalHandler().deletePaypal(paypal_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+#################### Credit Card Routes ####################
+
+@app.route("/DRL/creditcard", methods=['GET', 'POST'])
+def getAllCreditCard():
+    if request.method == 'POST':
+        return CreditCardHandler().insertCreditCard(request.json)
+    else:
+        if not request.args:
+            return CreditCardHandler().getAllCreditCard()
+        else:
+            return CreditCardHandler().searchCreditCard(request.args)
+
+@app.route('/DRL/creditcard/<int:creditcard_id>', methods=['GET', 'PUT', 'DELETE'])
+def getPaypalById(creditcard_id):
+    if request.method == 'GET':
+        return CreditCardHandler().getCreditCardById(paypal_id)
+    elif request.method == 'PUT':
+        return CreditCardHandler().updateCreditCard(creditcard_id, request.json)
+    elif request.method == 'DELETE':
+        return CreditCardHandler().deleteCreditCard(creditcard_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
