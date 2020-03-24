@@ -69,6 +69,20 @@ class ClothDAO:
         ]
         return result
 
+    def getAllAvailableClothBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 1, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
+        ]
+        return result
+
+    def getAllReservedClothBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Cloth", "Aeropostal", 5, 0.00, "Medium", "Cotton", "New", "M", "T-shirts"],
+            [2, 2, 1, "Cloth", "Adidas", 10, 0.00, "30", "Cotton", "New", "F", "Pants"]
+        ]
+        return result
+
     def insert(self, resource_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
         cloth_id = 1
         return cloth_id

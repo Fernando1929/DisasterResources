@@ -55,6 +55,20 @@ class WaterDAO:
         ]
         return result
 
+    def getAllAvailableWaterBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 1, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+        ]
+        return result
+
+    def getAllReservedWaterBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 1, "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
+        ]
+        return result
+
     def insert(self, resource_id, water_size, water_container, water_type, water_exp_date):
         water_id = 1
         return water_id

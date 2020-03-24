@@ -55,6 +55,20 @@ class MedDeviceDAO:
         ]
         return result
 
+    def getAllAvailableMedDeviceBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
+            [2, 2, 1, "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
+        ]
+        return result
+
+    def getAllReservedMedDeviceBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Medical Device", "Forcemech", 1, 0.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
+            [2, 2, 1, "Medical Device", "Arm Style", 2, 0.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
+        ]
+        return result
+
     def insert(self, resource_id, med_device_type, med_device_model, med_device_condition, med_device_power_type):
         mdevice_id = 1
         return mdevice_id

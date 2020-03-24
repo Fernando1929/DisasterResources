@@ -76,9 +76,17 @@ def getWaterBySupplierId(supplier_id):
 def getAllAvailableWater():
     return WaterHandler().getAllAvailableWater()
 
+@app.route('/DRL/water/available/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllAvailableWaterBySupplierId(supplier_id):
+    return WaterHandler().getAllAvailableWaterBySupplierId(supplier_id)
+
 @app.route('/DRL/water/reserved', methods = ['GET'])
 def getAllReservedWater():
     return WaterHandler().getAllReservedWater()
+
+@app.route('/DRL/water/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllReservedWaterBySupplierId(supplier_id):
+    return WaterHandler().getAllReservedWaterBySupplierId(supplier_id)
 
 #################### Cloth Routes ####################
 
@@ -111,9 +119,17 @@ def getClothBySupplierId(supplier_id):
 def getAllAvailableCloth():
     return ClothHandler().getAllAvailableCloth()
 
+@app.route('/DRL/cloth/available/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllAvailableClothBySupplierId(supplier_id):
+    return ClothHandler().getAllAvailableClothBySupplierId(supplier_id)
+
 @app.route('/DRL/cloth/reserved', methods = ['GET'])
 def getAllReservedCloth():
     return ClothHandler().getAllReservedCloth()
+
+@app.route('/DRL/cloth/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllReservedClothBySupplierId(supplier_id):
+    return ClothHandler().getAllReservedClothBySupplierId(supplier_id)
 
 #################### Heavy Equipment Routes ####################
 
@@ -146,9 +162,17 @@ def getHeavyEquipBySupplierId(supplier_id):
 def getAllAvailableHeavyEquip():
     return HeavyEquipHandler().getAllAvailableHeavyEquip()
 
+@app.route('/DRL/heavyequipment/available/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllAvailableHeavyEquipBySupplierId(supplier_id):
+    return HeavyEquipHandler().getAllAvailableHeavyEquipBySupplierId(supplier_id)
+
 @app.route('/DRL/heavyequipment/reserved', methods = ['GET'])
 def getAllReservedHeavyEquip():
     return HeavyEquipHandler().getAllReservedHeavyEquip()
+
+@app.route('/DRL/heavyequipment/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllReservedHeavyEquipBySupplierId(supplier_id):
+    return HeavyEquipHandler().getAllReservedHeavyEquipBySupplierId(supplier_id)
 
 #################### Medical Device Routes ####################
 
@@ -181,9 +205,17 @@ def getMedDeviceBySupplierId(supplier_id):
 def getAllAvailablemedDevice():
     return MedDeviceHandler().getAllAvailableMedDevice()
 
+@app.route('/DRL/medicaldevice/available/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllAvailableMedDeviceBySupplierId(supplier_id):
+    return MedDeviceHandler().getAllAvailableMedDeviceBySupplierId(supplier_id)
+
 @app.route('/DRL/medicaldevice/reserved', methods = ['GET'])
 def getAllReservedMedDevice():
     return MedDeviceHandler().getAllReservedMedDevice()
+
+@app.route('/DRL/medicaldevice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllReservedMedDeviceBySupplierId(supplier_id):
+    return MedDeviceHandler().getAllReservedMedDeviceBySupplierId(supplier_id)
 
 #################### Request Routes ####################
 

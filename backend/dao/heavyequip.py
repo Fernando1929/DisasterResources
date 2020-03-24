@@ -55,6 +55,20 @@ class HeavyEquipDAO:
         ]
         return result
 
+    def getAllAvailableHeavyEquipBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 125000.00, "Excavator", "320D", "Used"],
+            [2, 2, 1, "Heavy Equipment", "Clark", 1, 1500.00, "Elevator", "EC500-800 Type E", "Used"]
+        ]
+        return result
+
+    def getAllReservedHeavyEquipBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 0.00, "Excavator", "320D", "Used"],
+            [2, 2, 1, "Heavy Equipment", "Clark", 1, 0.00, "Elevator", "EC500-800 Type E", "Used"]
+        ]
+        return result
+
     def insert(self, resource_id, heavyequip_type, heavyequip_model, heavyequip_condition):
         hequip_id = 1
         return hequip_id
