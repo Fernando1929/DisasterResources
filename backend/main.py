@@ -2,9 +2,11 @@ from flask import Flask, jsonify, request
 from handler.customer import CustomerHandler
 from handler.water import WaterHandler
 from handler.cloth import ClothHandler
-from handler.heavyequip import HeavyEquipHandler
+from handler.heavyEquip import HeavyEquipHandler
 from handler.medDevice import MedDeviceHandler
 from handler.request import RequestHandler
+from handler.athMovil import AthMovilHandler
+from handler.paypal import PaypalHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
@@ -208,6 +210,52 @@ def getRequestById(request_id):
 @app.route('/DRL/customer/<int:customer_id>/request', methods= ['GET'])
 def getRequestByCustomerId(customer_id):
     return RequestHandler().getRequestByCustomerId(customer_id)
+
+#################### Ath Movil Routes ####################
+
+@app.route("/DRL/athmovil", methods=['GET', 'POST'])
+def getAllAthMovil():
+    if request.method == 'POST':
+        return AthMovilHandler().insertAthMovil(request.json)
+    else:
+        if not request.args:
+            return AthMovilHandler().getAllAthMovil()
+        else:
+            return AthMovilHandler().searchAthMovil(request.args)
+
+@app.route('/DRL/athmovil/<int:ath_movil_id>', methods=['GET', 'PUT', 'DELETE'])
+def getAthMovilById(ath_movil_id):
+    if request.method == 'GET':
+        return AthMovilHandler().getAthMovilById(ath_movil_id)
+    elif request.method == 'PUT':
+        return AthMovilHandler().updateAthMovil(ath_movil_id, request.json)
+    elif request.method == 'DELETE':
+        return AthMovilHandler().deleteAthMovil(ath_movil_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+#################### Paypal Routes ####################
+
+@app.route("/DRL/paypal", methods=['GET', 'POST'])
+def getAllPaypal():
+    if request.method == 'POST':
+        return PaypalHandler().insertPaypal(request.json)
+    else:
+        if not request.args:
+            return PaypalHandler().getAllPaypal()
+        else:
+            return PaypalHandler().searchPaypal(request.args)
+
+@app.route('/DRL/paypal/<int:paypal_id>', methods=['GET', 'PUT', 'DELETE'])
+def getPaypalById(paypal_id):
+    if request.method == 'GET':
+        return PaypalHandler().getPaypalById(paypal_id)
+    elif request.method == 'PUT':
+        return PaypalHandler().updatePaypal(paypal_id, request.json)
+    elif request.method == 'DELETE':
+        return PaypalHandler().deletePaypal(paypal_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 if __name__ == '__main__':
     app.run(debug=True)

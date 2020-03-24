@@ -40,7 +40,7 @@ class MedDeviceHandler:
         for row in mdevice_list:
             result = self.build_mdevice_dict(row)
             result_list.append(result)
-        return jsonify(Medical_Device = result_list)
+        return jsonify(MedicalDevice = result_list)
 
     def getAllAvailableMedDevice(self):
         dao = MedDeviceDAO()
@@ -49,7 +49,7 @@ class MedDeviceHandler:
         for row in mdevice_list:
             result = self.build_mdevice_dict(row)
             result_list.append(result)
-        return jsonify(Medical_Device = result_list)
+        return jsonify(MedicalDevice = result_list)
 
     def getAllReservedMedDevice(self):
         dao = MedDeviceDAO()
@@ -58,7 +58,7 @@ class MedDeviceHandler:
         for row in mdevice_list:
             result = self.build_mdevice_dict(row)
             result_list.append(result)
-        return jsonify(Medical_Device = result_list)
+        return jsonify(MedicalDevice = result_list)
 
     def getMedDeviceById(self, mdevice_id):
         dao = MedDeviceDAO()
@@ -67,7 +67,7 @@ class MedDeviceHandler:
             return jsonify(Error = "Medical Device Not Found"), 404
         else:
             hequip = self.build_mdevice_dict(row)
-            return jsonify(Medical_Device = hequip)
+            return jsonify(MedicalDevice = hequip)
 
     def getMedDeviceBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO()
@@ -81,7 +81,7 @@ class MedDeviceHandler:
             for row in mdevice_list:
                 result = self.build_mdevice_dict(row)
                 result_list.append(result)
-            return jsonify(Medical_Device = result_list)
+            return jsonify(MedicalDevice = result_list)
 
     def searchMedDevice(self, args):
         mdevice_brand = args.get("mdevice_brand")
@@ -101,7 +101,7 @@ class MedDeviceHandler:
         for row in mdevice_list:
             result = self.build_mdevice_dict(row)
             result_list.append(result)
-        return jsonify(Medical_Device = result_list)
+        return jsonify(MedicalDevice = result_list)
 
     def insertMedDevice(self, json):
         supplier_id = json["supplier_id"]
@@ -119,7 +119,7 @@ class MedDeviceHandler:
             mdevice_dao = MedDeviceDAO()
             mdevice_id = mdevice_dao.insert(resource_id, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
             result = self.build_mdevice_attributes(mdevice_id, resource_id, supplier_id, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
-            return jsonify(Medical_Device = result), 201
+            return jsonify(MedicalDevice = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
 

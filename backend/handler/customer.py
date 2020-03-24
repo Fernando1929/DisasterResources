@@ -5,8 +5,8 @@ from dao.user import UserDAO
 class CustomerHandler:
     def build_customer_dict(self, row):
         result = {}
-        result['user_id'] = row[0]
-        result['customer_id'] = row[1]
+        result['customer_id'] = row[0]
+        result['user_id'] = row[1]
         result['customer_firstname'] = row[2]
         result['customer_lastname'] = row[3]
         result['customer_date_birth'] = row[4]
@@ -14,10 +14,10 @@ class CustomerHandler:
         result['customer_phone'] = row[6]
         return result
 
-    def build_customer_attributes(self, user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone):
+    def build_customer_attributes(self, customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone):
         result = {}
-        result['user_id'] = user_id
         result['customer_id'] = customer_id
+        result['user_id'] = user_id
         result['customer_firstname'] = customer_firstname
         result['customer_lastname'] = customer_lastname
         result['customer_date_birth'] = customer_date_birth
@@ -47,6 +47,8 @@ class CustomerHandler:
         customer_firstname = args.get("customer_firstname")
         customer_lastname = args.get("customer_lastname")
         customer_email = args.get("customer_email")
+        customer_phone = args.get("customer_phone")
+        customer_date_birth = args.get("customer_date_birth")
         dao = CustomerDAO()
         customers_list = []
         if (len(args) == 2) and customer_firstname and customer_lastname:
@@ -57,6 +59,10 @@ class CustomerHandler:
             customers_list = dao.getCustomerByLastname(customer_lastname)
         elif (len(args) == 1) and customer_email:
             customers_list = dao.getCustomerByEmail(customer_email)
+        elif (len(args) == 1) and customer_phone:
+            customers_list = dao.getCustomerByPhone(customer_phone)
+        elif (len(args) == 1) and customer_date_birth:
+            customers_list = dao.getCustomerByDateOfBirth(customer_date_birth)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
@@ -76,7 +82,7 @@ class CustomerHandler:
             user_id = user_dao.insert(customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)          
             customer_dao = CustomerDAO()
             customer_id = customer_dao.insert(user_id)
-            result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+            result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
             return jsonify(Customer = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -86,7 +92,6 @@ class CustomerHandler:
         if not customer_dao.getCustomerById(customer_id):
             return jsonify(Error = "Customer not found."), 404
         else:
-            print(json)
             customer_firstname = json["customer_firstname"]
             customer_lastname = json["customer_lastname"]
             customer_date_birth = json["customer_date_birth"]
@@ -96,7 +101,7 @@ class CustomerHandler:
                 user_id = customer_dao.update(customer_id)
                 user_dao = UserDAO()
                 user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
-                result = self.build_customer_attributes(user_id, customer_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+                result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
                 return jsonify(Customer = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

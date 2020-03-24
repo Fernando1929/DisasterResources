@@ -1,5 +1,5 @@
 from flask import jsonify
-from dao.heavyequip import HeavyEquipDAO
+from dao.heavyEquip import HeavyEquipDAO
 from dao.resource import ResourceDAO
 
 class HeavyEquipHandler:
@@ -38,7 +38,7 @@ class HeavyEquipHandler:
         for row in hequip_list:
             result = self.build_hequip_dict(row)
             result_list.append(result)
-        return jsonify(Heavy_Equipment = result_list)
+        return jsonify(HeavyEquipment = result_list)
 
     def getAllAvailableHeavyEquip(self):
         dao = HeavyEquipDAO()
@@ -47,7 +47,7 @@ class HeavyEquipHandler:
         for row in hequip_list:
             result = self.build_hequip_dict(row)
             result_list.append(result)
-        return jsonify(Heavy_Equipment = result_list)
+        return jsonify(HeavyEquipment = result_list)
 
     def getAllReservedHeavyEquip(self):
         dao = HeavyEquipDAO()
@@ -56,7 +56,7 @@ class HeavyEquipHandler:
         for row in hequip_list:
             result = self.build_hequip_dict(row)
             result_list.append(result)
-        return jsonify(Heavy_Equipment = result_list)
+        return jsonify(HeavyEquipment = result_list)
 
     def getHeavyEquipById(self, hequip_id):
         dao = HeavyEquipDAO()
@@ -65,7 +65,7 @@ class HeavyEquipHandler:
             return jsonify(Error = "Heavy Equipment Not Found"), 404
         else:
             hequip = self.build_hequip_dict(row)
-            return jsonify(Heavy_Equipment = hequip)
+            return jsonify(HeavyEquipment = hequip)
 
     def getHeavyEquipBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO()
@@ -79,7 +79,7 @@ class HeavyEquipHandler:
             for row in hequip_list:
                 result = self.build_hequip_dict(row)
                 result_list.append(result)
-            return jsonify(Heavy_Equipment = result_list)
+            return jsonify(HeavyEquipment = result_list)
 
     def searchHeavyEquip(self, args):
         hequip_brand = args.get("hequip_brand")
@@ -99,7 +99,7 @@ class HeavyEquipHandler:
         for row in hequip_list:
             result = self.build_hequip_dict(row)
             result_list.append(result)
-        return jsonify(Heavy_Equipment = result_list)
+        return jsonify(HeavyEquipment = result_list)
 
     def insertHeavyEquip(self, json):
         supplier_id = json["supplier_id"]
@@ -116,7 +116,7 @@ class HeavyEquipHandler:
             hequip_dao = HeavyEquipDAO()
             hequip_id = hequip_dao.insert(resource_id, hequip_type, hequip_model, hequip_condition)
             result = self.build_hequip_attributes(hequip_id, resource_id, supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition)
-            return jsonify(Heavy_Equipment = result), 201
+            return jsonify(HeavyEquipment = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
 
@@ -138,7 +138,7 @@ class HeavyEquipHandler:
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price)
                 result = self.build_hequip_attributes(hequip_id, resource_id, supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition)
-                return jsonify(Heavy_Equipment = result), 200
+                return jsonify(HeavyEquipment = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
 

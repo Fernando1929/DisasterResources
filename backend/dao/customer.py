@@ -41,6 +41,20 @@ class CustomerDAO:
         ]
         return result
 
+    def getCustomerByPhone(self, customer_phone):
+        result = [
+            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
+            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
+        ]
+        return result
+
+    def getCustomerByDateOfBirth(self, customer_date_birth):
+        result = [
+            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
+            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
+        ]
+        return result
+
     def insert(self, customer_id):
         return customer_id
 
