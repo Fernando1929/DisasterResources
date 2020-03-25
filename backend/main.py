@@ -5,6 +5,7 @@ from handler.admin import AdminHandler
 from handler.order import OrderHandler
 from handler.generator import GeneratorHandler
 from handler.battery import BatteryHandler
+from handler.company import CompanyHandler
 
 #from handler.supplier import SupplierHandler
 # Import Cross-Origin Resource Sharing to enable
@@ -47,6 +48,29 @@ def getSupplierById(supplier_id):
 @app.route('/DRL/supplier/<int:supplier_id>/resources', methods=['GET']) 
 def getAllResourcesBySupplierId(supplier_id):
     return SupplierHandler().getAllSupplierResources(supplier_id)
+
+#################### Company Routes ####################
+
+@app.route('/DRL/company', methods = ['GET','POST']) #verify later
+def getAllCompanies():
+    if request.method == 'POST':
+        return CompanyHandler().insertCompany(request.json)
+    else :
+        if not request.args:
+            return CompanyHandler().getAllCompanies()
+        else:
+            return CompanyHandler().searchCompany(request.args)
+
+@app.route('/DRL/company/<int:company_id>', methods = ['GET','PUT','DELETE'])
+def getCompanyById(company_id):
+    if request.method == 'GET':
+        return CompanyHandler().getCompanyById(company_id)
+    elif request.method == 'PUT':
+        return CompanyHandler().updateCompany(company_id, request.json)
+    elif request.method == 'DELETE':
+        return CompanyHandler().deleteCompany(company_id)
+    else:
+        return jsonify(Error = "Method not allowed"), 405
        
 #################### Admin Routes ####################
 
