@@ -53,7 +53,21 @@ class GeneratorDAO:
     def getGeneratorBySupplierId(self, supplier_id):
         result =  ['1', '2', '1', '3', 'generator', 'WEN', '10', '$300', '1.20K', 'new', 'gasoline']
         return result
-
+    
+    def getAllAvailableGeneratorBySupplierId(self, supplier_id):
+        result = [
+            ['1', '2', '1', '3', 'generator', 'WEN', '10', '$300', '1.20K', 'new', 'gasoline'],
+            ['2', '1', '2', '4', 'generator', 'CAT', '8', '$500', '40K', 'new', 'diesel']
+        ]
+        return result
+    
+    def getAllReservedGeneratorBySupplierId(self, supplier_id):
+        result = [
+            ['1', '2', '1', '3', 'generator', 'WEN', '10', '$300', '1.20K', 'new', 'gasoline'],
+            ['2', '1', '2', '4', 'generator', 'CAT', '8', '$500', '40K', 'new', 'diesel']
+        ]
+        return result
+    
     def insert(self, resource_id, power_id, fuel):
         resource_id =1
         return resource_id
