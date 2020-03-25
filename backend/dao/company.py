@@ -38,13 +38,13 @@ class CompanyDAO:
         return result
 
     def insert(self, company_name, company_address, company_phone):
-        resource_id =1
-        return resource_id
+        company_id =1
+        return company_id
 
     def update(self, company_id, company_name, company_address, company_phone):
-        resource_id =1
-        return resource_id
+        company_id =1
+        return company_id
 
     def delete(self, company_id):
-        resource_id =1
-        return resource_id
+        company_id =1
+        return company_id

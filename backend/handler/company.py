@@ -59,11 +59,10 @@ class CompanyHandler:
         return jsonify(Companies=result_list)
 
     def insertCompany(self, json):
-        company_id = json['company_id']
         company_name = json['company_name']
         company_address = json['company_address']
         company_phone = json['company_phone']
-        if company_id and company_name and company_address and company_phone:
+        if company_name and company_address and company_phone:
             dao = CompanyDAO()
             company_id = dao.insert(company_name, company_address, company_phone)
             json = self.build_company_attributes(company_id, company_name, company_address, company_phone)
