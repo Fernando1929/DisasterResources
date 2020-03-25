@@ -51,6 +51,20 @@ class IceDAO:
            ['1', '2', '1', 'ice', 'el angel', '10', '$2.50', '5lbs']
         ]
         return result
+    
+    def getAllAvailableIceBySypplierId(self, supplier_id):
+        result = [
+            ['1', '2', '1', 'ice', 'el angel', '10', '$2.50', '5lbs'],
+            ['2', '1', '2', 'ice', 'submarine', ' 8', '$2.50', '6lbs']
+        ]
+        return result
+
+    def getAllReservedIceBySypplierId(self, supplier_id):
+        result = [
+            ['1', '2', '1', 'ice', 'el angel', '10', '$2.50', '5lbs'],
+            ['2', '1', '2', 'ice', 'submarine', ' 8', '$2.50', '6lbs']
+        ]
+        return result
 
     def insert(self, resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight):
         resource_id =1
