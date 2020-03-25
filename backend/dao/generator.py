@@ -1,7 +1,6 @@
 from config.dbconfig import pg_config
 import psycopg2
 
-
 class GeneratorDAO:
 
     def __init__(self):
