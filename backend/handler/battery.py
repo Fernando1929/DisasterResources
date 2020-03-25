@@ -86,6 +86,32 @@ class BatteryHandler:
                 result_list.append(result)
             return jsonify(Ice=result_list)
 
+    def getAllAvailableBatteryBySupplierId(self, supplier_id):
+        #supplier_dao = SupplierDAO
+        #if not supplier_dao.getSupplierById(supplier_id):
+        #    return jsonify(Error="Supplier Not Found"), 404
+        #else:
+            battery_dao = BatteryDAO()
+            result_list = []
+            battery_list = battery_dao.getAllAvailableBatteryBySupplierId(supplier_id)
+            for row in battery_list:
+                result = self.build_battery_dict(row)
+                result_list.append(result)
+            return jsonify(Ice=result_list)
+
+    def getAllReservedBatteryBySupplierId(self, supplier_id):
+        #supplier_dao = SupplierDAO
+        #if not supplier_dao.getSupplierById(supplier_id):
+        #    return jsonify(Error="Supplier Not Found"), 404
+        #else:
+            battery_dao = BatteryDAO()
+            result_list = []
+            battery_list = battery_dao.getAllReservedBatteryBySupplierId(supplier_id)
+            for row in battery_list:
+                result = self.build_battery_dict(row)
+                result_list.append(result)
+            return jsonify(Ice=result_list)
+
     def searchBattery(self, args): 
         Battery_power_capacity = args.get('power_capacity')
         Battery_power_condition = args.get('power_condition')

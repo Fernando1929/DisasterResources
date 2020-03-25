@@ -54,6 +54,20 @@ class BatteryDAO:
         result =   ['1','2','3','4', 'Battery', 'Duracel', '10', '$7', '1.20V', 'new', 'AA']
         return result
 
+    def getAllAvailableBatteryBySupplierId(self, supplier_id):
+        result = [
+            ['1','2','3','4', 'Battery', 'Duracel', '10', '$7', '1.20V', 'new', 'AA'],
+            ['2','3','4','5', 'Baterry', 'Energizer', ' 8', '$5','1.5V', 'new', 'AAA']
+        ]
+        return result
+    
+    def getAllReservedBatteryBySupplierId(self, supplier_id):
+        result = [
+            ['1','2','3','4', 'Battery', 'Duracel', '10', '$7', '1.20V', 'new', 'AA'],
+            ['2','3','4','5', 'Baterry', 'Energizer', ' 8', '$5','1.5V', 'new', 'AAA']
+        ]
+        return result
+
     def insert(self, resource_id, power_id, battery_type):
         resource_id =1
         return resource_id
