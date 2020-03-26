@@ -7,17 +7,15 @@ class RequestHandler:
         result = {}
         result['request_id'] = row[0]
         result['customer_id'] = row[1]
-        result['resource_id'] = row[2]
-        result['request_title'] = row[3]
-        result['request_quantity'] = row[4]
-        result['request_date'] = row[5]
+        result['request_title'] = row[2]
+        result['request_quantity'] = row[3]
+        result['request_date'] = row[4]
         return result
 
-    def build_request_attributes(self, request_id, customer_id, resource_id, request_title, request_quantity, request_date):
+    def build_request_attributes(self, request_id, customer_id, request_title, request_quantity, request_date):
         result = {}
         result['request_id'] = request_id
-        result['customer_id'] = customer_id
-        result['resource_id'] = resource_id
+        result['customer_id'] = customer_id 
         result['request_title'] = request_title
         result['request_quantity'] = request_quantity
         result['request_date'] = request_date
@@ -71,14 +69,13 @@ class RequestHandler:
 
     def insertRequest(self, json):
         customer_id = json["customer_id"]
-        resource_id = json["resource_id"]
         request_title = json["request_title"]
         request_quantity = json["request_quantity"]
         request_date = json["request_date"]
-        if customer_id and resource_id and request_title and request_quantity and request_date:
+        if customer_id and request_title and request_quantity and request_date:
             request_dao = RequestDAO()
-            request_id = request_dao.insert(customer_id, resource_id, request_title, request_quantity, request_date)
-            result = self.build_request_attributes(request_id, customer_id, resource_id, request_title, request_quantity, request_date)
+            request_id = request_dao.insert(customer_id, request_title, request_quantity, request_date)
+            result = self.build_request_attributes(request_id, customer_id, request_title, request_quantity, request_date)
             return jsonify(Request = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -89,14 +86,13 @@ class RequestHandler:
             return jsonify(Error = "Request not found."), 404
         else:
             customer_id = json["customer_id"]
-            resource_id = json["resource_id"]
             request_title = json["request_title"]
             request_quantity = json["request_quantity"]
             request_date = json["request_date"]
-            if customer_id and resource_id and request_title and request_quantity and request_date:
+            if customer_id and request_title and request_quantity and request_date:
                 request_dao = RequestDAO()
-                request_id = request_dao.update(request_id, customer_id, resource_id, request_title, request_quantity, request_date)
-                result = self.build_request_attributes(request_id, customer_id, resource_id, request_title, request_quantity, request_date)
+                request_id = request_dao.update(request_id, customer_id, request_title, request_quantity, request_date)
+                result = self.build_request_attributes(request_id, customer_id, request_title, request_quantity, request_date)
                 return jsonify(Request = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

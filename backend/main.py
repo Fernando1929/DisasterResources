@@ -303,7 +303,7 @@ def getAllCreditCard():
             return CreditCardHandler().searchCreditCard(request.args)
 
 @app.route('/DRL/creditcard/<int:creditcard_id>', methods=['GET', 'PUT', 'DELETE'])
-def getPaypalById(creditcard_id):
+def getCreditCardById(creditcard_id):
     if request.method == 'GET':
         return CreditCardHandler().getCreditCardById(creditcard_id)
     elif request.method == 'PUT':
