@@ -4,7 +4,7 @@ class PaymentDAO:
         payment_id = 1
         return payment_id
 
-    def update(self, payment_id):
+    def update(self, payment_id, user_id):
         return payment_id
 
     def delete(self, payment_id):

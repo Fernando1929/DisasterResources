@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.athMovil import AthMovilDAO
 from dao.payment import PaymentDAO
+from dao.user import UserDAO
 
 class AthMovilHandler:
 
@@ -48,9 +49,23 @@ class AthMovilHandler:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in ath_movil_list:
+            print(row)
             result = self.build_athMovil_dict(row)
             result_list.append(result)
         return jsonify(AthMovil = result_list)
+
+    def getAthMovilByUserId(self, user_id):
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else :
+            dao = AthMovilDAO()
+            row = dao.getAthMovilByUserId(user_id)
+            if not row:
+                return jsonify(Error = "Ath Movil Not Found"), 404
+            else:
+                ath_movil = self.build_athMovil_dict(row)
+                return jsonify(AthMovil = ath_movil)
 
     def insertAthMovil(self, json):
         user_id = json["user_id"]

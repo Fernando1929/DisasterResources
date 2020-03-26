@@ -267,6 +267,10 @@ def getAthMovilById(ath_movil_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route("/DRL/user/<int:user_id>/athmovil", methods=['GET'])
+def getAthMovilByUserId(user_id):
+    return AthMovilHandler().getAthMovilByUserId(user_id)
+
 #################### Paypal Routes ####################
 
 @app.route("/DRL/paypal", methods=['GET', 'POST'])

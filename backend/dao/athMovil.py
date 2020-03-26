@@ -14,6 +14,12 @@ class AthMovilDAO:
         return result
 
     def getAthMovilByPhone(self, ath_movil_phone):
+        result = [
+            [1, 1, 1, "7877778888"]
+        ]
+        return result
+
+    def getAthMovilByUserId(self, user_id):
         result = [1, 1, 1, "7877778888"]
         return result
 
