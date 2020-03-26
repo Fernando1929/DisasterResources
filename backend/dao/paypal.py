@@ -14,10 +14,16 @@ class PaypalDAO:
         return result
 
     def getPaypalByUsername(self, paypal_username):
-        result = [1, 1, 1, "Sam23", "Samuel1234"]
+        result = [
+            [1, 1, 1, "Sam23", "Samuel1234"]
+        ]
         return result
 
     def getPaypalByPassword(self, paypal_password):
+        result = [1, 1, 1, "Sam23", "Samuel1234"]
+        return result
+
+    def getPaypalByUserId(self, user_id):
         result = [1, 1, 1, "Sam23", "Samuel1234"]
         return result
 

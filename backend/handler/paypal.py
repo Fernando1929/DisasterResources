@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.paypal import PaypalDAO
 from dao.payment import PaymentDAO
+from dao.user import UserDAO
 
 class PaypalHandler:
 
@@ -54,6 +55,19 @@ class PaypalHandler:
             result_list.append(result)
         return jsonify(Paypal = result_list)
 
+    def getPaypalByUserId(self, user_id):
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else :
+            dao = PaypalDAO()
+            row = dao.getPaypalByUserId(user_id)
+            if not row:
+                return jsonify(Error = "Paypal Not Found"), 404
+            else:
+                paypal = self.build_paypal_dict(row)
+                return jsonify(AthMovil = paypal)
+
     def insertPaypal(self, json):
         user_id = json["user_id"]
         paypal_username = json["paypal_username"]
@@ -63,7 +77,7 @@ class PaypalHandler:
             payment_id = payment_dao.insert(user_id)
             paypal_dao = PaypalDAO()
             paypal_id = paypal_dao.insert(payment_id, paypal_username, paypal_password)
-            result = self.build_athMovil_attributes(paypal_id, payment_id, user_id, paypal_username, paypal_password)
+            result = self.build_paypal_attributes(paypal_id, payment_id, user_id, paypal_username, paypal_password)
             return jsonify(Paypal = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -80,14 +94,14 @@ class PaypalHandler:
                 payment_id = paypal_dao.update(paypal_id, paypal_username, paypal_password)
                 payment_dao = PaymentDAO()
                 payment_dao.update(payment_id, user_id)
-                result = self.build_athMovil_attributes(paypal_id, payment_id, user_id, paypal_username, paypal_password)
+                result = self.build_paypal_attributes(paypal_id, payment_id, user_id, paypal_username, paypal_password)
                 return jsonify(Paypal = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in post request"), 400
 
     def deletePaypal(self, paypal_id):
         paypal_dao = PaypalDAO()
-        if not paypal_dao.getpaypalById(paypal_id):
+        if not paypal_dao.getPaypalById(paypal_id):
             return jsonify(Error = "Paypal not found."), 404
         else:
             payment_id = paypal_dao.delete(paypal_id)

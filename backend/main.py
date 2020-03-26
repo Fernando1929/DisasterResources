@@ -294,6 +294,10 @@ def getPaypalById(paypal_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route("/DRL/user/<int:user_id>/paypal", methods=['GET'])
+def getPaypalByUserId(user_id):
+    return PaypalHandler().getPaypalByUserId(user_id)
+
 #################### Credit Card Routes ####################
 
 @app.route("/DRL/creditcard", methods=['GET', 'POST'])
