@@ -317,5 +317,9 @@ def getCreditCardById(creditcard_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route("/DRL/user/<int:user_id>/creditcard", methods=['GET'])
+def getCreditCardByUserId(user_id):
+    return CreditCardHandler().getCreditCardByUserId(user_id)
+
 if __name__ == '__main__':
     app.run(debug=True)

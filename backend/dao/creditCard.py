@@ -27,6 +27,10 @@ class CreditCardDAO:
         ]
         return result
 
+    def getCreditCardByUserId(self, user_id):
+        result = [1, 1, 1, "Samuel Ramirez", "1234567898765432", "000", "02/23"]
+        return result
+
     def insert(self, payment_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date):
         creditcard_id = 1
         return creditcard_id
