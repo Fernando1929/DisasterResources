@@ -42,6 +42,24 @@ class MedicineHandler:
             result_list.append(result)
         return jsonify(Medicines = result_list)
 
+    def getAllAvailableMedicines(self):
+        dao = MedicineDAO()
+        med_list = dao.getAllAvailableMedicine()
+        result_list = []
+        for row in med_list:
+            result = self.build_medicine_dict(row)
+            result_list.append(result)
+        return jsonify(Medicine = result_list)
+
+    def getAllReservedMedicines(self):
+        dao = MedicineDAO()
+        med_list = dao.getAllReservedMedicine()
+        result_list = []
+        for row in med_list:
+            result = self.build_medicine_dict(row)
+            result_list.append(result)
+        return jsonify(Medicine = result_list)
+
     def getMedicineById(self, med_id):
         dao = MedicineDAO()
         row = dao.getMedicineById(med_id)
@@ -56,6 +74,26 @@ class MedicineHandler:
         result_list = []
         med_dao = MedicineDAO()
         med_list = med_dao.getMedicinesBySupplierId(supplier_id)
+        for row in med_list:
+            result = self.build_medicine_dict(row)
+            result_list.append(result)
+        return jsonify(Medicine = result_list)
+
+    def getAllAvailableMedicineBySupplierId(self, supplier_id):
+        med_list = []
+        result_list = []
+        med_dao = MedicineDAO()
+        med_list = med_dao.getAllAvailableMedicineBySupplierId(supplier_id)
+        for row in med_list:
+            result = self.build_medicine_dict(row)
+            result_list.append(result)
+        return jsonify(Medicine = result_list)
+
+    def getAllReservedMedicineBySupplierId(self, supplier_id):
+        med_list = []
+        result_list = []
+        med_dao = MedicineDAO()
+        med_list = med_dao.getAllReservedMedicineBySupplierId(supplier_id)
         for row in med_list:
             result = self.build_medicine_dict(row)
             result_list.append(result)

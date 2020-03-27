@@ -38,6 +38,24 @@ class FuelHandler:
             result_list.append(result)
         return jsonify(Fuels = result_list)
 
+    def getAllAvailableFuels(self):
+        dao = FuelDAO()
+        fuel_list = dao.getAllAvailableFuel()
+        result_list = []
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Fuel = result_list)
+
+    def getAllReservedFuels(self):
+        dao = FuelDAO()
+        fuel_list = dao.getAllReservedFuel()
+        result_list = []
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Fuel = result_list)
+
     def getFuelById(self, fuel_id):
         dao = FuelDAO()
         row = dao.getFuelById(fuel_id)
@@ -48,10 +66,35 @@ class FuelHandler:
             return jsonify(Fuel = fuel)
 
     def getFuelBySupplierId(self, supplier_id):
+        #supplier_dao = SupplierDAO()
+        #if not supplier_dao.getSupplierById(supplier_id):
+        #    return jsonify(Error = "Supplier not found."), 404
+        #else:
+
         fuel_list = []
         result_list = []
         fuel_dao = FuelDAO()
         fuel_list = fuel_dao.getFuelsBySupplierId(supplier_id)
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Fuel = result_list)
+
+    def getAllAvailableFuelBySupplierId(self, supplier_id):
+        fuel_list = []
+        result_list = []
+        fuel_dao = FuelDAO()
+        fuel_list = fuel_dao.getAllAvailableFuelBySupplierId(supplier_id)
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Fuel = result_list)
+
+    def getAllReservedFuelBySupplierId(self, supplier_id):
+        fuel_list = []
+        result_list = []
+        fuel_dao = FuelDAO()
+        fuel_list = fuel_dao.getAllReservedFuelBySupplierId(supplier_id)
         for row in fuel_list:
             result = self.build_fuel_dict(row)
             result_list.append(result)
@@ -115,7 +158,7 @@ class FuelHandler:
                 resource_id = fuel_dao.update(fuel_id, fuel_type, fuel_gallons)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price)
-                # Need to find supplier_id
+
                 result = self.build_fuel_attributes(fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons)
                 return jsonify(Fuel = result), 200
             else:

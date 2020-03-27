@@ -2,6 +2,10 @@ class UserDAO:
     def _init_(self):
         super()._init_()
 
+    def getUserById(self, user_id):
+        result = [1, "Alex", "Smith", "03/03/1996", "alexsmith@gmail.com", "7870007777"]
+        return result
+
     def insert(self, firstname, lastname, date_birth, email, phone):
         user_id = 1
         return user_id

@@ -40,6 +40,24 @@ class ToolHandler:
             result_list.append(result)
         return jsonify(Tools = result_list)
 
+    def getAllAvailableTools(self):
+        dao = ToolDAO()
+        tool_list = dao.getAllAvailableTools()
+        result_list = []
+        for row in tool_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
+        return jsonify(Tools = result_list)
+
+    def getAllReservedTools(self):
+        dao = ToolDAO()
+        tool_list = dao.getAllReservedTools()
+        result_list = []
+        for row in tool_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
+        return jsonify(Tools = result_list)
+
     def getToolById(self, tool_id):
         dao = ToolDAO()
         row = dao.getToolById(tool_id)
@@ -49,7 +67,7 @@ class ToolHandler:
             tool = self.build_tool_dict(row)
             return jsonify(Tool = tool)
 
-    def getToolBySupplierId(self, supplier_id):
+    def getToolsBySupplierId(self, supplier_id):
         tool_list = []
         result_list = []
         tool_dao = ToolDAO()
@@ -57,9 +75,29 @@ class ToolHandler:
         for row in tool_list:
             result = self.build_tool_dict(row)
             result_list.append(result)
-        return jsonify(Tool = result_list)
+        return jsonify(Tools = result_list)
 
-    def searchTool(self, args):
+    def getAllAvailableToolsBySupplierId(self, supplier_id):
+        tool_list = []
+        result_list = []
+        tool_dao = ToolDAO()
+        tool_list = tool_dao.getAllAvailableToolsBySupplierId(supplier_id)
+        for row in tool_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
+        return jsonify(Tools = result_list)
+
+    def getAllReservedToolsBySupplierId(self, supplier_id):
+        tool_list = []
+        result_list = []
+        tool_dao = ToolDAO()
+        tool_list = tool_dao.getAllReservedToolsBySupplierId(supplier_id)
+        for row in tool_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
+        return jsonify(Tools = result_list)
+
+    def searchTools(self, args):
         tool_brand = args.get("tool_brand")
         tool_material = args.get("tool_material")
         tool_condition = args.get("tool_condition")
@@ -83,7 +121,7 @@ class ToolHandler:
         for row in tool_list:
             result = self.build_tool_dict(row)
             result_list.append(result)
-        return jsonify(Tool = result_list)
+        return jsonify(Tools = result_list)
 
     def insertTool(self, json):
         supplier_id = json["supplier_id"]

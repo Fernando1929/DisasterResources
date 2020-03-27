@@ -8,6 +8,14 @@ class FuelDAO:
         result = [[1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
+    def getAllAvailableFuel(self):
+        result = [[1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
+        return result
+
+    def getAllReservedFuel(self):
+        result = [[1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
+        return result
+
     def getFuelById(self, resource_id):
         result = [1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]
         return result
@@ -29,6 +37,14 @@ class FuelDAO:
         return result
 
     def getFuelsBySupplierId(self, supplier_id):
+        result = [[1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
+        return result
+
+    def getAllAvailableFuelBySupplierId(self, supplier_id):
+        result = [[1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
+        return result
+
+    def getAllReservedFuelBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 

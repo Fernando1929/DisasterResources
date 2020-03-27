@@ -9,6 +9,14 @@ class MedicineDAO:
         result = [[1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
+    def getAllAvailableMedicine(self):
+        result = [[1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
+        return result
+
+    def getAllReservedMedicine(self):
+        result = [[1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
+        return result
+
     def getMedicineById(self, resource_id):
         result = [1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]
         return result
@@ -34,6 +42,14 @@ class MedicineDAO:
         return result
 
     def getMedicinesBySupplierId(self, supplier_id):
+        result = [[1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
+        return result
+
+    def getAllAvailableMedicineBySupplierId(self, supplier_id):
+        result = [[1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
+        return result
+
+    def getAllReservedMedicineBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
