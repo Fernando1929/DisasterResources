@@ -8,19 +8,21 @@ class FuelHandler:
         result['fuel_id'] = row[0]
         result['resource_id'] = row[1]
         result['supplier_id'] = row[2]
-        result['fuel_name'] = row[3]
-        result['fuel_brand'] = row[4]
-        result['fuel_quantity'] = row[5]
-        result['fuel_price'] = row[6]
-        result['fuel_type'] = row[7]
-        result['fuel_gallons'] = row[8]
+        result['fuel_address'] = row[3]
+        result['fuel_name'] = row[4]
+        result['fuel_brand'] = row[5]
+        result['fuel_quantity'] = row[6]
+        result['fuel_price'] = row[7]
+        result['fuel_type'] = row[8]
+        result['fuel_gallons'] = row[9]
         return result
 
-    def build_fuel_attributes(self, fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons):
+    def build_fuel_attributes(self, fuel_id, resource_id, supplier_id, fuel_address, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons):
         result = {}
         result['fuel_id'] = fuel_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
+        result['fuel_address'] = fuel_address
         result['fuel_name'] = fuel_name
         result['fuel_brand'] = fuel_brand
         result['fuel_quantity'] = fuel_quantity
@@ -124,6 +126,7 @@ class FuelHandler:
 
     def insertFuel(self, json):
         supplier_id = json["supplier_id"]
+        fuel_address = json["fuel_address"]
         fuel_name = json["fuel_name"]
         fuel_brand = json["fuel_brand"]
         fuel_quantity = json["fuel_quantity"]
@@ -131,12 +134,12 @@ class FuelHandler:
         fuel_type = json["fuel_type"]
         fuel_gallons = json["fuel_gallons"]
 
-        if supplier_id and fuel_name and fuel_brand and fuel_quantity and fuel_price and fuel_type and fuel_gallons:
+        if supplier_id and fuel_address and fuel_name and fuel_brand and fuel_quantity and fuel_price and fuel_type and fuel_gallons:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price)
+            resource_id = resource_dao.insert(supplier_id, fuel_address, fuel_name, fuel_brand, fuel_quantity, fuel_price)
             fuel_dao = FuelDAO()
             fuel_id = fuel_dao.insert(resource_id, fuel_type, fuel_gallons)
-            result = self.build_fuel_attributes(fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons)
+            result = self.build_fuel_attributes(fuel_id, resource_id, supplier_id, fuel_address, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons)
             return jsonify(Fuel = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -147,6 +150,7 @@ class FuelHandler:
             return jsonify(Error = "Fuel not found."), 404
         else:
             supplier_id = json["supplier_id"]
+            fuel_address = json["fuel_address"]
             fuel_name = json["fuel_name"]
             fuel_brand = json["fuel_brand"]
             fuel_quantity = json["fuel_quantity"]
@@ -154,12 +158,12 @@ class FuelHandler:
             fuel_type = json["fuel_type"]
             fuel_gallons = json["fuel_gallons"]
 
-            if supplier_id and fuel_name and fuel_brand and fuel_quantity and fuel_price and fuel_type and fuel_gallons:
+            if supplier_id and fuel_address and fuel_name and fuel_brand and fuel_quantity and fuel_price and fuel_type and fuel_gallons:
                 resource_id = fuel_dao.update(fuel_id, fuel_type, fuel_gallons)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price)
+                resource_dao.update(resource_id, supplier_id, fuel_address, fuel_name, fuel_brand, fuel_quantity, fuel_price)
 
-                result = self.build_fuel_attributes(fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons)
+                result = self.build_fuel_attributes(fuel_id, resource_id, supplier_id, fuel_address, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons)
                 return jsonify(Fuel = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

@@ -8,21 +8,23 @@ class MedicineHandler:
         result['med_id'] = row[0]
         result['resource_id'] = row[1]
         result['supplier_id'] = row[2]
-        result['med_name'] = row[3]
-        result['med_brand'] = row[4]
-        result['med_quantity'] = row[5]
-        result['med_price'] = row[6]
-        result['med_type'] = row[7]
-        result['med_dose'] = row[8]
-        result['med_prescript'] = row[9]
-        result['med_expdate'] = row[10]
+        result['med_address'] = row[3]
+        result['med_name'] = row[4]
+        result['med_brand'] = row[5]
+        result['med_quantity'] = row[6]
+        result['med_price'] = row[7]
+        result['med_type'] = row[8]
+        result['med_dose'] = row[9]
+        result['med_prescript'] = row[10]
+        result['med_expdate'] = row[11]
         return result
 
-    def build_medicine_attributes(self, med_id, resource_id, supplier_id, med_name, med_brand, med_quantity, med_price, med_type, med_dose, med_prescript, med_expdate):
+    def build_medicine_attributes(self, med_id, resource_id, supplier_id, med_address, med_name, med_brand, med_quantity, med_price, med_type, med_dose, med_prescript, med_expdate):
         result = {}
         result['med_id'] = med_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
+        result['med_address'] = med_address
         result['med_name'] = med_name
         result['med_brand'] = med_brand
         result['med_quantity'] = med_quantity
@@ -128,6 +130,7 @@ class MedicineHandler:
 
     def insertMedicine(self, json):
         supplier_id = json["supplier_id"]
+        med_address = json["med_address"]
         med_name = json["med_name"]
         med_brand = json["med_brand"]
         med_quantity = json["med_quantity"]
@@ -137,12 +140,12 @@ class MedicineHandler:
         med_prescript = json["med_prescript"]
         med_expdate = json["med_expdate"]
 
-        if supplier_id and med_name and med_brand and med_quantity and med_price and med_type and med_dose and med_prescript and med_expdate:
+        if supplier_id and med_address and med_name and med_brand and med_quantity and med_price and med_type and med_dose and med_prescript and med_expdate:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, med_name, med_brand, med_quantity, med_price)
+            resource_id = resource_dao.insert(supplier_id, med_address, med_name, med_brand, med_quantity, med_price)
             med_dao = MedicineDAO()
             med_id = med_dao.insert(resource_id, med_type, med_dose, med_prescript, med_expdate)
-            result = self.build_medicine_attributes(med_id, resource_id, supplier_id, med_name, med_brand, med_quantity, med_price, med_type, med_dose, med_prescript, med_expdate)
+            result = self.build_medicine_attributes(med_id, resource_id, supplier_id, med_address, med_name, med_brand, med_quantity, med_price, med_type, med_dose, med_prescript, med_expdate)
             return jsonify(Medicine = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -153,6 +156,7 @@ class MedicineHandler:
             return jsonify(Error = "Medicine not found."), 404
         else:
             supplier_id = json["supplier_id"]
+            med_address = json["med_address"]
             med_name = json["med_name"]
             med_brand = json["med_brand"]
             med_quantity = json["med_quantity"]
@@ -162,12 +166,12 @@ class MedicineHandler:
             med_prescript = json["med_prescript"]
             med_expdate = json["med_expdate"]
 
-            if supplier_id and med_name and med_brand and med_quantity and med_price and med_type and med_dose and med_prescript and med_expdate:
+            if supplier_id and med_address and med_name and med_brand and med_quantity and med_price and med_type and med_dose and med_prescript and med_expdate:
                 resource_id = med_dao.update(med_id, med_type, med_dose, med_prescript, med_expdate)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, med_name, med_brand, med_quantity, med_price)
+                resource_dao.update(resource_id, supplier_id, med_address, med_name, med_brand, med_quantity, med_price)
              
-                result = self.build_medicine_attributes(med_id, resource_id, supplier_id, med_name, med_brand, med_quantity, med_price, med_type, med_dose, med_prescript, med_expdate)
+                result = self.build_medicine_attributes(med_id, resource_id, supplier_id, med_address, med_name, med_brand, med_quantity, med_price, med_type, med_dose, med_prescript, med_expdate)
                 return jsonify(Medicine = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
