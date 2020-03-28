@@ -7,8 +7,8 @@ class AdminHandler:
         #admin = user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone
     def build_admin_attributes(self, user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone):
         result = {}
-        result['user_id'] = user_id
         result['admin_id'] = admin_id
+        result['user_id'] = user_id
         result['admin_firstname'] = admin_firstname
         result['admin_lastname'] = admin_lastname
         result['admin_date_birth'] = admin_date_birth
@@ -18,8 +18,8 @@ class AdminHandler:
 
     def build_admin_dict(self, row):
         result = {}
-        result['user_id'] = row[0]
-        result['admin_id'] = row[1]
+        result['admin_id'] = row[0]
+        result['user_id'] = row[1]
         result['admin_firstname'] = row[2]
         result['admin_lastname'] = row[3]
         result['admin_date_birth'] = row[4]
@@ -46,9 +46,11 @@ class AdminHandler:
             return jsonify(Admin = admin)
 
     def searchAdmin(self, args):
-        admin_firstname = args.get("firstname")
-        admin_lastname = args.get("lastname")
-        admin_email = args.get('email')
+        admin_firstname = args.get("admin_firstname")
+        admin_lastname = args.get("admin_lastname")
+        admin_email = args.get('admin_email')
+        admin_phone = args.get('admin_phone')
+        admin_date_birth = args.get('admin_date_birth')
         dao = AdminDAO()
         admin_list = []
         if (len(args) == 2) and admin_firstname and admin_lastname:
@@ -59,6 +61,10 @@ class AdminHandler:
             admin_list = dao.getAdminByLastname(admin_lastname)
         elif(len(args) == 1) and admin_email:
             admin_list = dao.getAdminByEmail(admin_email)
+        elif(len(args) == 1) and admin_phone:
+            admin_list = dao.getAdminByPhone(admin_phone)
+        elif(len(args) == 1) and admin_date_birth:
+            admin_list = dao.getAdminByDateOfBirth(admin_date_birth)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
@@ -74,9 +80,9 @@ class AdminHandler:
         admin_email = json['admin_email']
         admin_phone = json['admin_phone']
         if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone:
-            dao_admin = AdminDAO()
             dao_user = UserDAO()
             user_id = dao_user.insert(admin_firstname, admin_lastname, admin_date_birth, admin_email,admin_phone)
+            dao_admin = AdminDAO()
             admin_id = dao_admin.insert(user_id)
             result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
             return jsonify(Admin=result), 201
@@ -85,17 +91,16 @@ class AdminHandler:
 
     def deleteAdmin(self, admin_id):
         dao_admin = AdminDAO()
-        dao_user = UserDAO()
         if not dao_admin.getAdminById(admin_id):
             return jsonify(Error = "Admin not found."), 404
         else:
+            dao_user = UserDAO()
             user_id = dao_admin.delete(admin_id)
             dao_user.delete(user_id)
             return jsonify(DeleteStatus = "OK"), 200
 
     def updateAdmin(self, admin_id, json):
         dao_admin = AdminDAO()
-        dao_user = UserDAO()
         if not dao_admin.getAdminById(admin_id):
             return jsonify(Error = "Admin not found."), 404
         else:
@@ -106,6 +111,7 @@ class AdminHandler:
             admin_phone = json['admin_phone']
             if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone:
                 user_id = dao_admin.update(admin_id)
+                dao_user = UserDAO()
                 dao_user.update(user_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
                 result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
                 return jsonify(Admin=result), 200

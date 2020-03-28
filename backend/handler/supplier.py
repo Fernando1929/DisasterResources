@@ -9,8 +9,8 @@ class SupplierHandler:
         #resource = resource_id, resource_name, resource_description, resource_brand, resource_quantity,resource_price
     def build_supplier_attributes(self, user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone):
         result = {}
+        result['supplier_id'] = supplier_id 
         result['user_id'] = user_id
-        result['supplier_id'] = supplier_id
         result['supplier_firstname'] = supplier_firstname
         result['supplier_lastname'] = supplier_lastname
         result['supplier_date_birth'] = supplier_date_birth
@@ -20,8 +20,8 @@ class SupplierHandler:
 
     def build_supplier_dict(self, row):
         result = {}
-        result['user_id'] = row[0]
-        result['supplier_id'] = row[1]
+        result['supplier_id'] = row[0]
+        result['user_id'] = row[1]
         result['supplier_firstname'] = row[2]
         result['supplier_lastname'] = row[3]
         result['supplier_date_birth'] = row[4]
@@ -67,9 +67,11 @@ class SupplierHandler:
         return jsonify(Resources=result_list)
 
     def searchSupplier(self, args):
-        supplier_firstname = args.get("firstname")
-        supplier_lastname = args.get("lastname")
-        supplier_email = args.get('email')
+        supplier_firstname = args.get('supplier_firstname')
+        supplier_lastname = args.get("supplier_lastname")
+        supplier_email = args.get('supplier_email')
+        supplier_phone = args.get('supplier_phone')
+        suppplier_date_birth = args('suppplier_date_birth')
         dao = SupplierDAO()
         supplier_list = []
         if (len(args) == 2) and supplier_firstname and supplier_lastname:
@@ -80,6 +82,10 @@ class SupplierHandler:
             supplier_list = dao.getSupplierByLastname(supplier_lastname)
         elif(len(args) == 1) and supplier_email:
             supplier_list = dao.getSupplierByEmail(supplier_email)
+        elif(len(args) == 1) and supplier_phone:
+            supplier_list = dao.getSupplierByPhone(supplier_phone)
+        elif(len(args) == 1) and suppplier_date_birth:
+            supplier_list = dao.getSupplierByDateOfBirth(suppplier_date_birth)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
@@ -95,9 +101,9 @@ class SupplierHandler:
         supplier_email = json['supplier_email']
         supplier_phone = json['supplier_phone']
         if supplier_firstname and supplier_lastname and supplier_date_birth and supplier_email and supplier_phone:
-            dao_supplier = SupplierDAO()
             dao_user = UserDAO()
             user_id = dao_user.insert(supplier_firstname, supplier_lastname, supplier_date_birth,supplier_email,supplier_phone)
+            dao_supplier = SupplierDAO()
             supplier_id = dao_supplier.insert( supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email,supplier_phone)
             result = self.build_supplier_attributes(supplier_id, user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
             return jsonify(Supplier=result), 201
@@ -105,13 +111,14 @@ class SupplierHandler:
             return jsonify(Error="Unexpected attributes in post request"), 400
 
     def deleteSupplier(self, supplier_id):
-        dao_supplier = SupplierDAO()
-        dao_user = UserDAO()
-        if not dao_supplier.getSupplierById(supplier_id):
+        supplier_dao = SupplierDAO()
+    
+        if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
         else:
-            dao_supplier.delete(supplier_id)
-            dao_user.delete(supplier_id)
+            user_id = supplier_dao.delete(supplier_id)
+            user_dao = UserDAO()
+            user_dao.delete(user_id)
             return jsonify(DeleteStatus = "OK"), 200
 
     def updateSupplier(self, supplier_id, json):
