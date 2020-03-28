@@ -112,6 +112,10 @@ def getFuelById(fuel_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route('/DRL/fuel/<int:fuel_id>/address', methods=['GET'])
+def getFuelAddress(fuel_id):
+    return FuelHandler().getFuelAddress(fuel_id)
+
 @app.route('/DRL/fuel/supplier/<int:supplier_id>', methods = ['GET'])
 def getFuelBySupplierId(supplier_id):
     return FuelHandler().getFuelBySupplierId(supplier_id)
@@ -156,6 +160,10 @@ def getToolById(tool_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route('/DRL/tools/<int:tool_id>/address', methods=['GET'])
+def getToolAddress(tool_id):
+    return ToolHandler().getToolAddress(tool_id)
+
 @app.route('/DRL/tools/supplier/<int:supplier_id>', methods = ['GET'])
 def getToolBySupplierId(supplier_id):
     return ToolHandler().getToolsBySupplierId(supplier_id)
@@ -199,6 +207,10 @@ def getFoodById(food_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route('/DRL/food/<int:food_id>/address', methods=['GET'])
+def getFoodAddress(food_id):
+    return FoodHandler().getFoodAddress(food_id)
+
 @app.route('/DRL/food/supplier/<int:supplier_id>', methods = ['GET'])
 def getFoodBySupplierId(supplier_id):
     return FoodHandler().getFoodBySupplierId(supplier_id)
@@ -241,6 +253,10 @@ def getMedicineById(med_id):
         return MedicineHandler().deleteMedicine(med_id)
     else:
         return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/medicine/<int:med_id>/address', methods=['GET'])
+def getMedicineAddress(med_id):
+    return MedicineHandler().getMedicineAddress(med_id)
 
 @app.route('/DRL/medicine/supplier/<int:supplier_id>', methods = ['GET'])
 def getMedicineBySupplierId(supplier_id):

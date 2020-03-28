@@ -48,6 +48,10 @@ class FuelDAO:
         result = [[1, 1, 1, "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
+    def getFuelAddress(self, supplier_id):
+        result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
+        return result
+
     def insert(self, resource_id, fuel_type, fuel_gallons):
         fuel_id = 1
         return fuel_id

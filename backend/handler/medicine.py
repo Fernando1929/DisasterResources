@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.medicine import MedicineDAO
+from dao.user import UserDAO
 
 class MedicineHandler:
     def build_medicine_dict(self, row):
@@ -31,6 +32,17 @@ class MedicineHandler:
         result['med_dose'] = med_dose
         result['med_prescript'] = med_prescript
         result['med_expdate'] = med_expdate
+        return result
+
+    def build_address_dict(self, row):
+        result = {}
+        result["address_id"] = row[0]
+        result["user_id"] = row[1]
+        result["addressline"] = row[2]
+        result["city"] = row[3]
+        result["state_province"] = row[4]
+        result["country"] = row[5]
+        result["zipcode"] = row[6]
         return result
 
     def getAllMedicines(self):
@@ -98,6 +110,20 @@ class MedicineHandler:
             result = self.build_medicine_dict(row)
             result_list.append(result)
         return jsonify(Medicine = result_list)
+
+    def getMedicineAddress(self, med_id):
+        med_dao = MedicineDAO()
+        supplier_id = med_dao.getMedicineById(med_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserById(supplier_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = med_dao.getMedicineAddress(supplier_id)
+            if not row:
+                return jsonify(Error = "Address not found."), 404
+            else:
+                med_address = self.build_address_dict(row)
+                return jsonify(Address = med_address)
 
     def searchMedicine(self, args):
         med_brand = args.get("med_brand")

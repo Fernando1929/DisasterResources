@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.fuel import FuelDAO
+from dao.user import UserDAO
 
 class FuelHandler:
     def build_fuel_dict(self, row):
@@ -27,6 +28,17 @@ class FuelHandler:
         result['fuel_price'] = fuel_price
         result['fuel_type'] = fuel_type
         result['fuel_gallons'] = fuel_gallons
+        return result
+
+    def build_address_dict(self, row):
+        result = {}
+        result["address_id"] = row[0]
+        result["user_id"] = row[1]
+        result["addressline"] = row[2]
+        result["city"] = row[3]
+        result["state_province"] = row[4]
+        result["country"] = row[5]
+        result["zipcode"] = row[6]
         return result
 
     def getAllFuels(self):
@@ -99,6 +111,20 @@ class FuelHandler:
             result = self.build_fuel_dict(row)
             result_list.append(result)
         return jsonify(Fuel = result_list)
+
+    def getFuelAddress(self, fuel_id):
+        fuel_dao = FuelDAO()
+        supplier_id = fuel_dao.getFuelById(fuel_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserById(supplier_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = fuel_dao.getFuelAddress(supplier_id)
+            if not row:
+                return jsonify(Error = "Address not found."), 404
+            else:
+                fuel_address = self.build_address_dict(row)
+                return jsonify(Address = fuel_address)
 
     def searchFuel(self, args):
         fuel_brand = args.get("fuel_brand")

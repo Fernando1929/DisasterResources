@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.food import FoodDAO
+from dao.user import UserDAO
 
 class FoodHandler:
     def build_food_dict(self, row):
@@ -33,6 +34,17 @@ class FoodHandler:
         result['food_type'] = food_type
         result['food_ounces'] = food_ounces
         result['food_expdate'] = food_expdate
+        return result
+
+    def build_address_dict(self, row):
+        result = {}
+        result["address_id"] = row[0]
+        result["user_id"] = row[1]
+        result["addressline"] = row[2]
+        result["city"] = row[3]
+        result["state_province"] = row[4]
+        result["country"] = row[5]
+        result["zipcode"] = row[6]
         return result
 
     def getAllFoods(self):
@@ -100,6 +112,20 @@ class FoodHandler:
             result = self.build_food_dict(row)
             result_list.append(result)
         return jsonify(Food = result_list)
+
+    def getFoodAddress(self, food_id):
+        food_dao = FoodDAO()
+        supplier_id = food_dao.getFoodById(food_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserById(supplier_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = food_dao.getFoodAddress(supplier_id)
+            if not row:
+                return jsonify(Error = "Address not found."), 404
+            else:
+                food_address = self.build_address_dict(row)
+                return jsonify(Address = food_address)
 
     def searchFood(self, args):
         food_brand = args.get("food_brand")

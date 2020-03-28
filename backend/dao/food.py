@@ -56,6 +56,10 @@ class FoodDAO:
         result = [[1, 1, 1, "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
+    def getFoodAddress(self, supplier_id):
+        result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
+        return result
+
     def insert(self, resource_id, food_category, food_container, food_type, food_ounces, food_expdate):
         food_id = 1
         return food_id

@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.tools import ToolDAO
+from dao.user import UserDAO
 
 class ToolHandler:
     def build_tool_dict(self, row):
@@ -29,6 +30,17 @@ class ToolHandler:
         result['tool_material'] = tool_material
         result['tool_condition'] = tool_condition
         result['tool_pwtype'] = tool_pwtype
+        return result
+
+    def build_address_dict(self, row):
+        result = {}
+        result["address_id"] = row[0]
+        result["user_id"] = row[1]
+        result["addressline"] = row[2]
+        result["city"] = row[3]
+        result["state_province"] = row[4]
+        result["country"] = row[5]
+        result["zipcode"] = row[6]
         return result
 
     def getAllTools(self):
@@ -96,6 +108,20 @@ class ToolHandler:
             result = self.build_tool_dict(row)
             result_list.append(result)
         return jsonify(Tools = result_list)
+
+    def getToolAddress(self, tool_id):
+        tool_dao = ToolDAO()
+        supplier_id = tool_dao.getToolById(tool_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserById(supplier_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = tool_dao.getToolAddress(supplier_id)
+            if not row:
+                return jsonify(Error = "Address not found."), 404
+            else:
+                tool_address = self.build_address_dict(row)
+                return jsonify(Address = tool_address)
 
     def searchTools(self, args):
         tool_brand = args.get("tool_brand")

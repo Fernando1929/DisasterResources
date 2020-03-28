@@ -52,6 +52,10 @@ class ToolDAO:
         result = [[1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
         return result
 
+    def getToolAddress(self, supplier_id):
+        result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
+        return result
+
     def insert(self, resource_id, tool_material, tool_condition, tool_pwtype):
         tool_id = 1
         return tool_id
