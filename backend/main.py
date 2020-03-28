@@ -145,6 +145,10 @@ def getIceById(ice_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET']) #Finish Method
+def getAddress(ice_id):
+    return IceHandler().getIceAddress(ice_id)
+
 @app.route('/DRL/ice/available', methods = ['GET'])
 def getAllAvailableIce():
     return IceHandler().getAllAvailableIce()
@@ -184,6 +188,10 @@ def getBatteryById(battery_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
+def getBatteryAddress(battery_id):
+    return BatteryHandler().getBatteryAddress(battery_id)
+
 @app.route('/DRL/battery/available', methods = ['GET'])
 def getAllAvailableBattery():
     return BatteryHandler().getAllAvailableBattery()
@@ -222,6 +230,10 @@ def getGeneratorById(generator_id):
         return GeneratorHandler().deleteGenerator(generator_id)
     else:
         return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/generator/<int:generator_id>/address', methods = ['GET'])
+def getGeneratorAddress(generator_id):
+    return GeneratorHandler().getGeneratorAddress(generator_id)
 
 @app.route('/DRL/generator/available',methods = ['GET'])
 def getAllAvailableGenerator():
