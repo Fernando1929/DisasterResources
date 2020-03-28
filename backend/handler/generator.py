@@ -3,6 +3,7 @@ from dao.supplier import SupplierDAO
 from dao.resource import ResourceDAO
 from dao.power import PowerDAO
 from dao.generator import GeneratorDAO
+from dao.user import UserDAO
 
 class GeneratorHandler:
 
@@ -22,6 +23,16 @@ class GeneratorHandler:
         result['fuel'] = row[10]
         return result
 
+    def build_address_dic(self,row):
+        result = {}
+        result['address_id'] = row[0]
+        result['user_id'] = row[1]
+        result['Addressline'] = row[2]
+        result['city'] = row[3]
+        result['state_province'] = row[4]
+        result['country'] = row[5]
+        result['zipcode'] = row[6]
+        return result
 
     def build_generator_attributes(self, supplier_id, resource_id, power_id, generator_id, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, fuel):
         result = {}
@@ -132,6 +143,20 @@ class GeneratorHandler:
             result = self.build_generator_dict(row)
             result_list.append(result)
         return jsonify(Generator=result_list)
+
+    def getGeneratorAddress(self, generator_id):
+        generator_dao = GeneratorDAO()
+        user_id = generator_dao.getGeneratorById(generator_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = generator_dao.getGeneratorAddress(user_id)
+            if not row:
+                return jsonify(Error = "Address not found."), 404
+            else:
+                address = self.build_address_dic(row)
+                return jsonify(Address = address)
 
     def insertGenerator(self, json):
         supplier_id = json['supplier_id']

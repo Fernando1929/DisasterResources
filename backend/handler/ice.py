@@ -2,6 +2,7 @@ from flask import jsonify
 from dao.ice import IceDAO
 from dao.supplier import SupplierDAO
 from dao.resource import ResourceDAO
+from dao.user import UserDAO
 
 class IceHandler:
 
@@ -16,6 +17,17 @@ class IceHandler:
         result['ice_quantity'] = row[5]
         result['ice_price'] = row[6]
         result['ice_weight'] = row[7]
+        return result
+
+    def build_address_dic(self,row):
+        result = {}
+        result['address_id'] = row[0]
+        result['user_id'] = row[1]
+        result['Addressline'] = row[2]
+        result['city'] = row[3]
+        result['state_province'] = row[4]
+        result['country'] = row[5]
+        result['zipcode'] = row[6]
         return result
 
     def build_ice_attributes(self, ice_id, resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight):
@@ -124,6 +136,21 @@ class IceHandler:
         return jsonify(Ice=result_list)
 
 
+    def getIceAddress(self,ice_id):
+        ice_dao = IceDAO()
+        user_id = ice_dao.getIceById(ice_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = ice_dao.getIceAddress(user_id)
+            if not row:
+                return jsonify(Error = "Address not found."), 404
+            else:
+                address = self.build_address_dic(row)
+                return jsonify(Address = address)
+
+
     def insertIce(self, json):
         supplier_id = json['supplier_id']
         ice_name = json['ice_name']
@@ -132,9 +159,9 @@ class IceHandler:
         ice_price = json['ice_price']
         ice_weight = json['ice_weight']
         if supplier_id and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
+            resource_dao = ResourceDAO()
+            resource_id = resource_dao.insert(supplier_id, ice_name, ice_brand, ice_quantity, ice_price)
             ice_dao = IceDAO()
-            res_dao = ResourceDAO()
-            resource_id = res_dao.insert(supplier_id, ice_name, ice_brand, ice_quantity, ice_price)
             ice_id = ice_dao.insert(resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
             result = self.build_ice_attributes(supplier_id,resource_id ,ice_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
             return jsonify(Ice=result), 201
@@ -163,8 +190,8 @@ class IceHandler:
             ice_price = json['ice_price']
             ice_weight = json['ice_weight']
             if supplier_id and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
-                res_dao = ResourceDAO()
                 resource_id = ice_dao.update(ice_id ,ice_weight)
+                res_dao = ResourceDAO()
                 res_dao.update(resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price)
                 result = self.build_ice_attributes(supplier_id, resource_id, ice_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
                 return jsonify(Ice=result), 200

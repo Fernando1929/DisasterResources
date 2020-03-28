@@ -3,6 +3,7 @@ from dao.battery import BatteryDAO
 from dao.power import PowerDAO
 from dao.resource import ResourceDAO
 from dao.supplier import SupplierDAO
+from dao.user import UserDAO
 
 class BatteryHandler:
 
@@ -20,6 +21,17 @@ class BatteryHandler:
         result['power_capacity'] = row[8]
         result['power_condition'] = row[9]
         result['battery_type'] = row[10]
+        return result
+
+    def build_address_dic(self,row):
+        result = {}
+        result['address_id'] = row[0]
+        result['user_id'] = row[1]
+        result['Addressline'] = row[2]
+        result['city'] = row[3]
+        result['state_province'] = row[4]
+        result['country'] = row[5]
+        result['zipcode'] = row[6]
         return result
 
     def build_battery_attributes(self, supplier_id, resource_id, power_id, battery_id, battery_name, battery_brand, battery_quantity,battery_price, power_capacity, power_condition, battery_type):
@@ -131,6 +143,20 @@ class BatteryHandler:
             result = self.build_battery_dict(row)
             result_list.append(result)
         return jsonify(Battery=result_list)
+    
+    def getBatteryAddress(self,battery_id):
+        battery_dao = BatteryDAO()
+        user_id = battery_dao.getBatteryById(battery_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = battery_dao.getBatteryAddress(user_id)
+            if not row:
+                return jsonify(Error = "Address not found."), 404
+            else:
+                address = self.build_address_dic(row)
+                return jsonify(Address = address)
 
     def insertBattery(self, json):
         supplier_id = json['supplier_id']
