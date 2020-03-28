@@ -6,6 +6,9 @@ class UserDAO:
     def _init_(self):
         super().__init__()
 
+    def getUserByUserId(self, user_id):
+        return user_id
+
     def insert(self, firstname, lastname, date_birth, email, phone):
         user_id = 1
         return user_id
