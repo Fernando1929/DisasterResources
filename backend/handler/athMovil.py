@@ -49,7 +49,6 @@ class AthMovilHandler:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in ath_movil_list:
-            print(row)
             result = self.build_athMovil_dict(row)
             result_list.append(result)
         return jsonify(AthMovil = result_list)

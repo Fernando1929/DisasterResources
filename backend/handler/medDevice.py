@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.medDevice import MedDeviceDAO
 from dao.resource import ResourceDAO
+from dao.user import UserDAO
 
 class MedDeviceHandler:
     def build_mdevice_dict(self, row):
@@ -31,6 +32,17 @@ class MedDeviceHandler:
         result['mdevice_model'] = mdevice_model
         result['mdevice_condition'] = mdevice_condition
         result['mdevice_power_type'] = mdevice_power_type
+        return result
+
+    def build_address_dict(self, row):
+        result = {}
+        result["address_id"] = row[0]
+        result["user_id"] = row[1]
+        result["address_line"] = row[2]
+        result["address_city"] = row[3]
+        result["address_state_province"] = row[4]
+        result["address_country"] = row[5]
+        result["address_zipcode"] = row[6]
         return result
 
     def getAllMedDevice(self):
@@ -130,6 +142,20 @@ class MedDeviceHandler:
             result = self.build_mdevice_dict(row)
             result_list.append(result)
         return jsonify(MedicalDevice = result_list)
+
+    def getMedDeviceAddress(self, mdevice_id):
+        mdevice_dao = MedDeviceDAO()
+        user_id = mdevice_dao.getMedDeviceById(mdevice_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = mdevice_dao.getMedDeviceAddress(user_id)
+            if not row:
+                return jsonify(Error = "Address Not Found"), 404
+            else:
+                address = self.build_address_dict(row)
+                return jsonify(Address = address)
 
     def insertMedDevice(self, json):
         supplier_id = json["supplier_id"]

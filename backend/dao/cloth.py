@@ -2,6 +2,8 @@ class ClothDAO:
     def __init__(self):
         super().__init__()
 
+    # cloth = cloth id, resource id, user id, name, brand, quantity, price, size, material, condition, gender, type
+
     def getAllCloth(self):
         result = [
             [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],
@@ -81,6 +83,10 @@ class ClothDAO:
             [1, 1, 1, "Cloth", "Aeropostal", 5, 0.00, "Medium", "Cotton", "New", "M", "T-shirts"],
             [2, 2, 1, "Cloth", "Adidas", 10, 0.00, "30", "Cotton", "New", "F", "Pants"]
         ]
+        return result
+
+    def getClothAddress(self, user_id):
+        result = [1, 1, "Barrio Las Palmas", "Utuado", "PR", "US", "00641"]
         return result
 
     def insert(self, resource_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):

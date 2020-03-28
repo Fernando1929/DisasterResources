@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.water import WaterDAO
 from dao.resource import ResourceDAO
+from dao.user import UserDAO
 
 class WaterHandler:
     def build_water_dict(self, row):
@@ -31,6 +32,17 @@ class WaterHandler:
         result['water_container'] = water_container
         result['water_type'] = water_type
         result['water_exp_date'] = water_exp_date
+        return result
+
+    def build_address_dict(self, row):
+        result = {}
+        result["address_id"] = row[0]
+        result["user_id"] = row[1]
+        result["address_line"] = row[2]
+        result["address_city"] = row[3]
+        result["address_state_province"] = row[4]
+        result["address_country"] = row[5]
+        result["address_zipcode"] = row[6]
         return result
 
     def getAllWater(self):
@@ -130,6 +142,20 @@ class WaterHandler:
             result = self.build_water_dict(row)
             result_list.append(result)
         return jsonify(Water = result_list)
+
+    def getWaterAddress(self, water_id):
+        water_dao = WaterDAO()
+        user_id = water_dao.getWaterById(water_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = water_dao.getWaterAddress(user_id)
+            if not row:
+                return jsonify(Error = "Address Not Found"), 404
+            else:
+                address = self.build_address_dict(row)
+                return jsonify(Address = address)
 
     def insertWater(self, json):
         supplier_id = json["supplier_id"]

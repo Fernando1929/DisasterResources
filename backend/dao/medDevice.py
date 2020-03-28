@@ -69,6 +69,10 @@ class MedDeviceDAO:
         ]
         return result
 
+    def getMedDeviceAddress(self, user_id):
+        result = [1, 1, "Barrio Las Palmas", "Utuado", "PR", "US", "00641"]
+        return result
+
     def insert(self, resource_id, med_device_type, med_device_model, med_device_condition, med_device_power_type):
         mdevice_id = 1
         return mdevice_id

@@ -69,6 +69,10 @@ class HeavyEquipDAO:
         ]
         return result
 
+    def getHeavyEquipAddress(self, user_id):
+        result = [1, 1, "Barrio Las Palmas", "Utuado", "PR", "US", "00641"]
+        return result
+
     def insert(self, resource_id, heavyequip_type, heavyequip_model, heavyequip_condition):
         hequip_id = 1
         return hequip_id

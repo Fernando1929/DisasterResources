@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.cloth import ClothDAO
 from dao.resource import ResourceDAO
+from dao.user import UserDAO
 
 class ClothHandler:
     def build_cloth_dict(self, row):
@@ -34,6 +35,18 @@ class ClothHandler:
         result['cloth_gender'] = cloth_gender
         result['cloth_type'] = cloth_type
         return result
+
+    def build_address_dict(self, row):
+        result = {}
+        result["address_id"] = row[0]
+        result["user_id"] = row[1]
+        result["address_line"] = row[2]
+        result["address_city"] = row[3]
+        result["address_state_province"] = row[4]
+        result["address_country"] = row[5]
+        result["address_zipcode"] = row[6]
+        return result
+
 
     def getAllCloth(self):
         dao = ClothDAO()
@@ -132,6 +145,20 @@ class ClothHandler:
             result = self.build_cloth_dict(row)
             result_list.append(result)
         return jsonify(Cloth = result_list)
+
+    def getClothAddress(self, cloth_id):
+        cloth_dao = ClothDAO()
+        user_id = cloth_dao.getClothById(cloth_id)[2]
+        user_dao = UserDAO()
+        if not user_dao.getUserByUserId(user_id):
+            return jsonify(Error = "User not found."), 404
+        else:
+            row = cloth_dao.getClothAddress(user_id)
+            if not row:
+                return jsonify(Error = "Address Not Found"), 404
+            else:
+                address = self.build_address_dict(row)
+                return jsonify(Address = address)
 
     def insertCloth(self, json):
         supplier_id = json["supplier_id"]

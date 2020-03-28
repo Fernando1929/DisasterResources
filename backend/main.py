@@ -72,6 +72,10 @@ def getWaterById(water_id):
 def getWaterBySupplierId(supplier_id):
     return WaterHandler().getWaterBySupplierId(supplier_id)
 
+@app.route('/DRL/water/<int:water_id>/address', methods = ['GET'])
+def getWaterAddress(water_id):
+    return WaterHandler().getWaterAddress(water_id)
+
 @app.route('/DRL/water/available', methods = ['GET'])
 def getAllAvailableWater():
     return WaterHandler().getAllAvailableWater()
@@ -114,6 +118,10 @@ def getClothById(cloth_id):
 @app.route('/DRL/cloth/supplier/<int:supplier_id>', methods = ['GET'])
 def getClothBySupplierId(supplier_id):
     return ClothHandler().getClothBySupplierId(supplier_id)
+
+@app.route('/DRL/cloth/<int:cloth_id>/address', methods = ['GET'])
+def getClothAddress(cloth_id):
+    return ClothHandler().getClothAddress(cloth_id)
 
 @app.route('/DRL/cloth/available', methods = ['GET'])
 def getAllAvailableCloth():
@@ -158,6 +166,10 @@ def getHeavyEquipById(hequip_id):
 def getHeavyEquipBySupplierId(supplier_id):
     return HeavyEquipHandler().getHeavyEquipBySupplierId(supplier_id)
 
+@app.route('/DRL/heavyequipment/<int:hequip_id>/address', methods = ['GET'])
+def getHeavyEquipAddress(hequip_id):
+    return HeavyEquipHandler().getHeavyEquipAddress(hequip_id)
+
 @app.route('/DRL/heavyequipment/available', methods = ['GET'])
 def getAllAvailableHeavyEquip():
     return HeavyEquipHandler().getAllAvailableHeavyEquip()
@@ -200,6 +212,10 @@ def getMedDeviceById(mdevice_id):
 @app.route('/DRL/medicaldevice/supplier/<int:supplier_id>', methods = ['GET'])
 def getMedDeviceBySupplierId(supplier_id):
     return MedDeviceHandler().getMedDeviceBySupplierId(supplier_id)
+
+@app.route('/DRL/medicaldevice/<int:mdevice_id>/address', methods = ['GET'])
+def getMedDeviceAddress(mdevice_id):
+    return MedDeviceHandler().getMedDeviceAddress(mdevice_id)
 
 @app.route('/DRL/medicaldevice/available', methods = ['GET'])
 def getAllAvailablemedDevice():
