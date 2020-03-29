@@ -1,6 +1,6 @@
 class ResourceDAO:
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
 
     def insert(self, supplier_id, name, brand, quantity, price):
         resource_id = 1
