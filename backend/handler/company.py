@@ -38,6 +38,19 @@ class CompanyHandler:
             order = self.build_company_dict(row)
             return jsonify(Company = order)
 
+    def getCompanyBySupplierId(self, supplier_id):
+        #supplier_dao = SupplierDAO
+        #if not supplier_dao.getSupplierById(supplier_id):
+        #    return jsonify(Error="Supplier Not Found"), 404
+        #else:
+            company_dao = CompanyDAO()
+            result_list = []
+            company_list = company_dao.getCompanyBySupplierId(supplier_id)
+            for row in company_list:
+                result = self.build_company_dict(row)
+                result_list.append(result)
+            return jsonify(Company=result_list)
+
     def searchCompany(self, args):
         company_name = args['company_name']
         company_address = args['company_address']
