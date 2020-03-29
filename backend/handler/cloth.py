@@ -150,7 +150,7 @@ class ClothHandler:
         cloth_dao = ClothDAO()
         user_id = cloth_dao.getClothById(cloth_id)[2]
         user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
+        if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
             row = cloth_dao.getClothAddress(user_id)

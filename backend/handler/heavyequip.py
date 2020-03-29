@@ -145,7 +145,7 @@ class HeavyEquipHandler:
         hequip_dao = HeavyEquipDAO()
         user_id = hequip_dao.getHeavyEquipById(hequip_id)[2]
         user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
+        if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
             row = hequip_dao.getHeavyEquipAddress(user_id)

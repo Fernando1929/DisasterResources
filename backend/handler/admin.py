@@ -4,7 +4,7 @@ from dao.user import UserDAO
 
 class AdminHandler:
 
-        #admin = user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone
+    #admin = user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone
     def build_admin_attributes(self, user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone):
         result = {}
         result['admin_id'] = admin_id

@@ -33,7 +33,7 @@ CORS(app)
 
 @app.route('/')
 def greeting():
-    return 'Hello, this is the Disaster Resources Locator App!'
+    return 'Welcome to the Disaster Resources Locator App!'
 
 
 #################### Login Routes ####################
@@ -549,8 +549,8 @@ def getIceById(ice_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET']) #Finish Method
-def getAddress(ice_id):
+@app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET'])
+def getIceAddress(ice_id):
     return IceHandler().getIceAddress(ice_id)
 
 @app.route('/DRL/ice/available', methods = ['GET'])
@@ -592,7 +592,7 @@ def getBatteryById(battery_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
+@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET'])
 def getBatteryAddress(battery_id):
     return BatteryHandler().getBatteryAddress(battery_id)
 

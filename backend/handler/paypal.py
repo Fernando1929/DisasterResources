@@ -57,7 +57,7 @@ class PaypalHandler:
 
     def getPaypalByUserId(self, user_id):
         user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
+        if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else :
             dao = PaypalDAO()

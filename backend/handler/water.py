@@ -147,7 +147,7 @@ class WaterHandler:
         water_dao = WaterDAO()
         user_id = water_dao.getWaterById(water_id)[2]
         user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
+        if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
             row = water_dao.getWaterAddress(user_id)

@@ -147,7 +147,7 @@ class MedDeviceHandler:
         mdevice_dao = MedDeviceDAO()
         user_id = mdevice_dao.getMedDeviceById(mdevice_id)[2]
         user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
+        if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
             row = mdevice_dao.getMedDeviceAddress(user_id)

@@ -148,7 +148,7 @@ class BatteryHandler:
         battery_dao = BatteryDAO()
         user_id = battery_dao.getBatteryById(battery_id)[2]
         user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
+        if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
             row = battery_dao.getBatteryAddress(user_id)

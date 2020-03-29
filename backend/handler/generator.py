@@ -148,7 +148,7 @@ class GeneratorHandler:
         generator_dao = GeneratorDAO()
         user_id = generator_dao.getGeneratorById(generator_id)[2]
         user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
+        if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
             row = generator_dao.getGeneratorAddress(user_id)
