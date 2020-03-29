@@ -51,7 +51,10 @@ class GeneratorDAO:
         return result
     
     def getGeneratorBySupplierId(self, supplier_id):
-        result = [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline']
+        result = [
+            [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline'],
+            [2, 1, 2, 4, 'generator', 'CAT', 8, 500.00, 40, 'new', 'diesel']
+        ]
         return result
     
     def getAllAvailableGeneratorBySupplierId(self, supplier_id):
