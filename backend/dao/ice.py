@@ -48,7 +48,8 @@ class IceDAO:
     
     def getIceBySupplierId(self, supplier_id):
         result = [
-            [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5]
+            [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5],
+            [2, 1, 2, 'ice', 'submarine', 8, 2.50, 6]
         ]
         return result
     

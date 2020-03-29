@@ -39,7 +39,8 @@ class CompanyDAO:
 
     def getCompanyBySupplierId(self, supplier_id):
         result = [
-            [1, 'Baxter', 'Jayuya','7879999999']
+            [1, 'Baxter', 'Jayuya','7879999999'], 
+            [2, "Pepe's Company", 'San Juan','7879998999']
         ]
         return result
 

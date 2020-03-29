@@ -181,6 +181,12 @@ def getCompanyById(company_id):
         return jsonify(Error = "Method not allowed"), 405
 
 @app.route('/DRL/supplier/<int:supplier_id>/company', methods = ['GET'])
+def getCompanyBySupplierId(supplier_id):
+    return CompanyHandler().getCompanyBySupplierId(supplier_id)
+       
+#################### Admin Routes ####################
+
+@app.route('/DRL/supplier/<int:supplier_id>/company', methods = ['GET'])
 
 #################### Request Routes ####################
 
@@ -551,8 +557,12 @@ def getIceById(ice_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/ice/supplier/<int:supplier_id>', methods = ['GET'])
+def getIceBySupplierId(supplier_id):
+    return IceHandler().getIceBySupplierId(supplier_id)
+
 @app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET'])
-def getIceAddress(ice_id):
+def getAddress(ice_id):
     return IceHandler().getIceAddress(ice_id)
 
 @app.route('/DRL/ice/available', methods = ['GET'])
@@ -594,7 +604,11 @@ def getBatteryById(battery_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET'])
+@app.route('/DRL/battery/supplier/<int:supplier_id>', methods = ['GET'])
+def getBatteryBySupplierId(supplier_id):
+    return BatteryHandler().getBatteryBySupplierId(supplier_id)
+
+@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
 def getBatteryAddress(battery_id):
     return BatteryHandler().getBatteryAddress(battery_id)
 
@@ -636,6 +650,10 @@ def getGeneratorById(generator_id):
         return GeneratorHandler().deleteGenerator(generator_id)
     else:
         return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/generator/supplier/<int:supplier_id>', methods = ['GET'])
+def getGeneratorBySupplierId(supplier_id):
+    return GeneratorHandler().getGeneratorBySupplierId(supplier_id)
 
 @app.route('/DRL/generator/<int:generator_id>/address', methods = ['GET'])
 def getGeneratorAddress(generator_id):
