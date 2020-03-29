@@ -180,9 +180,11 @@ def getCompanyById(company_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
+@app.route('/DRL/supplier/<int:supplier_id>/company', methods = ['GET'])
+
 #################### Request Routes ####################
 
-@app.route('/DRL/customer/request', methods= ['GET', 'POST'])
+@app.route('/DRL/customer/requests', methods= ['GET', 'POST'])
 def getAllRequest():
     if request.method == 'POST':
         return RequestHandler().insertRequest(request.json)
@@ -192,7 +194,7 @@ def getAllRequest():
         else:
             return RequestHandler().searchRequest(request.args)
 
-@app.route('/DRL/customer/request/<int:request_id>', methods= ['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/customer/requests/<int:request_id>', methods= ['GET', 'PUT', 'DELETE'])
 def getRequestById(request_id):
     if request.method == 'GET':
         return RequestHandler().getRequestById(request_id)
@@ -203,13 +205,13 @@ def getRequestById(request_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/customer/<int:customer_id>/request', methods= ['GET'])
+@app.route('/DRL/customer/<int:customer_id>/requests', methods= ['GET'])
 def getRequestByCustomerId(customer_id):
     return RequestHandler().getRequestByCustomerId(customer_id)
 
 #################### Reservation Routes ####################
 
-@app.route("/DRL/customer/reservation", methods=['GET', 'POST'])
+@app.route("/DRL/customer/reservations", methods=['GET', 'POST'])
 def getAllReservations():
     if request.method == 'POST':
         return ReservationHandler().insertReservation(request.json)
@@ -219,7 +221,7 @@ def getAllReservations():
         else:
             return ReservationHandler().searchReservation(request.args)
 
-@app.route("/DRL/customer/reservation/<int:reservation_id>", methods=['GET', 'PUT', 'DELETE'])
+@app.route("/DRL/customer/reservations/<int:reservation_id>", methods=['GET', 'PUT', 'DELETE'])
 def getReservationById(reservation_id):
     if request.method == 'GET':
         return ReservationHandler().getReservationById(reservation_id)
@@ -230,13 +232,13 @@ def getReservationById(reservation_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route("/DRL/customer/<int:customer_id>/reservation", methods=['GET'])
+@app.route("/DRL/customer/<int:customer_id>/reservations", methods=['GET'])
 def getReservationsByCustomerId(customer_id):
     return ReservationHandler().getReservationsByCustomerId(customer_id)
 
 #################### Order Routes ####################
 
-@app.route('/DRL/customer/order', methods=['GET','POST'])
+@app.route('/DRL/customer/orders', methods=['GET','POST'])
 def getAllOrder():
     if request.method == 'POST':
         return OrderHandler().insertOrder(request.json)
@@ -246,7 +248,7 @@ def getAllOrder():
         else:
             return OrderHandler().searchOrders(request.args)
 
-@app.route('/DRL/customer/order/<int:order_id>', methods=['GET', 'PUT','DELETE'])
+@app.route('/DRL/customer/orders/<int:order_id>', methods=['GET', 'PUT','DELETE'])
 def getOrderById(order_id):
     if request.method == 'GET':
         return OrderHandler().getOrderById(order_id)
@@ -257,7 +259,7 @@ def getOrderById(order_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/customer/<int:customer_id>/order', methods=['GET'])
+@app.route('/DRL/customer/<int:customer_id>/orders', methods=['GET'])
 def getOrderByCustomerId(customer_id):
     return OrderHandler().getOrderByCustomerId(customer_id)
 
