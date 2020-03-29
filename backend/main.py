@@ -271,7 +271,7 @@ def getOrderByCustomerId(customer_id):
 
 #################### Credit Card Routes ####################
 
-@app.route("/DRL/user/creditcard", methods=['GET', 'POST'])
+@app.route("/DRL/customer/creditcard", methods=['GET', 'POST'])
 def getAllCreditCard():
     if request.method == 'POST':
         return CreditCardHandler().insertCreditCard(request.json)
@@ -281,7 +281,7 @@ def getAllCreditCard():
         else:
             return CreditCardHandler().searchCreditCard(request.args)
 
-@app.route('/DRL/user/creditcard/<int:creditcard_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/customer/creditcard/<int:creditcard_id>', methods=['GET', 'PUT', 'DELETE'])
 def getCreditCardById(creditcard_id):
     if request.method == 'GET':
         return CreditCardHandler().getCreditCardById(creditcard_id)
@@ -298,7 +298,7 @@ def getCreditCardByCustomerId(customer_id):
 
 #################### Ath Movil Routes ####################
 
-@app.route("/DRL/user/athmovil", methods=['GET', 'POST'])
+@app.route("/DRL/customer/athmovil", methods=['GET', 'POST'])
 def getAllAthMovil():
     if request.method == 'POST':
         return AthMovilHandler().insertAthMovil(request.json)
@@ -308,7 +308,7 @@ def getAllAthMovil():
         else:
             return AthMovilHandler().searchAthMovil(request.args)
 
-@app.route('/DRL/user/athmovil/<int:ath_movil_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/customer/athmovil/<int:ath_movil_id>', methods=['GET', 'PUT', 'DELETE'])
 def getAthMovilById(ath_movil_id):
     if request.method == 'GET':
         return AthMovilHandler().getAthMovilById(ath_movil_id)
@@ -325,7 +325,7 @@ def getAthMovilByCustomerId(customer_id):
 
 #################### Paypal Routes ####################
 
-@app.route("/DRL/user/paypal", methods=['GET', 'POST'])
+@app.route("/DRL/customer/paypal", methods=['GET', 'POST'])
 def getAllPaypal():
     if request.method == 'POST':
         return PaypalHandler().insertPaypal(request.json)
@@ -335,7 +335,7 @@ def getAllPaypal():
         else:
             return PaypalHandler().searchPaypal(request.args)
 
-@app.route('/DRL/user/paypal/<int:paypal_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/customer/paypal/<int:paypal_id>', methods=['GET', 'PUT', 'DELETE'])
 def getPaypalById(paypal_id):
     if request.method == 'GET':
         return PaypalHandler().getPaypalById(paypal_id)
