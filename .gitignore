@@ -1,4 +1,8 @@
 venv/
 .idea/
 .vscode/
+<<<<<<< HEAD
 __pycache__/
+=======
+__pycache__/
+>>>>>>> resources

@@ -15,6 +15,14 @@ from handler.request import RequestHandler
 from handler.athMovil import AthMovilHandler
 from handler.paypal import PaypalHandler
 from handler.creditCard import CreditCardHandler
+from handler.ice import IceHandler
+from handler.supplier import SupplierHandler
+from handler.admin import AdminHandler
+from handler.order import OrderHandler
+from handler.generator import GeneratorHandler
+from handler.battery import BatteryHandler
+from handler.company import CompanyHandler
+
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
@@ -25,10 +33,11 @@ CORS(app)
 
 @app.route('/')
 def greeting():
-    return 'Hello, this is the DRL App!'
+    return 'Hello, this is the Disaster Resources Locator App!'
 
 
 #################### Login Routes ####################
+
 @app.route("/DRL/login", methods=['POST'])
 def login():
     return LoginHandler().insertLogin(request.json)
@@ -49,6 +58,7 @@ def getLoginByUserId(user_id):
     return LoginHandler().getLoginByUserId(user_id)
 
 #################### Address Routes ####################
+
 @app.route("/DRL/user/address", methods=['GET', 'POST'])
 def getAllAddresses():
     if request.method == 'POST':
@@ -74,7 +84,131 @@ def getAddressById(address_id):
 def getAddressesByUserId(user_id):
     return AddressHandler().getAddressesByUserId(user_id)
 
+#################### Customer Routes ####################
+
+@app.route("/DRL/customer", methods=['GET', 'POST'])
+def getAllCustomers():
+    if request.method == 'POST':
+        return CustomerHandler().insertCustomer(request.json)
+    else:
+        if not request.args:
+            return CustomerHandler().getAllCustomer()
+        else:
+            return CustomerHandler().searchCustomer(request.args)
+
+@app.route('/DRL/customer/<int:customer_id>', methods=['GET', 'PUT', 'DELETE'])
+def getCustomerById(customer_id):
+    if request.method == 'GET':
+        return CustomerHandler().getCustomerById(customer_id)
+    elif request.method == 'PUT':
+        return CustomerHandler().updateCustomer(customer_id, request.json)
+    elif request.method == 'DELETE':
+        return CustomerHandler().deleteCustomer(customer_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+#################### Supplier Routes ####################
+
+@app.route('/DRL/supplier', methods = ['GET','POST'])
+def getAllSuppliers():
+    if request.method == 'POST':
+        return SupplierHandler().insertSupplier(request.json)
+    else :
+        if not request.args:
+            return SupplierHandler().getAllSupplier()
+        else:
+            return SupplierHandler().searchSupplier(request.args)
+
+@app.route('/DRL/supplier/<int:supplier_id>', methods = ['GET','PUT','DELETE'])
+def getSupplierById(supplier_id):
+    if request.method == 'GET':
+        return SupplierHandler().getSupplierById(supplier_id)
+    elif request.method == 'PUT':
+        return SupplierHandler().updateSupplier(supplier_id, request.json)
+    elif request.method == 'DELETE':
+        return SupplierHandler().deleteSupplier(supplier_id)
+    else:
+        return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/supplier/<int:supplier_id>/resources', methods=['GET']) 
+def getAllResourcesBySupplierId(supplier_id):
+    return SupplierHandler().getAllSupplierResources(supplier_id)
+
+#################### Admin Routes ####################
+
+@app.route('/DRL/admin', methods = ['GET','POST'])
+def getAllAdmin():
+    if request.method == 'POST':
+        return AdminHandler().insertAdmin(request.json)
+    else :
+        if not request.args:
+            return AdminHandler().getAllAdmin()
+        else:
+            return AdminHandler().searchAdmin(request.args)
+
+@app.route('/DRL/admin/<int:admin_id>', methods = ['GET','PUT','DELETE'])
+def getAdminById(admin_id):
+    if request.method == 'GET':
+        return AdminHandler().getAdminById(admin_id)
+    elif request.method == 'PUT':
+        return AdminHandler().updateAdmin(admin_id,request.json)
+    elif request.method == 'DELETE':
+        return AdminHandler().deleteAdmin(admin_id)
+    else:
+        return jsonify(Error = "Method not allowed"), 405
+
+#################### Company Routes ####################
+
+@app.route('/DRL/company', methods = ['GET','POST']) #verify later
+def getAllCompanies():
+    if request.method == 'POST':
+        return CompanyHandler().insertCompany(request.json)
+    else :
+        if not request.args:
+            return CompanyHandler().getAllCompanies()
+        else:
+            return CompanyHandler().searchCompany(request.args)
+
+@app.route('/DRL/company/<int:company_id>', methods = ['GET','PUT','DELETE'])
+def getCompanyById(company_id):
+    if request.method == 'GET':
+        return CompanyHandler().getCompanyById(company_id)
+    elif request.method == 'PUT':
+        return CompanyHandler().updateCompany(company_id, request.json)
+    elif request.method == 'DELETE':
+        return CompanyHandler().deleteCompany(company_id)
+    else:
+        return jsonify(Error = "Method not allowed"), 405
+
+#################### Request Routes ####################
+
+@app.route('/DRL/customer/request', methods= ['GET', 'POST'])
+def getAllRequest():
+    if request.method == 'POST':
+        return RequestHandler().insertRequest(request.json)
+    else:
+        if not request.args:
+            return RequestHandler().getAllRequest()
+        else:
+            return RequestHandler().searchRequest(request.args)
+
+@app.route('/DRL/customer/request/<int:request_id>', methods= ['GET', 'PUT', 'DELETE'])
+def getRequestById(request_id):
+    if request.method == 'GET':
+        return RequestHandler().getRequestById(request_id)
+    elif request.method == 'PUT':
+        return RequestHandler().updateRequest(request_id, request.json)
+    elif request.method == 'DELETE':
+        return RequestHandler().deleteRequest(request_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/customer/<int:customer_id>/request', methods= ['GET'])
+def getRequestByCustomerId(customer_id):
+    return RequestHandler().getRequestByCustomerId(customer_id)
+
 #################### Reservation Routes ####################
+
 @app.route("/DRL/customer/reservation", methods=['GET', 'POST'])
 def getAllReservations():
     if request.method == 'POST':
@@ -99,6 +233,114 @@ def getReservationById(reservation_id):
 @app.route("/DRL/customer/<int:customer_id>/reservation", methods=['GET'])
 def getReservationsByCustomerId(customer_id):
     return ReservationHandler().getReservationsByCustomerId(customer_id)
+
+#################### Order Routes ####################
+
+@app.route('/DRL/customer/order', methods=['GET','POST'])
+def getAllOrder():
+    if request.method == 'POST':
+        return OrderHandler().insertOrder(request.json)
+    else:
+        if not request.args:
+            return OrderHandler().getAllOrders()
+        else:
+            return OrderHandler().searchOrders(request.args)
+
+@app.route('/DRL/customer/order/<int:order_id>', methods=['GET', 'PUT','DELETE'])
+def getOrderById(order_id):
+    if request.method == 'GET':
+        return OrderHandler().getOrderById(order_id)
+    elif request.method == 'PUT':
+        return OrderHandler().updateOrder(order_id, request.json)
+    elif request.method == 'DELETE':
+        return OrderHandler().deleteOrder(order_id)
+    else:
+        return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/customer/<int:customer_id>/order', methods=['GET'])
+def getOrderByCustomerId(customer_id):
+    return OrderHandler().getOrderByCustomerId(customer_id)
+
+#################### Credit Card Routes ####################
+
+@app.route("/DRL/creditcard", methods=['GET', 'POST'])
+def getAllCreditCard():
+    if request.method == 'POST':
+        return CreditCardHandler().insertCreditCard(request.json)
+    else:
+        if not request.args:
+            return CreditCardHandler().getAllCreditCard()
+        else:
+            return CreditCardHandler().searchCreditCard(request.args)
+
+@app.route('/DRL/creditcard/<int:creditcard_id>', methods=['GET', 'PUT', 'DELETE'])
+def getCreditCardById(creditcard_id):
+    if request.method == 'GET':
+        return CreditCardHandler().getCreditCardById(creditcard_id)
+    elif request.method == 'PUT':
+        return CreditCardHandler().updateCreditCard(creditcard_id, request.json)
+    elif request.method == 'DELETE':
+        return CreditCardHandler().deleteCreditCard(creditcard_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route("/DRL/user/<int:user_id>/creditcard", methods=['GET'])
+def getCreditCardByUserId(user_id):
+    return CreditCardHandler().getCreditCardByUserId(user_id)
+
+#################### Ath Movil Routes ####################
+
+@app.route("/DRL/athmovil", methods=['GET', 'POST'])
+def getAllAthMovil():
+    if request.method == 'POST':
+        return AthMovilHandler().insertAthMovil(request.json)
+    else:
+        if not request.args:
+            return AthMovilHandler().getAllAthMovil()
+        else:
+            return AthMovilHandler().searchAthMovil(request.args)
+
+@app.route('/DRL/athmovil/<int:ath_movil_id>', methods=['GET', 'PUT', 'DELETE'])
+def getAthMovilById(ath_movil_id):
+    if request.method == 'GET':
+        return AthMovilHandler().getAthMovilById(ath_movil_id)
+    elif request.method == 'PUT':
+        return AthMovilHandler().updateAthMovil(ath_movil_id, request.json)
+    elif request.method == 'DELETE':
+        return AthMovilHandler().deleteAthMovil(ath_movil_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route("/DRL/user/<int:user_id>/athmovil", methods=['GET'])
+def getAthMovilByUserId(user_id):
+    return AthMovilHandler().getAthMovilByUserId(user_id)
+
+#################### Paypal Routes ####################
+
+@app.route("/DRL/paypal", methods=['GET', 'POST'])
+def getAllPaypal():
+    if request.method == 'POST':
+        return PaypalHandler().insertPaypal(request.json)
+    else:
+        if not request.args:
+            return PaypalHandler().getAllPaypal()
+        else:
+            return PaypalHandler().searchPaypal(request.args)
+
+@app.route('/DRL/paypal/<int:paypal_id>', methods=['GET', 'PUT', 'DELETE'])
+def getPaypalById(paypal_id):
+    if request.method == 'GET':
+        return PaypalHandler().getPaypalById(paypal_id)
+    elif request.method == 'PUT':
+        return PaypalHandler().updatePaypal(paypal_id, request.json)
+    elif request.method == 'DELETE':
+        return PaypalHandler().deletePaypal(paypal_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route("/DRL/user/<int:user_id>/paypal", methods=['GET'])
+def getPaypalByUserId(user_id):
+    return PaypalHandler().getPaypalByUserId(user_id)
 
 #################### Fuel Routes ####################
 
@@ -214,8 +456,6 @@ def getFoodById(food_id):
         return FoodHandler().updateFood(food_id, request.json)
     elif request.method == 'DELETE':
         return FoodHandler().deleteFood(food_id)
-    else:
-        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DRL/food/<int:food_id>/address', methods=['GET'])
 def getFoodAddress(food_id):
@@ -261,8 +501,6 @@ def getMedicineById(med_id):
         return MedicineHandler().updateMedicine(med_id, request.json)
     elif request.method == 'DELETE':
         return MedicineHandler().deleteMedicine(med_id)
-    else:
-        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DRL/medicine/<int:med_id>/address', methods=['GET'])
 def getMedicineAddress(med_id):
@@ -288,29 +526,134 @@ def getAllReservedMedicines():
 def getAllReservedMedicinesBySupplierId(supplier_id):
     return MedicineHandler().getAllReservedMedicineBySupplierId(supplier_id)
 
+#################### Ice Routes ####################
 
-#################### Customer Routes ####################
-
-@app.route("/DRL/customer", methods=['GET', 'POST'])
-def getAllCustomers():
+@app.route('/DRL/ice', methods = ['GET','POST'])
+def getAllIce():
     if request.method == 'POST':
-        return CustomerHandler().insertCustomer(request.json)
-    else:
+        return IceHandler().insertIce(request.json)
+    else :
         if not request.args:
-            return CustomerHandler().getAllCustomer()
+            return IceHandler().getAllIce()
         else:
-            return CustomerHandler().searchCustomer(request.args)
+            return IceHandler().searchIce(request.args)
 
-@app.route('/DRL/customer/<int:customer_id>', methods=['GET', 'PUT', 'DELETE'])
-def getCustomerById(customer_id):
+@app.route('/DRL/ice/<int:ice_id>', methods = ['GET','PUT','DELETE'])
+def getIceById(ice_id):
     if request.method == 'GET':
-        return CustomerHandler().getCustomerById(customer_id)
+        return IceHandler().getIceById(ice_id)
     elif request.method == 'PUT':
-        return CustomerHandler().updateCustomer(customer_id, request.json)
+        return IceHandler().updateIce(ice_id, request.json)
     elif request.method == 'DELETE':
-        return CustomerHandler().deleteCustomer(customer_id)
+        return IceHandler().deleteIce(ice_id)
+    else:
+        return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET']) #Finish Method
+def getAddress(ice_id):
+    return IceHandler().getIceAddress(ice_id)
+
+@app.route('/DRL/ice/available', methods = ['GET'])
+def getAllAvailableIce():
+    return IceHandler().getAllAvailableIce()
+
+@app.route('/DRL/ice/available/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllAvailableIceBySupplierId(supplier_id):
+    return IceHandler().getAllAvailableIceBySupplierId(supplier_id)
+
+@app.route('/DRL/ice/reserved', methods = ['GET'])
+def getAllReservedIce():
+    return IceHandler().getAllReservedIce()
+
+@app.route('/DRL/ice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllReservedIceBySupplierId(supplier_id):
+    return IceHandler().getAllReservedIceBySupplierId(supplier_id)
+
+#################### Battery Routes ####################
+
+@app.route('/DRL/battery', methods = ['GET','POST'])
+def getAllBattery():
+    if request.method == 'POST':
+        return BatteryHandler().insertBattery(request.json)
+    else :
+        if not request.args:
+            return BatteryHandler().getAllBattery()
+        else:
+            return BatteryHandler().searchBattery(request.args)
+
+@app.route('/DRL/battery/<int:battery_id>', methods = ['GET','PUT','DELETE']) 
+def getBatteryById(battery_id):
+    if request.method == 'GET':
+        return BatteryHandler().getBatteryById(battery_id)
+    elif request.method == 'PUT':
+        return BatteryHandler().updateBattery(battery_id, request.json)
+    elif request.method == 'DELETE':
+        return BatteryHandler().deleteBaterry(battery_id)
+    else:
+        return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
+def getBatteryAddress(battery_id):
+    return BatteryHandler().getBatteryAddress(battery_id)
+
+@app.route('/DRL/battery/available', methods = ['GET'])
+def getAllAvailableBattery():
+    return BatteryHandler().getAllAvailableBattery()
+
+@app.route('/DRL/battery/available/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllAvailableBatteryBySupplierId(supplier_id):
+    return BatteryHandler().getAllAvailableBatteryBySupplierId(supplier_id)
+
+@app.route('/DRL/battery/reserved', methods = ['GET'])
+def getAllReservedBattery():
+    return BatteryHandler().getAllReservedBattery()
+
+@app.route('/DRL/battery/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllReservedBatteryBySupplierId(supplier_id):
+    return BatteryHandler().getAllReservedBatteryBySupplierId(supplier_id)
+
+#################### Generator Routes ####################
+
+@app.route('/DRL/generator',methods = ['GET','POST'])
+def getAllGenerator():
+    if request.method == 'POST':
+        return GeneratorHandler().insertGenerator(request.json)
+    else :
+        if not request.args:
+            return GeneratorHandler().getAllGenerator()
+        else:
+            return GeneratorHandler().searchGenerator(request.args)
+
+@app.route('/DRL/generator/<int:generator_id>', methods = ['GET','PUT','DELETE'])
+def getGeneratorById(generator_id):
+    if request.method == 'GET':
+        return GeneratorHandler().getGeneratorById(generator_id)
+    elif request.method == 'PUT':
+        return GeneratorHandler().updateGenerator(generator_id, request.json)
+    elif request.method == 'DELETE':
+        return GeneratorHandler().deleteGenerator(generator_id)
     else:
         return jsonify(Error="Method not allowed."), 405
+
+@app.route('/DRL/generator/<int:generator_id>/address', methods = ['GET'])
+def getGeneratorAddress(generator_id):
+    return GeneratorHandler().getGeneratorAddress(generator_id)
+
+@app.route('/DRL/generator/available',methods = ['GET'])
+def getAllAvailableGenerator():
+    return GeneratorHandler().getAllAvailableGenerator()
+
+@app.route('/DRL/generator/available/supplier/<int:supplier_id>',methods = ['GET'])
+def getAllAvailableGeneratorBySupplierId(supplier_id):
+    return GeneratorHandler().getAllAvailableGeneratorBySupplierId(supplier_id)
+
+@app.route('/DRL/generator/reserved',methods = ['GET'])
+def getAllReservedGenerator():
+    return GeneratorHandler().getAllReservedGenerator()
+
+@app.route('/DRL/generator/reserved/supplier/<int:supplier_id>',methods = ['GET'])
+def getAllReservedGeneratorBySupplierId(supplier_id):
+    return GeneratorHandler().getAllReservedGeneratorBySupplierId(supplier_id)
 
 #################### Water Routes ####################
 
@@ -500,113 +843,7 @@ def getAllReservedMedDevice():
 def getAllReservedMedDeviceBySupplierId(supplier_id):
     return MedDeviceHandler().getAllReservedMedDeviceBySupplierId(supplier_id)
 
-#################### Request Routes ####################
-
-@app.route('/DRL/customer/request', methods= ['GET', 'POST'])
-def getAllRequest():
-    if request.method == 'POST':
-        return RequestHandler().insertRequest(request.json)
-    else:
-        if not request.args:
-            return RequestHandler().getAllRequest()
-        else:
-            return RequestHandler().searchRequest(request.args)
-
-@app.route('/DRL/customer/request/<int:request_id>', methods= ['GET', 'PUT', 'DELETE'])
-def getRequestById(request_id):
-    if request.method == 'GET':
-        return RequestHandler().getRequestById(request_id)
-    elif request.method == 'PUT':
-        return RequestHandler().updateRequest(request_id, request.json)
-    elif request.method == 'DELETE':
-        return RequestHandler().deleteRequest(request_id)
-    else:
-        return jsonify(Error="Method not allowed."), 405
-
-@app.route('/DRL/customer/<int:customer_id>/request', methods= ['GET'])
-def getRequestByCustomerId(customer_id):
-    return RequestHandler().getRequestByCustomerId(customer_id)
-
-#################### Ath Movil Routes ####################
-
-@app.route("/DRL/athmovil", methods=['GET', 'POST'])
-def getAllAthMovil():
-    if request.method == 'POST':
-        return AthMovilHandler().insertAthMovil(request.json)
-    else:
-        if not request.args:
-            return AthMovilHandler().getAllAthMovil()
-        else:
-            return AthMovilHandler().searchAthMovil(request.args)
-
-@app.route('/DRL/athmovil/<int:ath_movil_id>', methods=['GET', 'PUT', 'DELETE'])
-def getAthMovilById(ath_movil_id):
-    if request.method == 'GET':
-        return AthMovilHandler().getAthMovilById(ath_movil_id)
-    elif request.method == 'PUT':
-        return AthMovilHandler().updateAthMovil(ath_movil_id, request.json)
-    elif request.method == 'DELETE':
-        return AthMovilHandler().deleteAthMovil(ath_movil_id)
-    else:
-        return jsonify(Error="Method not allowed."), 405
-
-@app.route("/DRL/user/<int:user_id>/athmovil", methods=['GET'])
-def getAthMovilByUserId(user_id):
-    return AthMovilHandler().getAthMovilByUserId(user_id)
-
-#################### Paypal Routes ####################
-
-@app.route("/DRL/paypal", methods=['GET', 'POST'])
-def getAllPaypal():
-    if request.method == 'POST':
-        return PaypalHandler().insertPaypal(request.json)
-    else:
-        if not request.args:
-            return PaypalHandler().getAllPaypal()
-        else:
-            return PaypalHandler().searchPaypal(request.args)
-
-@app.route('/DRL/paypal/<int:paypal_id>', methods=['GET', 'PUT', 'DELETE'])
-def getPaypalById(paypal_id):
-    if request.method == 'GET':
-        return PaypalHandler().getPaypalById(paypal_id)
-    elif request.method == 'PUT':
-        return PaypalHandler().updatePaypal(paypal_id, request.json)
-    elif request.method == 'DELETE':
-        return PaypalHandler().deletePaypal(paypal_id)
-    else:
-        return jsonify(Error="Method not allowed."), 405
-
-@app.route("/DRL/user/<int:user_id>/paypal", methods=['GET'])
-def getPaypalByUserId(user_id):
-    return PaypalHandler().getPaypalByUserId(user_id)
-
-#################### Credit Card Routes ####################
-
-@app.route("/DRL/creditcard", methods=['GET', 'POST'])
-def getAllCreditCard():
-    if request.method == 'POST':
-        return CreditCardHandler().insertCreditCard(request.json)
-    else:
-        if not request.args:
-            return CreditCardHandler().getAllCreditCard()
-        else:
-            return CreditCardHandler().searchCreditCard(request.args)
-
-@app.route('/DRL/creditcard/<int:creditcard_id>', methods=['GET', 'PUT', 'DELETE'])
-def getCreditCardById(creditcard_id):
-    if request.method == 'GET':
-        return CreditCardHandler().getCreditCardById(creditcard_id)
-    elif request.method == 'PUT':
-        return CreditCardHandler().updateCreditCard(creditcard_id, request.json)
-    elif request.method == 'DELETE':
-        return CreditCardHandler().deleteCreditCard(creditcard_id)
-    else:
-        return jsonify(Error="Method not allowed."), 405
-
-@app.route("/DRL/user/<int:user_id>/creditcard", methods=['GET'])
-def getCreditCardByUserId(user_id):
-    return CreditCardHandler().getCreditCardByUserId(user_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
