@@ -68,6 +68,15 @@ class FuelHandler:
             result_list.append(result)
         return jsonify(Fuels = result_list)
 
+    def getAllRequestedFuels(self):
+        dao = FuelDAO()
+        fuel_list = dao.getAllRequestedFuel()
+        result_list = []
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Fuels = result_list)
+
     def getFuelById(self, fuel_id):
         dao = FuelDAO()
         row = dao.getFuelById(fuel_id)
@@ -107,6 +116,16 @@ class FuelHandler:
         result_list = []
         fuel_dao = FuelDAO()
         fuel_list = fuel_dao.getAllReservedFuelBySupplierId(supplier_id)
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Fuels = result_list)
+
+    def getAllRequestedFuelBySupplierId(self, supplier_id):
+        fuel_list = []
+        result_list = []
+        fuel_dao = FuelDAO()
+        fuel_list = fuel_dao.getAllRequestedFuelBySupplierId(supplier_id)
         for row in fuel_list:
             result = self.build_fuel_dict(row)
             result_list.append(result)

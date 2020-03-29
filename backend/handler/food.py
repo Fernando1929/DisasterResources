@@ -74,6 +74,15 @@ class FoodHandler:
             result_list.append(result)
         return jsonify(Food = result_list)
 
+    def getAllRequestedFoods(self):
+        dao = FoodDAO()
+        food_list = dao.getAllRequestedFood()
+        result_list = []
+        for row in food_list:
+            result = self.build_food_dict(row)
+            result_list.append(result)
+        return jsonify(Food = result_list)
+
     def getFoodById(self, food_id):
         dao = FoodDAO()
         row = dao.getFoodById(food_id)
@@ -108,6 +117,16 @@ class FoodHandler:
         result_list = []
         food_dao = FoodDAO()
         food_list = food_dao.getAllReservedFoodBySupplierId(supplier_id)
+        for row in food_list:
+            result = self.build_food_dict(row)
+            result_list.append(result)
+        return jsonify(Food = result_list)
+
+    def getAllRequestedFoodBySupplierId(self, supplier_id):
+        food_list = []
+        result_list = []
+        food_dao = FoodDAO()
+        food_list = food_dao.getAllRequestedFoodBySupplierId(supplier_id)
         for row in food_list:
             result = self.build_food_dict(row)
             result_list.append(result)

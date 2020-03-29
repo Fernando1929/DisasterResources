@@ -16,6 +16,10 @@ class FoodDAO:
         result = [[1, 1, 1, "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
+    def getAllRequestedFood(self):
+        result = [[1, 1, 1, "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
+        return result
+
     def getFoodById(self, resource_id):
         result = [1, 1, 1, "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]
         return result
@@ -53,6 +57,10 @@ class FoodDAO:
         return result
 
     def getAllReservedFoodBySupplierId(self, supplier_id):
+        result = [[1, 1, 1, "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
+        return result
+
+    def getAllRequestedFoodBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
