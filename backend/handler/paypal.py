@@ -1,7 +1,7 @@
 from flask import jsonify
 from dao.paypal import PaypalDAO
 from dao.payment import PaymentDAO
-from dao.user import UserDAO
+from dao.customer import CustomerDAO
 
 class PaypalHandler:
 
@@ -9,16 +9,16 @@ class PaypalHandler:
         result = {}
         result['paypal_id'] = row[0]
         result['payment_id'] = row[1]
-        result['user_id'] = row[2]
+        result['customer_id'] = row[2]
         result['paypal_username'] = row[3]
         result['paypal_password'] = row[4]
         return result
 
-    def build_paypal_attributes(self, paypal_id, payment_id, user_id, paypal_username, paypal_password):
+    def build_paypal_attributes(self, paypal_id, payment_id, customer_id, paypal_username, paypal_password):
         result = {}
         result['paypal_id'] = paypal_id
         result['payment_id'] = payment_id
-        result['user_id'] = user_id
+        result['customer_id'] = customer_id
         result['paypal_username'] = paypal_username
         result['paypal_password'] = paypal_password
         return result
@@ -55,13 +55,13 @@ class PaypalHandler:
             result_list.append(result)
         return jsonify(Paypal = result_list)
 
-    def getPaypalByUserId(self, user_id):
-        user_dao = UserDAO()
-        if not user_dao.getUserByUserId(user_id):
-            return jsonify(Error = "User not found."), 404
+    def getPaypalByCustomerId(self, customer_id):
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer not found."), 404
         else :
             dao = PaypalDAO()
-            row = dao.getPaypalByUserId(user_id)
+            row = dao.getPaypalByCustomerId(customer_id)
             if not row:
                 return jsonify(Error = "Paypal Not Found"), 404
             else:
@@ -69,15 +69,15 @@ class PaypalHandler:
                 return jsonify(AthMovil = paypal)
 
     def insertPaypal(self, json):
-        user_id = json["user_id"]
+        customer_id = json["customer_id"]
         paypal_username = json["paypal_username"]
         paypal_password = json["paypal_password"]
-        if user_id and paypal_username and paypal_password:
+        if customer_id and paypal_username and paypal_password:
             payment_dao = PaymentDAO()
-            payment_id = payment_dao.insert(user_id)
+            payment_id = payment_dao.insert(customer_id)
             paypal_dao = PaypalDAO()
             paypal_id = paypal_dao.insert(payment_id, paypal_username, paypal_password)
-            result = self.build_paypal_attributes(paypal_id, payment_id, user_id, paypal_username, paypal_password)
+            result = self.build_paypal_attributes(paypal_id, payment_id, customer_id, paypal_username, paypal_password)
             return jsonify(Paypal = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -87,14 +87,14 @@ class PaypalHandler:
         if not paypal_dao.getPaypalById(paypal_id):
             return jsonify(Error = "Paypal not found."), 404
         else:
-            user_id = json["user_id"]
+            customer_id = json["customer_id"]
             paypal_username = json["paypal_username"]
             paypal_password = json["paypal_password"]
-            if user_id and paypal_username and paypal_password:
+            if customer_id and paypal_username and paypal_password:
                 payment_id = paypal_dao.update(paypal_id, paypal_username, paypal_password)
                 payment_dao = PaymentDAO()
-                payment_dao.update(payment_id, user_id)
-                result = self.build_paypal_attributes(paypal_id, payment_id, user_id, paypal_username, paypal_password)
+                payment_dao.update(payment_id, customer_id)
+                result = self.build_paypal_attributes(paypal_id, payment_id, customer_id, paypal_username, paypal_password)
                 return jsonify(Paypal = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in post request"), 400

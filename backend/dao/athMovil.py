@@ -19,7 +19,7 @@ class AthMovilDAO:
         ]
         return result
 
-    def getAthMovilByUserId(self, user_id):
+    def getAthMovilByCustomerId(self, customer_id):
         result = [1, 1, 1, "7877778888"]
         return result
 

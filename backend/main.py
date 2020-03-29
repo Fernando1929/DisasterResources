@@ -315,9 +315,9 @@ def getAthMovilById(ath_movil_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route("/DRL/user/<int:user_id>/athmovil", methods=['GET'])
-def getAthMovilByUserId(user_id):
-    return AthMovilHandler().getAthMovilByUserId(user_id)
+@app.route("/DRL/customer/<int:customer_id>/athmovil", methods=['GET'])
+def getAthMovilByCustomerId(customer_id):
+    return AthMovilHandler().getAthMovilByCustomerId(customer_id)
 
 #################### Paypal Routes ####################
 
@@ -342,9 +342,9 @@ def getPaypalById(paypal_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route("/DRL/user/<int:user_id>/paypal", methods=['GET'])
-def getPaypalByUserId(user_id):
-    return PaypalHandler().getPaypalByUserId(user_id)
+@app.route("/DRL/customer/<int:customer_id>/paypal", methods=['GET'])
+def getPaypalByCustomerId(customer_id):
+    return PaypalHandler().getPaypalByCustomerId(customer_id)
 
 #################### Credit Card Routes ####################
 
@@ -369,9 +369,9 @@ def getCreditCardById(creditcard_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route("/DRL/user/<int:user_id>/creditcard", methods=['GET'])
-def getCreditCardByUserId(user_id):
-    return CreditCardHandler().getCreditCardByUserId(user_id)
+@app.route("/DRL/customer/<int:customer_id>/creditcard", methods=['GET'])
+def getCreditCardByCustomerId(customer_id):
+    return CreditCardHandler().getCreditCardByCustomerId(customer_id)
 
 if __name__ == '__main__':
     app.run(debug=True)

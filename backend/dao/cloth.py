@@ -2,8 +2,6 @@ class ClothDAO:
     def __init__(self):
         super().__init__()
 
-    # cloth = cloth id, resource id, user id, name, brand, quantity, price, size, material, condition, gender, type
-
     def getAllCloth(self):
         result = [
             [1, 1, 1, "Cloth", "Aeropostal", 5, 10.00, "Medium", "Cotton", "New", "M", "T-shirts"],

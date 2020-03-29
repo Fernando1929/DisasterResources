@@ -27,7 +27,7 @@ class CreditCardDAO:
         ]
         return result
 
-    def getCreditCardByUserId(self, user_id):
+    def getCreditCardByCustomerId(self, user_id):
         result = [1, 1, 1, "Samuel Ramirez", "1234567898765432", "000", "02/23"]
         return result
 
