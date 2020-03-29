@@ -23,7 +23,7 @@ class PaypalDAO:
         result = [1, 1, 1, "Sam23", "Samuel1234"]
         return result
 
-    def getPaypalByUserId(self, user_id):
+    def getPaypalByCustomerId(self, customer_id):
         result = [1, 1, 1, "Sam23", "Samuel1234"]
         return result
 

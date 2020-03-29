@@ -1,7 +1,7 @@
 from flask import jsonify
 from dao.creditCard import CreditCardDAO
 from dao.payment import PaymentDAO
-from dao.user import UserDAO
+from dao.customer import CustomerDAO
 
 class CreditCardHandler:
 
@@ -9,18 +9,18 @@ class CreditCardHandler:
         result = {}
         result['creditcard_id'] = row[0]
         result['payment_id'] = row[1]
-        result['user_id'] = row[2]
+        result['customer_id'] = row[2]
         result['creditcard_name'] = row[3]
         result['creditcard_number'] = row[4]
         result['creditcard_ccv'] = row[5]
         result['creditcard_exp_date'] = row[6]
         return result
 
-    def build_creditcard_attributes(self, creditcard_id, payment_id, user_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date):
+    def build_creditcard_attributes(self, creditcard_id, payment_id, customer_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date):
         result = {}
         result['creditcard_id'] = creditcard_id
         result['payment_id'] = payment_id
-        result['user_id'] = user_id
+        result['customer_id'] = customer_id
         result['creditcard_name'] = creditcard_name
         result['creditcard_number'] = creditcard_number
         result['creditcard_ccv'] = creditcard_ccv
@@ -62,13 +62,13 @@ class CreditCardHandler:
             result_list.append(result)
         return jsonify(CreditCard = result_list)
 
-    def getCreditCardByUserId(self, user_id):
-        user_dao = UserDAO()
-        if not user_dao.getUserById(user_id):
-            return jsonify(Error = "User not found."), 404
+    def getCreditCardByCustomerId(self, customer_id):
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer not found."), 404
         else :
             dao = CreditCardDAO()
-            row = dao.getCreditCardByUserId(user_id)
+            row = dao.getCreditCardByCustomerId(customer_id)
             if not row:
                 return jsonify(Error = "Credit Card Not Found"), 404
             else:
@@ -76,17 +76,17 @@ class CreditCardHandler:
                 return jsonify(CreditCard = creditcard)
 
     def insertCreditCard(self, json):
-        user_id = json["user_id"]
+        customer_id = json["customer_id"]
         creditcard_name = json["creditcard_name"]
         creditcard_number = json["creditcard_number"]
         creditcard_ccv = json["creditcard_ccv"]
         creditcard_exp_date = json["creditcard_exp_date"]
-        if user_id and creditcard_name and creditcard_number and creditcard_ccv and creditcard_exp_date:
+        if customer_id and creditcard_name and creditcard_number and creditcard_ccv and creditcard_exp_date:
             payment_dao = PaymentDAO()
-            payment_id = payment_dao.insert(user_id)
+            payment_id = payment_dao.insert(customer_id)
             creditcard_dao = CreditCardDAO()
             creditcard_id = creditcard_dao.insert(payment_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date)
-            result = self.build_creditcard_attributes(creditcard_id, payment_id, user_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date)
+            result = self.build_creditcard_attributes(creditcard_id, payment_id, customer_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date)
             return jsonify(CreditCard = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -96,16 +96,16 @@ class CreditCardHandler:
         if not creditcard_dao.getCreditCardById(creditcard_id):
             return jsonify(Error = "Credit Card not found."), 404
         else:
-            user_id = json["user_id"]
+            customer_id = json["customer_id"]
             creditcard_name = json["creditcard_name"]
             creditcard_number = json["creditcard_number"]
             creditcard_ccv = json["creditcard_ccv"]
             creditcard_exp_date = json["creditcard_exp_date"]
-            if user_id and creditcard_name and creditcard_number and creditcard_ccv and creditcard_exp_date:
+            if customer_id and creditcard_name and creditcard_number and creditcard_ccv and creditcard_exp_date:
                 payment_id = creditcard_dao.update(creditcard_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date)
                 payment_dao = PaymentDAO()
-                payment_dao.update(payment_id, user_id)
-                result = self.build_creditcard_attributes(creditcard_id, payment_id, user_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date)
+                payment_dao.update(payment_id, customer_id)
+                result = self.build_creditcard_attributes(creditcard_id, payment_id, customer_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date)
                 return jsonify(CreditCard = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in post request"), 400
