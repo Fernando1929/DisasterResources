@@ -53,7 +53,7 @@ class LoginHandler:
             for row in login_list:
                 result = self.build_login_dict(row)
                 result_list.append(result)
-            return jsonify(Logins = result_list)
+            return jsonify(Login = result_list)
 
     # def searchLogin(self, args):
     #     username = args.get("username")
