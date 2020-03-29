@@ -52,9 +52,9 @@ class CompanyHandler:
             return jsonify(Company=result_list)
 
     def searchCompany(self, args):
-        company_name = args['company_name']
-        company_address = args['company_address']
-        company_phone = args['company_phone']
+        company_name = args.get('company_name')
+        company_address = args.get('company_address')
+        company_phone = args.get('company_phone')
         dao = CompanyDAO()
         companies_list = []
         if (len(args) == 1) and company_name:
