@@ -71,6 +71,10 @@ def getCompanyById(company_id):
         return CompanyHandler().deleteCompany(company_id)
     else:
         return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/supplier/<int:supplier_id>/company', methods = ['GET'])
+def getCompanyBySupplierId(supplier_id):
+    return CompanyHandler().getCompanyBySupplierId(supplier_id)
        
 #################### Admin Routes ####################
 
@@ -145,7 +149,11 @@ def getIceById(ice_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET']) #Finish Method
+@app.route('/DRL/ice/supplier/<int:supplier_id>', methods = ['GET'])
+def getIceBySupplierId(supplier_id):
+    return IceHandler().getIceBySupplierId(supplier_id)
+
+@app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET'])
 def getAddress(ice_id):
     return IceHandler().getIceAddress(ice_id)
 
@@ -187,6 +195,10 @@ def getBatteryById(battery_id):
         return BatteryHandler().deleteBaterry(battery_id)
     else:
         return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/battery/supplier/<int:supplier_id>', methods = ['GET'])
+def getBatteryBySupplierId(supplier_id):
+    return BatteryHandler().getBatteryBySupplierId(supplier_id)
 
 @app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
 def getBatteryAddress(battery_id):
@@ -230,6 +242,10 @@ def getGeneratorById(generator_id):
         return GeneratorHandler().deleteGenerator(generator_id)
     else:
         return jsonify(Error = "Method not allowed"), 405
+
+@app.route('/DRL/generator/supplier/<int:supplier_id>', methods = ['GET'])
+def getGeneratorBySupplierId(supplier_id):
+    return GeneratorHandler().getGeneratorBySupplierId(supplier_id)
 
 @app.route('/DRL/generator/<int:generator_id>/address', methods = ['GET'])
 def getGeneratorAddress(generator_id):
