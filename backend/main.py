@@ -136,6 +136,14 @@ def getAllReservedFuels():
 def getAllReservedFuelBySupplierId(supplier_id):
     return FuelHandler().getAllReservedFuelBySupplierId(supplier_id)
 
+@app.route('/DRL/fuel/requested', methods = ['GET'])
+def getAllRequestedFuels():
+    return FuelHandler().getAllRequestedFuels()
+
+@app.route('/DRL/fuel/requested/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllRequestedFuelBySupplierId(supplier_id):
+    return FuelHandler().getAllRequestedFuelBySupplierId(supplier_id)
+
 
 #################### Tools Routes ####################
 
@@ -184,6 +192,14 @@ def getAllReservedTools():
 def getAllReservedToolsBySupplierId(supplier_id):
     return ToolHandler().getAllReservedToolsBySupplierId(supplier_id)
 
+@app.route('/DRL/tools/requested', methods = ['GET'])
+def getAllRequestedTools():
+    return ToolHandler().getAllRequestedTools()
+
+@app.route('/DRL/tools/requested/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllRequestedToolsBySupplierId(supplier_id):
+    return ToolHandler().getAllRequestedToolsBySupplierId(supplier_id)
+
 #################### Food Routes ####################
 
 @app.route("/DRL/food", methods=['GET', 'POST'])
@@ -231,6 +247,14 @@ def getAllReservedFoods():
 def getAllReservedFoodsBySupplierId(supplier_id):
     return FoodHandler().getAllReservedFoodBySupplierId(supplier_id)
 
+@app.route('/DRL/food/requested', methods = ['GET'])
+def getAllRequestedFoods():
+    return FoodHandler().getAllRequestedFoods()
+
+@app.route('/DRL/food/requested/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllRequestedFoodsBySupplierId(supplier_id):
+    return FoodHandler().getAllRequestedFoodBySupplierId(supplier_id)
+
 #################### Medicine Routes ####################
 
 @app.route("/DRL/medicine", methods=['GET', 'POST'])
@@ -277,6 +301,14 @@ def getAllReservedMedicines():
 @app.route('/DRL/medicine/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedMedicinesBySupplierId(supplier_id):
     return MedicineHandler().getAllReservedMedicineBySupplierId(supplier_id)
+
+@app.route('/DRL/medicine/requested', methods = ['GET'])
+def getAllRequestedMedicines():
+    return MedicineHandler().getAllReservedMedicines()
+
+@app.route('/DRL/medicine/requested/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllRequestedMedicinesBySupplierId(supplier_id):
+    return MedicineHandler().getAllRequestedMedicineBySupplierId(supplier_id)
 
 
 

@@ -16,6 +16,10 @@ class ToolDAO:
         result = [[1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
         return result
 
+    def getAllRequestedTools(self):
+        result = [[1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
+        return result
+
     def getToolById(self, resource_id):
         result = [1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]
         return result
@@ -49,6 +53,10 @@ class ToolDAO:
         return result
 
     def getAllReservedToolsBySupplierId(self, supplier_id):
+        result = [[1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
+        return result
+
+    def getAllRequestedToolsBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
         return result
 
