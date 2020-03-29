@@ -96,7 +96,7 @@ class BatteryHandler:
             for row in battery_list:
                 result = self.build_battery_dict(row)
                 result_list.append(result)
-            return jsonify(Ice=result_list)
+            return jsonify(Battery=result_list)
 
     def getAllAvailableBatteryBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO
@@ -109,7 +109,7 @@ class BatteryHandler:
             for row in battery_list:
                 result = self.build_battery_dict(row)
                 result_list.append(result)
-            return jsonify(Ice=result_list)
+            return jsonify(Battery=result_list)
 
     def getAllReservedBatteryBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO
@@ -122,7 +122,7 @@ class BatteryHandler:
             for row in battery_list:
                 result = self.build_battery_dict(row)
                 result_list.append(result)
-            return jsonify(Ice=result_list)
+            return jsonify(Battery=result_list)
 
     def searchBattery(self, args): 
         Battery_power_capacity = args.get('power_capacity')

@@ -37,6 +37,12 @@ class CompanyDAO:
         ]
         return result
 
+    def getCompanyBySupplierId(self, supplier_id):
+        result = [
+            [1, 'Baxter', 'Jayuya','7879999999']
+        ]
+        return result
+
     def insert(self, company_name, company_address, company_phone):
         company_id =1
         return company_id

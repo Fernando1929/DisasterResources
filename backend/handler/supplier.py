@@ -71,7 +71,7 @@ class SupplierHandler:
         supplier_lastname = args.get("supplier_lastname")
         supplier_email = args.get('supplier_email')
         supplier_phone = args.get('supplier_phone')
-        suppplier_date_birth = args('suppplier_date_birth')
+        suppplier_date_birth = args.get('suppplier_date_birth')
         dao = SupplierDAO()
         supplier_list = []
         if (len(args) == 2) and supplier_firstname and supplier_lastname:

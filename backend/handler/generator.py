@@ -7,7 +7,7 @@ from dao.user import UserDAO
 
 class GeneratorHandler:
 
-    #generator = resource_id, resource_name, resource_description, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, fuel
+    #generator = resource_id, resource_name, resource_description, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, generator_fuel
     def build_generator_dict(self, row): 
         result = {}
         result['supplier_id'] = row[0]
@@ -20,7 +20,7 @@ class GeneratorHandler:
         result['generator_price'] = row[7]
         result['power_capacity'] = row[8]
         result['power_condition'] = row[9]
-        result['fuel'] = row[10]
+        result['generator_fuel'] = row[10]
         return result
 
     def build_address_dic(self,row):
@@ -34,7 +34,7 @@ class GeneratorHandler:
         result['zipcode'] = row[6]
         return result
 
-    def build_generator_attributes(self, supplier_id, resource_id, power_id, generator_id, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, fuel):
+    def build_generator_attributes(self, supplier_id, resource_id, power_id, generator_id, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel):
         result = {}
         result['supplier_id'] = supplier_id
         result['resource_id'] = resource_id
@@ -46,7 +46,7 @@ class GeneratorHandler:
         result['generator_price'] = generator_price 
         result['power_capacity'] = power_capacity  
         result['power_condition'] = power_condition
-        result['fuel'] = fuel
+        result['generator_fuel'] = generator_fuel
         return result
 
     def getAllGenerator(self): 
@@ -127,15 +127,15 @@ class GeneratorHandler:
     def searchGenerator(self, args):
         generator_power_capacity = args.get('power_capacity')
         generator_power_condition = args.get('power_condition')
-        fuel = args.get('fuel')
+        generator_fuel = args.get('generator_fuel')
         dao = GeneratorDAO()
         generator_list = []
         if (len(args) == 1) and generator_power_capacity:
             generator_list = dao.getGeneratorByPowerCapacity(generator_power_capacity)
         elif (len(args) == 1) and generator_power_condition:
             generator_list = dao.getGeneratorByPowerCondition(generator_power_condition)
-        elif (len(args) == 1) and fuel:
-            generator_list = dao.getGeneratorByFuel(fuel)
+        elif (len(args) == 1) and generator_fuel:
+            generator_list = dao.getGeneratorByFuel(generator_fuel)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []

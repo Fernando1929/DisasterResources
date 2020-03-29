@@ -1,5 +1,5 @@
 from flask import jsonify
-from dao.heavyEquip import HeavyEquipDAO
+from dao.heavyequip import HeavyEquipDAO
 from dao.resource import ResourceDAO
 from dao.user import UserDAO
 
