@@ -23,6 +23,13 @@ class HeavyEquipDAO:
         ]
         return result
 
+    def getAllRequestedHeavyEquip(self):
+        result = [
+            [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 0.00, "Excavator", "320D", "Used"],
+            [2, 2, 2, "Heavy Equipment", "Clark", 1, 0.00, "Elevator", "EC500-800 Type E", "Used"]
+        ]
+        return result
+
     def getHeavyEquipById(self, resource_id):
         result = [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 125000.00, "Excavator", "320D", "Used"]
         return result
@@ -63,6 +70,13 @@ class HeavyEquipDAO:
         return result
 
     def getAllReservedHeavyEquipBySupplierId(self, supplier_id):
+        result = [
+            [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 0.00, "Excavator", "320D", "Used"],
+            [2, 2, 1, "Heavy Equipment", "Clark", 1, 0.00, "Elevator", "EC500-800 Type E", "Used"]
+        ]
+        return result
+
+    def getAllRequestedHeavyEquipBySupplierId(self, supplier_id):
         result = [
             [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 0.00, "Excavator", "320D", "Used"],
             [2, 2, 1, "Heavy Equipment", "Clark", 1, 0.00, "Elevator", "EC500-800 Type E", "Used"]
