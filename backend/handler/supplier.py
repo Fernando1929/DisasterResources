@@ -68,7 +68,7 @@ class SupplierHandler:
             for row in supplier_list:
                 result = self.build_supplier_dict(row)
                 result_list.append(result)
-            return jsonify(Supplier=result_list)
+            return jsonify(Suppliers=result_list)
 
     def getAllSupplierResources(self, supplier_id):
         dao = SupplierDAO()
