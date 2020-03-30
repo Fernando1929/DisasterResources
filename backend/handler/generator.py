@@ -76,6 +76,15 @@ class GeneratorHandler:
             result_list.append(result)
         return jsonify(Generator=result_list)
 
+    def getAllRequestedGenerator(self): 
+        dao = GeneratorDAO()
+        result = dao.getAllRequestedGenerator()
+        result_list = []
+        for row in result:
+            result = self.build_generator_dict(row)
+            result_list.append(result)
+        return jsonify(Generator=result_list)
+
     def getGeneratorById(self, generator_id): 
         dao = GeneratorDAO()
         row = dao.getGeneratorById(generator_id)
@@ -128,6 +137,19 @@ class GeneratorHandler:
             generator_dao = GeneratorDAO()
             result_list = []
             generator_list = generator_dao.getAllReservedGeneratorBySupplierId(supplier_id)
+            for row in generator_list:
+                result = self.build_generator_dict(row)
+                result_list.append(result)
+            return jsonify(Generator=result_list)
+
+    def getAllRequestedGeneratorBySupplierId(self, supplier_id):
+        #supplier_dao = SupplierDAO
+        #if not supplier_dao.getSupplierById(supplier_id):
+        #    return jsonify(Error="Supplier Not Found"), 404
+        #else:
+            generator_dao = GeneratorDAO()
+            result_list = []
+            generator_list = generator_dao.getAllRequestedGeneratorBySupplierId(supplier_id)
             for row in generator_list:
                 result = self.build_generator_dict(row)
                 result_list.append(result)

@@ -27,6 +27,13 @@ class BatteryDAO:
         ]
         return result
 
+    def getAllRequestedBattery(self):
+        result = [
+            [1,2,3,4, 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
+            [2,3,4,5, 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
+        ]
+        return result
+
     def getBatteryById(self,battery_id):
         result =  [1,2,3,4, 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
         return result
@@ -69,6 +76,13 @@ class BatteryDAO:
         return result
     
     def getAllReservedBatteryBySupplierId(self, supplier_id):
+        result = [
+            [1,2,3,4, 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
+            [2,3,4,5, 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
+        ]
+        return result
+
+    def getAllRequestedBatteryBySupplierId(self, supplier_id):
         result = [
             [1,2,3,4, 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']

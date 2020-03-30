@@ -76,7 +76,16 @@ class BatteryHandler:
             result_list.append(result)
         return jsonify(Battery=result_list)
 
-    def getBatteryById(self, battery_id): 
+    def getAllRequestedBattery(self): 
+        dao = BatteryDAO()
+        result = dao.getAllRequestedBattery()
+        result_list = []
+        for row in result:
+            result = self.build_battery_dict(row)
+            result_list.append(result)
+        return jsonify(Battery=result_list)
+
+    def getBatteryById(self, resource_id): 
         dao = BatteryDAO()
         row = dao.getBatteryById(battery_id)
         if not row:
@@ -128,6 +137,19 @@ class BatteryHandler:
             battery_dao = BatteryDAO()
             result_list = []
             battery_list = battery_dao.getAllReservedBatteryBySupplierId(supplier_id)
+            for row in battery_list:
+                result = self.build_battery_dict(row)
+                result_list.append(result)
+            return jsonify(Battery=result_list)
+    
+    def getAllRequestedBatteryBySupplierId(self, supplier_id):
+        #supplier_dao = SupplierDAO
+        #if not supplier_dao.getSupplierById(supplier_id):
+        #    return jsonify(Error="Supplier Not Found"), 404
+        #else:
+            battery_dao = BatteryDAO()
+            result_list = []
+            battery_list = battery_dao.getAllRequestedBatteryBySupplierId(supplier_id)
             for row in battery_list:
                 result = self.build_battery_dict(row)
                 result_list.append(result)

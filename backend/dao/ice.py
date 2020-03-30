@@ -28,6 +28,13 @@ class IceDAO:
         ]
         return result
 
+    def getAllRequestedIce(self):
+        result = [
+            [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5],
+            [2, 1, 2, 'ice', 'submarine', 8, 2.50, 6]
+        ]
+        return result
+
     def getIceById(self,ice_id):
         result = [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5]
         return result    
@@ -65,6 +72,13 @@ class IceDAO:
         return result
 
     def getAllReservedIceBySypplierId(self, supplier_id):
+        result = [
+            [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5],
+            [2, 1, 2, 'ice', 'submarine', 8, 2.50, 6]
+        ]
+        return result
+
+    def getAllRequestedIceBySypplierId(self, supplier_id):
         result = [
             [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5],
             [2, 1, 2, 'ice', 'submarine', 8, 2.50, 6]

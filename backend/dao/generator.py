@@ -28,11 +28,14 @@ class GeneratorDAO:
         ]
         return result
 
-    def getGeneratorById(self,generator_id):
-        result = [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline']
+    def getAllRequestedGenerator(self):
+        result = [
+            [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline'],
+            [2, 1, 2, 4, 'generator', 'CAT', 8, 500.00, 40, 'new', 'diesel']
+        ]
         return result
 
-    def getGeneratorByResourceId(self,resource_id):
+    def getGeneratorById(self,resource_id):
         result = [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline']
         return result
 
@@ -69,6 +72,13 @@ class GeneratorDAO:
         return result
     
     def getAllReservedGeneratorBySupplierId(self, supplier_id):
+        result = [
+            [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline'],
+            [2, 1, 2, 4, 'generator', 'CAT', 8, 500.00, 40, 'new', 'diesel']
+        ]
+        return result
+
+    def getAllRequestedGeneratorBySupplierId(self, supplier_id):
         result = [
             [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline'],
             [2, 1, 2, 4, 'generator', 'CAT', 8, 500.00, 40, 'new', 'diesel']
