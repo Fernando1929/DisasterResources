@@ -62,6 +62,13 @@ class SupplierDAO:
         ]
         return result
 
+    def getSuppliersByCompanyId(self, company_id):
+        result = [
+            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999'],
+            [2, 2, 'Miranda', 'Torres', '23/12/85', 'mtorres@gymail.com', '9999999999']
+        ]
+        return result
+
     def insert(self, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone):
         resource_id = 1
         return resource_id
