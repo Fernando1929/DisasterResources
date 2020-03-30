@@ -87,6 +87,15 @@ class MedDeviceHandler:
         if not row:
             return jsonify(Error = "Medical Device Not Found"), 404
         else:
+            mdevice = self.build_mdevice_dict(row)
+            return jsonify(MedicalDevice = mdevice)
+
+    def getMedDeviceByResourceId(self, resource_id):
+        dao = MedDeviceDAO()
+        row = dao.getMedDeviceByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Medical Device Not Found"), 404
+        else:
             hequip = self.build_mdevice_dict(row)
             return jsonify(MedicalDevice = hequip)
 

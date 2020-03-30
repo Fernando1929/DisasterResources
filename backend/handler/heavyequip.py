@@ -88,6 +88,15 @@ class HeavyEquipHandler:
             hequip = self.build_hequip_dict(row)
             return jsonify(HeavyEquipment = hequip)
 
+    def getHeavyEquipByResourceId(self, resource_id):
+        dao = HeavyEquipDAO()
+        row = dao.getHeavyEquipByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Heavy Equipment Not Found"), 404
+        else:
+            hequip = self.build_hequip_dict(row)
+            return jsonify(HeavyEquipment = hequip)
+
     def getHeavyEquipBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO()
         #if not supplier_dao.getSupplierById(supplier_id):

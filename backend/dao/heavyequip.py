@@ -30,7 +30,11 @@ class HeavyEquipDAO:
         ]
         return result
 
-    def getHeavyEquipById(self, resource_id):
+    def getHeavyEquipById(self, heavyequip_id):
+        result = [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 125000.00, "Excavator", "320D", "Used"]
+        return result
+
+    def getHeavyEquipByResourceId(self, resource_id):
         result = [1, 1, 1, "Heavy Equipment", "Caterpillar", 1, 125000.00, "Excavator", "320D", "Used"]
         return result
 

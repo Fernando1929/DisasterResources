@@ -28,7 +28,11 @@ class GeneratorDAO:
         ]
         return result
 
-    def getGeneratorById(self,resource_id):
+    def getGeneratorById(self,generator_id):
+        result = [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline']
+        return result
+
+    def getGeneratorByResourceId(self,resource_id):
         result = [1, 2, 1, 3, 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline']
         return result
 

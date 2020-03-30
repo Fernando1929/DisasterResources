@@ -90,6 +90,15 @@ class WaterHandler:
             water = self.build_water_dict(row)
             return jsonify(Water = water)
 
+    def getWaterByResourceId(self, resource_id):
+        dao = WaterDAO()
+        row = dao.getWaterByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Water Not Found"), 404
+        else:
+            water = self.build_water_dict(row)
+            return jsonify(Water = water)
+
     def getWaterBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO()
         #if not supplier_dao.getSupplierById(supplier_id):

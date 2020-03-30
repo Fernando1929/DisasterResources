@@ -93,6 +93,15 @@ class ClothHandler:
             cloth = self.build_cloth_dict(row)
             return jsonify(Cloth = cloth)
 
+    def getClothByResourceId(self, resource_id):
+        dao = ClothDAO()
+        row = dao.getClothByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Cloth Not Found"), 404
+        else:
+            cloth = self.build_cloth_dict(row)
+            return jsonify(Cloth = cloth)
+
     def getClothBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO()
         #if not supplier_dao.getSupplierById(supplier_id):

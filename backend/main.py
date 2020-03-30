@@ -36,17 +36,6 @@ CORS(app)
 def greeting():
     return 'Welcome to the Disaster Resources Locator App!'
 
-@app.route("/DRL/resources", methods=['GET']) 
-def getAllResources():
-    return ResourceHandler().getAllResources()
-
-@app.route("/DRL/resources/<int:resource_id>", methods=['GET'])
-def getResourceById(resource_id):
-    return ResourceHandler().getResourceById(resource_id)
-
-@app.route("/DRL/resources/<int:resource_id>/fullinfo", methods=['GET'])
-def getResourceFullInfo(resource_id):
-    return ResourceHandler().getResourceFullInfo(resource_id)
 
 #################### Login Routes ####################
 
@@ -361,6 +350,20 @@ def getPaypalById(paypal_id):
 @app.route("/DRL/customer/<int:customer_id>/paypal", methods=['GET'])
 def getPaypalByCustomerId(customer_id):
     return PaypalHandler().getPaypalByCustomerId(customer_id)
+
+#################### General Resource Routes ####################
+
+@app.route("/DRL/resources", methods=['GET']) 
+def getAllResources():
+    return ResourceHandler().getAllResources()
+
+@app.route("/DRL/resources/<int:resource_id>", methods=['GET'])
+def getResourceById(resource_id):
+    return ResourceHandler().getResourceById(resource_id)
+
+@app.route("/DRL/resources/<int:resource_id>/fullinfo", methods=['GET'])
+def getResourceFullInfo(resource_id):
+    return ResourceHandler().getResourceFullInfo(resource_id)
 
 #################### Fuel Routes ####################
 

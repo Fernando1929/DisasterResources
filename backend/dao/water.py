@@ -30,7 +30,11 @@ class WaterDAO:
         ]
         return result
 
-    def getWaterById(self, resource_id):
+    def getWaterById(self, water_id):
+        result = [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
+        return result
+
+    def getWaterByResourceId(self, resource_id):
         result = [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
         return result
 

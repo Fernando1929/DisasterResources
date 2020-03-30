@@ -78,6 +78,15 @@ class IceHandler:
             ice = self.build_ice_dict(row)
             return jsonify(Ice = ice)
 
+    def getIceByResourceId(self, resource_id):
+        dao = IceDAO()
+        row = dao.getIceByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Ice Not Found"), 404
+        else:
+            ice = self.build_ice_dict(row)
+            return jsonify(Ice = ice)
+
     def getIceBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO
         #if not supplier_dao.getSupplierById(supplier_id):

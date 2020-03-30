@@ -31,6 +31,10 @@ class IceDAO:
     def getIceById(self,ice_id):
         result = [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5]
         return result    
+
+    def getIceByResourceId(self,resource_id):
+        result = [1, 2, 1, 'ice', 'el angel', 10, 2.50, 5]
+        return result  
     
     def getIceByBrand(self,ice_brand):
         result = [

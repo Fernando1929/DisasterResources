@@ -30,7 +30,11 @@ class MedDeviceDAO:
         ]
         return result
 
-    def getMedDeviceById(self, resource_id):
+    def getMedDeviceById(self, mdevice_id):
+        result = [1, 1, 1, "Medical Device", "Forcemech", 1, 1900.00, "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"]
+        return result
+
+    def getMedDeviceByResourceId(self, resource_id):
         result = [1, 1, 1, "Medical Device", "Forcemech", 1, 1900.00, "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"]
         return result
 

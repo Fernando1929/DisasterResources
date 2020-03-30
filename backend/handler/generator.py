@@ -85,6 +85,15 @@ class GeneratorHandler:
             genearator = self.build_generator_dict(row)
             return jsonify(Generator=genearator)
 
+    def getGeneratorByResourceId(self, resource_id): 
+        dao = GeneratorDAO()
+        row = dao.getGeneratorByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Generator Not Found"), 404
+        else:
+            genearator = self.build_generator_dict(row)
+            return jsonify(Generator=genearator)
+
     def getGeneratorBySupplierId(self, supplier_id):
         #supplier_dao = SupplierDAO
         #if not supplier_dao.getSupplierById(supplier_id):

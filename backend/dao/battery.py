@@ -31,6 +31,10 @@ class BatteryDAO:
         result =  [1,2,3,4, 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
         return result
 
+    def getBatteryByResourceId(self,resource_id):
+        result =  [1,2,3,4, 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
+        return result
+
     def getBatteryByPowerCapacity(self,power_capacity):
         result = [
             [2,3,4,5, 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']

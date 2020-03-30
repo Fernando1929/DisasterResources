@@ -30,7 +30,11 @@ class ClothDAO:
         ]
         return result
 
-    def getClothById(self, resource_id):
+    def getClothById(self, cloth_id):
+        result = [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
+        return result
+
+    def getClothByResourceId(self, resource_id):
         result = [2, 2, 2, "Cloth", "Adidas", 10, 15.00, "30", "Cotton", "New", "F", "Pants"]
         return result
 
