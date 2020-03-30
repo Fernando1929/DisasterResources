@@ -51,7 +51,7 @@ def getAllResourcesBySupplierId(supplier_id):
 
 #################### Company Routes ####################
 
-@app.route('/DRL/company', methods = ['GET','POST']) #verify later
+@app.route('/DRL/company', methods = ['GET','POST'])
 def getAllCompanies():
     if request.method == 'POST':
         return CompanyHandler().insertCompany(request.json)
@@ -154,7 +154,7 @@ def getIceBySupplierId(supplier_id):
     return IceHandler().getIceBySupplierId(supplier_id)
 
 @app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET'])
-def getAddress(ice_id):
+def getIceAddress(ice_id):
     return IceHandler().getIceAddress(ice_id)
 
 @app.route('/DRL/ice/available', methods = ['GET'])
@@ -172,6 +172,14 @@ def getAllReservedIce():
 @app.route('/DRL/ice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedIceBySupplierId(supplier_id):
     return IceHandler().getAllReservedIceBySupplierId(supplier_id)
+
+@app.route('/DRL/ice/requested', methods = ['GET'])
+def getAllRequestedIce():
+    return IceHandler().getAllRequestedIce()
+
+@app.route('/DRL/ice/requested/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllRequestedIceBySupplierId(supplier_id):
+    return IceHandler().getAllRequestedIceBySupplierId(supplier_id)
 
 #################### Battery Routes ####################
 
@@ -200,7 +208,7 @@ def getBatteryById(battery_id):
 def getBatteryBySupplierId(supplier_id):
     return BatteryHandler().getBatteryBySupplierId(supplier_id)
 
-@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
+@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET'])
 def getBatteryAddress(battery_id):
     return BatteryHandler().getBatteryAddress(battery_id)
 
@@ -219,6 +227,14 @@ def getAllReservedBattery():
 @app.route('/DRL/battery/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedBatteryBySupplierId(supplier_id):
     return BatteryHandler().getAllReservedBatteryBySupplierId(supplier_id)
+
+@app.route('/DRL/battery/requested', methods = ['GET'])
+def getAllRequestedBattery():
+    return BatteryHandler().getAllRequestedBattery()
+
+@app.route('/DRL/battery/requested/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllRequestedBatteryBySupplierId(supplier_id):
+    return BatteryHandler().getAllRequestedBatteryBySupplierId(supplier_id)
 
 #################### Generator Routes ####################
 
@@ -267,6 +283,13 @@ def getAllReservedGenerator():
 def getAllReservedGeneratorBySupplierId(supplier_id):
     return GeneratorHandler().getAllReservedGeneratorBySupplierId(supplier_id)
 
+@app.route('/DRL/generator/requested', methods = ['GET'])
+def getAllRequestedGenerator():
+    return GeneratorHandler().getAllRequestedGenerator()
+
+@app.route('/DRL/generator/requested/supplier/<int:supplier_id>', methods = ['GET'])
+def getAllRequestedGeneratorBySupplierId(supplier_id):
+    return GeneratorHandler().getAllRequestedGeneratorBySupplierId(supplier_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
