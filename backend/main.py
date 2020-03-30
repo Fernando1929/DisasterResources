@@ -49,6 +49,10 @@ def getSupplierById(supplier_id):
 def getAllResourcesBySupplierId(supplier_id):
     return SupplierHandler().getAllSupplierResources(supplier_id)
 
+@app.route('/DRL/supplier/company/<int:company_id>', methods=["GET"])
+def getSuppliersByCompanyId(company_id):
+    return SupplierHandler().getSuppliersByCompanyId(company_id)
+
 #################### Company Routes ####################
 
 @app.route('/DRL/company', methods = ['GET','POST'])
