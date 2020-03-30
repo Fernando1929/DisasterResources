@@ -88,6 +88,15 @@ class ToolHandler:
             tool = self.build_tool_dict(row)
             return jsonify(Tool = tool)
 
+    def getToolByResourceId(self, resource_id):
+        dao = ToolDAO()
+        row = dao.getToolByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Tool Not Found"), 404
+        else:
+            tool = self.build_tool_dict(row)
+            return jsonify(Tool = tool)
+
     def getToolsBySupplierId(self, supplier_id):
         tool_list = []
         result_list = []

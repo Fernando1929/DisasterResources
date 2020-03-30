@@ -90,6 +90,15 @@ class MedicineHandler:
             medicine = self.build_medicine_dict(row)
             return jsonify(Medicine = medicine)
 
+    def getMedicineByResourceId(self, resource_id):
+        dao = MedicineDAO()
+        row = dao.getMedicineByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Medicine Not Found"), 404
+        else:
+            medicine = self.build_medicine_dict(row)
+            return jsonify(Medicine = medicine)
+
     def getMedicineBySupplierId(self, supplier_id):
         med_list = []
         result_list = []
