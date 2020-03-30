@@ -92,6 +92,15 @@ class FoodHandler:
             food = self.build_food_dict(row)
             return jsonify(Food = food)
 
+    def getFoodByResourceId(self, resource_id):
+        dao = FoodDAO()
+        row = dao.getFoodByResourceId(resource_id)
+        if not row:
+            return jsonify(Error = "Food Not Found"), 404
+        else:
+            food = self.build_food_dict(row)
+            return jsonify(Food = food)
+
     def getFoodBySupplierId(self, supplier_id):
         food_list = []
         result_list = []

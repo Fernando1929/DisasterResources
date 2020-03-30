@@ -22,6 +22,7 @@ from handler.order import OrderHandler
 from handler.generator import GeneratorHandler
 from handler.battery import BatteryHandler
 from handler.company import CompanyHandler
+from handler.resource import ResourceHandler
 
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
@@ -35,6 +36,17 @@ CORS(app)
 def greeting():
     return 'Welcome to the Disaster Resources Locator App!'
 
+@app.route("/DRL/resources", methods=['GET']) 
+def getAllResources():
+    return ResourceHandler().getAllResources()
+
+@app.route("/DRL/resources/<int:resource_id>", methods=['GET'])
+def getResourceById(resource_id):
+    return ResourceHandler().getResourceById(resource_id)
+
+@app.route("/DRL/resources/<int:resource_id>/fullinfo", methods=['GET'])
+def getResourceFullInfo(resource_id):
+    return ResourceHandler().getResourceFullInfo(resource_id)
 
 #################### Login Routes ####################
 
@@ -352,7 +364,7 @@ def getPaypalByCustomerId(customer_id):
 
 #################### Fuel Routes ####################
 
-@app.route("/DRL/fuel", methods=['GET', 'POST'])
+@app.route("/DRL/resources/fuel", methods=['GET', 'POST'])
 def getAllFuels():
     if request.method == 'POST':
         return FuelHandler().insertFuel(request.json)
@@ -362,7 +374,7 @@ def getAllFuels():
         else:
             return FuelHandler().searchFuel(request.args)
 
-@app.route('/DRL/fuel/<int:fuel_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/fuel/<int:fuel_id>', methods=['GET', 'PUT', 'DELETE'])
 def getFuelById(fuel_id):
     if request.method == 'GET':
         return FuelHandler().getFuelById(fuel_id)
@@ -373,41 +385,41 @@ def getFuelById(fuel_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/fuel/<int:fuel_id>/address', methods=['GET'])
+@app.route('/DRL/resources/fuel/<int:fuel_id>/address', methods=['GET'])
 def getFuelAddress(fuel_id):
     return FuelHandler().getFuelAddress(fuel_id)
 
-@app.route('/DRL/fuel/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/fuel/supplier/<int:supplier_id>', methods = ['GET'])
 def getFuelBySupplierId(supplier_id):
     return FuelHandler().getFuelBySupplierId(supplier_id)
 
-@app.route('/DRL/fuel/available', methods = ['GET'])
+@app.route('/DRL/resources/fuel/available', methods = ['GET'])
 def getAllAvailableFuels():
     return FuelHandler().getAllAvailableFuels()
 
-@app.route('/DRL/fuel/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/fuel/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableFuelBySupplierId(supplier_id):
     return FuelHandler().getAllAvailableFuelBySupplierId(supplier_id)
 
-@app.route('/DRL/fuel/reserved', methods = ['GET'])
+@app.route('/DRL/resources/fuel/reserved', methods = ['GET'])
 def getAllReservedFuels():
     return FuelHandler().getAllReservedFuels()
 
-@app.route('/DRL/fuel/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/fuel/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedFuelBySupplierId(supplier_id):
     return FuelHandler().getAllReservedFuelBySupplierId(supplier_id)
 
-@app.route('/DRL/fuel/requested', methods = ['GET'])
+@app.route('/DRL/resources/fuel/requested', methods = ['GET'])
 def getAllRequestedFuels():
     return FuelHandler().getAllRequestedFuels()
 
-@app.route('/DRL/fuel/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/fuel/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedFuelBySupplierId(supplier_id):
     return FuelHandler().getAllRequestedFuelBySupplierId(supplier_id)
 
 #################### Tools Routes ####################
 
-@app.route("/DRL/tools", methods=['GET', 'POST'])
+@app.route("/DRL/resources/tools", methods=['GET', 'POST'])
 def getAllTools():
     if request.method == 'POST':
         return ToolHandler().insertTool(request.json)
@@ -417,7 +429,7 @@ def getAllTools():
         else:
             return ToolHandler().searchTools(request.args)
 
-@app.route('/DRL/tools/<int:tool_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/tools/<int:tool_id>', methods=['GET', 'PUT', 'DELETE'])
 def getToolById(tool_id):
     if request.method == 'GET':
         return ToolHandler().getToolById(tool_id)
@@ -428,41 +440,41 @@ def getToolById(tool_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/tools/<int:tool_id>/address', methods=['GET'])
+@app.route('/DRL/resources/tools/<int:tool_id>/address', methods=['GET'])
 def getToolAddress(tool_id):
     return ToolHandler().getToolAddress(tool_id)
 
-@app.route('/DRL/tools/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/tools/supplier/<int:supplier_id>', methods = ['GET'])
 def getToolBySupplierId(supplier_id):
     return ToolHandler().getToolsBySupplierId(supplier_id)
 
-@app.route('/DRL/tools/available', methods = ['GET'])
+@app.route('/DRL/resources/tools/available', methods = ['GET'])
 def getAllAvailableTools():
     return ToolHandler().getAllAvailableTools()
 
-@app.route('/DRL/tools/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/tools/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableToolsBySupplierId(supplier_id):
     return ToolHandler().getAllAvailableToolsBySupplierId(supplier_id)
 
-@app.route('/DRL/tools/reserved', methods = ['GET'])
+@app.route('/DRL/resources/tools/reserved', methods = ['GET'])
 def getAllReservedTools():
     return ToolHandler().getAllReservedTools()
 
-@app.route('/DRL/tools/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/tools/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedToolsBySupplierId(supplier_id):
     return ToolHandler().getAllReservedToolsBySupplierId(supplier_id)
 
-@app.route('/DRL/tools/requested', methods = ['GET'])
+@app.route('/DRL/resources/tools/requested', methods = ['GET'])
 def getAllRequestedTools():
     return ToolHandler().getAllRequestedTools()
 
-@app.route('/DRL/tools/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/tools/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedToolsBySupplierId(supplier_id):
     return ToolHandler().getAllRequestedToolsBySupplierId(supplier_id)
 
 #################### Food Routes ####################
 
-@app.route("/DRL/food", methods=['GET', 'POST'])
+@app.route("/DRL/resources/food", methods=['GET', 'POST'])
 def getAllFoods():
     if request.method == 'POST':
         return FoodHandler().insertFood(request.json)
@@ -472,7 +484,7 @@ def getAllFoods():
         else:
             return FoodHandler().searchFood(request.args)
 
-@app.route('/DRL/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
 def getFoodById(food_id):
     if request.method == 'GET':
         return FoodHandler().getFoodById(food_id)
@@ -481,41 +493,41 @@ def getFoodById(food_id):
     elif request.method == 'DELETE':
         return FoodHandler().deleteFood(food_id)
 
-@app.route('/DRL/food/<int:food_id>/address', methods=['GET'])
+@app.route('/DRL/resources/food/<int:food_id>/address', methods=['GET'])
 def getFoodAddress(food_id):
     return FoodHandler().getFoodAddress(food_id)
 
-@app.route('/DRL/food/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/food/supplier/<int:supplier_id>', methods = ['GET'])
 def getFoodBySupplierId(supplier_id):
     return FoodHandler().getFoodBySupplierId(supplier_id)
 
-@app.route('/DRL/food/available', methods = ['GET'])
+@app.route('/DRL/resources/food/available', methods = ['GET'])
 def getAllAvailableFoods():
     return FoodHandler().getAllAvailableFoods()
 
-@app.route('/DRL/food/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/food/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableFoodsBySupplierId(supplier_id):
     return FoodHandler().getAllAvailableFoodBySupplierId(supplier_id)
 
-@app.route('/DRL/food/reserved', methods = ['GET'])
+@app.route('/DRL/resources/food/reserved', methods = ['GET'])
 def getAllReservedFoods():
     return FoodHandler().getAllReservedFoods()
 
-@app.route('/DRL/food/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/food/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedFoodsBySupplierId(supplier_id):
     return FoodHandler().getAllReservedFoodBySupplierId(supplier_id)
 
-@app.route('/DRL/food/requested', methods = ['GET'])
+@app.route('/DRL/resources/food/requested', methods = ['GET'])
 def getAllRequestedFoods():
     return FoodHandler().getAllRequestedFoods()
 
-@app.route('/DRL/food/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/food/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedFoodsBySupplierId(supplier_id):
     return FoodHandler().getAllRequestedFoodBySupplierId(supplier_id)
 
 #################### Medicine Routes ####################
 
-@app.route("/DRL/medicine", methods=['GET', 'POST'])
+@app.route("/DRL/resources/medicine", methods=['GET', 'POST'])
 def getAllMedicines():
     if request.method == 'POST':
         return MedicineHandler().insertMedicine(request.json)
@@ -525,7 +537,7 @@ def getAllMedicines():
         else:
             return MedicineHandler().searchMedicine(request.args)
 
-@app.route('/DRL/medicine/<int:med_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/medicine/<int:med_id>', methods=['GET', 'PUT', 'DELETE'])
 def getMedicineById(med_id):
     if request.method == 'GET':
         return MedicineHandler().getMedicineById(med_id)
@@ -534,41 +546,41 @@ def getMedicineById(med_id):
     elif request.method == 'DELETE':
         return MedicineHandler().deleteMedicine(med_id)
 
-@app.route('/DRL/medicine/<int:med_id>/address', methods=['GET'])
+@app.route('/DRL/resources/medicine/<int:med_id>/address', methods=['GET'])
 def getMedicineAddress(med_id):
     return MedicineHandler().getMedicineAddress(med_id)
 
-@app.route('/DRL/medicine/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicine/supplier/<int:supplier_id>', methods = ['GET'])
 def getMedicineBySupplierId(supplier_id):
     return MedicineHandler().getMedicineBySupplierId(supplier_id)
 
-@app.route('/DRL/medicine/available', methods = ['GET'])
+@app.route('/DRL/resources/medicine/available', methods = ['GET'])
 def getAllAvailableMedicines():
     return MedicineHandler().getAllAvailableMedicines()
 
-@app.route('/DRL/medicine/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicine/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableMedicinesBySupplierId(supplier_id):
     return MedicineHandler().getAllAvailableMedicineBySupplierId(supplier_id)
 
-@app.route('/DRL/medicine/reserved', methods = ['GET'])
+@app.route('/DRL/resources/medicine/reserved', methods = ['GET'])
 def getAllReservedMedicines():
     return MedicineHandler().getAllReservedMedicines()
 
-@app.route('/DRL/medicine/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicine/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedMedicinesBySupplierId(supplier_id):
     return MedicineHandler().getAllReservedMedicineBySupplierId(supplier_id)
 
-@app.route('/DRL/medicine/requested', methods = ['GET'])
+@app.route('/DRL/resources/medicine/requested', methods = ['GET'])
 def getAllRequestedMedicines():
     return MedicineHandler().getAllReservedMedicines()
 
-@app.route('/DRL/medicine/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicine/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedMedicinesBySupplierId(supplier_id):
     return MedicineHandler().getAllRequestedMedicineBySupplierId(supplier_id)
     
 #################### Ice Routes ####################
 
-@app.route('/DRL/ice', methods = ['GET','POST'])
+@app.route('/DRL/resources/ice', methods = ['GET','POST'])
 def getAllIce():
     if request.method == 'POST':
         return IceHandler().insertIce(request.json)
@@ -578,7 +590,7 @@ def getAllIce():
         else:
             return IceHandler().searchIce(request.args)
 
-@app.route('/DRL/ice/<int:ice_id>', methods = ['GET','PUT','DELETE'])
+@app.route('/DRL/resources/ice/<int:ice_id>', methods = ['GET','PUT','DELETE'])
 def getIceById(ice_id):
     if request.method == 'GET':
         return IceHandler().getIceById(ice_id)
@@ -589,33 +601,33 @@ def getIceById(ice_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/ice/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/ice/supplier/<int:supplier_id>', methods = ['GET'])
 def getIceBySupplierId(supplier_id):
     return IceHandler().getIceBySupplierId(supplier_id)
 
-@app.route('/DRL/ice/<int:ice_id>/address', methods = ['GET'])
+@app.route('/DRL/resources/ice/<int:ice_id>/address', methods = ['GET'])
 def getAddress(ice_id):
     return IceHandler().getIceAddress(ice_id)
 
-@app.route('/DRL/ice/available', methods = ['GET'])
+@app.route('/DRL/resources/ice/available', methods = ['GET'])
 def getAllAvailableIce():
     return IceHandler().getAllAvailableIce()
 
-@app.route('/DRL/ice/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/ice/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableIceBySupplierId(supplier_id):
     return IceHandler().getAllAvailableIceBySupplierId(supplier_id)
 
-@app.route('/DRL/ice/reserved', methods = ['GET'])
+@app.route('/DRL/resources/ice/reserved', methods = ['GET'])
 def getAllReservedIce():
     return IceHandler().getAllReservedIce()
 
-@app.route('/DRL/ice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/ice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedIceBySupplierId(supplier_id):
     return IceHandler().getAllReservedIceBySupplierId(supplier_id)
 
 #################### Battery Routes ####################
 
-@app.route('/DRL/battery', methods = ['GET','POST'])
+@app.route('/DRL/resources/battery', methods = ['GET','POST'])
 def getAllBattery():
     if request.method == 'POST':
         return BatteryHandler().insertBattery(request.json)
@@ -625,7 +637,7 @@ def getAllBattery():
         else:
             return BatteryHandler().searchBattery(request.args)
 
-@app.route('/DRL/battery/<int:battery_id>', methods = ['GET','PUT','DELETE']) 
+@app.route('/DRL/resources/battery/<int:battery_id>', methods = ['GET','PUT','DELETE']) 
 def getBatteryById(battery_id):
     if request.method == 'GET':
         return BatteryHandler().getBatteryById(battery_id)
@@ -636,33 +648,33 @@ def getBatteryById(battery_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/battery/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/battery/supplier/<int:supplier_id>', methods = ['GET'])
 def getBatteryBySupplierId(supplier_id):
     return BatteryHandler().getBatteryBySupplierId(supplier_id)
 
-@app.route('/DRL/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
+@app.route('/DRL/resources/battery/<int:battery_id>/address', methods = ['GET']) #Finish Method
 def getBatteryAddress(battery_id):
     return BatteryHandler().getBatteryAddress(battery_id)
 
-@app.route('/DRL/battery/available', methods = ['GET'])
+@app.route('/DRL/resources/battery/available', methods = ['GET'])
 def getAllAvailableBattery():
     return BatteryHandler().getAllAvailableBattery()
 
-@app.route('/DRL/battery/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/battery/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableBatteryBySupplierId(supplier_id):
     return BatteryHandler().getAllAvailableBatteryBySupplierId(supplier_id)
 
-@app.route('/DRL/battery/reserved', methods = ['GET'])
+@app.route('/DRL/resources/battery/reserved', methods = ['GET'])
 def getAllReservedBattery():
     return BatteryHandler().getAllReservedBattery()
 
-@app.route('/DRL/battery/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/battery/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedBatteryBySupplierId(supplier_id):
     return BatteryHandler().getAllReservedBatteryBySupplierId(supplier_id)
 
 #################### Generator Routes ####################
 
-@app.route('/DRL/generator',methods = ['GET','POST'])
+@app.route('/DRL/resources/generator',methods = ['GET','POST'])
 def getAllGenerator():
     if request.method == 'POST':
         return GeneratorHandler().insertGenerator(request.json)
@@ -672,7 +684,7 @@ def getAllGenerator():
         else:
             return GeneratorHandler().searchGenerator(request.args)
 
-@app.route('/DRL/generator/<int:generator_id>', methods = ['GET','PUT','DELETE'])
+@app.route('/DRL/resources/generator/<int:generator_id>', methods = ['GET','PUT','DELETE'])
 def getGeneratorById(generator_id):
     if request.method == 'GET':
         return GeneratorHandler().getGeneratorById(generator_id)
@@ -683,33 +695,33 @@ def getGeneratorById(generator_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/generator/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/generator/supplier/<int:supplier_id>', methods = ['GET'])
 def getGeneratorBySupplierId(supplier_id):
     return GeneratorHandler().getGeneratorBySupplierId(supplier_id)
 
-@app.route('/DRL/generator/<int:generator_id>/address', methods = ['GET'])
+@app.route('/DRL/resources/generator/<int:generator_id>/address', methods = ['GET'])
 def getGeneratorAddress(generator_id):
     return GeneratorHandler().getGeneratorAddress(generator_id)
 
-@app.route('/DRL/generator/available',methods = ['GET'])
+@app.route('/DRL/resources/generator/available',methods = ['GET'])
 def getAllAvailableGenerator():
     return GeneratorHandler().getAllAvailableGenerator()
 
-@app.route('/DRL/generator/available/supplier/<int:supplier_id>',methods = ['GET'])
+@app.route('/DRL/resources/generator/available/supplier/<int:supplier_id>',methods = ['GET'])
 def getAllAvailableGeneratorBySupplierId(supplier_id):
     return GeneratorHandler().getAllAvailableGeneratorBySupplierId(supplier_id)
 
-@app.route('/DRL/generator/reserved',methods = ['GET'])
+@app.route('/DRL/resources/generator/reserved',methods = ['GET'])
 def getAllReservedGenerator():
     return GeneratorHandler().getAllReservedGenerator()
 
-@app.route('/DRL/generator/reserved/supplier/<int:supplier_id>',methods = ['GET'])
+@app.route('/DRL/resources/generator/reserved/supplier/<int:supplier_id>',methods = ['GET'])
 def getAllReservedGeneratorBySupplierId(supplier_id):
     return GeneratorHandler().getAllReservedGeneratorBySupplierId(supplier_id)
 
 #################### Water Routes ####################
 
-@app.route("/DRL/water", methods=['GET', 'POST'])
+@app.route("/DRL/resources/water", methods=['GET', 'POST'])
 def getAllWater():
     if request.method == 'POST':
         return WaterHandler().insertWater(request.json)
@@ -719,7 +731,7 @@ def getAllWater():
         else:
             return WaterHandler().searchWater(request.args)
 
-@app.route('/DRL/water/<int:water_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/water/<int:water_id>', methods=['GET', 'PUT', 'DELETE'])
 def getWaterById(water_id):
     if request.method == 'GET':
         return WaterHandler().getWaterById(water_id)
@@ -730,41 +742,41 @@ def getWaterById(water_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/water/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/water/supplier/<int:supplier_id>', methods = ['GET'])
 def getWaterBySupplierId(supplier_id):
     return WaterHandler().getWaterBySupplierId(supplier_id)
 
-@app.route('/DRL/water/<int:water_id>/address', methods = ['GET'])
+@app.route('/DRL/resources/water/<int:water_id>/address', methods = ['GET'])
 def getWaterAddress(water_id):
     return WaterHandler().getWaterAddress(water_id)
 
-@app.route('/DRL/water/available', methods = ['GET'])
+@app.route('/DRL/resources/water/available', methods = ['GET'])
 def getAllAvailableWater():
     return WaterHandler().getAllAvailableWater()
 
-@app.route('/DRL/water/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/water/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableWaterBySupplierId(supplier_id):
     return WaterHandler().getAllAvailableWaterBySupplierId(supplier_id)
 
-@app.route('/DRL/water/reserved', methods = ['GET'])
+@app.route('/DRL/resources/water/reserved', methods = ['GET'])
 def getAllReservedWater():
     return WaterHandler().getAllReservedWater()
 
-@app.route('/DRL/water/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/water/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedWaterBySupplierId(supplier_id):
     return WaterHandler().getAllReservedWaterBySupplierId(supplier_id)
 
-@app.route('/DRL/water/requested', methods = ['GET'])
+@app.route('/DRL/resources/water/requested', methods = ['GET'])
 def getAllRequestedWater():
     return WaterHandler().getAllRequestedWater()
 
-@app.route('/DRL/water/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/water/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedWaterBySupplierId(supplier_id):
     return WaterHandler().getAllRequestedWaterBySupplierId(supplier_id)
 
 #################### Cloth Routes ####################
 
-@app.route("/DRL/cloth", methods=['GET', 'POST'])
+@app.route("/DRL/resources/cloth", methods=['GET', 'POST'])
 def getAllCloth():
     if request.method == 'POST':
         return ClothHandler().insertCloth(request.json)
@@ -774,7 +786,7 @@ def getAllCloth():
         else:
             return ClothHandler().searchCloth(request.args)
 
-@app.route('/DRL/cloth/<int:cloth_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/cloth/<int:cloth_id>', methods=['GET', 'PUT', 'DELETE'])
 def getClothById(cloth_id):
     if request.method == 'GET':
         return ClothHandler().getClothById(cloth_id)
@@ -785,41 +797,41 @@ def getClothById(cloth_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/cloth/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/cloth/supplier/<int:supplier_id>', methods = ['GET'])
 def getClothBySupplierId(supplier_id):
     return ClothHandler().getClothBySupplierId(supplier_id)
 
-@app.route('/DRL/cloth/<int:cloth_id>/address', methods = ['GET'])
+@app.route('/DRL/resources/cloth/<int:cloth_id>/address', methods = ['GET'])
 def getClothAddress(cloth_id):
     return ClothHandler().getClothAddress(cloth_id)
 
-@app.route('/DRL/cloth/available', methods = ['GET'])
+@app.route('/DRL/resources/cloth/available', methods = ['GET'])
 def getAllAvailableCloth():
     return ClothHandler().getAllAvailableCloth()
 
-@app.route('/DRL/cloth/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/cloth/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableClothBySupplierId(supplier_id):
     return ClothHandler().getAllAvailableClothBySupplierId(supplier_id)
 
-@app.route('/DRL/cloth/reserved', methods = ['GET'])
+@app.route('/DRL/resources/cloth/reserved', methods = ['GET'])
 def getAllReservedCloth():
     return ClothHandler().getAllReservedCloth()
 
-@app.route('/DRL/cloth/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/cloth/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedClothBySupplierId(supplier_id):
     return ClothHandler().getAllReservedClothBySupplierId(supplier_id)
 
-@app.route('/DRL/cloth/requested', methods = ['GET'])
+@app.route('/DRL/resources/cloth/requested', methods = ['GET'])
 def getAllRequestedCloth():
     return ClothHandler().getAllRequestedCloth()
 
-@app.route('/DRL/cloth/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/cloth/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedClothBySupplierId(supplier_id):
     return ClothHandler().getAllRequestedClothBySupplierId(supplier_id)
 
 #################### Heavy Equipment Routes ####################
 
-@app.route("/DRL/heavyequipment", methods=['GET', 'POST'])
+@app.route("/DRL/resources/heavyequipment", methods=['GET', 'POST'])
 def getAllHeavyEquip():
     if request.method == 'POST':
         return HeavyEquipHandler().insertHeavyEquip(request.json)
@@ -829,7 +841,7 @@ def getAllHeavyEquip():
         else:
             return HeavyEquipHandler().searchHeavyEquip(request.args)
 
-@app.route('/DRL/heavyequipment/<int:hequip_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/heavyequipment/<int:hequip_id>', methods=['GET', 'PUT', 'DELETE'])
 def getHeavyEquipById(hequip_id):
     if request.method == 'GET':
         return HeavyEquipHandler().getHeavyEquipById(hequip_id)
@@ -840,41 +852,41 @@ def getHeavyEquipById(hequip_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/heavyequipment/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/supplier/<int:supplier_id>', methods = ['GET'])
 def getHeavyEquipBySupplierId(supplier_id):
     return HeavyEquipHandler().getHeavyEquipBySupplierId(supplier_id)
 
-@app.route('/DRL/heavyequipment/<int:hequip_id>/address', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/<int:hequip_id>/address', methods = ['GET'])
 def getHeavyEquipAddress(hequip_id):
     return HeavyEquipHandler().getHeavyEquipAddress(hequip_id)
 
-@app.route('/DRL/heavyequipment/available', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/available', methods = ['GET'])
 def getAllAvailableHeavyEquip():
     return HeavyEquipHandler().getAllAvailableHeavyEquip()
 
-@app.route('/DRL/heavyequipment/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/vheavyequipment/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableHeavyEquipBySupplierId(supplier_id):
     return HeavyEquipHandler().getAllAvailableHeavyEquipBySupplierId(supplier_id)
 
-@app.route('/DRL/heavyequipment/reserved', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/reserved', methods = ['GET'])
 def getAllReservedHeavyEquip():
     return HeavyEquipHandler().getAllReservedHeavyEquip()
 
-@app.route('/DRL/heavyequipment/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedHeavyEquipBySupplierId(supplier_id):
     return HeavyEquipHandler().getAllReservedHeavyEquipBySupplierId(supplier_id)
 
-@app.route('/DRL/heavyequipment/requested', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/requested', methods = ['GET'])
 def getAllRequestedHeavyEquip():
     return HeavyEquipHandler().getAllRequestedHeavyEquip()
 
-@app.route('/DRL/heavyequipment/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedHeavyEquipBySupplierId(supplier_id):
     return HeavyEquipHandler().getAllRequestedHeavyEquipBySupplierId(supplier_id)
 
 #################### Medical Device Routes ####################
 
-@app.route("/DRL/medicaldevice", methods=['GET', 'POST'])
+@app.route("/DRL/resources/medicaldevice", methods=['GET', 'POST'])
 def getAllMedDevice():
     if request.method == 'POST':
         return MedDeviceHandler().insertMedDevice(request.json)
@@ -884,7 +896,7 @@ def getAllMedDevice():
         else:
             return MedDeviceHandler().searchMedDevice(request.args)
 
-@app.route('/DRL/medicaldevice/<int:mdevice_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DRL/resources/medicaldevice/<int:mdevice_id>', methods=['GET', 'PUT', 'DELETE'])
 def getMedDeviceById(mdevice_id):
     if request.method == 'GET':
         return MedDeviceHandler().getMedDeviceById(mdevice_id)
@@ -895,35 +907,35 @@ def getMedDeviceById(mdevice_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DRL/medicaldevice/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/supplier/<int:supplier_id>', methods = ['GET'])
 def getMedDeviceBySupplierId(supplier_id):
     return MedDeviceHandler().getMedDeviceBySupplierId(supplier_id)
 
-@app.route('/DRL/medicaldevice/<int:mdevice_id>/address', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/<int:mdevice_id>/address', methods = ['GET'])
 def getMedDeviceAddress(mdevice_id):
     return MedDeviceHandler().getMedDeviceAddress(mdevice_id)
 
-@app.route('/DRL/medicaldevice/available', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/available', methods = ['GET'])
 def getAllAvailablemedDevice():
     return MedDeviceHandler().getAllAvailableMedDevice()
 
-@app.route('/DRL/medicaldevice/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableMedDeviceBySupplierId(supplier_id):
     return MedDeviceHandler().getAllAvailableMedDeviceBySupplierId(supplier_id)
 
-@app.route('/DRL/medicaldevice/reserved', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/reserved', methods = ['GET'])
 def getAllReservedMedDevice():
     return MedDeviceHandler().getAllReservedMedDevice()
 
-@app.route('/DRL/medicaldevice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedMedDeviceBySupplierId(supplier_id):
     return MedDeviceHandler().getAllReservedMedDeviceBySupplierId(supplier_id)
 
-@app.route('/DRL/medicaldevice/requested', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/requested', methods = ['GET'])
 def getAllRequestedMedDevice():
     return MedDeviceHandler().getAllRequestedMedDevice()
 
-@app.route('/DRL/medicaldevice/requested/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/medicaldevice/requested/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllRequestedMedDeviceBySupplierId(supplier_id):
     return MedDeviceHandler().getAllRequestedMedDeviceBySupplierId(supplier_id)
 

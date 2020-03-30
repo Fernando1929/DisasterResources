@@ -20,7 +20,11 @@ class ToolDAO:
         result = [[1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
         return result
 
-    def getToolById(self, resource_id):
+    def getToolById(self, tool_id):
+        result = [1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]
+        return result
+
+    def getToolByResourceId(self, resource_id):
         result = [1, 1, 1, "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]
         return result
 

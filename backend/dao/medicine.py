@@ -21,7 +21,11 @@ class MedicineDAO:
         result = [[1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
-    def getMedicineById(self, resource_id):
+    def getMedicineById(self, med_id):
+        result = [1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]
+        return result
+
+    def getMedicineByResourceId(self, resource_id):
         result = [1, 1, 1, "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]
         return result
 
