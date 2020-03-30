@@ -68,6 +68,15 @@ class IceHandler:
             result = self.build_ice_dict(row)
             result_list.append(result)
         return jsonify(Ice=result_list)
+
+    def getAllRequestedIce(self):
+        dao = IceDAO()
+        result = dao.getAllRequestedIce()
+        result_list = []
+        for row in result:
+            result = self.build_ice_dict(row)
+            result_list.append(result)
+        return jsonify(Ice=result_list)
     
     def getIceById(self, ice_id):
         dao = IceDAO()
@@ -116,7 +125,19 @@ class IceHandler:
                 result = self.build_ice_dict(row)
                 result_list.append(result)
             return jsonify(Ice=result_list)
-    
+
+    def getAllRequestedIceBySupplierId(self, supplier_id):
+        #supplier_dao = SupplierDAO
+        #if not supplier_dao.getSupplierById(supplier_id):
+        #    return jsonify(Error="Supplier Not Found"), 404
+        #else:
+            ice_dao = IceDAO()
+            result_list = []
+            ice_list = ice_dao.getAllRequestedIceBySypplierId(supplier_id)
+            for row in ice_list:
+                result = self.build_ice_dict(row)
+                result_list.append(result)
+            return jsonify(Ice=result_list)
     
     def searchIce(self, args):
         brand =  args.get('ice_brand')
