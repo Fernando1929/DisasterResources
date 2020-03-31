@@ -65,7 +65,7 @@ class MedicineDAO:
         return result
 
     def getMedicineAddress(self, supplier_id):
-        result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
+        result = [1, 1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
         return result
 
     def insert(self, resource_id, med_type, med_dose, med_prescript, med_expdate):
