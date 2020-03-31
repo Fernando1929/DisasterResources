@@ -6,17 +6,18 @@ from dao.user import UserDAO
 
 class IceHandler:
 
-    #ice = ice_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight
+    #ice = supplier_id, ice_id, category, ice_name, ice_brand, ice_quantity, ice_price , ice_weight
     def build_ice_dict(self, row): 
-        result = {}
-        result['supplier_id'] = row[0]
-        result['resource_id'] = row[1]
+        result = {} 
         result['ice_id'] = row[2]
-        result['ice_name'] = row[3]
-        result['ice_brand'] = row[4]
-        result['ice_quantity'] = row[5]
-        result['ice_price'] = row[6]
-        result['ice_weight'] = row[7]
+        result['resource_id'] = row[1]
+        result['supplier_id'] = row[0]
+        result['category'] = row[3]
+        result['ice_name'] = row[4]
+        result['ice_brand'] = row[5]
+        result['ice_quantity'] = row[6]
+        result['ice_price'] = row[7]
+        result['ice_weight'] = row[8]
         return result
 
     def build_address_dic(self,row):
@@ -30,11 +31,12 @@ class IceHandler:
         result['zipcode'] = row[6]
         return result
 
-    def build_ice_attributes(self, ice_id, resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight):
+    def build_ice_attributes(self, ice_id, resource_id, supplier_id, category, ice_name, ice_brand, ice_quantity, ice_price , ice_weight):
         result = {}  
         result['supplier_id'] = supplier_id
         result['resource_id'] = resource_id
         result['ice_id'] = ice_id
+        result['category'] = category 
         result['ice_name'] = ice_name
         result['ice_brand'] = ice_brand
         result['ice_quantity'] = ice_quantity
@@ -183,17 +185,18 @@ class IceHandler:
 
     def insertIce(self, json):
         supplier_id = json['supplier_id']
+        category = json['category']
         ice_name = json['ice_name']
         ice_brand = json['ice_brand']
         ice_quantity = json['ice_quantity'] 
         ice_price = json['ice_price']
         ice_weight = json['ice_weight']
-        if supplier_id and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
+        if supplier_id and category and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, ice_name, ice_brand, ice_quantity, ice_price)
+            resource_id = resource_dao.insert(supplier_id, category, ice_name, ice_brand, ice_quantity, ice_price)
             ice_dao = IceDAO()
             ice_id = ice_dao.insert(resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
-            result = self.build_ice_attributes(supplier_id,resource_id ,ice_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
+            result = self.build_ice_attributes(supplier_id, resource_id, ice_id, category, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
             return jsonify(Ice=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
@@ -214,16 +217,17 @@ class IceHandler:
             return jsonify(Error = "Ice not found."), 404
         else:
             supplier_id = json['supplier_id']
+            category = json['category']
             ice_name = json['ice_name']
             ice_brand = json['ice_brand']
             ice_quantity = json['ice_quantity'] 
             ice_price = json['ice_price']
             ice_weight = json['ice_weight']
-            if supplier_id and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
+            if supplier_id and category and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
                 resource_id = ice_dao.update(ice_id ,ice_weight)
                 res_dao = ResourceDAO()
-                res_dao.update(resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price)
-                result = self.build_ice_attributes(supplier_id, resource_id, ice_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
+                res_dao.update(resource_id, supplier_id, category, ice_name, ice_brand, ice_quantity, ice_price)
+                result = self.build_ice_attributes(supplier_id, resource_id, ice_id, category, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
                 return jsonify(Ice=result), 200
             else:
                 return jsonify(Error="Unexpected attributes in update request"), 400
