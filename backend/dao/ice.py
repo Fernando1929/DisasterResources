@@ -8,6 +8,14 @@ class IceDAO:
         
     #ice = ice_id, resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight
 
+    def getAllIce(self):
+        result = [
+            [1, 2, 1, "ice", 'ice', 'el angel', 10, 2.50, 5],
+            [2, 1, 2, "ice", 'ice', 'submarine', 8, 2.50, 6]
+        ]
+        return result
+
+
     def getAllAvailableIce(self):
         result = [
             [1, 2, 1, "ice", 'ice', 'el angel', 10, 2.50, 5],
