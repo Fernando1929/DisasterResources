@@ -57,7 +57,7 @@ class AthMovilHandler:
         customer_dao = CustomerDAO()
         if not customer_dao.getCustomerById(customer_id):
             return jsonify(Error = "Customer not found."), 404
-        else :
+        else:
             dao = AthMovilDAO()
             row = dao.getAthMovilByCustomerId(customer_id)
             if not row:
@@ -69,6 +69,7 @@ class AthMovilHandler:
     def insertAthMovil(self, json):
         customer_id = json["customer_id"]
         ath_movil_phone = json["ath_movil_phone"]
+        
         if customer_id and ath_movil_phone:
             payment_dao = PaymentDAO()
             payment_id = payment_dao.insert(customer_id)

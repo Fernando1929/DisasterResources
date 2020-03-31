@@ -1,12 +1,10 @@
-from config.dbconfig import pg_config
-import psycopg2
-
 class OrderDAO:
     
     def __init__(self):
         super().__init__()
 
     #order = customer_id, payment_id, order_id, order_date, order_quantity, order_totalprice, order_status
+    
     def getAllOrders(self):
         result = [
             [1,2,1, '12/3/20', 3, 30, 'pending'],

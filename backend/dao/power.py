@@ -1,6 +1,3 @@
-from config.dbconfig import pg_config
-import psycopg2
-
 class PowerDAO:
     def _init_(self):
         super().__init__()

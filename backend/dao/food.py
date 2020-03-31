@@ -4,19 +4,20 @@ class FoodDAO:
 
 # food = food_id, resource_id, supplier_id, food_name, food_brand, food_quantity, food_price, 
 #           food_category, food_container, food_type, food_ounces, food_expdate
+
     def getAllFoods(self):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
-    def getAllAvailableFood(self):
+    def getAllAvailableFoods(self):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
-    def getAllReservedFood(self):
+    def getAllReservedFoods(self):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
-    def getAllRequestedFood(self):
+    def getAllRequestedFoods(self):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
@@ -28,7 +29,7 @@ class FoodDAO:
         result = [1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]
         return result
 
-    def getFoodByBrand(self, resource_brand):
+    def getFoodsByBrand(self, resource_brand):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
@@ -56,15 +57,15 @@ class FoodDAO:
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
-    def getAllAvailableFoodBySupplierId(self, supplier_id):
+    def getAllAvailableFoodsBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
-    def getAllReservedFoodBySupplierId(self, supplier_id):
+    def getAllReservedFoodsBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 
-    def getAllRequestedFoodBySupplierId(self, supplier_id):
+    def getAllRequestedFoodsBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
         return result
 

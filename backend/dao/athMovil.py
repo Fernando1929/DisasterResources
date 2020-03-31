@@ -2,6 +2,8 @@ class AthMovilDAO:
     def __init__(self):
         super().__init__()
 
+    # ath movil = ath_movil_id, payment_id, customer_id, ath_movil_phone
+
     def getAllAthMovil(self):
         result = [
             [1, 1, 1, "7877778888"],

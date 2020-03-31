@@ -2,7 +2,9 @@ class CustomerDAO:
     def __init__(self):
         super().__init__()
 
-    def getAllCustomer(self):
+    # customer = customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone
+
+    def getAllCustomers(self):
         result = [
             [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
             [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
@@ -13,21 +15,21 @@ class CustomerDAO:
         result = [1, 1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"]
         return result
 
-    def getCustomerByFirstname(self, customer_firstname):
+    def getCustomersByFirstname(self, customer_firstname):
         result = [
             [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
             [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
         ]
         return result
 
-    def getCustomerByLastname(self, customer_lastname):
+    def getCustomersByLastname(self, customer_lastname):
         result = [
             [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
             [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
         ]
         return result
 
-    def getCustomerByFirstnameAndLastname(self, customer_firstname, customer_lastname):
+    def getCustomersByFirstnameAndLastname(self, customer_firstname, customer_lastname):
         result = [
             [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
             [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
@@ -48,7 +50,7 @@ class CustomerDAO:
         ]
         return result
 
-    def getCustomerByDateOfBirth(self, customer_date_birth):
+    def getCustomersByDateOfBirth(self, customer_date_birth):
         result = [
             [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
             [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]

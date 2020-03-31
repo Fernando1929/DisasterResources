@@ -3,7 +3,6 @@ from dao.order import OrderDAO
 
 class OrderHandler:
 
-    #order = customer_id, payment_id, order_id, order_date, order_quantity, order_totalprice, order_status
     def build_order_dict(self, row):
         result = {}
         result['customer_id'] = row[0]
@@ -33,7 +32,7 @@ class OrderHandler:
         for row in result:
             result = self.build_order_dict(row)
             result_list.append(result)
-        return jsonify(Orders=result_list)
+        return jsonify(Orders = result_list)
 
     def getOrderById(self, order_id):
         dao = OrderDAO()
@@ -61,7 +60,7 @@ class OrderHandler:
         for row in orders_list:
             result = self.build_order_dict(row)
             result_list.append(result)
-        return jsonify(Orders=result_list)
+        return jsonify(Orders = result_list)
 
     def getOrderByCustomerId(self, customer_id):
         dao = OrderDAO()
@@ -79,13 +78,14 @@ class OrderHandler:
         order_quantity = json['order_totalprice'] 
         order_totalprice = json['order_quantity'] 
         order_status = json['order_status']
+
         if customer_id and payment_id and order_date and order_quantity and order_totalprice and order_status:
             dao = OrderDAO()
             order_id = dao.insert(customer_id, payment_id, order_date, order_quantity, order_totalprice, order_status)
             json = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_quantity, order_totalprice, order_status) #change parameters
-            return jsonify(Order=json), 201
+            return jsonify(Order = json), 201
         else:
-            return jsonify(Error="Unexpected attributes in post request"), 400
+            return jsonify(Error = "Unexpected attributes in post request"), 400
 
     def deleteOrder(self, order_id):
         dao = OrderDAO()
@@ -107,9 +107,10 @@ class OrderHandler:
             order_quantity = json['order_quantity']
             order_totalprice = json['order_totalprice']
             order_status = json['order_status']
+
             if customer_id and payment_id and order_date and order_quantity and order_totalprice and order_status:
                 dao.update(customer_id, payment_id, order_id, order_date, order_quantity, order_totalprice, order_status)
                 result = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_quantity, order_totalprice, order_status)
-                return jsonify(Order=result), 200
+                return jsonify(Order = result), 200
             else:
-                return jsonify(Error="Unexpected attributes in update request"), 400
+                return jsonify(Error = "Unexpected attributes in update request"), 400

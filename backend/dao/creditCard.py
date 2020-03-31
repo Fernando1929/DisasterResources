@@ -2,7 +2,9 @@ class CreditCardDAO:
     def __init__(self):
         super().__init__()
 
-    def getAllCreditCard(self):
+    # creditcard = creditcard_id, payment_id, customer_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date
+
+    def getAllCreditCards(self):
         result = [
             [1, 1, 1, "Samuel Ramirez", "1234567898765432", "000", "02/23"],
             [2, 2, 2, "Alice Scarlet", "1234567898765432", "001", "01/23"]

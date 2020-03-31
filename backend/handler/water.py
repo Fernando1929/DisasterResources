@@ -2,8 +2,10 @@ from flask import jsonify
 from dao.water import WaterDAO
 from dao.resource import ResourceDAO
 from dao.user import UserDAO
+from dao.supplier import SupplierDAO
 
 class WaterHandler:
+
     def build_water_dict(self, row):
         result = {}
         result['water_id'] = row[0]
@@ -47,41 +49,41 @@ class WaterHandler:
         result["address_zipcode"] = row[6]
         return result
 
-    def getAllWater(self):
+    def getAllWaters(self):
         dao = WaterDAO()
-        water_list = dao.getAllWater()
+        water_list = dao.getAllWaters()
         result_list = []
         for row in water_list:
             result = self.build_water_dict(row)
             result_list.append(result)
-        return jsonify(Water = result_list)
+        return jsonify(Waters = result_list)
 
-    def getAllAvailableWater(self):
+    def getAllAvailableWaters(self):
         dao = WaterDAO()
-        water_list = dao.getAllAvailableWater()
+        water_list = dao.getAllAvailableWaters()
         result_list = []
         for row in water_list:
             result = self.build_water_dict(row)
             result_list.append(result)
-        return jsonify(Water = result_list)
+        return jsonify(Waters = result_list)
 
-    def getAllReservedWater(self):
+    def getAllReservedWaters(self):
         dao = WaterDAO()
-        water_list = dao.getAllReservedWater()
+        water_list = dao.getAllReservedWaters()
         result_list = []
         for row in water_list:
             result = self.build_water_dict(row)
             result_list.append(result)
-        return jsonify(Water = result_list)
+        return jsonify(Waters = result_list)
 
-    def getAllRequestedWater(self):
+    def getAllRequestedWaters(self):
         dao = WaterDAO()
-        water_list = dao.getAllRequestedWater()
+        water_list = dao.getAllRequestedWaters()
         result_list = []
         for row in water_list:
             result = self.build_water_dict(row)
             result_list.append(result)
-        return jsonify(Water = result_list)
+        return jsonify(Waters = result_list)
 
     def getWaterById(self, water_id):
         dao = WaterDAO()
@@ -101,81 +103,81 @@ class WaterHandler:
             water = self.build_water_dict(row)
             return jsonify(Water = water)
 
-    def getWaterBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getWatersBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             water_list = []
             result_list = []
             water_dao = WaterDAO()
-            water_list = water_dao.getWaterBySupplierId(supplier_id)
+            water_list = water_dao.getWatersBySupplierId(supplier_id)
             for row in water_list:
                 result = self.build_water_dict(row)
                 result_list.append(result)
-            return jsonify(Water = result_list)
+            return jsonify(Waters = result_list)
 
-    def getAllAvailableWaterBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getAllAvailableWatersBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             water_list = []
             result_list = []
             water_dao = WaterDAO()
-            water_list = water_dao.getAllAvailableWaterBySupplierId(supplier_id)
+            water_list = water_dao.getAllAvailableWatersBySupplierId(supplier_id)
             for row in water_list:
                 result = self.build_water_dict(row)
                 result_list.append(result)
-            return jsonify(Water = result_list)
+            return jsonify(Waters = result_list)
 
-    def getAllReservedWaterBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getAllReservedWatersBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             water_list = []
             result_list = []
             water_dao = WaterDAO()
-            water_list = water_dao.getAllReservedWaterBySupplierId(supplier_id)
+            water_list = water_dao.getAllReservedWatersBySupplierId(supplier_id)
             for row in water_list:
                 result = self.build_water_dict(row)
                 result_list.append(result)
-            return jsonify(Water = result_list)
+            return jsonify(Waters = result_list)
 
-    def getAllRequestedWaterBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getAllRequestedWatersBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             water_list = []
             result_list = []
             water_dao = WaterDAO()
-            water_list = water_dao.getAllRequestedWaterBySupplierId(supplier_id)
+            water_list = water_dao.getAllRequestedWatersBySupplierId(supplier_id)
             for row in water_list:
                 result = self.build_water_dict(row)
                 result_list.append(result)
-            return jsonify(Water = result_list)
+            return jsonify(Waters = result_list)
 
-    def searchWater(self, args):
+    def searchWaters(self, args):
         water_brand = args.get("water_brand")
         water_container = args.get("water_container")
         water_type = args.get("water_type")
         dao = WaterDAO()
         water_list = []
         if (len(args) == 1) and water_brand:
-            water_list = dao.getWaterByBrand(water_brand)
+            water_list = dao.getWatersByBrand(water_brand)
         elif (len(args) == 1) and water_container:
-            water_list = dao.getWaterByContainer(water_container)
+            water_list = dao.getWatersByContainer(water_container)
         elif (len(args) == 1) and water_type:
-            water_list = dao.getWaterByType(water_type)
+            water_list = dao.getWatersByType(water_type)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in water_list:
             result = self.build_water_dict(row)
             result_list.append(result)
-        return jsonify(Water = result_list)
+        return jsonify(Waters = result_list)
 
     def getWaterAddress(self, water_id):
         water_dao = WaterDAO()
@@ -202,6 +204,7 @@ class WaterHandler:
         water_container = json["water_container"]
         water_type = json["water_type"]
         water_exp_date = json["water_exp_date"]
+
         if supplier_id and category and water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category, water_name, water_brand, water_quantity, water_price)
@@ -227,6 +230,7 @@ class WaterHandler:
             water_container = json["water_container"]
             water_type = json["water_type"]
             water_exp_date = json["water_exp_date"]
+            
             if supplier_id and category and water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
                 resource_id = water_dao.update(water_id, water_size, water_container, water_type, water_exp_date)
                 resource_dao = ResourceDAO()

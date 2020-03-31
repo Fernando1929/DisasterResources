@@ -2,21 +2,21 @@ class FuelDAO:
     def __init__(self):
         super().__init__()
 
-# fuel = fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, 
-#           fuel_type, fuel_gallons
+# fuel = fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons
+
     def getAllFuels(self):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
-    def getAllAvailableFuel(self):
+    def getAllAvailableFuels(self):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
-    def getAllReservedFuel(self):
+    def getAllReservedFuels(self):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
-    def getAllRequestedFuel(self):
+    def getAllRequestedFuels(self):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
@@ -28,7 +28,7 @@ class FuelDAO:
         result = [1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]
         return result
 
-    def getFuelByBrand(self, resource_brand):
+    def getFuelsByBrand(self, resource_brand):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
@@ -48,15 +48,15 @@ class FuelDAO:
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
-    def getAllAvailableFuelBySupplierId(self, supplier_id):
+    def getAllAvailableFuelsBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
-    def getAllReservedFuelBySupplierId(self, supplier_id):
+    def getAllReservedFuelsBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 
-    def getAllRequestedFuelBySupplierId(self, supplier_id):
+    def getAllRequestedFuelsBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]
         return result
 

@@ -2,28 +2,30 @@ class MedDeviceDAO:
     def __init__(self):
         super().__init__()
 
-    def getAllMedDevice(self):
+    # med_device = mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power
+
+    def getAllMedDevices(self):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getAllAvailableMedDevice(self):
+    def getAllAvailableMedDevices(self):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getAllReservedMedDevice(self):
+    def getAllReservedMedDevices(self):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 0.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 0.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getAllRequestedMedDevice(self):
+    def getAllRequestedMedDevices(self):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 0.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 0.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
@@ -38,49 +40,49 @@ class MedDeviceDAO:
         result = [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00, "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"]
         return result
 
-    def getMedDeviceByBrand(self, resource_brand):
+    def getMedDevicesByBrand(self, resource_brand):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getMedDeviceByCondition(self, med_device_condition):
+    def getMedDevicesByCondition(self, med_device_condition):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getMedDeviceByType(self, med_device_type):
+    def getMedDevicesByType(self, med_device_type):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getMedDeviceBySupplierId(self, supplier_id):
+    def getMedDevicesBySupplierId(self, supplier_id):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 2, "medical_device", "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getAllAvailableMedDeviceBySupplierId(self, supplier_id):
+    def getAllAvailableMedDevicesBySupplierId(self, supplier_id):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 1900.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 1, "medical_device", "Medical Device", "Arm Style", 2, 20.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getAllReservedMedDeviceBySupplierId(self, supplier_id):
+    def getAllReservedMedDevicesBySupplierId(self, supplier_id):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 0.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 1, "medical_device", "Medical Device", "Arm Style", 2, 0.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]
         ]
         return result
 
-    def getAllRequestedMedDeviceBySupplierId(self, supplier_id):
+    def getAllRequestedMedDevicesBySupplierId(self, supplier_id):
         result = [
             [1, 1, 1, "medical_device", "Medical Device", "Forcemech", 1, 0.00 , "Electric Wheelchair", "Voyager R2", "New", "Lithium battery"],
             [2, 2, 1, "medical_device", "Medical Device", "Arm Style", 2, 0.00, "Blood Preassure Monitor", "Annsky", "Very good", "AA batteries"]

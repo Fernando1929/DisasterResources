@@ -1,88 +1,86 @@
-from config.dbconfig import pg_config
-import psycopg2
-
 class BatteryDAO:
     def __init__(self):
         super().__init__()
 
     #battery = supplier_id, resource_id, power_id, battery_id, category, resource_name, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, battery_type
-    def getAllBattery(self):
+    
+    def getAllBatteries(self):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
     
-    def getAllAvailableBattery(self):
+    def getAllAvailableBatteries(self):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
     
-    def getAllReservedBattery(self):
+    def getAllReservedBatteries(self):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
 
-    def getAllRequestedBattery(self):
+    def getAllRequestedBatteries(self):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
 
-    def getBatteryById(self,battery_id):
+    def getBatteryById(self, battery_id):
         result =  [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
         return result
 
-    def getBatteryByResourceId(self,resource_id):
+    def getBatteryByResourceId(self, resource_id):
         result =  [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
         return result
 
-    def getBatteryByPowerCapacity(self,power_capacity):
+    def getBatteriesByPowerCapacity(self, power_capacity):
         result = [
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
     
-    def getBatteryByPowerCondition(self, power_condition):
+    def getBatteriesByPowerCondition(self, power_condition):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
 
-    def getBatteryByType(self, battery_type):
+    def getBatteriesByType(self, battery_type):
         result = [
            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
         ]
         return result
 
-    def getBatteryBySupplierId(self, supplier_id):
+    def getBatteriesBySupplierId(self, supplier_id):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
 
-    def getAllAvailableBatteryBySupplierId(self, supplier_id):
+    def getAllAvailableBatteriesBySupplierId(self, supplier_id):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
     
-    def getAllReservedBatteryBySupplierId(self, supplier_id):
+    def getAllReservedBatteriesBySupplierId(self, supplier_id):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
         ]
         return result
 
-    def getAllRequestedBatteryBySupplierId(self, supplier_id):
+    def getAllRequestedBatteriesBySupplierId(self, supplier_id):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
             [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']

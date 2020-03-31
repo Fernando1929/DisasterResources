@@ -2,22 +2,22 @@ class MedicineDAO:
     def __init__(self):
         super().__init__()
 
-
 # medicine = med_id, resource_id, category, supplier_id, med_name, med_brand, med_quantity, med_price, 
 #           med_type, med_dose, med_prescript, med_expdate
+
     def getAllMedicines(self):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
-    def getAllAvailableMedicine(self):
+    def getAllAvailableMedicines(self):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
-    def getAllReservedMedicine(self):
+    def getAllReservedMedicines(self):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
-    def getAllRequestedMedicine(self):
+    def getAllRequestedMedicines(self):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
@@ -29,7 +29,7 @@ class MedicineDAO:
         result = [1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]
         return result
 
-    def getMedicineByBrand(self, resource_brand):
+    def getMedicinesByBrand(self, resource_brand):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
@@ -53,15 +53,15 @@ class MedicineDAO:
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
-    def getAllAvailableMedicineBySupplierId(self, supplier_id):
+    def getAllAvailableMedicinesBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
-    def getAllReservedMedicineBySupplierId(self, supplier_id):
+    def getAllReservedMedicinesBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "medicine", "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 
-    def getAllRequestedMedicineBySupplierId(self, supplier_id):
+    def getAllRequestedMedicinesBySupplierId(self, supplier_id):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]
         return result
 

@@ -1,6 +1,3 @@
-# from config.dbconfig import pg_config
-# import psycopg2
-
 class AddressDAO:
     
     def __init__(self):
@@ -16,23 +13,23 @@ class AddressDAO:
         result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
         return result
 
-    def getAddressByCity(self, city):
+    def getAddressesByCity(self, city):
         result = [[1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]]
         return result
 
-    def getAddressByCountry(self, country):
+    def getAddressesByCountry(self, country):
         result = [[1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]]
         return result
 
-    def getAddressByZipcode(self, zipcode):
+    def getAddressesByZipcode(self, zipcode):
         result = [[1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]]
         return result
 
-    def getAddressByStateOrProvince(self, state_province):
+    def getAddressesByStateOrProvince(self, state_province):
         result = [[1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]]
         return result
 
-    def getAddressByCityAndCountry(self, city, country):
+    def getAddressesByCityAndCountry(self, city, country):
         result = [[1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]]
         return result
 

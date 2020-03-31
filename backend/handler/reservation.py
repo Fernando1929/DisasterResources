@@ -1,6 +1,6 @@
 from flask import jsonify
 from dao.reservation import ReservationDAO
-from dao.user import UserDAO
+from dao.customer import CustomerDAO
 
 class ReservationHandler:
 
@@ -41,23 +41,22 @@ class ReservationHandler:
             return jsonify(Reservation = reservation)
 
     def getReservationsByCustomerId(self, customer_id):
-        # user_dao = UserDAO()
-        # if not user_dao.getUserById(customer_id):
-        #     return jsonify(Error = "User not found."), 404
-        # else:
-        reservation_list = []
-        result_list = []
-        dao = ReservationDAO()
-        reservation_list = dao.getReservationsByCustomerId(customer_id)
-        for row in reservation_list:
-            result = self.build_reservation_dict(row)
-            result_list.append(result)
-        return jsonify(Reservations = result_list)
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer not found."), 404
+        else:
+            reservation_list = []
+            result_list = []
+            dao = ReservationDAO()
+            reservation_list = dao.getReservationsByCustomerId(customer_id)
+            for row in reservation_list:
+                result = self.build_reservation_dict(row)
+                result_list.append(result)
+            return jsonify(Reservations = result_list)
 
-    def searchReservation(self, args):
+    def searchReservations(self, args):
         reservation_date = args.get("reservation_date")
         reservation_status = args.get("reservation_status")
-
         dao = ReservationDAO()
         reservation_list = []
         if (len(args) == 1) and reservation_date:
@@ -72,7 +71,7 @@ class ReservationHandler:
         for row in reservation_list:
             result = self.build_reservation_dict(row)
             result_list.append(result)
-        return jsonify(Reservation = result_list)
+        return jsonify(Reservations = result_list)
 
     def insertReservation(self, json):
         customer_id = json["customer_id"]
