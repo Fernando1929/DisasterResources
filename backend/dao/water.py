@@ -4,86 +4,86 @@ class WaterDAO:
 
     def getAllWater(self):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getAllAvailableWater(self):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getAllReservedWater(self):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getAllRequestedWater(self):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getWaterById(self, water_id):
-        result = [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
+        result = [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
         return result
 
     def getWaterByResourceId(self, resource_id):
-        result = [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
+        result = [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
         return result
 
     def getWaterByBrand(self, resource_brand):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getWaterByContainer(self, water_container):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getWaterByType(self, water_type):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getWaterBySupplierId(self, supplier_id):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getAllAvailableWaterBySupplierId(self, supplier_id):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 1, "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 1, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getAllReservedWaterBySupplierId(self, supplier_id):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 1, "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 1, "water", "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
     def getAllRequestedWaterBySupplierId(self, supplier_id):
         result = [
-            [1, 1, 1, "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 1, "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 1, "water", "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
