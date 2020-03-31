@@ -9,20 +9,22 @@ class HeavyEquipHandler:
         result['hequip_id'] = row[0]
         result['resource_id'] = row[1]
         result['supplier_id'] = row[2]
-        result['hequip_name'] = row[3]
-        result['hequip_brand'] = row[4]
-        result['hequip_quantity'] = row[5]
-        result['hequip_price'] = row[6]
-        result['hequip_type'] = row[7]
-        result['hequip_model'] = row[8]
-        result['hequip_condition'] = row[9]
+        result['category'] = row[3]
+        result['hequip_name'] = row[4]
+        result['hequip_brand'] = row[5]
+        result['hequip_quantity'] = row[6]
+        result['hequip_price'] = row[7]
+        result['hequip_type'] = row[8]
+        result['hequip_model'] = row[9]
+        result['hequip_condition'] = row[10]
         return result
 
-    def build_hequip_attributes(self, hequip_id, resource_id, supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition):
+    def build_hequip_attributes(self, hequip_id, resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition):
         result = {}
         result['hequip_id'] = hequip_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
+        result['category'] = category
         result['hequip_name'] = hequip_name
         result['hequip_brand'] = hequip_brand
         result['hequip_quantity'] = hequip_quantity
@@ -189,6 +191,7 @@ class HeavyEquipHandler:
 
     def insertHeavyEquip(self, json):
         supplier_id = json["supplier_id"]
+        category = json["category"]
         hequip_name = json["hequip_name"]
         hequip_brand = json["hequip_brand"]
         hequip_quantity = json["hequip_quantity"]
@@ -196,12 +199,12 @@ class HeavyEquipHandler:
         hequip_type = json["hequip_type"]
         hequip_model = json["hequip_model"]
         hequip_condition = json["hequip_condition"]
-        if supplier_id and hequip_name and hequip_brand and hequip_quantity and hequip_price and hequip_type and hequip_model and hequip_condition:
+        if supplier_id and category and hequip_name and hequip_brand and hequip_quantity and hequip_price and hequip_type and hequip_model and hequip_condition:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price)
+            resource_id = resource_dao.insert(supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price)
             hequip_dao = HeavyEquipDAO()
             hequip_id = hequip_dao.insert(resource_id, hequip_type, hequip_model, hequip_condition)
-            result = self.build_hequip_attributes(hequip_id, resource_id, supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition)
+            result = self.build_hequip_attributes(hequip_id, resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition)
             return jsonify(HeavyEquipment = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -212,6 +215,7 @@ class HeavyEquipHandler:
             return jsonify(Error = "Heavy Equipment not found."), 404
         else:
             supplier_id = json["supplier_id"]
+            category = json["category"]
             hequip_name = json["hequip_name"]
             hequip_brand = json["hequip_brand"]
             hequip_quantity = json["hequip_quantity"]
@@ -219,11 +223,11 @@ class HeavyEquipHandler:
             hequip_type = json["hequip_type"]
             hequip_model = json["hequip_model"]
             hequip_condition = json["hequip_condition"]
-            if supplier_id and hequip_name and hequip_brand and hequip_quantity and hequip_price and hequip_type and hequip_model and hequip_condition:
+            if supplier_id and category and hequip_name and hequip_brand and hequip_quantity and hequip_price and hequip_type and hequip_model and hequip_condition:
                 resource_id = hequip_dao.update(hequip_id, hequip_type, hequip_model, hequip_condition)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price)
-                result = self.build_hequip_attributes(hequip_id, resource_id, supplier_id, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition)
+                resource_dao.update(resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price)
+                result = self.build_hequip_attributes(hequip_id, resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition)
                 return jsonify(HeavyEquipment = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

@@ -9,21 +9,23 @@ class WaterHandler:
         result['water_id'] = row[0]
         result['resource_id'] = row[1]
         result['supplier_id'] = row[2]
-        result['water_name'] = row[3]
-        result['water_brand'] = row[4]
-        result['water_quantity'] = row[5]
-        result['water_price'] = row[6]
-        result['water_size'] = row[7]
-        result['water_container'] = row[8]
-        result['water_type'] = row[9]
-        result['water_exp_date'] = row[10]
+        result['category'] = row[3]
+        result['water_name'] = row[4]
+        result['water_brand'] = row[5]
+        result['water_quantity'] = row[6]
+        result['water_price'] = row[7]
+        result['water_size'] = row[8]
+        result['water_container'] = row[9]
+        result['water_type'] = row[10]
+        result['water_exp_date'] = row[11]
         return result
 
-    def build_water_attributes(self, water_id, resource_id, supplier_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date):
+    def build_water_attributes(self, water_id, resource_id, supplier_id, category, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date):
         result = {}
         result['water_id'] = water_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
+        result['category'] = category
         result['water_name'] = water_name
         result['water_brand'] = water_brand
         result['water_quantity'] = water_quantity
@@ -191,6 +193,7 @@ class WaterHandler:
 
     def insertWater(self, json):
         supplier_id = json["supplier_id"]
+        category = json["category"]
         water_name = json["water_name"]
         water_brand = json["water_brand"]
         water_quantity = json["water_quantity"]
@@ -199,12 +202,12 @@ class WaterHandler:
         water_container = json["water_container"]
         water_type = json["water_type"]
         water_exp_date = json["water_exp_date"]
-        if supplier_id and water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
+        if supplier_id and category and water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, water_name, water_brand, water_quantity, water_price)
+            resource_id = resource_dao.insert(supplier_id, category, water_name, water_brand, water_quantity, water_price)
             water_dao = WaterDAO()
             water_id = water_dao.insert(resource_id, water_size, water_container, water_type, water_exp_date)
-            result = self.build_water_attributes(water_id, resource_id, supplier_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
+            result = self.build_water_attributes(water_id, resource_id, supplier_id, category, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
             return jsonify(Water = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -215,6 +218,7 @@ class WaterHandler:
             return jsonify(Error = "Water not found."), 404
         else:
             supplier_id = json["supplier_id"]
+            category = json["category"]
             water_name = json["water_name"]
             water_brand = json["water_brand"]
             water_quantity = json["water_quantity"]
@@ -223,12 +227,11 @@ class WaterHandler:
             water_container = json["water_container"]
             water_type = json["water_type"]
             water_exp_date = json["water_exp_date"]
-            if supplier_id and water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
+            if supplier_id and category and water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
                 resource_id = water_dao.update(water_id, water_size, water_container, water_type, water_exp_date)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, water_name, water_brand, water_quantity, water_price)
-                # Need to find supplier_id
-                result = self.build_water_attributes(water_id, resource_id, supplier_id, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
+                resource_dao.update(resource_id, supplier_id, category, water_name, water_brand, water_quantity, water_price)
+                result = self.build_water_attributes(water_id, resource_id, supplier_id, category, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date)
                 return jsonify(Water = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

@@ -9,21 +9,23 @@ class MedDeviceHandler:
         result['mdevice_id'] = row[0]
         result['resource_id'] = row[1]
         result['supplier_id'] = row[2]
-        result['mdevice_name'] = row[3]
-        result['mdevice_brand'] = row[4]
-        result['mdevice_quantity'] = row[5]
-        result['mdevice_price'] = row[6]
-        result['mdevice_type'] = row[7]
-        result['mdevice_model'] = row[8]
-        result['mdevice_condition'] = row[9]
-        result['mdevice_power_type'] = row[10]
+        result['category'] = row[3]
+        result['mdevice_name'] = row[4]
+        result['mdevice_brand'] = row[5]
+        result['mdevice_quantity'] = row[6]
+        result['mdevice_price'] = row[7]
+        result['mdevice_type'] = row[8]
+        result['mdevice_model'] = row[9]
+        result['mdevice_condition'] = row[10]
+        result['mdevice_power_type'] = row[11]
         return result
 
-    def build_mdevice_attributes(self, mdevice_id, resource_id, supplier_id, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type):
+    def build_mdevice_attributes(self, mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type):
         result = {}
         result['mdevice_id'] = mdevice_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
+        result['category'] = category
         result['mdevice_name'] = mdevice_name
         result['mdevice_brand'] = mdevice_brand
         result['mdevice_quantity'] = mdevice_quantity
@@ -191,6 +193,7 @@ class MedDeviceHandler:
 
     def insertMedDevice(self, json):
         supplier_id = json["supplier_id"]
+        category = json["category"]
         mdevice_name = json["mdevice_name"]
         mdevice_brand = json["mdevice_brand"]
         mdevice_quantity = json["mdevice_quantity"]
@@ -199,12 +202,12 @@ class MedDeviceHandler:
         mdevice_model = json["mdevice_model"]
         mdevice_condition = json["mdevice_condition"]
         mdevice_power_type = json["mdevice_power_type"]
-        if supplier_id and mdevice_name and mdevice_brand and mdevice_quantity and mdevice_price and mdevice_type and mdevice_model and mdevice_condition and mdevice_power_type:
+        if supplier_id and category and mdevice_name and mdevice_brand and mdevice_quantity and mdevice_price and mdevice_type and mdevice_model and mdevice_condition and mdevice_power_type:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price)
+            resource_id = resource_dao.insert(supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price)
             mdevice_dao = MedDeviceDAO()
             mdevice_id = mdevice_dao.insert(resource_id, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
-            result = self.build_mdevice_attributes(mdevice_id, resource_id, supplier_id, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
+            result = self.build_mdevice_attributes(mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
             return jsonify(MedicalDevice = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -215,6 +218,7 @@ class MedDeviceHandler:
             return jsonify(Error = "Medical Device not found."), 404
         else:
             supplier_id = json["supplier_id"]
+            category = json["category"]
             mdevice_name = json["mdevice_name"]
             mdevice_brand = json["mdevice_brand"]
             mdevice_quantity = json["mdevice_quantity"]
@@ -223,11 +227,11 @@ class MedDeviceHandler:
             mdevice_model = json["mdevice_model"]
             mdevice_condition = json["mdevice_condition"]
             mdevice_power_type = json["mdevice_power_type"]
-            if supplier_id and mdevice_name and mdevice_brand and mdevice_quantity and mdevice_price and mdevice_type and mdevice_model and mdevice_condition and mdevice_power_type:
+            if supplier_id and category and mdevice_name and mdevice_brand and mdevice_quantity and mdevice_price and mdevice_type and mdevice_model and mdevice_condition and mdevice_power_type:
                 resource_id = mdevice_dao.update(mdevice_id, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price)
-                result = self.build_mdevice_attributes(mdevice_id, resource_id, supplier_id, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
+                resource_dao.update(resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price)
+                result = self.build_mdevice_attributes(mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
                 return jsonify(Medical_Device = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
