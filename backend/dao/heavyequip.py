@@ -2,6 +2,8 @@ class HeavyEquipDAO:
     def __init__(self):
         super().__init__()
 
+    # heavy_equipment = hequip_id, resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition
+
     def getAllHeavyEquip(self):
         result = [
             [1, 1, 1, "heavy_equipment", "Heavy Equipment", "Caterpillar", 1, 125000.00, "Excavator", "320D", "Used"],

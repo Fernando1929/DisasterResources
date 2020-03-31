@@ -1,11 +1,8 @@
-# from config.dbconfig import pg_config
-# import psycopg2
-
 class LoginDAO:
     def __init__(self):
         super().__init__()
 
-# login = login_id, user_id, username, password
+    # login = login_id, user_id, username, password
 
     # def getAllLogins(self):
     #     result = [[1,1, "juandelacalle", "password"]]

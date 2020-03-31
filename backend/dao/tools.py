@@ -4,6 +4,7 @@ class ToolDAO:
 
 # tools = tool_id, resource_id, supplier_id, resource_category, tool_name, tool_brand, tool_quantity, tool_price, 
 #           tool_material, tool_condition, tool_pwtype
+
     def getAllTools(self):
         result = [[1, 1, 1, 'tools', "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
         return result
@@ -28,7 +29,7 @@ class ToolDAO:
         result = [1, 1, 1, 'tools', "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]
         return result
 
-    def getToolByBrand(self, resource_brand):
+    def getToolsByBrand(self, resource_brand):
         result = [[1, 1, 1, 'tools', "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]
         return result
 

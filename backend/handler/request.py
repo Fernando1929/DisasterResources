@@ -3,6 +3,7 @@ from dao.request import RequestDAO
 from dao.customer import CustomerDAO
 
 class RequestHandler:
+
     def build_request_dict(self, row):
         result = {}
         result['request_id'] = row[0]
@@ -21,14 +22,14 @@ class RequestHandler:
         result['request_date'] = request_date
         return result
 
-    def getAllRequest(self):
+    def getAllRequests(self):
         dao = RequestDAO()
-        request_list = dao.getAllRequest()
+        request_list = dao.getAllRequests()
         result_list = []
         for row in request_list:
             result = self.build_request_dict(row)
             result_list.append(result)
-        return jsonify(Request = result_list)
+        return jsonify(Requests = result_list)
 
     def getRequestById(self, request_id):
         dao = RequestDAO()
@@ -39,7 +40,7 @@ class RequestHandler:
             request = self.build_request_dict(row)
             return jsonify(Request = request)
 
-    def getRequestByCustomerId(self, customer_id):
+    def getRequestsByCustomerId(self, customer_id):
         customer_dao = CustomerDAO()
         if not customer_dao.getCustomerById(customer_id):
             return jsonify(Error = "Customer not found."), 404
@@ -47,31 +48,32 @@ class RequestHandler:
             request_list = []
             result_list = []
             request_dao = RequestDAO()
-            request_list = request_dao.getRequestByCustomerId(customer_id)
+            request_list = request_dao.getRequestsByCustomerId(customer_id)
             for row in request_list:
                 result = self.build_request_dict(row)
                 result_list.append(result)
-            return jsonify(Request = result_list)
+            return jsonify(Requests = result_list)
 
-    def searchRequest(self, args):
+    def searchRequests(self, args):
         request_title = args.get("request_title")
         dao = RequestDAO()
         request_list = []
         if (len(args) == 1) and request_title:
-            request_list = dao.getRequestByTitle(request_title)
+            request_list = dao.getRequestsByTitle(request_title)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in request_list:
             result = self.build_request_dict(row)
             result_list.append(result)
-        return jsonify(Request = result_list)
+        return jsonify(Requests = result_list)
 
     def insertRequest(self, json):
         customer_id = json["customer_id"]
         request_title = json["request_title"]
         request_quantity = json["request_quantity"]
         request_date = json["request_date"]
+
         if customer_id and request_title and request_quantity and request_date:
             request_dao = RequestDAO()
             request_id = request_dao.insert(customer_id, request_title, request_quantity, request_date)
@@ -89,6 +91,7 @@ class RequestHandler:
             request_title = json["request_title"]
             request_quantity = json["request_quantity"]
             request_date = json["request_date"]
+            
             if customer_id and request_title and request_quantity and request_date:
                 request_dao = RequestDAO()
                 request_id = request_dao.update(request_id, customer_id, request_title, request_quantity, request_date)

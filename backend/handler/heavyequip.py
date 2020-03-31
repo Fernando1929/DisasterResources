@@ -2,8 +2,10 @@ from flask import jsonify
 from dao.heavyequip import HeavyEquipDAO
 from dao.resource import ResourceDAO
 from dao.user import UserDAO
+from dao.supplier import SupplierDAO
 
 class HeavyEquipHandler:
+
     def build_hequip_dict(self, row):
         result = {}
         result['hequip_id'] = row[0]
@@ -100,10 +102,10 @@ class HeavyEquipHandler:
             return jsonify(HeavyEquipment = hequip)
 
     def getHeavyEquipBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             hequip_list = []
             result_list = []
             hequip_dao = HeavyEquipDAO()
@@ -114,10 +116,10 @@ class HeavyEquipHandler:
             return jsonify(HeavyEquipment = result_list)
 
     def getAllAvailableHeavyEquipBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             hequip_list = []
             result_list = []
             hequip_dao = HeavyEquipDAO()
@@ -128,10 +130,10 @@ class HeavyEquipHandler:
             return jsonify(HeavyEquipment = result_list)
 
     def getAllReservedHeavyEquipBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             hequip_list = []
             result_list = []
             hequip_dao = HeavyEquipDAO()
@@ -142,10 +144,10 @@ class HeavyEquipHandler:
             return jsonify(HeavyEquipment = result_list)
 
     def getAllRequestedHeavyEquipBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             hequip_list = []
             result_list = []
             hequip_dao = HeavyEquipDAO()
@@ -199,6 +201,7 @@ class HeavyEquipHandler:
         hequip_type = json["hequip_type"]
         hequip_model = json["hequip_model"]
         hequip_condition = json["hequip_condition"]
+
         if supplier_id and category and hequip_name and hequip_brand and hequip_quantity and hequip_price and hequip_type and hequip_model and hequip_condition:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price)
@@ -223,6 +226,7 @@ class HeavyEquipHandler:
             hequip_type = json["hequip_type"]
             hequip_model = json["hequip_model"]
             hequip_condition = json["hequip_condition"]
+            
             if supplier_id and category and hequip_name and hequip_brand and hequip_quantity and hequip_price and hequip_type and hequip_model and hequip_condition:
                 resource_id = hequip_dao.update(hequip_id, hequip_type, hequip_model, hequip_condition)
                 resource_dao = ResourceDAO()

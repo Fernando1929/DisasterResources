@@ -1,12 +1,10 @@
 from flask import jsonify
 from dao.supplier import SupplierDAO
 from dao.user import UserDAO
-
+from dao.company import CompanyDAO
 
 class SupplierHandler:
 
-        #supplier = user_id, supplier_id, supplier_firstname, supplier_lastname, asupplier_date_birth, supplier_email, supplier_phone
-        #resource = resource_id, resource_name, resource_description, resource_brand, resource_quantity,resource_price
     def build_supplier_attributes(self, user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone):
         result = {}
         result['supplier_id'] = supplier_id 
@@ -39,14 +37,14 @@ class SupplierHandler:
         result['resource_price'] = row[5]
         return result
 
-    def getAllSupplier(self):
+    def getAllSuppliers(self):
         dao = SupplierDAO()
-        result = dao.getAllSupplier()
+        result = dao.getAllSuppliers()
         result_list = []
         for row in result:
             result = self.build_supplier_dict(row)
             result_list.append(result)
-        return jsonify(Suppliers=result_list)
+        return jsonify(Suppliers = result_list)
 
     def getSupplierById(self, supplier_id):
         dao = SupplierDAO()
@@ -55,20 +53,20 @@ class SupplierHandler:
             return jsonify(Error = "Supplier Not Found"), 404
         else:
             supplier = self.build_supplier_dict(row)
-            return jsonify(Supplier=supplier)
+            return jsonify(Supplier = supplier)
     
     def getSuppliersByCompanyId(self, company_id):
-        #company_dao = CompanyDAO
-        #if not company_dao.getCompanyById(company_id):
-        #    return jsonify(Error="Company Not Found"), 404
-        #else:
+        company_dao = CompanyDAO()
+        if not company_dao.getCompanyById(company_id):
+            return jsonify(Error = "Company Not Found"), 404
+        else:
             supplier_dao = SupplierDAO()
             result_list = []
             supplier_list = supplier_dao.getSuppliersByCompanyId(company_id)
             for row in supplier_list:
                 result = self.build_supplier_dict(row)
                 result_list.append(result)
-            return jsonify(Suppliers=result_list)
+            return jsonify(Suppliers = result_list)
 
     def getAllSupplierResources(self, supplier_id):
         dao = SupplierDAO()
@@ -77,9 +75,9 @@ class SupplierHandler:
         for row in result:
             result = self.build_resource_dict(row)
             result_list.append(result)
-        return jsonify(Resources=result_list)
+        return jsonify(Resources = result_list)
 
-    def searchSupplier(self, args):
+    def searchSuppliers(self, args):
         supplier_firstname = args.get('supplier_firstname')
         supplier_lastname = args.get("supplier_lastname")
         supplier_email = args.get('supplier_email')
@@ -88,24 +86,24 @@ class SupplierHandler:
         dao = SupplierDAO()
         supplier_list = []
         if (len(args) == 2) and supplier_firstname and supplier_lastname:
-            supplier_list = dao.getSupplierByFirstnameAndLastname(supplier_firstname , supplier_lastname)
+            supplier_list = dao.getSuppliersByFirstnameAndLastname(supplier_firstname , supplier_lastname)
         elif (len(args) == 1) and supplier_firstname:
-            supplier_list = dao.getSupplierByFirstname(supplier_firstname)
+            supplier_list = dao.getSuppliersByFirstname(supplier_firstname)
         elif (len(args) == 1) and supplier_lastname:
-            supplier_list = dao.getSupplierByLastname(supplier_lastname)
+            supplier_list = dao.getSuppliersByLastname(supplier_lastname)
         elif(len(args) == 1) and supplier_email:
             supplier_list = dao.getSupplierByEmail(supplier_email)
         elif(len(args) == 1) and supplier_phone:
             supplier_list = dao.getSupplierByPhone(supplier_phone)
         elif(len(args) == 1) and suppplier_date_birth:
-            supplier_list = dao.getSupplierByDateOfBirth(suppplier_date_birth)
+            supplier_list = dao.getSuppliersByDateOfBirth(suppplier_date_birth)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in supplier_list:
             result = self.build_supplier_dict(row)
             result_list.append(result)
-        return jsonify(Suppliers=result_list)
+        return jsonify(Suppliers = result_list)
 
     def insertSupplier(self, json):
         supplier_firstname = json['supplier_firstname']
@@ -113,15 +111,16 @@ class SupplierHandler:
         supplier_date_birth = json['supplier_date_birth']
         supplier_email = json['supplier_email']
         supplier_phone = json['supplier_phone']
+
         if supplier_firstname and supplier_lastname and supplier_date_birth and supplier_email and supplier_phone:
             dao_user = UserDAO()
             user_id = dao_user.insert(supplier_firstname, supplier_lastname, supplier_date_birth,supplier_email,supplier_phone)
             dao_supplier = SupplierDAO()
             supplier_id = dao_supplier.insert( supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email,supplier_phone)
             result = self.build_supplier_attributes(supplier_id, user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
-            return jsonify(Supplier=result), 201
+            return jsonify(Supplier = result), 201
         else:
-            return jsonify(Error="Unexpected attributes in post request"), 400
+            return jsonify(Error = "Unexpected attributes in post request"), 400
 
     def deleteSupplier(self, supplier_id):
         supplier_dao = SupplierDAO()
@@ -145,10 +144,11 @@ class SupplierHandler:
             supplier_date_birth = json['supplier_date_birth']
             supplier_email = json['supplier_email']
             supplier_phone = json['supplier_phone']
+
             if supplier_firstname and supplier_lastname and supplier_date_birth and supplier_email and supplier_phone:
                 user_id = dao_supplier.update(supplier_id)
                 dao_user.update(user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
                 result = self.build_supplier_attributes(user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
-                return jsonify(Supplier=result), 200
+                return jsonify(Supplier = result), 200
             else:
-                return jsonify(Error="Unexpected attributes in update request"), 400
+                return jsonify(Error = "Unexpected attributes in update request"), 400

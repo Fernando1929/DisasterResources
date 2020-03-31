@@ -27,14 +27,14 @@ class CreditCardHandler:
         result['creditcard_exp_date'] = creditcard_exp_date
         return result
 
-    def getAllCreditCard(self):
+    def getAllCreditCards(self):
         dao = CreditCardDAO()
-        creditcard_list = dao.getAllCreditCard()
+        creditcard_list = dao.getAllCreditCards()
         result_list = []
         for row in creditcard_list:
             result = self.build_creditcard_dict(row)
             result_list.append(result)
-        return jsonify(CreditCard = result_list)
+        return jsonify(CreditCards = result_list)
 
     def getCreditCardById(self, creditcard_id):
         dao = CreditCardDAO()
@@ -81,6 +81,7 @@ class CreditCardHandler:
         creditcard_number = json["creditcard_number"]
         creditcard_ccv = json["creditcard_ccv"]
         creditcard_exp_date = json["creditcard_exp_date"]
+
         if customer_id and creditcard_name and creditcard_number and creditcard_ccv and creditcard_exp_date:
             payment_dao = PaymentDAO()
             payment_id = payment_dao.insert(customer_id)
@@ -101,6 +102,7 @@ class CreditCardHandler:
             creditcard_number = json["creditcard_number"]
             creditcard_ccv = json["creditcard_ccv"]
             creditcard_exp_date = json["creditcard_exp_date"]
+            
             if customer_id and creditcard_name and creditcard_number and creditcard_ccv and creditcard_exp_date:
                 payment_id = creditcard_dao.update(creditcard_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date)
                 payment_dao = PaymentDAO()

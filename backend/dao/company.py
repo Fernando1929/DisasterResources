@@ -7,6 +7,7 @@ class CompanyDAO:
         super().__init__()
     
     #company = company_id, company_name, company_address, company_phone
+    
     def getAllCompanies(self):
         result = [
             [1, 'Baxter', 'Jayuya','7879999999'], 

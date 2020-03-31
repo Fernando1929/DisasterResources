@@ -6,14 +6,15 @@ class IceDAO:
     def __init__(self):
         super().__init__()
         
-    #ice = supplier_id, resource_id, ice_id, resource_category, ice_name, ice_brand, ice_quantity, ice_price , ice_weight
-    def getAllIce(self):
+    #ice = ice_id, resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight
+
+    def getAllAvailableIce(self):
         result = [
             [1, 2, 1, "ice", 'ice', 'el angel', 10, 2.50, 5],
             [2, 1, 2, "ice", 'ice', 'submarine', 8, 2.50, 6]
         ]
         return result
-    
+
     def getAllAvailableIce(self):
         result = [
             [1, 2, 1, "ice", 'ice', 'el angel', 10, 2.50, 5],
@@ -27,7 +28,7 @@ class IceDAO:
             [2, 1, 2, "ice", 'ice', 'submarine', 8, 2.50, 6]
         ]
         return result
-
+    
     def getAllRequestedIce(self):
         result = [
             [1, 2, 1, "ice", 'ice', 'el angel', 10, 2.50, 5],
@@ -86,17 +87,17 @@ class IceDAO:
         return result
     
     def getIceAddress(self, user_id):
-        result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
+        result = [1, 1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
         return result
 
     def insert(self, resource_id, supplier_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight):
-        resource_id =1
+        resource_id = 1
         return resource_id
 
     def delete(self, resource_id):
-        resource_id =1
+        resource_id = 1
         return resource_id
 
     def update(self, ice_id, ice_weight):
-        resource_id =1
+        resource_id = 1
         return resource_id

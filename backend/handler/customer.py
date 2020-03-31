@@ -3,6 +3,7 @@ from dao.customer import CustomerDAO
 from dao.user import UserDAO
 
 class CustomerHandler:
+    
     def build_customer_dict(self, row):
         result = {}
         result['customer_id'] = row[0]
@@ -25,9 +26,9 @@ class CustomerHandler:
         result['customer_phone'] = customer_phone
         return result
 
-    def getAllCustomer(self):
+    def getAllCustomers(self):
         dao = CustomerDAO()
-        customers_list = dao.getAllCustomer()
+        customers_list = dao.getAllCustomers()
         result_list = []
         for row in customers_list:
             result = self.build_customer_dict(row)
@@ -43,7 +44,7 @@ class CustomerHandler:
             customer = self.build_customer_dict(row)
             return jsonify(Customer = customer)
 
-    def searchCustomer(self, args):
+    def searchCustomers(self, args):
         customer_firstname = args.get("customer_firstname")
         customer_lastname = args.get("customer_lastname")
         customer_email = args.get("customer_email")
@@ -52,24 +53,24 @@ class CustomerHandler:
         dao = CustomerDAO()
         customers_list = []
         if (len(args) == 2) and customer_firstname and customer_lastname:
-            customers_list = dao.getCustomerByFirstnameAndLastname(customer_firstname, customer_lastname)
+            customers_list = dao.getCustomersByFirstnameAndLastname(customer_firstname, customer_lastname)
         elif (len(args) == 1) and customer_firstname:
-            customers_list = dao.getCustomerByFirstname(customer_firstname)
+            customers_list = dao.getCustomersByFirstname(customer_firstname)
         elif (len(args) == 1) and customer_lastname:
-            customers_list = dao.getCustomerByLastname(customer_lastname)
+            customers_list = dao.getCustomersByLastname(customer_lastname)
         elif (len(args) == 1) and customer_email:
-            customers_list = dao.getCustomerByEmail(customer_email)
+            customers_list = dao.getCustomersByEmail(customer_email)
         elif (len(args) == 1) and customer_phone:
-            customers_list = dao.getCustomerByPhone(customer_phone)
+            customers_list = dao.getCustomersByPhone(customer_phone)
         elif (len(args) == 1) and customer_date_birth:
-            customers_list = dao.getCustomerByDateOfBirth(customer_date_birth)
+            customers_list = dao.getCustomersByDateOfBirth(customer_date_birth)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in customers_list:
             result = self.build_customer_dict(row)
             result_list.append(result)
-        return jsonify(Customer=result_list)
+        return jsonify(Customers = result_list)
 
     def insertCustomer(self, json):
         customer_firstname = json['customer_firstname']
@@ -77,6 +78,7 @@ class CustomerHandler:
         customer_date_birth = json['customer_date_birth']
         customer_email = json['customer_email']
         customer_phone = json['customer_phone']
+
         if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
             user_dao = UserDAO()
             user_id = user_dao.insert(customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)          
@@ -97,6 +99,7 @@ class CustomerHandler:
             customer_date_birth = json["customer_date_birth"]
             customer_email = json["customer_email"]
             customer_phone = json["customer_phone"]
+            
             if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
                 user_id = customer_dao.update(customer_id)
                 user_dao = UserDAO()

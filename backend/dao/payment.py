@@ -1,4 +1,6 @@
 class PaymentDAO:
+    def _init_(self):
+        super().__init__()
 
     def insert(self, user_id):
         payment_id = 1

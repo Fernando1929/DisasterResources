@@ -2,8 +2,10 @@ from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.medicine import MedicineDAO
 from dao.user import UserDAO
+from dao.supplier import SupplierDAO
 
 class MedicineHandler:
+
     def build_medicine_dict(self, row):
         result = {}
         result['med_id'] = row[0]
@@ -58,30 +60,30 @@ class MedicineHandler:
 
     def getAllAvailableMedicines(self):
         dao = MedicineDAO()
-        med_list = dao.getAllAvailableMedicine()
+        med_list = dao.getAllAvailableMedicines()
         result_list = []
         for row in med_list:
             result = self.build_medicine_dict(row)
             result_list.append(result)
-        return jsonify(Medicine = result_list)
+        return jsonify(Medicines = result_list)
 
     def getAllReservedMedicines(self):
         dao = MedicineDAO()
-        med_list = dao.getAllReservedMedicine()
+        med_list = dao.getAllReservedMedicines()
         result_list = []
         for row in med_list:
             result = self.build_medicine_dict(row)
             result_list.append(result)
-        return jsonify(Medicine = result_list)
+        return jsonify(Medicines = result_list)
 
     def getAllRequestedMedicines(self):
         dao = MedicineDAO()
-        med_list = dao.getAllRequestedMedicine()
+        med_list = dao.getAllRequestedMedicines()
         result_list = []
         for row in med_list:
             result = self.build_medicine_dict(row)
             result_list.append(result)
-        return jsonify(Medicine = result_list)
+        return jsonify(Medicines = result_list)
 
     def getMedicineById(self, med_id):
         dao = MedicineDAO()
@@ -101,45 +103,61 @@ class MedicineHandler:
             medicine = self.build_medicine_dict(row)
             return jsonify(Medicine = medicine)
 
-    def getMedicineBySupplierId(self, supplier_id):
-        med_list = []
-        result_list = []
-        med_dao = MedicineDAO()
-        med_list = med_dao.getMedicinesBySupplierId(supplier_id)
-        for row in med_list:
-            result = self.build_medicine_dict(row)
-            result_list.append(result)
-        return jsonify(Medicine = result_list)
+    def getMedicinesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            med_list = []
+            result_list = []
+            med_dao = MedicineDAO()
+            med_list = med_dao.getMedicinesBySupplierId(supplier_id)
+            for row in med_list:
+                result = self.build_medicine_dict(row)
+                result_list.append(result)
+            return jsonify(Medicines = result_list)
 
-    def getAllAvailableMedicineBySupplierId(self, supplier_id):
-        med_list = []
-        result_list = []
-        med_dao = MedicineDAO()
-        med_list = med_dao.getAllAvailableMedicineBySupplierId(supplier_id)
-        for row in med_list:
-            result = self.build_medicine_dict(row)
-            result_list.append(result)
-        return jsonify(Medicine = result_list)
+    def getAllAvailableMedicinesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            med_list = []
+            result_list = []
+            med_dao = MedicineDAO()
+            med_list = med_dao.getAllAvailableMedicinesBySupplierId(supplier_id)
+            for row in med_list:
+                result = self.build_medicine_dict(row)
+                result_list.append(result)
+            return jsonify(Medicines = result_list)
 
-    def getAllReservedMedicineBySupplierId(self, supplier_id):
-        med_list = []
-        result_list = []
-        med_dao = MedicineDAO()
-        med_list = med_dao.getAllReservedMedicineBySupplierId(supplier_id)
-        for row in med_list:
-            result = self.build_medicine_dict(row)
-            result_list.append(result)
-        return jsonify(Medicine = result_list)
+    def getAllReservedMedicinesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            med_list = []
+            result_list = []
+            med_dao = MedicineDAO()
+            med_list = med_dao.getAllReservedMedicinesBySupplierId(supplier_id)
+            for row in med_list:
+                result = self.build_medicine_dict(row)
+                result_list.append(result)
+            return jsonify(Medicines = result_list)
 
-    def getAllRequestedMedicineBySupplierId(self, supplier_id):
-        med_list = []
-        result_list = []
-        med_dao = MedicineDAO()
-        med_list = med_dao.getAllRequestedMedicineBySupplierId(supplier_id)
-        for row in med_list:
-            result = self.build_medicine_dict(row)
-            result_list.append(result)
-        return jsonify(Medicine = result_list)
+    def getAllRequestedMedicinesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            med_list = []
+            result_list = []
+            med_dao = MedicineDAO()
+            med_list = med_dao.getAllRequestedMedicinesBySupplierId(supplier_id)
+            for row in med_list:
+                result = self.build_medicine_dict(row)
+                result_list.append(result)
+            return jsonify(Medicines = result_list)
 
     def getMedicineAddress(self, med_id):
         med_dao = MedicineDAO()
@@ -155,17 +173,16 @@ class MedicineHandler:
                 med_address = self.build_address_dict(row)
                 return jsonify(Address = med_address)
 
-    def searchMedicine(self, args):
+    def searchMedicines(self, args):
         med_brand = args.get("med_brand")
         med_type = args.get("med_type")
         med_dose = args.get("med_dose")
         med_prescript = args.get("med_prescript")
         med_expdate = args.get("med_expdate")
-
         dao = MedicineDAO()
         med_list = []
         if (len(args) == 1) and med_brand:
-            med_list = dao.getMedicineByBrand(med_brand)
+            med_list = dao.getMedicinesByBrand(med_brand)
         elif (len(args) == 1) and med_type:
             med_list = dao.getMedicinesByType(med_type)
         elif (len(args) == 1) and med_prescript:
@@ -180,7 +197,7 @@ class MedicineHandler:
         for row in med_list:
             result = self.build_medicine_dict(row)
             result_list.append(result)
-        return jsonify(Medicine = result_list)
+        return jsonify(Medicines = result_list)
 
     def insertMedicine(self, json):
         supplier_id = json["supplier_id"]

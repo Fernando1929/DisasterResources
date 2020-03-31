@@ -1,9 +1,9 @@
 from flask import jsonify
 from dao.company import CompanyDAO 
+from dao.supplier import SupplierDAO
 
 class CompanyHandler:
 
-    #company = company_id, company_name, company_address, company_phone
     def build_company_dict(self, row):
         result = {}
         result['company_id'] = row[0]
@@ -27,7 +27,7 @@ class CompanyHandler:
         for row in result:
             result = self.build_company_dict(row)
             result_list.append(result)
-        return jsonify(Companies=result_list)
+        return jsonify(Companies = result_list)
 
     def getCompanyById(self, company_id):
         dao = CompanyDAO()
@@ -39,17 +39,17 @@ class CompanyHandler:
             return jsonify(Company = order)
 
     def getCompanyBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error="Supplier Not Found"), 404
-        #else:
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier Not Found"), 404
+        else:
             company_dao = CompanyDAO()
             result_list = []
             company_list = company_dao.getCompanyBySupplierId(supplier_id)
             for row in company_list:
                 result = self.build_company_dict(row)
                 result_list.append(result)
-            return jsonify(Company=result_list)
+            return jsonify(Company = result_list)
 
     def searchCompany(self, args):
         company_name = args.get('company_name')
@@ -69,19 +69,20 @@ class CompanyHandler:
         for row in companies_list:
             result = self.build_company_dict(row)
             result_list.append(result)
-        return jsonify(Companies=result_list)
+        return jsonify(Company = result_list)
 
     def insertCompany(self, json):
         company_name = json['company_name']
         company_address = json['company_address']
         company_phone = json['company_phone']
+
         if company_name and company_address and company_phone:
             dao = CompanyDAO()
             company_id = dao.insert(company_name, company_address, company_phone)
             json = self.build_company_attributes(company_id, company_name, company_address, company_phone)
-            return jsonify(Company=json), 201
+            return jsonify(Company = json), 201
         else:
-            return jsonify(Error="Unexpected attributes in post request"), 400
+            return jsonify(Error = "Unexpected attributes in post request"), 400
 
     def deleteCompany(self, company_id):
         dao = CompanyDAO()
@@ -100,9 +101,10 @@ class CompanyHandler:
             company_name = json['company_name']
             company_address = json['company_address']
             company_phone = json['company_phone']
+
             if company_id and company_name and company_address and company_phone:
                 dao.update(company_id, company_name, company_address, company_phone)
                 result = self.build_company_attributes(company_id, company_name, company_address, company_phone)
-                return jsonify(Company=result), 200
+                return jsonify(Company = result), 200
             else:
-                return jsonify(Error="Unexpected attributes in update request"), 400
+                return jsonify(Error = "Unexpected attributes in update request"), 400

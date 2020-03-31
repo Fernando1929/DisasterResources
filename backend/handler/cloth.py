@@ -1,9 +1,11 @@
 from flask import jsonify
 from dao.cloth import ClothDAO
 from dao.resource import ResourceDAO
+from dao.supplier import SupplierDAO
 from dao.user import UserDAO
 
 class ClothHandler:
+
     def build_cloth_dict(self, row):
         result = {}
         result['cloth_id'] = row[0]
@@ -50,41 +52,41 @@ class ClothHandler:
         return result
 
 
-    def getAllCloth(self):
+    def getAllClothes(self):
         dao = ClothDAO()
-        cloth_list = dao.getAllCloth()
+        cloth_list = dao.getAllClothes()
         result_list = []
         for row in cloth_list:
             result = self.build_cloth_dict(row)
             result_list.append(result)
-        return jsonify(Cloth = result_list)
+        return jsonify(Clothes = result_list)
 
-    def getAllAvailableCloth(self):
+    def getAllAvailableClothes(self):
         dao = ClothDAO()
-        cloth_list = dao.getAllAvailableCloth()
+        cloth_list = dao.getAllAvailableClothes()
         result_list = []
         for row in cloth_list:
             result = self.build_cloth_dict(row)
             result_list.append(result)
-        return jsonify(Cloth = result_list)
+        return jsonify(Clothes = result_list)
 
-    def getAllReservedCloth(self):
+    def getAllReservedClothes(self):
         dao = ClothDAO()
-        cloth_list = dao.getAllReservedCloth()
+        cloth_list = dao.getAllReservedClothes()
         result_list = []
         for row in cloth_list:
             result = self.build_cloth_dict(row)
             result_list.append(result)
-        return jsonify(Cloth = result_list)
+        return jsonify(Clothes = result_list)
 
-    def getAllRequestedCloth(self):
+    def getAllRequestedClothes(self):
         dao = ClothDAO()
-        cloth_list = dao.getAllRequestedCloth()
+        cloth_list = dao.getAllRequestedClothes()
         result_list = []
         for row in cloth_list:
             result = self.build_cloth_dict(row)
             result_list.append(result)
-        return jsonify(Cloth = result_list)
+        return jsonify(Clothes = result_list)
 
     def getClothById(self, cloth_id):
         dao = ClothDAO()
@@ -104,81 +106,81 @@ class ClothHandler:
             cloth = self.build_cloth_dict(row)
             return jsonify(Cloth = cloth)
 
-    def getClothBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getClothesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             cloth_list = []
             result_list = []
             cloth_dao = ClothDAO()
-            cloth_list = cloth_dao.getClothBySupplierId(supplier_id)
+            cloth_list = cloth_dao.getClothesBySupplierId(supplier_id)
             for row in cloth_list:
                 result = self.build_cloth_dict(row)
                 result_list.append(result)
-            return jsonify(Cloth = result_list)
+            return jsonify(Clothes = result_list)
 
-    def getAllAvailableClothBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getAllAvailableClothesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             cloth_list = []
             result_list = []
             cloth_dao = ClothDAO()
-            cloth_list = cloth_dao.getAllAvailableClothBySupplierId(supplier_id)
+            cloth_list = cloth_dao.getAllAvailableClothesBySupplierId(supplier_id)
             for row in cloth_list:
                 result = self.build_cloth_dict(row)
                 result_list.append(result)
-            return jsonify(Cloth = result_list)
+            return jsonify(Clothes = result_list)
 
-    def getAllReservedClothBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getAllReservedClothesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             cloth_list = []
             result_list = []
             cloth_dao = ClothDAO()
-            cloth_list = cloth_dao.getAllReservedClothBySupplierId(supplier_id)
+            cloth_list = cloth_dao.getAllReservedClothesBySupplierId(supplier_id)
             for row in cloth_list:
                 result = self.build_cloth_dict(row)
                 result_list.append(result)
-            return jsonify(Cloth = result_list)
+            return jsonify(Clothes = result_list)
 
-    def getAllRequestedClothBySupplierId(self, supplier_id):
-        #supplier_dao = SupplierDAO()
-        #if not supplier_dao.getSupplierById(supplier_id):
-        #    return jsonify(Error = "Supplier not found."), 404
-        #else:
+    def getAllRequestedClothesBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
             cloth_list = []
             result_list = []
             cloth_dao = ClothDAO()
-            cloth_list = cloth_dao.getAllRequestedClothBySupplierId(supplier_id)
+            cloth_list = cloth_dao.getAllRequestedClothesBySupplierId(supplier_id)
             for row in cloth_list:
                 result = self.build_cloth_dict(row)
                 result_list.append(result)
-            return jsonify(Cloth = result_list)
+            return jsonify(Clothes = result_list)
 
-    def searchCloth(self, args):
+    def searchClothes(self, args):
         cloth_brand = args.get("cloth_brand")
         cloth_gender = args.get("cloth_gender")
         cloth_type = args.get("cloth_type")
         dao = ClothDAO()
         cloth_list = []
         if (len(args) == 1) and cloth_brand:
-            cloth_list = dao.getClothByBrand(cloth_brand)
+            cloth_list = dao.getClothesByBrand(cloth_brand)
         elif (len(args) == 1) and cloth_gender:
-            cloth_list = dao.getClothByGender(cloth_gender)
+            cloth_list = dao.getClothesByGender(cloth_gender)
         elif (len(args) == 1) and cloth_type:
-            cloth_list = dao.getClothByType(cloth_type)
+            cloth_list = dao.getClothesByType(cloth_type)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in cloth_list:
             result = self.build_cloth_dict(row)
             result_list.append(result)
-        return jsonify(Cloth = result_list)
+        return jsonify(Clothes = result_list)
 
     def getClothAddress(self, cloth_id):
         cloth_dao = ClothDAO()
@@ -206,6 +208,7 @@ class ClothHandler:
         cloth_condition = json["cloth_condition"]
         cloth_gender = json["cloth_gender"]
         cloth_type = json["cloth_type"]
+
         if supplier_id and category and cloth_name and cloth_brand and cloth_quantity and cloth_price and cloth_size and cloth_material and cloth_condition and cloth_gender and cloth_type:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category, cloth_name, cloth_brand, cloth_quantity, cloth_price)
@@ -232,6 +235,7 @@ class ClothHandler:
             cloth_condition = json["cloth_condition"]
             cloth_gender = json["cloth_gender"]
             cloth_type = json["cloth_type"]
+            
             if supplier_id and category and cloth_name and cloth_brand and cloth_quantity and cloth_price and cloth_size and cloth_material and cloth_condition and cloth_gender and cloth_type:
                 resource_id = cloth_dao.update(cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type)
                 resource_dao = ResourceDAO()

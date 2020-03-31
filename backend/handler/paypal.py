@@ -72,6 +72,7 @@ class PaypalHandler:
         customer_id = json["customer_id"]
         paypal_username = json["paypal_username"]
         paypal_password = json["paypal_password"]
+        
         if customer_id and paypal_username and paypal_password:
             payment_dao = PaymentDAO()
             payment_id = payment_dao.insert(customer_id)
@@ -90,6 +91,7 @@ class PaypalHandler:
             customer_id = json["customer_id"]
             paypal_username = json["paypal_username"]
             paypal_password = json["paypal_password"]
+
             if customer_id and paypal_username and paypal_password:
                 payment_id = paypal_dao.update(paypal_id, paypal_username, paypal_password)
                 payment_dao = PaymentDAO()

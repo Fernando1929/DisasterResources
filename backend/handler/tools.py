@@ -2,6 +2,7 @@ from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.tools import ToolDAO
 from dao.user import UserDAO
+from dao.supplier import SupplierDAO
 
 class ToolHandler:
     def build_tool_dict(self, row):
@@ -100,44 +101,60 @@ class ToolHandler:
             return jsonify(Tool = tool)
 
     def getToolsBySupplierId(self, supplier_id):
-        tool_list = []
-        result_list = []
-        tool_dao = ToolDAO()
-        tool_list = tool_dao.getToolsBySupplierId(supplier_id)
-        for row in tool_list:
-            result = self.build_tool_dict(row)
-            result_list.append(result)
-        return jsonify(Tools = result_list)
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            tool_list = []
+            result_list = []
+            tool_dao = ToolDAO()
+            tool_list = tool_dao.getToolsBySupplierId(supplier_id)
+            for row in tool_list:
+                result = self.build_tool_dict(row)
+                result_list.append(result)
+            return jsonify(Tools = result_list)
 
     def getAllAvailableToolsBySupplierId(self, supplier_id):
-        tool_list = []
-        result_list = []
-        tool_dao = ToolDAO()
-        tool_list = tool_dao.getAllAvailableToolsBySupplierId(supplier_id)
-        for row in tool_list:
-            result = self.build_tool_dict(row)
-            result_list.append(result)
-        return jsonify(Tools = result_list)
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            tool_list = []
+            result_list = []
+            tool_dao = ToolDAO()
+            tool_list = tool_dao.getAllAvailableToolsBySupplierId(supplier_id)
+            for row in tool_list:
+                result = self.build_tool_dict(row)
+                result_list.append(result)
+            return jsonify(Tools = result_list)
 
     def getAllReservedToolsBySupplierId(self, supplier_id):
-        tool_list = []
-        result_list = []
-        tool_dao = ToolDAO()
-        tool_list = tool_dao.getAllReservedToolsBySupplierId(supplier_id)
-        for row in tool_list:
-            result = self.build_tool_dict(row)
-            result_list.append(result)
-        return jsonify(Tools = result_list)
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            tool_list = []
+            result_list = []
+            tool_dao = ToolDAO()
+            tool_list = tool_dao.getAllReservedToolsBySupplierId(supplier_id)
+            for row in tool_list:
+                result = self.build_tool_dict(row)
+                result_list.append(result)
+            return jsonify(Tools = result_list)
 
     def getAllRequestedToolsBySupplierId(self, supplier_id):
-        tool_list = []
-        result_list = []
-        tool_dao = ToolDAO()
-        tool_list = tool_dao.getAllRequestedToolsBySupplierId(supplier_id)
-        for row in tool_list:
-            result = self.build_tool_dict(row)
-            result_list.append(result)
-        return jsonify(Tools = result_list)
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            tool_list = []
+            result_list = []
+            tool_dao = ToolDAO()
+            tool_list = tool_dao.getAllRequestedToolsBySupplierId(supplier_id)
+            for row in tool_list:
+                result = self.build_tool_dict(row)
+                result_list.append(result)
+            return jsonify(Tools = result_list)
 
     def getToolAddress(self, tool_id):
         tool_dao = ToolDAO()
@@ -162,7 +179,7 @@ class ToolHandler:
         dao = ToolDAO()
         tool_list = []
         if (len(args) == 1) and tool_brand:
-            tool_list = dao.getToolByBrand(tool_brand)
+            tool_list = dao.getToolsByBrand(tool_brand)
         elif (len(args) == 1) and tool_material:
             tool_list = dao.getToolsByMaterial(tool_material)
         elif (len(args) == 1) and tool_condition:

@@ -72,6 +72,6 @@ class ResourceHandler:
                 return GeneratorHandler().getGeneratorByResourceId(resource_id)
             elif category == "ice":
                 return IceHandler().getIceByResourceId(resource_id)
-
-        return jsonify(Error = "Invalid category"), 400
+        else:
+            return jsonify(Error = "Invalid category"), 400
         

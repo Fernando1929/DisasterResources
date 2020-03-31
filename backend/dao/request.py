@@ -3,7 +3,9 @@ class RequestDAO:
     def __init__(self):
         super().__init__()
 
-    def getAllRequest(self):
+    # request = request_id, customer_id, request_title, request_quantity, request_date
+
+    def getAllRequests(self):
         result = [
             [1, 1, "Water Request", 10, "3/16/2020"],
             [2, 1, "Cloth Request", 2, "3/16/2020"]
@@ -14,14 +16,14 @@ class RequestDAO:
         result = [2, 1, "Cloth Request", 2, "3/16/2020"]
         return result
 
-    def getRequestByCustomerId(self, customer_id):
+    def getRequestsByCustomerId(self, customer_id):
         result = [
             [1, 1, "Water Request", 10, "3/16/2020"],
             [2, 1, "Cloth Request", 2, "3/16/2020"]
         ]
         return result
 
-    def getRequestByTitle(self, request_title):
+    def getRequestsByTitle(self, request_title):
         result = [
             [1, 1, "Water Request", 10, "3/16/2020"],
             [2, 1, "Cloth Request", 2, "3/16/2020"]

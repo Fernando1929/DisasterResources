@@ -61,7 +61,7 @@ class AddressHandler:
                 result_list.append(result)
             return jsonify(Addresses = result_list)
 
-    def searchAddress(self, args):
+    def searchAddresses(self, args):
         city = args.get("city")
         state_province = args.get("state_province")
         country = args.get("country")
@@ -70,22 +70,22 @@ class AddressHandler:
         dao = AddressDAO()
         address_list = []
         if (len(args) == 1) and city:
-            address_list = dao.getAddressByCity(city)
+            address_list = dao.getAddressesByCity(city)
         elif (len(args) == 1) and state_province:
-            address_list = dao.getAddressByStateOrProvince(state_province)
+            address_list = dao.getAddressesByStateOrProvince(state_province)
         elif (len(args) == 1) and country:
-            address_list = dao.getAddressByCountry(country)
+            address_list = dao.getAddressesByCountry(country)
         elif (len(args) == 1) and zipcode:
-            address_list = dao.getAddressByZipcode(zipcode)
+            address_list = dao.getAddressesByZipcode(zipcode)
         elif (len(args) == 2) and city and country:
-            address_list = dao.getAddressByCityAndCountry(city, country)
+            address_list = dao.getAddressesByCityAndCountry(city, country)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in address_list:
             result = self.build_address_dict(row)
             result_list.append(result)
-        return jsonify(Address = result_list)
+        return jsonify(Addresses = result_list)
 
     def insertAddress(self, json):
         user_id = json["user_id"]
