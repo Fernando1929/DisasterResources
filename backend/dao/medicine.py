@@ -3,7 +3,7 @@ class MedicineDAO:
         super().__init__()
 
 
-# medicine = med_id, resource_id, category, supplier_id, med_name, med_brand, med_quantity, med_price, 
+# medicine = med_id, resource_id, supplier_id, resource_category, med_name, med_brand, med_quantity, med_price, 
 #           med_type, med_dose, med_prescript, med_expdate
     def getAllMedicines(self):
         result = [[1, 1, 1, "medicine", "Sumatriptan", "Walgreens", 1, 10.00, "migraine", "50mg", "Y", "12/31/2020"]]

@@ -21,11 +21,11 @@ class ResourceHandler:
         result = {}
         result['resource_id'] = row[0]
         result['supplier_id'] = row[1]
-        result['category'] = row[2]
-        result['name'] = row[3]
-        result['brand'] = row[4]
-        result['quantity'] = row[5]
-        result['price'] = row[6]
+        result['resource_category'] = row[2]
+        result['resource_name'] = row[3]
+        result['resource_brand'] = row[4]
+        result['resource_quantity'] = row[5]
+        result['resource_price'] = row[6]
         return result
 
     def getAllResources(self):

@@ -5,7 +5,7 @@ class BatteryDAO:
     def __init__(self):
         super().__init__()
 
-    #battery = supplier_id, resource_id, power_id, battery_id, category, resource_name, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, battery_type
+    #battery = supplier_id, resource_id, power_id, battery_id, resource_category, resource_name, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, battery_type
     def getAllBattery(self):
         result = [
             [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],

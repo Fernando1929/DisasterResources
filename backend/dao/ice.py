@@ -6,7 +6,7 @@ class IceDAO:
     def __init__(self):
         super().__init__()
         
-    #ice = supplier_id, resource_id, ice_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight
+    #ice = supplier_id, resource_id, ice_id, resource_category, ice_name, ice_brand, ice_quantity, ice_price , ice_weight
     def getAllIce(self):
         result = [
             [1, 2, 1, "ice", 'ice', 'el angel', 10, 2.50, 5],

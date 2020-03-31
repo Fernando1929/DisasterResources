@@ -6,7 +6,7 @@ class GeneratorDAO:
     def __init__(self):
         super().__init__()
         
-    #battery = supplier_id, resource_id, power_id, generator_id, resource_name, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, generator_fuel
+    #generator = supplier_id, resource_id, power_id, generator_id, resource_category, resource_name, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, generator_fuel
     def getAllGenerator(self):
         result = [
             [1, 2, 1, 3, "generator", 'generator', 'WEN', 10, 300.00, 1.20, 'new', 'gasoline'],

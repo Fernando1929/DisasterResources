@@ -2,7 +2,7 @@ class ToolDAO:
     def __init__(self):
         super().__init__()
 
-# tools = tool_id, resource_id, supplier_id, category, tool_name, tool_brand, tool_quantity, tool_price, 
+# tools = tool_id, resource_id, supplier_id, resource_category, tool_name, tool_brand, tool_quantity, tool_price, 
 #           tool_material, tool_condition, tool_pwtype
     def getAllTools(self):
         result = [[1, 1, 1, 'tools', "Wrench", "Craftsman", 5, 40.00, "stainless steel", "New", "None"]]

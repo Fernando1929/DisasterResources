@@ -2,7 +2,7 @@ class FuelDAO:
     def __init__(self):
         super().__init__()
 
-# fuel = fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, 
+# fuel = fuel_id, resource_id, supplier_id, resource_category, fuel_name, fuel_brand, fuel_quantity, fuel_price, 
 #           fuel_type, fuel_gallons
     def getAllFuels(self):
         result = [[1, 1, 1, "fuel", "Gasoline", "Shell", 1, 20.00, "gasoline", 12]]

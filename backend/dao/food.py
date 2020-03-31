@@ -2,7 +2,7 @@ class FoodDAO:
     def __init__(self):
         super().__init__()
 
-# food = food_id, resource_id, supplier_id, food_name, food_brand, food_quantity, food_price, 
+# food = food_id, resource_id, supplier_id, resource_category, food_name, food_brand, food_quantity, food_price, 
 #           food_category, food_container, food_type, food_ounces, food_expdate
     def getAllFoods(self):
         result = [[1, 1, 1, "food", "Canned peaches", "Del Monte", 12, 10.00, "fruit", "aluminum", "canned", 8, "12/31/2020"]]
