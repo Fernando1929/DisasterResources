@@ -85,7 +85,7 @@ class BatteryHandler:
             result_list.append(result)
         return jsonify(Battery=result_list)
 
-    def getBatteryById(self, resource_id): 
+    def getBatteryById(self, battery_id): 
         dao = BatteryDAO()
         row = dao.getBatteryById(battery_id)
         if not row:

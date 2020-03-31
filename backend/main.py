@@ -87,15 +87,16 @@ def getAddressesByUserId(user_id):
 
 #################### Customer Routes ####################
 
-@app.route("/DRL/customer", methods=['GET', 'POST'])
+@app.route("/DRL/register/customer", methods=['POST'])
+def registerCustomer():
+    return CustomerHandler().insertCustomer(request.json)
+
+@app.route("/DRL/customer", methods=['GET'])
 def getAllCustomers():
-    if request.method == 'POST':
-        return CustomerHandler().insertCustomer(request.json)
+    if not request.args:
+        return CustomerHandler().getAllCustomer()
     else:
-        if not request.args:
-            return CustomerHandler().getAllCustomer()
-        else:
-            return CustomerHandler().searchCustomer(request.args)
+        return CustomerHandler().searchCustomer(request.args)
 
 @app.route('/DRL/customer/<int:customer_id>', methods=['GET', 'PUT', 'DELETE'])
 def getCustomerById(customer_id):
@@ -110,15 +111,16 @@ def getCustomerById(customer_id):
 
 #################### Supplier Routes ####################
 
-@app.route('/DRL/supplier', methods = ['GET','POST'])
+@app.route("/DRL/register/supplier", methods=['POST'])
+def registerSupplier():
+    return SupplierHandler().insertSupplier(request.json)
+
+@app.route('/DRL/supplier', methods = ['GET'])
 def getAllSuppliers():
-    if request.method == 'POST':
-        return SupplierHandler().insertSupplier(request.json)
-    else :
-        if not request.args:
-            return SupplierHandler().getAllSupplier()
-        else:
-            return SupplierHandler().searchSupplier(request.args)
+    if not request.args:
+        return SupplierHandler().getAllSupplier()
+    else:
+        return SupplierHandler().searchSupplier(request.args)
 
 @app.route('/DRL/supplier/<int:supplier_id>', methods = ['GET','PUT','DELETE'])
 def getSupplierById(supplier_id):
@@ -141,15 +143,16 @@ def getSuppliersByCompanyId(company_id):
 
 #################### Admin Routes ####################
 
-@app.route('/DRL/admin', methods = ['GET','POST'])
+@app.route("/DRL/register/admin", methods=['POST'])
+def registerAdmin():
+    return AdminHandler().insertAdmin(request.json)
+
+@app.route('/DRL/admin', methods = ['GET'])
 def getAllAdmin():
-    if request.method == 'POST':
-        return AdminHandler().insertAdmin(request.json)
-    else :
-        if not request.args:
-            return AdminHandler().getAllAdmin()
-        else:
-            return AdminHandler().searchAdmin(request.args)
+    if not request.args:
+        return AdminHandler().getAllAdmin()
+    else:
+        return AdminHandler().searchAdmin(request.args)
 
 @app.route('/DRL/admin/<int:admin_id>', methods = ['GET','PUT','DELETE'])
 def getAdminById(admin_id):
@@ -891,7 +894,7 @@ def getHeavyEquipAddress(hequip_id):
 def getAllAvailableHeavyEquip():
     return HeavyEquipHandler().getAllAvailableHeavyEquip()
 
-@app.route('/DRL/resources/vheavyequipment/available/supplier/<int:supplier_id>', methods = ['GET'])
+@app.route('/DRL/resources/heavyequipment/available/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllAvailableHeavyEquipBySupplierId(supplier_id):
     return HeavyEquipHandler().getAllAvailableHeavyEquipBySupplierId(supplier_id)
 
