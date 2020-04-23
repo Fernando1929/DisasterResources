@@ -5,20 +5,27 @@ from handler.fuel import FuelHandler
 from handler.food import FoodHandler
 from handler.medicine import MedicineHandler
 from handler.tools import ToolHandler
+from handler.cloth import ClothHandler
+from handler.heavyequip import HeavyEquipHandler
+from handler.water import WaterHandler
+from handler.medDevice import MedDeviceHandler
+from handler.battery import BatteryHandler
+from handler.generator import GeneratorHandler
+from handler.ice import IceHandler
 
 class ResourceHandler:
 
-    valid_categories = ['fuel', 'food', 'medicine', 'tools']
+    valid_categories = ['fuel', 'food', 'medicine', 'tools', 'cloth', 'heavy_equipment', 'water', 'medical_device', 'battery', 'generator', 'ice']
 
     def build_resource_dict(self, row):
         result = {}
         result['resource_id'] = row[0]
         result['supplier_id'] = row[1]
-        result['category'] = row[2]
-        result['name'] = row[3]
-        result['brand'] = row[4]
-        result['quantity'] = row[5]
-        result['price'] = row[6]
+        result['resource_category'] = row[2]
+        result['resource_name'] = row[3]
+        result['resource_brand'] = row[4]
+        result['resource_quantity'] = row[5]
+        result['resource_price'] = row[6]
         return result
 
     def getAllResources(self):
@@ -51,6 +58,20 @@ class ResourceHandler:
                 return MedicineHandler().getMedicineByResourceId(resource_id)
             elif category == "tools":
                 return ToolHandler().getToolByResourceId(resource_id)
-
-        return jsonify(Error = "Invalid category"), 400
+            elif category == "cloth":
+                return ClothHandler().getClothByResourceId(resource_id)
+            elif category == "heavy_equipment":
+                return HeavyEquipHandler().getHeavyEquipByResourceId(resource_id)
+            elif category == "water":
+                return WaterHandler().getWaterByResourceId(resource_id)
+            elif category == "medical_device":
+                return MedDeviceHandler().getMedDeviceByResourceId(resource_id)
+            elif category == "battery":
+                return BatteryHandler().getBatteryByResourceId(resource_id)
+            elif category == "generator":
+                return GeneratorHandler().getGeneratorByResourceId(resource_id)
+            elif category == "ice":
+                return IceHandler().getIceByResourceId(resource_id)
+        else:
+            return jsonify(Error = "Invalid category"), 400
         

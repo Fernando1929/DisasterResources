@@ -20,14 +20,14 @@ class LoginHandler:
         result['password'] = password
         return result
 
-    def getAllLogins(self):
-        dao = LoginDAO()
-        login_list = dao.getAllLogins()
-        result_list = []
-        for row in login_list:
-            result = self.build_login_dict(row)
-            result_list.append(result)
-        return jsonify(Logins = result_list)
+    # def getAllLogins(self):
+    #     dao = LoginDAO()
+    #     login_list = dao.getAllLogins()
+    #     result_list = []
+    #     for row in login_list:
+    #         result = self.build_login_dict(row)
+    #         result_list.append(result)
+    #     return jsonify(Logins = result_list)
 
     def getLoginById(self, login_id):
         dao = LoginDAO()

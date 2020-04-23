@@ -2,29 +2,33 @@ from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.food import FoodDAO
 from dao.user import UserDAO
+from dao.supplier import SupplierDAO
 
 class FoodHandler:
+
     def build_food_dict(self, row):
         result = {}
         result['food_id'] = row[0]
         result['resource_id'] = row[1]
         result['supplier_id'] = row[2]
-        result['food_name'] = row[3]
-        result['food_brand'] = row[4]
-        result['food_quantity'] = row[5]
-        result['food_price'] = row[6]
-        result['food_category'] = row[7]
-        result['food_container'] = row[8]
-        result['food_type'] = row[9]
-        result['food_ounces'] = row[10]
-        result['food_expdate'] = row[11]
+        result['category'] = row[3]
+        result['food_name'] = row[4]
+        result['food_brand'] = row[5]
+        result['food_quantity'] = row[6]
+        result['food_price'] = row[7]
+        result['food_category'] = row[8]
+        result['food_container'] = row[9]
+        result['food_type'] = row[10]
+        result['food_ounces'] = row[11]
+        result['food_expdate'] = row[12]
         return result
 
-    def build_food_attributes(self, food_id, resource_id, supplier_id, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate):
+    def build_food_attributes(self, food_id, resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate):
         result = {}
         result['food_id'] = food_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
+        result['category'] = category
         result['food_name'] = food_name
         result['food_brand'] = food_brand
         result['food_quantity'] = food_quantity
@@ -58,30 +62,30 @@ class FoodHandler:
 
     def getAllAvailableFoods(self):
         dao = FoodDAO()
-        food_list = dao.getAllAvailableFood()
+        food_list = dao.getAllAvailableFoods()
         result_list = []
         for row in food_list:
             result = self.build_food_dict(row)
             result_list.append(result)
-        return jsonify(Food = result_list)
+        return jsonify(Foods = result_list)
 
     def getAllReservedFoods(self):
         dao = FoodDAO()
-        food_list = dao.getAllReservedFood()
+        food_list = dao.getAllReservedFoods()
         result_list = []
         for row in food_list:
             result = self.build_food_dict(row)
             result_list.append(result)
-        return jsonify(Food = result_list)
+        return jsonify(Foods = result_list)
 
     def getAllRequestedFoods(self):
         dao = FoodDAO()
-        food_list = dao.getAllRequestedFood()
+        food_list = dao.getAllRequestedFoods()
         result_list = []
         for row in food_list:
             result = self.build_food_dict(row)
             result_list.append(result)
-        return jsonify(Food = result_list)
+        return jsonify(Foods = result_list)
 
     def getFoodById(self, food_id):
         dao = FoodDAO()
@@ -101,45 +105,61 @@ class FoodHandler:
             food = self.build_food_dict(row)
             return jsonify(Food = food)
 
-    def getFoodBySupplierId(self, supplier_id):
-        food_list = []
-        result_list = []
-        food_dao = FoodDAO()
-        food_list = food_dao.getFoodsBySupplierId(supplier_id)
-        for row in food_list:
-            result = self.build_food_dict(row)
-            result_list.append(result)
-        return jsonify(Food = result_list)
+    def getFoodsBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            food_list = []
+            result_list = []
+            food_dao = FoodDAO()
+            food_list = food_dao.getFoodsBySupplierId(supplier_id)
+            for row in food_list:
+                result = self.build_food_dict(row)
+                result_list.append(result)
+            return jsonify(Foods = result_list)
 
-    def getAllAvailableFoodBySupplierId(self, supplier_id):
-        food_list = []
-        result_list = []
-        food_dao = FoodDAO()
-        food_list = food_dao.getAllAvailableFoodBySupplierId(supplier_id)
-        for row in food_list:
-            result = self.build_food_dict(row)
-            result_list.append(result)
-        return jsonify(Food = result_list)
+    def getAllAvailableFoodsBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            food_list = []
+            result_list = []
+            food_dao = FoodDAO()
+            food_list = food_dao.getAllAvailableFoodsBySupplierId(supplier_id)
+            for row in food_list:
+                result = self.build_food_dict(row)
+                result_list.append(result)
+            return jsonify(Foods = result_list)
 
-    def getAllReservedFoodBySupplierId(self, supplier_id):
-        food_list = []
-        result_list = []
-        food_dao = FoodDAO()
-        food_list = food_dao.getAllReservedFoodBySupplierId(supplier_id)
-        for row in food_list:
-            result = self.build_food_dict(row)
-            result_list.append(result)
-        return jsonify(Food = result_list)
+    def getAllReservedFoodsBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            food_list = []
+            result_list = []
+            food_dao = FoodDAO()
+            food_list = food_dao.getAllReservedFoodsBySupplierId(supplier_id)
+            for row in food_list:
+                result = self.build_food_dict(row)
+                result_list.append(result)
+            return jsonify(Foods = result_list)
 
-    def getAllRequestedFoodBySupplierId(self, supplier_id):
-        food_list = []
-        result_list = []
-        food_dao = FoodDAO()
-        food_list = food_dao.getAllRequestedFoodBySupplierId(supplier_id)
-        for row in food_list:
-            result = self.build_food_dict(row)
-            result_list.append(result)
-        return jsonify(Food = result_list)
+    def getAllRequestedFoodsBySupplierId(self, supplier_id):
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
+        else:
+            food_list = []
+            result_list = []
+            food_dao = FoodDAO()
+            food_list = food_dao.getAllRequestedFoodsBySupplierId(supplier_id)
+            for row in food_list:
+                result = self.build_food_dict(row)
+                result_list.append(result)
+            return jsonify(Foods = result_list)
 
     def getFoodAddress(self, food_id):
         food_dao = FoodDAO()
@@ -155,18 +175,17 @@ class FoodHandler:
                 food_address = self.build_address_dict(row)
                 return jsonify(Address = food_address)
 
-    def searchFood(self, args):
+    def searchFoods(self, args):
         food_brand = args.get("food_brand")
         food_category = args.get("food_category")
         food_container = args.get("food_container")
         food_type = args.get("food_type")
         food_ounces = args.get("food_ounces")
         food_expdate = args.get("food_expdate")
-
         dao = FoodDAO()
         food_list = []
         if (len(args) == 1) and food_brand:
-            food_list = dao.getFoodByBrand(food_brand)
+            food_list = dao.getFoodsByBrand(food_brand)
         elif (len(args) == 1) and food_category:
             food_list = dao.getFoodsByCategory(food_category)
         elif (len(args) == 1) and food_container:
@@ -187,6 +206,7 @@ class FoodHandler:
 
     def insertFood(self, json):
         supplier_id = json["supplier_id"]
+        category = json["category"]
         food_name = json["food_name"]
         food_brand = json["food_brand"]
         food_quantity = json["food_quantity"]
@@ -197,12 +217,12 @@ class FoodHandler:
         food_ounces = json["food_ounces"]
         food_expdate = json["food_expdate"]
 
-        if supplier_id and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
+        if supplier_id and category and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, food_name, food_brand, food_quantity, food_price)
+            resource_id = resource_dao.insert(supplier_id, category, food_name, food_brand, food_quantity, food_price)
             food_dao = FoodDAO()
             food_id = food_dao.insert(resource_id, food_category, food_container, food_type, food_ounces, food_expdate)
-            result = self.build_food_attributes(food_id, resource_id, supplier_id, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
+            result = self.build_food_attributes(food_id, resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
             return jsonify(Food = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -213,6 +233,7 @@ class FoodHandler:
             return jsonify(Error = "Food not found."), 404
         else:
             supplier_id = json["supplier_id"]
+            category = json["category"]
             food_name = json["food_name"]
             food_brand = json["food_brand"]
             food_quantity = json["food_quantity"]
@@ -222,13 +243,13 @@ class FoodHandler:
             food_type = json["food_type"]
             food_ounces = json["food_ounces"]
             food_expdate = json["food_expdate"]
-
-            if supplier_id and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
+            
+            if supplier_id and category and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
                 resource_id = food_dao.update(food_id, food_category, food_container, food_type, food_ounces, food_expdate)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, food_name, food_brand, food_quantity, food_price)
+                resource_dao.update(resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price)
              
-                result = self.build_food_attributes(food_id, resource_id, supplier_id, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
+                result = self.build_food_attributes(food_id, resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
                 return jsonify(Food = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
