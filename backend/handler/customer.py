@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.customer import CustomerDAO
 from dao.user import UserDAO
+from dao.userPhone import UserPhoneDAO
 
 class CustomerHandler:
     
@@ -81,7 +82,9 @@ class CustomerHandler:
 
         if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
             user_dao = UserDAO()
-            user_id = user_dao.insert(customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)          
+            user_id = user_dao.insert(customer_firstname, customer_lastname, customer_date_birth, customer_email)
+            dao_phone = UserPhoneDAO()
+            dao_phone.insert(user_id, customer_phone)         
             customer_dao = CustomerDAO()
             customer_id = customer_dao.insert(user_id)
             result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)

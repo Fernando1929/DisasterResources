@@ -35,39 +35,57 @@ class SupplierDAO:
         return result
 
     def getSuppliersByFirstnameAndLastname(self,supplier_firstname, supplier_lastname):
-        result = [
-            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join users natural inner join user_phone where user_firstname = %s and user_lastname = %s;"
+        cursor.execute(query, (supplier_firstname, supplier_lastname))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getSuppliersByFirstname(self,supplier_firstname):
-        result = [
-            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join users natural inner join user_phone where user_firstname = %s;"
+        cursor.execute(query, (supplier_firstname,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getSuppliersByLastname(self,supplier_lastname):
-        result = [
-            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join users natural inner join user_phone where user_lastname = %s;"
+        cursor.execute(query, (supplier_lastname,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
         
     def getSupplierByEmail(self,supplier_email):
-        result = [
-            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join users natural inner join user_phone where user_email = %s;"
+        cursor.execute(query, (supplier_email,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
     
     def getSupplierByPhone(self,supplier_phone):
-        result = [
-            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join users natural inner join user_phone where user_phone = %s;"
+        cursor.execute(query, (supplier_phone,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
     
     def getSuppliersByDateOfBirth(self,supplier_date_birth):
-        result = [
-            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join users natural inner join user_phone where user_date_birth = %s;"
+        cursor.execute(query, (supplier_date_birth,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getSuppliersByCompanyId(self, company_id):
