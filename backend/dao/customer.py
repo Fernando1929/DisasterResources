@@ -1,63 +1,90 @@
+from config.dbconfig import pg_config
+import psycopg2
 class CustomerDAO:
     def __init__(self):
-        super().__init__()
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     # customer = customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone
 
     def getAllCustomers(self):
-        result = [
-            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
-            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCustomerById(self, customer_id):
-        result = [1, 1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone where customer_id = %s;"
+        cursor.execute(query, (customer_id,))
+        result = cursor.fetchone()
         return result
 
     def getCustomersByFirstname(self, customer_firstname):
-        result = [
-            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
-            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone where user_firstname = %s;"
+        cursor.execute(query, (customer_firstname,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCustomersByLastname(self, customer_lastname):
-        result = [
-            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
-            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone where user_lastname = %s;"
+        cursor.execute(query, (customer_lastname,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCustomersByFirstnameAndLastname(self, customer_firstname, customer_lastname):
-        result = [
-            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
-            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone where user_firstname = %s and user_lastname = %s;"
+        cursor.execute(query, (customer_firstname, customer_lastname))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCustomerByEmail(self, customer_email):
-        result = [
-            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
-            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone where user_email = %s;"
+        cursor.execute(query, (customer_email,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCustomerByPhone(self, customer_phone):
-        result = [
-            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
-            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone where user_phone = %s;"
+        cursor.execute(query, (customer_phone,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCustomersByDateOfBirth(self, customer_date_birth):
-        result = [
-            [1,  1, "Alex", "Vargas", "05/15/1992", "alexvargas1@gmail.com", "787-777-7777"],
-            [2,  2, "Sam", "Scarlet", "01/03/1996", "sammyscarlet7@gmail.com", "787-777-8888"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from customer natural inner join users natural inner join user_phone where user_date_birth = %s;"
+        cursor.execute(query, (customer_date_birth,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def insert(self, customer_id):
+    def insert(self, user_id):
+        cursor = self.conn.cursor()
+        query = "insert into customer(user_id) values (%s) returning customer_id;"
+        cursor.execute(query, (user_id,))
+        customer_id = cursor.fetchone()[0]
+        self.conn.commit()
         return customer_id
 
     def update(self, customer_id):

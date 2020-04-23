@@ -114,9 +114,9 @@ class SupplierHandler:
 
         if supplier_firstname and supplier_lastname and supplier_date_birth and supplier_email and supplier_phone:
             dao_user = UserDAO()
-            user_id = dao_user.insert(supplier_firstname, supplier_lastname, supplier_date_birth,supplier_email,supplier_phone)
+            user_id = dao_user.insert(supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
             dao_supplier = SupplierDAO()
-            supplier_id = dao_supplier.insert( supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email,supplier_phone)
+            supplier_id = dao_supplier.insert(user_id)
             result = self.build_supplier_attributes(supplier_id, user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
             return jsonify(Supplier = result), 201
         else:
