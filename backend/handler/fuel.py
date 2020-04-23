@@ -1,7 +1,6 @@
 from flask import jsonify
 from dao.resource import ResourceDAO
 from dao.fuel import FuelDAO
-from dao.user import UserDAO
 from dao.supplier import SupplierDAO
 
 class FuelHandler:
@@ -158,9 +157,9 @@ class FuelHandler:
     def getFuelAddress(self, fuel_id):
         fuel_dao = FuelDAO()
         supplier_id = fuel_dao.getFuelById(fuel_id)[2]
-        user_dao = UserDAO()
-        if not user_dao.getUserById(supplier_id):
-            return jsonify(Error = "User not found."), 404
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
         else:
             row = fuel_dao.getFuelAddress(supplier_id)
             if not row:
