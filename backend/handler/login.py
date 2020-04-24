@@ -7,9 +7,9 @@ class LoginHandler:
     def build_login_dict(self, row):
         result = {}
         result['login_id'] = row[0]
-        result['user_id'] = row[1]
-        result['username'] = row[2]
-        result['password'] = row[3]
+        result['username'] = row[1]
+        result['password'] = row[2]
+        result['user_id'] = row[3]
         return result
 
     def build_login_attributes(self, login_id, user_id, username, password):
@@ -19,15 +19,6 @@ class LoginHandler:
         result['username'] = username
         result['password'] = password
         return result
-
-    # def getAllLogins(self):
-    #     dao = LoginDAO()
-    #     login_list = dao.getAllLogins()
-    #     result_list = []
-    #     for row in login_list:
-    #         result = self.build_login_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Logins = result_list)
 
     def getLoginById(self, login_id):
         dao = LoginDAO()
@@ -43,17 +34,13 @@ class LoginHandler:
         if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
-            login_list = []
-            result_list = []
             dao = LoginDAO()
-            login_list = dao.getLoginByUserId(user_id)
-            # if not address_list:
-            #     return jsonify(Error = "Address Not Found"), 404
-            # else:
-            for row in login_list:
-                result = self.build_login_dict(row)
-                result_list.append(result)
-            return jsonify(Login = result_list)
+            row = dao.getLoginByUserId(user_id)
+            if not row:
+                return jsonify(Error = "Login Not Found"), 404
+            else:
+                login = self.build_login_dict(row)
+                return jsonify(Login = login)
 
     # def searchLogin(self, args):
     #     username = args.get("username")

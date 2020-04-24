@@ -10,36 +10,36 @@ class LoginDAO:
 
     def getLoginById(self, login_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM Login WHERE login_id = %s;"
-        cursor.execute(query, (login_id))
+        query = "SELECT * FROM login WHERE login_id = %s;"
+        cursor.execute(query, (login_id,))
         result = cursor.fetchone()
         return result
 
     def getLoginByUsername(self, username):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM Login WHERE username = %s;"
-        cursor.execute(query, (username))
+        query = "SELECT * FROM login WHERE username = %s;"
+        cursor.execute(query, (username,))
         result = cursor.fetchone()
         return result
 
     def getLoginByPassword(self, password):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM Login WHERE password = %s;"
-        cursor.execute(query, (password))
+        query = "SELECT * FROM login WHERE password = %s;"
+        cursor.execute(query, (password,))
         result = cursor.fetchone()
         return result
 
     def getLoginByUsernameAndPassword(self, username, password):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM Login WHERE username = %s AND password = %s;"
-        cursor.execute(query, (username, password))
+        query = "SELECT * FROM login WHERE username = %s AND password = %s;"
+        cursor.execute(query, (username, password,))
         result = cursor.fetchone()
         return result
 
     def getLoginByUserId(self, user_id):
         cursor = self.conn.cursor()
         query = "SELECT * FROM login WHERE user_id = %s;"
-        cursor.execute(query, (user_id))
+        cursor.execute(query, (user_id,))
         result = cursor.fetchone()
         return result
 

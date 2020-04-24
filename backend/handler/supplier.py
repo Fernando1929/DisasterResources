@@ -25,7 +25,7 @@ class SupplierHandler:
         result['supplier_lastname'] = row[3]
         result['supplier_date_birth'] = row[4]
         result['supplier_email'] = row[5]
-        result['supplier_phone'] = row[6]
+        result['supplier_phone'] = row[7]
         return result 
 
     def build_resource_dict(self, row):
@@ -83,7 +83,7 @@ class SupplierHandler:
         supplier_lastname = args.get("supplier_lastname")
         supplier_email = args.get('supplier_email')
         supplier_phone = args.get('supplier_phone')
-        suppplier_date_birth = args.get('suppplier_date_birth')
+        suppplier_date_birth = args.get('supplier_date_birth')
         dao = SupplierDAO()
         supplier_list = []
         if (len(args) == 2) and supplier_firstname and supplier_lastname:

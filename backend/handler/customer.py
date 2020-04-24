@@ -13,7 +13,7 @@ class CustomerHandler:
         result['customer_lastname'] = row[3]
         result['customer_date_birth'] = row[4]
         result['customer_email'] = row[5]
-        result['customer_phone'] = row[6]
+        result['customer_phone'] = row[7]
         return result
 
     def build_customer_attributes(self, customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone):

@@ -3,7 +3,9 @@ import psycopg2
 
 class CustomerDAO:
     def __init__(self):
-        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
     # customer = customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone
@@ -51,7 +53,7 @@ class CustomerDAO:
             result.append(row)
         return result
 
-    def getCustomerByEmail(self, customer_email):
+    def getCustomersByEmail(self, customer_email):
         cursor = self.conn.cursor()
         query = "select * from customer natural inner join users natural inner join user_phone where user_email = %s;"
         cursor.execute(query, (customer_email,))
@@ -60,7 +62,7 @@ class CustomerDAO:
             result.append(row)
         return result
 
-    def getCustomerByPhone(self, customer_phone):
+    def getCustomersByPhone(self, customer_phone):
         cursor = self.conn.cursor()
         query = "select * from customer natural inner join users natural inner join user_phone where user_phone = %s;"
         cursor.execute(query, (customer_phone,))

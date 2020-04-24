@@ -21,14 +21,14 @@ class ReservationDAO:
     def getReservationById(self, reservation_id):
         cursor = self.conn.cursor()
         query = "SELECT * FROM reservation WHERE reservation_id = %s;"
-        cursor.execute(query, (reservation_id))
+        cursor.execute(query, (reservation_id,))
         result = cursor.fetchone()
         return result
 
     def getReservationsByDate(self, reservation_date):
         cursor = self.conn.cursor()
         query = "SELECT * FROM reservation WHERE reservation_date = %s;"
-        cursor.execute(query, (reservation_date))
+        cursor.execute(query, (reservation_date,))
         result = []
         for row in cursor:
             result.append(row)
@@ -37,7 +37,7 @@ class ReservationDAO:
     def getReservationsByStatus(self, reservation_status):
         cursor = self.conn.cursor()
         query = "SELECT * FROM reservation WHERE reservation_status = %s;"
-        cursor.execute(query, (reservation_status))
+        cursor.execute(query, (reservation_status,))
         result = []
         for row in cursor:
             result.append(row)
@@ -46,7 +46,7 @@ class ReservationDAO:
     def getReservationsByDateAndStatus(self, reservation_date, reservation_status):
         cursor = self.conn.cursor()
         query = "SELECT * FROM reservation WHERE reservation_date = %s AND reservation_status = %s;"
-        cursor.execute(query, (reservation_date, reservation_status))
+        cursor.execute(query, (reservation_date, reservation_status,))
         result = []
         for row in cursor:
             result.append(row)
@@ -55,7 +55,7 @@ class ReservationDAO:
     def getReservationsByCustomerId(self, customer_id):
         cursor = self.conn.cursor()
         query = "SELECT * FROM reservation WHERE customer_id = %s;"
-        cursor.execute(query, (customer_id))
+        cursor.execute(query, (customer_id,))
         result = []
         for row in cursor:
             result.append(row)
@@ -64,7 +64,7 @@ class ReservationDAO:
     def insert(self, customer_id, reservation_date, reservation_quantity, reservation_status):
         cursor = self.conn.cursor()
         query = "INSERT INTO reservation (customer_id, reservation_date, reservation_quantity, reservation_status) VALUES (%s, %s, %s, %s) RETURNING reservation_id;"
-        cursor.execute(query, (customer_id, reservation_date, reservation_quantity, reservation_status))
+        cursor.execute(query, (customer_id, reservation_date, reservation_quantity, reservation_status,))
         reservation_id = cursor.fetchone()[0]
         self.conn.commit()
         return reservation_id
