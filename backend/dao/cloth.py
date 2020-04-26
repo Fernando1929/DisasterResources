@@ -149,7 +149,7 @@ class ClothDAO:
 
     def insert(self, resource_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
         cursor = self.conn.cursor()
-        query = "insert into water(resource_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type) values (%s, %s, %s, %s, %s, %s) returning cloth_id;"
+        query = "insert into cloth(resource_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type) values (%s, %s, %s, %s, %s, %s) returning cloth_id;"
         cursor.execute(query, (resource_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type))
         cloth_id = cursor.fetchone()[0]
         self.conn.commit()
