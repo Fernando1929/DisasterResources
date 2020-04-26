@@ -8,17 +8,17 @@ class HeavyEquipHandler:
 
     def build_hequip_dict(self, row):
         result = {}
-        result['hequip_id'] = row[0]
-        result['resource_id'] = row[1]
-        result['supplier_id'] = row[2]
-        result['category'] = row[3]
-        result['hequip_name'] = row[4]
-        result['hequip_brand'] = row[5]
-        result['hequip_quantity'] = row[6]
-        result['hequip_price'] = row[7]
-        result['hequip_type'] = row[8]
-        result['hequip_model'] = row[9]
-        result['hequip_condition'] = row[10]
+        result['resource_id'] = row[0]
+        result['hequip_id'] = row[1]
+        result['hequip_type'] = row[2]
+        result['hequip_model'] = row[3]
+        result['hequip_condition'] = row[4]
+        result['supplier_id'] = row[5]
+        result['category'] = row[6]
+        result['hequip_name'] = row[7]
+        result['hequip_brand'] = row[8]
+        result['hequip_quantity'] = row[9]
+        result['hequip_price'] = row[10]
         return result
 
     def build_hequip_attributes(self, hequip_id, resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition):
