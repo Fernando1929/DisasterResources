@@ -6,36 +6,36 @@ from dao.supplier import SupplierDAO
 
 class MedDeviceHandler:
 
-    def build_mdevice_dict(self, row):
+    def build_med_device_dict(self, row):
         result = {}
-        result['mdevice_id'] = row[0]
-        result['resource_id'] = row[1]
-        result['supplier_id'] = row[2]
-        result['category'] = row[3]
-        result['mdevice_name'] = row[4]
-        result['mdevice_brand'] = row[5]
-        result['mdevice_quantity'] = row[6]
-        result['mdevice_price'] = row[7]
-        result['mdevice_type'] = row[8]
-        result['mdevice_model'] = row[9]
-        result['mdevice_condition'] = row[10]
-        result['mdevice_power_type'] = row[11]
+        result['resource_id'] = row[0]
+        result['med_device_id'] = row[1]
+        result['med_device_type'] = row[2]
+        result['med_device_model'] = row[3]
+        result['med_device_condition'] = row[4]
+        result['med_device_power_type'] = row[5]
+        result['supplier_id'] = row[6]
+        result['category'] = row[7]
+        result['med_device_name'] = row[8]
+        result['med_device_brand'] = row[9]
+        result['med_device_quantity'] = row[10]
+        result['med_device_price'] = row[11]
         return result
 
-    def build_mdevice_attributes(self, mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type):
+    def build_med_device_attributes(self, med_device_id, resource_id, supplier_id, category, med_device_name, med_device_brand, med_device_quantity, med_device_price, med_device_type, med_device_model, med_device_condition, med_device_power_type):
         result = {}
-        result['mdevice_id'] = mdevice_id
+        result['mdevice_id'] = med_device_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
         result['category'] = category
-        result['mdevice_name'] = mdevice_name
-        result['mdevice_brand'] = mdevice_brand
-        result['mdevice_quantity'] = mdevice_quantity
-        result['mdevice_price'] = mdevice_price
-        result['mdevice_type'] = mdevice_type
-        result['mdevice_model'] = mdevice_model
-        result['mdevice_condition'] = mdevice_condition
-        result['mdevice_power_type'] = mdevice_power_type
+        result['mdevice_name'] = med_device_name
+        result['mdevice_brand'] = med_device_brand
+        result['mdevice_quantity'] = med_device_quantity
+        result['mdevice_price'] = med_device_price
+        result['mdevice_type'] = med_device_type
+        result['mdevice_model'] = med_device_model
+        result['mdevice_condition'] = med_device_condition
+        result['mdevice_power_type'] = med_device_power_type
         return result
 
     def build_address_dict(self, row):
@@ -51,47 +51,47 @@ class MedDeviceHandler:
 
     def getAllMedDevices(self):
         dao = MedDeviceDAO()
-        mdevice_list = dao.getAllMedDevices()
+        med_device_list = dao.getAllMedDevices()
         result_list = []
-        for row in mdevice_list:
-            result = self.build_mdevice_dict(row)
+        for row in med_device_list:
+            result = self.build_med_device_dict(row)
             result_list.append(result)
         return jsonify(MedicalDevices = result_list)
 
     def getAllAvailableMedDevices(self):
         dao = MedDeviceDAO()
-        mdevice_list = dao.getAllAvailableMedDevices()
+        med_device_list = dao.getAllAvailableMedDevices()
         result_list = []
-        for row in mdevice_list:
-            result = self.build_mdevice_dict(row)
+        for row in med_device_list:
+            result = self.build_med_device_dict(row)
             result_list.append(result)
         return jsonify(MedicalDevices  = result_list)
 
     def getAllReservedMedDevices(self):
         dao = MedDeviceDAO()
-        mdevice_list = dao.getAllReservedMedDevices()
+        med_device_list = dao.getAllReservedMedDevices()
         result_list = []
-        for row in mdevice_list:
-            result = self.build_mdevice_dict(row)
+        for row in med_device_list:
+            result = self.build_med_device_dict(row)
             result_list.append(result)
         return jsonify(MedicalDevices = result_list)
 
     def getAllRequestedMedDevices(self):
         dao = MedDeviceDAO()
-        mdevice_list = dao.getAllRequestedMedDevices()
+        med_device_list = dao.getAllRequestedMedDevices()
         result_list = []
-        for row in mdevice_list:
-            result = self.build_mdevice_dict(row)
+        for row in med_device_list:
+            result = self.build_med_device_dict(row)
             result_list.append(result)
         return jsonify(MedicalDevices = result_list)
 
-    def getMedDeviceById(self, mdevice_id):
+    def getMedDeviceById(self, med_device_id):
         dao = MedDeviceDAO()
-        row = dao.getMedDeviceById(mdevice_id)
+        row = dao.getMedDeviceById(med_device_id)
         if not row:
             return jsonify(Error = "Medical Device Not Found"), 404
         else:
-            mdevice = self.build_mdevice_dict(row)
+            mdevice = self.build_med_device_dict(row)
             return jsonify(MedicalDevice = mdevice)
 
     def getMedDeviceByResourceId(self, resource_id):
@@ -100,7 +100,7 @@ class MedDeviceHandler:
         if not row:
             return jsonify(Error = "Medical Device Not Found"), 404
         else:
-            hequip = self.build_mdevice_dict(row)
+            hequip = self.build_med_device_dict(row)
             return jsonify(MedicalDevice = hequip)
 
     def getMedDevicesBySupplierId(self, supplier_id):
@@ -108,12 +108,12 @@ class MedDeviceHandler:
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
         else:
-            mdevice_list = []
+            med_device_list = []
             result_list = []
-            mdevice_dao = MedDeviceDAO()
-            mdevice_list = mdevice_dao.getMedDevicesBySupplierId(supplier_id)
-            for row in mdevice_list:
-                result = self.build_mdevice_dict(row)
+            med_device_dao = MedDeviceDAO()
+            med_device_list = med_device_dao.getMedDevicesBySupplierId(supplier_id)
+            for row in med_device_list:
+                result = self.build_med_device_dict(row)
                 result_list.append(result)
             return jsonify(MedicalDevices = result_list)
 
@@ -122,12 +122,12 @@ class MedDeviceHandler:
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
         else:
-            mdevice_list = []
+            med_device_list = []
             result_list = []
-            mdevice_dao = MedDeviceDAO()
-            mdevice_list = mdevice_dao.getAllAvailableMedDevicesBySupplierId(supplier_id)
-            for row in mdevice_list:
-                result = self.build_mdevice_dict(row)
+            med_device_dao = MedDeviceDAO()
+            med_device_list = med_device_dao.getAllAvailableMedDevicesBySupplierId(supplier_id)
+            for row in med_device_list:
+                result = self.build_med_device_dict(row)
                 result_list.append(result)
             return jsonify(MedicalDevices = result_list)
 
@@ -136,12 +136,12 @@ class MedDeviceHandler:
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
         else:
-            mdevice_list = []
+            med_device_list = []
             result_list = []
-            mdevice_dao = MedDeviceDAO()
-            mdevice_list = mdevice_dao.getAllReservedMedDevicesBySupplierId(supplier_id)
-            for row in mdevice_list:
-                result = self.build_mdevice_dict(row)
+            med_device_dao = MedDeviceDAO()
+            med_device_list = med_device_dao.getAllReservedMedDevicesBySupplierId(supplier_id)
+            for row in med_device_list:
+                result = self.build_med_device_dict(row)
                 result_list.append(result)
             return jsonify(MedicalDevices = result_list)
 
@@ -150,43 +150,43 @@ class MedDeviceHandler:
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
         else:
-            mdevice_list = []
+            med_device_list = []
             result_list = []
-            mdevice_dao = MedDeviceDAO()
-            mdevice_list = mdevice_dao.getAllRequestedMedDevicesBySupplierId(supplier_id)
-            for row in mdevice_list:
-                result = self.build_mdevice_dict(row)
+            med_device_dao = MedDeviceDAO()
+            med_device_list = med_device_dao.getAllRequestedMedDevicesBySupplierId(supplier_id)
+            for row in med_device_list:
+                result = self.build_med_device_dict(row)
                 result_list.append(result)
             return jsonify(MedicalDevice = result_list)
 
     def searchMedDevices(self, args):
-        mdevice_brand = args.get("mdevice_brand")
-        mdevice_type = args.get("mdevice_type")
-        mdevice_condition = args.get("mdevice_condition")
+        med_device_brand = args.get("med_device_brand")
+        med_device_type = args.get("med_device_type")
+        med_device_condition = args.get("med_device_condition")
         dao = MedDeviceDAO()
-        mdevice_list = []
-        if (len(args) == 1) and mdevice_brand:
-            mdevice_list = dao.getMedDevicesByBrand(mdevice_brand)
-        elif (len(args) == 1) and mdevice_type:
-            mdevice_list = dao.getMedDevicesByType(mdevice_type)
-        elif (len(args) == 1) and mdevice_condition:
-            mdevice_list = dao.getMedDevicesByCondition(mdevice_condition)
+        med_device_list = []
+        if (len(args) == 1) and med_device_brand:
+            med_device_list = dao.getMedDevicesByBrand(med_device_brand)
+        elif (len(args) == 1) and med_device_type:
+            med_device_list = dao.getMedDevicesByType(med_device_type)
+        elif (len(args) == 1) and med_device_condition:
+            med_device_list = dao.getMedDevicesByCondition(med_device_condition)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
-        for row in mdevice_list:
-            result = self.build_mdevice_dict(row)
+        for row in med_device_list:
+            result = self.build_med_device_dict(row)
             result_list.append(result)
         return jsonify(MedicalDevices = result_list)
 
-    def getMedDeviceAddress(self, mdevice_id):
-        mdevice_dao = MedDeviceDAO()
-        user_id = mdevice_dao.getMedDeviceById(mdevice_id)[2]
+    def getMedDeviceAddress(self, med_device_id):
+        med_device_dao = MedDeviceDAO()
+        user_id = med_device_dao.getMedDeviceById(med_device_id)[2]
         user_dao = UserDAO()
         if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
         else:
-            row = mdevice_dao.getMedDeviceAddress(user_id)
+            row = med_device_dao.getMedDeviceAddress(user_id)
             if not row:
                 return jsonify(Error = "Address Not Found"), 404
             else:
@@ -196,56 +196,56 @@ class MedDeviceHandler:
     def insertMedDevice(self, json):
         supplier_id = json["supplier_id"]
         category = json["category"]
-        mdevice_name = json["mdevice_name"]
-        mdevice_brand = json["mdevice_brand"]
-        mdevice_quantity = json["mdevice_quantity"]
-        mdevice_price = json["mdevice_price"]
-        mdevice_type = json["mdevice_type"]
-        mdevice_model = json["mdevice_model"]
-        mdevice_condition = json["mdevice_condition"]
-        mdevice_power_type = json["mdevice_power_type"]
+        med_device_name = json["med_device_name"]
+        med_device_brand = json["med_device_brand"]
+        med_device_quantity = json["med_device_quantity"]
+        med_device_price = json["med_device_price"]
+        med_device_type = json["med_device_type"]
+        med_device_model = json["med_device_model"]
+        med_device_condition = json["med_device_condition"]
+        med_device_power_type = json["med_device_power_type"]
 
-        if supplier_id and category and mdevice_name and mdevice_brand and mdevice_quantity and mdevice_price and mdevice_type and mdevice_model and mdevice_condition and mdevice_power_type:
+        if supplier_id and category and med_device_name and med_device_brand and med_device_quantity and med_device_price and med_device_type and med_device_model and med_device_condition and med_device_power_type:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price)
-            mdevice_dao = MedDeviceDAO()
-            mdevice_id = mdevice_dao.insert(resource_id, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
-            result = self.build_mdevice_attributes(mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
+            resource_id = resource_dao.insert(supplier_id, category, med_device_name, med_device_brand, med_device_quantity, med_device_price)
+            med_device_dao = MedDeviceDAO()
+            med_device_id = med_device_dao.insert(resource_id, med_device_type, med_device_model, med_device_condition, med_device_power_type)
+            result = self.build_med_device_attributes(med_device_id, resource_id, supplier_id, category, med_device_name, med_device_brand, med_device_quantity, med_device_price, med_device_type, med_device_model, med_device_condition, med_device_power_type)
             return jsonify(MedicalDevice = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
 
-    def updateMedDevice(self, mdevice_id, json):
-        mdevice_dao = MedDeviceDAO()
-        if not mdevice_dao.getMedDeviceById(mdevice_id):
+    def updateMedDevice(self, med_device_id, json):
+        med_device_dao = MedDeviceDAO()
+        if not med_device_dao.getMedDeviceById(med_device_id):
             return jsonify(Error = "Medical Device not found."), 404
         else:
             supplier_id = json["supplier_id"]
             category = json["category"]
-            mdevice_name = json["mdevice_name"]
-            mdevice_brand = json["mdevice_brand"]
-            mdevice_quantity = json["mdevice_quantity"]
-            mdevice_price = json["mdevice_price"]
-            mdevice_type = json["mdevice_type"]
-            mdevice_model = json["mdevice_model"]
-            mdevice_condition = json["mdevice_condition"]
-            mdevice_power_type = json["mdevice_power_type"]
+            med_device_name = json["med_device_name"]
+            med_device_brand = json["med_device_brand"]
+            med_device_quantity = json["med_device_quantity"]
+            med_device_price = json["med_device_price"]
+            med_device_type = json["med_device_type"]
+            med_device_model = json["med_device_model"]
+            med_device_condition = json["med_device_condition"]
+            med_device_power_type = json["med_device_power_type"]
             
-            if supplier_id and category and mdevice_name and mdevice_brand and mdevice_quantity and mdevice_price and mdevice_type and mdevice_model and mdevice_condition and mdevice_power_type:
-                resource_id = mdevice_dao.update(mdevice_id, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
+            if supplier_id and category and med_device_name and med_device_brand and med_device_quantity and med_device_price and med_device_type and med_device_model and med_device_condition and med_device_power_type:
+                resource_id = med_device_dao.update(med_device_id, med_device_type, med_device_model, med_device_condition, med_device_power_type)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price)
-                result = self.build_mdevice_attributes(mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power_type)
+                resource_dao.update(resource_id, supplier_id, category, med_device_name, med_device_brand, med_device_quantity, med_device_price)
+                result = self.build_med_device_attributes(med_device_id, resource_id, supplier_id, category, med_device_name, med_device_brand, med_device_quantity, med_device_price, med_device_type, med_device_model, med_device_condition, med_device_power_type)
                 return jsonify(Medical_Device = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
 
-    def deleteMedDevice(self, mdevice_id):
-        mdevice_dao = MedDeviceDAO()
-        if not mdevice_dao.getMedDeviceById(mdevice_id):
+    def deleteMedDevice(self, med_device_id):
+        med_device_dao = MedDeviceDAO()
+        if not med_device_dao.getMedDeviceById(med_device_id):
             return jsonify(Error = "Medical Device not found."), 404
         else:
-            resource_id = mdevice_dao.delete(mdevice_id)
+            resource_id = med_device_dao.delete(med_device_id)
             resource_dao = ResourceDAO()
             resource_dao.delete(resource_id)
             return jsonify(DeleteStatus = "OK"), 200
