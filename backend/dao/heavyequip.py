@@ -131,7 +131,7 @@ class HeavyEquipDAO:
 
     def insert(self, resource_id, heavyequip_type, heavyequip_model, heavyequip_condition):
         cursor = self.conn.cursor()
-        query = "insert into water(resource_id, heavyequip_type, heavyequip_model, heavyequip_condition) values (%s, %s, %s, %s) returning heavyequip_id;"
+        query = "insert into heavy_equipment(resource_id, heavyequip_type, heavyequip_model, heavyequip_condition) values (%s, %s, %s, %s) returning heavyequip_id;"
         cursor.execute(query, (resource_id, heavyequip_type, heavyequip_model, heavyequip_condition))
         heavyequip_id = cursor.fetchone()[0]
         self.conn.commit()
