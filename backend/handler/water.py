@@ -8,8 +8,8 @@ class WaterHandler:
 
     def build_water_dict(self, row):
         result = {}
-        result['water_id'] = row[0]
-        result['resource_id'] = row[1]
+        result['resource_id'] = row[0]
+        result['water_id'] = row[1]
         result['water_size'] = row[2]
         result['water_container'] = row[3]
         result['water_type'] = row[4]
