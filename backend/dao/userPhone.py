@@ -9,9 +9,11 @@ class UserPhoneDAO:
 
     def insert(self, user_id, phone):
         cursor = self.conn.cursor()
-        query = "insert into user_phone(user_id, user_phone) values (%s, %s);"
+        query = "insert into user_phone(user_id, user_phone) values (%s, %s) returning phone_id;"
         cursor.execute(query, (user_id, phone))
+        phone_id = cursor.fetchone()[0]
         self.conn.commit()
+        return phone_id
 
     def update(self, user_id, firstname, lastname, date_bith, email, phone):
         return user_id
