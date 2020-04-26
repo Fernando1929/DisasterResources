@@ -7,11 +7,11 @@ class PaypalHandler:
 
     def build_paypal_dict(self, row):
         result = {}
-        result['paypal_id'] = row[0]
-        result['payment_id'] = row[1]
-        result['customer_id'] = row[2]
-        result['paypal_username'] = row[3]
-        result['paypal_password'] = row[4]
+        result['payment_id'] = row[0]
+        result['paypal_id'] = row[1]
+        result['paypal_username'] = row[2]
+        result['paypal_password'] = row[3]
+        result['customer_id'] = row[4]
         return result
 
     def build_paypal_attributes(self, paypal_id, payment_id, customer_id, paypal_username, paypal_password):
