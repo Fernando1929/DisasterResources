@@ -8,19 +8,19 @@ class ClothHandler:
 
     def build_cloth_dict(self, row):
         result = {}
-        result['cloth_id'] = row[0]
-        result['resource_id'] = row[1]
-        result['supplier_id'] = row[2]
-        result['category'] = row[3]
-        result['cloth_name'] = row[4]
-        result['cloth_brand'] = row[5]
-        result['cloth_quantity'] = row[6]
-        result['cloth_price'] = row[7]
-        result['cloth_size'] = row[8]
-        result['cloth_material'] = row[9]
-        result['cloth_condition'] = row[10]
-        result['cloth_gender'] = row[11]
-        result['cloth_type'] = row[12]
+        result['resource_id'] = row[0]
+        result['cloth_id'] = row[1]
+        result['cloth_size'] = row[2]
+        result['cloth_material'] = row[3]
+        result['cloth_condition'] = row[4]
+        result['cloth_gender'] = row[5]
+        result['cloth_type'] = row[6]
+        result['supplier_id'] = row[7]
+        result['category'] = row[8]
+        result['cloth_name'] = row[9]
+        result['cloth_brand'] = row[10]
+        result['cloth_quantity'] = row[11]
+        result['cloth_price'] = row[12]
         return result
 
     def build_cloth_attributes(self, cloth_id, resource_id, supplier_id, category, cloth_name, cloth_brand, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
