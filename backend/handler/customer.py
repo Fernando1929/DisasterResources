@@ -7,16 +7,17 @@ class CustomerHandler:
     
     def build_customer_dict(self, row):
         result = {}
-        result['customer_id'] = row[0]
-        result['user_id'] = row[1]
+        result['user_id'] = row[0]
+        result['customer_id'] = row[1]
         result['customer_firstname'] = row[2]
         result['customer_lastname'] = row[3]
         result['customer_date_birth'] = row[4]
         result['customer_email'] = row[5]
-        result['customer_phone'] = row[6]
+        result['customer_phone_id'] = row[6]
+        result['customer_phone'] = row[7]
         return result
 
-    def build_customer_attributes(self, customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone):
+    def build_customer_attributes(self, customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone_id, customer_phone):
         result = {}
         result['customer_id'] = customer_id
         result['user_id'] = user_id
@@ -24,6 +25,7 @@ class CustomerHandler:
         result['customer_lastname'] = customer_lastname
         result['customer_date_birth'] = customer_date_birth
         result['customer_email'] = customer_email
+        result['customer_phone_id'] = customer_phone_id
         result['customer_phone'] = customer_phone
         return result
 
@@ -84,10 +86,10 @@ class CustomerHandler:
             user_dao = UserDAO()
             user_id = user_dao.insert(customer_firstname, customer_lastname, customer_date_birth, customer_email)
             dao_phone = UserPhoneDAO()
-            dao_phone.insert(user_id, customer_phone)         
+            customer_phone_id = dao_phone.insert(user_id, customer_phone)         
             customer_dao = CustomerDAO()
             customer_id = customer_dao.insert(user_id)
-            result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+            result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone_id, customer_phone)
             return jsonify(Customer = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
