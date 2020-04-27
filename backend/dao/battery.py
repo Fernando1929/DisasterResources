@@ -1,14 +1,21 @@
+from config.dbconfig import pg_config
+import psycopg2
+
+
 class BatteryDAO:
-    def __init__(self):
-        super().__init__()
 
     #battery = supplier_id, resource_id, power_id, battery_id, resource_category, resource_name, resource_brand, resource_quantity, resource_price, power_capacity, power_condition, battery_type
+    def __init__(self):
+        connection_url = "dbname=%s user=%s password=%s"% (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
     
     def getAllBatteries(self):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join bateries;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
     
     def getAllAvailableBatteries(self):
@@ -91,9 +98,13 @@ class BatteryDAO:
         result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
         return result
 
-    def insert(self, resource_id, power_id, battery_type):
-        resource_id = 1
-        return resource_id
+    def insert(self, resource_id, power_condition, power_capacity, battery_type):
+        cursor = self.conn.cursor()
+        query = "insert into bateries(resource_id, power_condition, power_capacity, battery_type) values(%s,%s,%s,%s) returning baterry_id"
+        cursor.execute(query,(resource_id, power_condition, power_capacity, battery_type))
+        battery_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return battery_id
         
     def update(self,resource_id):
         resource_id = 1

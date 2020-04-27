@@ -2,56 +2,84 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class CompanyDAO:
-    
-    def __init__(self):
-        super().__init__()
-    
+
     #company = company_id, company_name, company_address, company_phone
+    def __init__(self):
+        connection_url = "dbname=%s user=%s password=%s"% (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
     
     def getAllCompanies(self):
-        result = [
-            [1, 'Baxter', 'Jayuya','7879999999'], 
-            [2, "Pepe's Company", 'San Juan','7879998999'], 
-        ]
+        cursor = self.conn.cursor()
+        query = "Select * from company;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCompanyById(self, company_id):
-        result =  [1, 'Baxter', 'Jayuya','7879999999']
+        cursor = self.conn.cursor()
+        query = "Select * from company where company_id = %s;"
+        cursor.execute(query,(company_id))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCompanyByName(self, company_name):
-        result = [
-            [1, 'Baxter', 'Jayuya','7879999999'], 
-            [2, "Pepe's Company", 'San Juan','7879998999']
-        ]
+        cursor = self.conn.cursor()
+        query = "Select * from company where company_name = %s;"
+        cursor.execute(query,(company_name))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCompanyByAddress(self, company_address):
-        result = [
-           [1, 'Baxter', 'Jayuya','7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "Select * from company where company_address = %s;"
+        cursor.execute(query,(company_address))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCompanyByPhone(self, company_phone):
-        result = [
-            [1, 'Baxter', 'Jayuya','7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "Select * from company where company_phone = %s;"
+        cursor.execute(query,(company_phone))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getCompanyBySupplierId(self, supplier_id):
-        result = [
-            [1, 'Baxter', 'Jayuya','7879999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "Select * from company Natural Inner Join represents where supplier_id = %s;"
+        cursor.execute(query,(supplier_id))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def insert(self, company_name, company_address, company_phone):
-        company_id =1
+        cursor = self.conn.cursor()
+        query = "insert into company(company_name, company_address, company_phone) values(%s,%s,%s) returning resource_id;"
+        cursor.execute(query,(company_name, company_address, company_phone))
+        company_id = cursor.fetchone()[0]
+        self.conn.commit()
         return company_id
 
     def update(self, company_id, company_name, company_address, company_phone):
-        company_id =1
+        cursor = self.conn.cursor()
+        query = "update company set company_name = %s, company_address = %s, company_phone = %s where company_id = %s;"
+        cursor.execute(query,(company_name, company_address, company_phone,company_id))
+        self.conn.commit()
         return company_id
 
     def delete(self, company_id):
-        company_id =1
+        cursor = self.conn.cursor()
+        query = "delete from company where company_id = %s;"
+        cursor.execute(query,(company_id))
+        self.conn.commit()
         return company_id
