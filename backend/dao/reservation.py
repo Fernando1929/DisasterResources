@@ -7,7 +7,7 @@ class ReservationDAO:
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
-    #reservation = reservation_id, customer_id, reservation_date, reservation_quantity, reservation_status
+    #reservation = reservation_id, customer_id, reservation_date, reservation_status
 
     def getAllReservations(self):
         cursor = self.conn.cursor()
@@ -61,15 +61,21 @@ class ReservationDAO:
             result.append(row)
         return result
 
-    def insert(self, customer_id, reservation_date, reservation_quantity, reservation_status):
+    def insert(self, customer_id, reservation_date, reservation_status):
         cursor = self.conn.cursor()
-        query = "INSERT INTO reservation (customer_id, reservation_date, reservation_quantity, reservation_status) VALUES (%s, %s, %s, %s) RETURNING reservation_id;"
-        cursor.execute(query, (customer_id, reservation_date, reservation_quantity, reservation_status,))
+        query = "INSERT INTO reservation (customer_id, reservation_date, reservation_status) VALUES (%s, %s, %s) RETURNING reservation_id;"
+        cursor.execute(query, (customer_id, reservation_date, reservation_status,))
         reservation_id = cursor.fetchone()[0]
         self.conn.commit()
         return reservation_id
 
-    def update(self, reservation_id, customer_id, reservation_date, reservation_quantity, reservation_status):
+    def insertResourceReservation(self, reservation_id, resource_id, quantity):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO resource_reservations (reservation_id, resource_id, reservation_quantity) VALUES (%s, %s, %s);"
+        cursor.execute(query, (reservation_id, resource_id, quantity))
+        self.conn.commit()
+
+    def update(self, reservation_id, customer_id, reservation_date, reservation_status):
         return reservation_id
 
     def delete(self, reservation_id):

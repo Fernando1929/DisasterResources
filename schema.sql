@@ -58,28 +58,27 @@ resource_price float);
 
 -- Request table
 CREATE TABLE request (request_id serial primary key, customer_id integer references customer(customer_id), 
-request_title varchar(40), request_quantity integer, request_date char(10));
+request_title varchar(40), request_date char(10));
 
 -- Resource Requests table
 CREATE TABLE resource_requests (request_id integer references request(request_id), resource_id integer references 
-resource(resource_id), primary key (request_id, resource_id));
+resource(resource_id), primary key (request_id, resource_id), request_quantity integer);
 
 -- Reservation table
 CREATE TABLE reservation (reservation_id serial primary key, customer_id integer references customer(customer_id), 
-reservation_date char(10), reservation_quantity integer, reservation_status varchar(10));
+reservation_date char(10), reservation_status varchar(10));
 
 -- Resource Reservations table
 CREATE TABLE resource_reservations (reservation_id integer references reservation(reservation_id), resource_id 
-integer references resource(resource_id), primary key (reservation_id, resource_id));
+integer references resource(resource_id), primary key (reservation_id, resource_id), reservation_quantity integer);
 
 -- Order table
 CREATE TABLE order (order_id serial primary key, customer_id integer references customer(customer_id), 
-payment_id integer references payment(payment_id), order_date char(10), order_quantity integer, 
-order_price float, order_status varchar(10));
+payment_id integer references payment(payment_id), order_date char(10), order_price float, order_status varchar(10));
 
 -- Resource Orders table
 CREATE TABLE resource_orders (order_id integer references order(order_id), resource_id integer references 
-resource(resource_id), primary key (order_id, resource_id), discount float);
+resource(resource_id), primary key (order_id, resource_id), discount float, order_quantity integer);
 
 -- Fuel table
 CREATE TABLE fuel (fuel_id serial primary key, resource_id integer references resource(resource_id), 
@@ -87,11 +86,11 @@ fuel_type varchar(10), fuel_gallons float);
 
 -- Food table
 CREATE TABLE food (food_id serial primary key, resource_id integer references resource(resource_id), 
-food_category varchar(15), food_container varchar(15), food_type varchar(15), food_expdate char(5), food_ounces float);
+food_category varchar(15), food_container varchar(15), food_type varchar(15), food_expdate char(10), food_ounces float);
 
 -- Medicine table
 CREATE TABLE medicine (med_id serial primary key, resource_id integer references resource(resource_id), 
-med_type varchar(15), med_dose varchar(10), med_prescript char(1), med_expdate char(5));
+med_type varchar(15), med_dose varchar(10), med_prescript char(1), med_expdate char(10));
 
 -- Tools table
 CREATE TABLE tools (tool_id serial primary key, resource_id integer references resource(resource_id), 
@@ -104,7 +103,7 @@ med_device_power_type varchar(10));
 
 -- Water table
 CREATE TABLE water (water_id serial primary key, resource_id integer references resource(resource_id), 
-water_size varchar(10), water_container varchar(10), water_type varchar(10), water_exp_date char(5));
+water_size varchar(10), water_container varchar(10), water_type varchar(10), water_exp_date char(10));
 
 -- Cloth table
 CREATE TABLE cloth (cloth_id serial primary key, resource_id integer references resource(resource_id), 

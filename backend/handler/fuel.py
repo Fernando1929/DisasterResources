@@ -7,16 +7,16 @@ class FuelHandler:
 
     def build_fuel_dict(self, row):
         result = {}
-        result['fuel_id'] = row[0]
-        result['resource_id'] = row[1]
-        result['supplier_id'] = row[2]
-        result['category'] = row[3]
-        result['fuel_name'] = row[4]
-        result['fuel_brand'] = row[5]
-        result['fuel_quantity'] = row[6]
-        result['fuel_price'] = row[7]
-        result['fuel_type'] = row[8]
-        result['fuel_gallons'] = row[9]
+        result['resource_id'] = row[0]
+        result['fuel_id'] = row[1]
+        result['fuel_type'] = row[2]
+        result['fuel_gallons'] = row[3]
+        result['supplier_id'] = row[4]
+        result['category'] = row[5]
+        result['fuel_name'] = row[6]
+        result['fuel_brand'] = row[7]
+        result['fuel_quantity'] = row[8]
+        result['fuel_price'] = row[9]
         return result
 
     def build_fuel_attributes(self, fuel_id, resource_id, supplier_id, category, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons):
@@ -156,7 +156,7 @@ class FuelHandler:
 
     def getFuelAddress(self, fuel_id):
         fuel_dao = FuelDAO()
-        supplier_id = fuel_dao.getFuelById(fuel_id)[2]
+        supplier_id = fuel_dao.getFuelById(fuel_id)[4]
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
@@ -200,7 +200,7 @@ class FuelHandler:
         fuel_type = json["fuel_type"]
         fuel_gallons = json["fuel_gallons"]
 
-        if supplier_id and category and fuel_name and fuel_brand and fuel_quantity and fuel_price and fuel_type and fuel_gallons:
+        if supplier_id and category and fuel_name and fuel_brand and fuel_quantity and (fuel_price>=0) and fuel_type and fuel_gallons:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category, fuel_name, fuel_brand, fuel_quantity, fuel_price)
             fuel_dao = FuelDAO()
