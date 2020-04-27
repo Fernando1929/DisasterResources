@@ -1,20 +1,27 @@
+from config.dbconfig import pg_config
+import psycopg2
 class WaterDAO:
     def __init__(self):
-        super().__init__()
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     # water = water_id, resource_id, supplier_id, category, water_name, water_quantity, water_price, water_size, water_container, water_type, water_exp_date
 
     def getAllWaters(self):
-        result = [
-            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from water;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getAllAvailableWaters(self):
         result = [
-            [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"],
-            [2, 2, 2, "water", "Water", "Great Value", 5, 1.00, 8, "Bottle", "Purified", "02/24/2024"]
+            [1, 1, 1, "water", "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"],
+            [2, 2, 2, "water", "Water", "Great Value", 5, 0.00, 8, "Bottle", "Purified", "02/24/2024"]
         ]
         return result
 
@@ -33,7 +40,7 @@ class WaterDAO:
         return result
 
     def getWaterById(self, water_id):
-        result = [1, 1, 1, "water", "Water", "Nikini", 10, 1.00, 16, "Bottle", "Purified", "02/12/2022"]
+        result = [1, 1, 1, "water", "Water", "Nikini", 10, 0.00, 16, "Bottle", "Purified", "02/12/2022"]
         return result
 
     def getWaterByResourceId(self, resource_id):
@@ -94,7 +101,11 @@ class WaterDAO:
         return result
 
     def insert(self, resource_id, water_size, water_container, water_type, water_exp_date):
-        water_id = 1
+        cursor = self.conn.cursor()
+        query = "insert into water(resource_id, water_size, water_container, water_type, water-exp_date) values (%s, %s, %s, %s, %s) returning water_id;"
+        cursor.execute(query, (resource_id, water_size, water_container, water_type, water_exp_date))
+        water_id = cursor.fetchone()[0]
+        self.conn.commit()
         return water_id
 
     def update(self, water_id, water_size, water_container, water_type, water_exp_date):

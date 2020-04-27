@@ -1,7 +1,12 @@
+from config.dbconfig import pg_config
+import psycopg2
 class AddressDAO:
     
     def __init__(self):
-        super().__init__()
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     # address: address_id, user_id, addressline, city, state_province, country, zipcode
 
@@ -38,7 +43,11 @@ class AddressDAO:
         return result
 
     def insert(self, user_id, addressline, city, state_province, country, zipcode):
-        address_id = 1
+        cursor = self.conn.cursor()
+        query = "insert into address(user_id, addressline, city, state_province, country, zipcode) values (%s, %s, %s, %s, %s, %s) returning address_id;"
+        cursor.execute(query, (user_id, addressline, city, state_province, country, zipcode))
+        address_id = cursor.fetchone()[0]
+        self.conn.commit()
         return address_id
 
     def update(self, address_id, user_id, addressline, city, state_province, country, zipcode):
