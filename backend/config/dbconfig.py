@@ -1,7 +1,7 @@
 #Databse configuration information
 
 pg_config = {
-    'user' : '',
-    'passwd' : '',
-    'dbname' : ''
+    'user' : 'drlusr',
+    'passwd' : 'DRLAMF',
+    'dbname' : 'drl'
 }
