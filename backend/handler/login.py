@@ -88,7 +88,7 @@ class LoginHandler:
                 login_dao = LoginDAO()
                 login_id = login_dao.update(login_id, user_id, username, password)
                 result = self.build_login_attributes(login_id, user_id, username, password)
-                return jsonify(Login = result), 201
+                return jsonify(Login = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in post request"), 400
 

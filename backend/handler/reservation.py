@@ -102,7 +102,7 @@ class ReservationHandler:
                 reservation_dao = ReservationDAO()
                 reservation_id = reservation_dao.insert(customer_id, reservation_date, reservation_status)
                 result = self.build_reservation_attributes(reservation_id, customer_id, reservation_date, reservation_status)
-                return jsonify(Reservation = result), 201
+                return jsonify(Reservation = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in post request"), 400
 
