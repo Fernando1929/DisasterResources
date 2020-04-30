@@ -9,14 +9,15 @@ class IceHandler:
 
     def build_ice_dict(self, row): 
         result = {} 
-        result['ice_id'] = row[7]
+        
         result['resource_id'] = row[0]
         result['supplier_id'] = row[1]
-        result['category'] = row[3]
-        result['ice_name'] = row[2]
+        result['category'] = row[2]
+        result['ice_name'] = row[3]
         result['ice_brand'] = row[4]
         result['ice_quantity'] = row[5]
         result['ice_price'] = row[6]
+        result['ice_id'] = row[7]
         result['ice_weight'] = row[8]
         return result
 

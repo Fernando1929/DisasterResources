@@ -10,18 +10,17 @@ class GeneratorHandler:
 
     def build_generator_dict(self, row): 
         result = {}
-        result['generator_id'] = row[0]
-        result['power_id'] = row[1]
-        result['resource_id'] = row[2]
-        result['supplier_id'] = row[3]
-        result['category'] = row[4]
-        result['generator_name'] = row[5]
-        result['generator_brand'] = row[6]
-        result['generator_quantity'] = row[7]
-        result['generator_price'] = row[8]
-        result['power_capacity'] = row[9]
-        result['power_condition'] = row[10]
-        result['generator_fuel'] = row[11]
+        result['resource_id'] = row[0]
+        result['supplier_id'] = row[1]
+        result['category'] = row[2]
+        result['generator_name'] = row[3]
+        result['generator_brand'] = row[4]
+        result['generator_quantity'] = row[5]
+        result['generator_price'] = row[6]
+        result['generator_id'] = row[7]
+        result['power_capacity'] = row[8]
+        result['power_condition'] = row[9]
+        result['generator_fuel'] = row[10]
         return result
 
     def build_address_dic(self,row):
@@ -35,11 +34,10 @@ class GeneratorHandler:
         result['zipcode'] = row[6]
         return result
 
-    def build_generator_attributes(self, supplier_id, resource_id, power_id, generator_id, category, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel):
+    def build_generator_attributes(self, supplier_id, resource_id, generator_id, category, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel):
         result = {}
         result['supplier_id'] = supplier_id
         result['resource_id'] = resource_id
-        result['power_id'] = power_id
         result['generator_id'] = generator_id 
         result['category'] = category
         result['generator_name'] = generator_name 
@@ -98,7 +96,7 @@ class GeneratorHandler:
 
     def getGeneratorByResourceId(self, resource_id): 
         dao = GeneratorDAO()
-        row = dao.getGeneratorByResourceId(resource_id)
+        row = dao.getGeneratorsByResourceId(resource_id)
         if not row:
             return jsonify(Error = "Generator Not Found"), 404
         else:
@@ -204,12 +202,10 @@ class GeneratorHandler:
 
         if supplier_id and category and generator_name and generator_brand and generator_quantity and generator_price and power_capacity and power_condition and generator_fuel:
             res_dao = ResourceDAO()
-            resource_id = res_dao.insert(supplier_id, category, generator_name, generator_brand, generator_quantity, generator_price)
-            power_dao = PowerDAO()
-            power_id = power_dao.insert(resource_id, power_capacity,  power_condition)
+            resource_id = res_dao.insert(supplier_id, category, generator_name, generator_brand, generator_quantity, generator_price)            
             generator_dao = GeneratorDAO()
-            generator_id = generator_dao.insert(resource_id, power_id, generator_fuel)
-            result = self.build_generator_attributes(supplier_id, resource_id, power_id, generator_id, category, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel)
+            generator_id = generator_dao.insert(resource_id,power_capacity, power_condition, generator_fuel)
+            result = self.build_generator_attributes(supplier_id, resource_id, generator_id, category, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel)
             return jsonify(Generator = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -244,10 +240,8 @@ class GeneratorHandler:
             if supplier_id and category and generator_name  and generator_brand and generator_quantity and generator_price and power_capacity and power_condition and generator_fuel:
                 res_dao = ResourceDAO()
                 resource_id = res_dao.insert(supplier_id, category, generator_name, generator_brand, generator_quantity, generator_price)
-                power_dao = PowerDAO()
-                power_id = power_dao.insert(resource_id, power_capacity,  power_condition)
-                generator_id = generator_dao.insert(resource_id, power_id, generator_fuel)
-                result = self.build_generator_attributes(supplier_id, resource_id, power_id, generator_id, category, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel)
+                generator_id = generator_dao.insert(resource_id, power_capacity, power_condition, generator_fuel)
+                result = self.build_generator_attributes(supplier_id, resource_id, generator_id, category, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel)
                 return jsonify(Generator = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

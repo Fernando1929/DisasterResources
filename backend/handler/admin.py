@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.admin import AdminDAO
 from dao.user import UserDAO
+from dao.userPhone import UserPhoneDAO
 
 class AdminHandler:
 
@@ -17,13 +18,14 @@ class AdminHandler:
 
     def build_admin_dict(self, row):
         result = {}
-        result['admin_id'] = row[0]
-        result['user_id'] = row[1]
+        result['user_id'] = row[0]
+        result['admin_id'] = row[1]
         result['admin_firstname'] = row[2]
         result['admin_lastname'] = row[3]
         result['admin_date_birth'] = row[4]
         result['admin_email'] = row[5]
-        result['admin_phone'] = row[6]
+        result['phone_id'] = row[6]
+        result['admin_phone'] = row[7]
         return result
 
     def getAllAdmins(self):
@@ -81,7 +83,9 @@ class AdminHandler:
 
         if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone:
             dao_user = UserDAO()
-            user_id = dao_user.insert(admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
+            user_id = dao_user.insert(admin_firstname, admin_lastname, admin_date_birth, admin_email)
+            dao_phone = UserPhoneDAO()
+            dao_phone.insert(user_id, admin_phone)   
             dao_admin = AdminDAO()
             admin_id = dao_admin.insert(user_id)
             result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
