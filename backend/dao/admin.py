@@ -10,7 +10,7 @@ class AdminDAO:
         
     def getAllAdmins(self):
         cursor = self.conn.cursor()
-        query = "Select * from user Natural Inner Join admin Natural Inner Join user_phone;" 
+        query = "Select * from admin Natural Inner Join users Natural Inner Join user_phone;" 
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -83,7 +83,7 @@ class AdminDAO:
     def insert(self, user_id):
         cursor = self.conn.cursor()
         query = "insert into admin(user_id) values(%s) returning admin_id;"
-        cursor.execute(query,(user_id))
+        cursor.execute(query,(user_id,))
         admin_id = cursor.fetchone()[0]
         self.conn.commit()
         return admin_id

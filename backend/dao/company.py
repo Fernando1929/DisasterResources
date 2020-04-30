@@ -17,7 +17,7 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyById(self, company_id):
+    def getCompanyById(self, company_id): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_id = %s;"
         cursor.execute(query,(company_id))
@@ -26,7 +26,7 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyByName(self, company_name):
+    def getCompanyByName(self, company_name): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_name = %s;"
         cursor.execute(query,(company_name))
@@ -35,7 +35,7 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyByAddress(self, company_address):
+    def getCompanyByAddress(self, company_address): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_address = %s;"
         cursor.execute(query,(company_address))
@@ -44,7 +44,7 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyByPhone(self, company_phone):
+    def getCompanyByPhone(self, company_phone): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_phone = %s;"
         cursor.execute(query,(company_phone))
@@ -53,7 +53,7 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyBySupplierId(self, supplier_id):
+    def getCompanyBySupplierId(self, supplier_id): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company Natural Inner Join represents where supplier_id = %s;"
         cursor.execute(query,(supplier_id))
@@ -64,20 +64,20 @@ class CompanyDAO:
 
     def insert(self, company_name, company_address, company_phone):
         cursor = self.conn.cursor()
-        query = "insert into company(company_name, company_address, company_phone) values(%s,%s,%s) returning resource_id;"
+        query = "insert into company(company_name, company_address, company_phone) values(%s,%s,%s) returning company_id;"
         cursor.execute(query,(company_name, company_address, company_phone))
         company_id = cursor.fetchone()[0]
         self.conn.commit()
         return company_id
 
-    def update(self, company_id, company_name, company_address, company_phone):
+    def update(self, company_id, company_name, company_address, company_phone): #needs test
         cursor = self.conn.cursor()
         query = "update company set company_name = %s, company_address = %s, company_phone = %s where company_id = %s;"
         cursor.execute(query,(company_name, company_address, company_phone,company_id))
         self.conn.commit()
         return company_id
 
-    def delete(self, company_id):
+    def delete(self, company_id): #needs test
         cursor = self.conn.cursor()
         query = "delete from company where company_id = %s;"
         cursor.execute(query,(company_id))

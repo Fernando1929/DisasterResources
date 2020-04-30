@@ -11,105 +11,149 @@ class BatteryDAO:
     
     def getAllBatteries(self):
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join bateries;"
+        query = "Select * from resource Natural Inner Join batteries;"
         cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
         return result
     
-    def getAllAvailableBatteries(self):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getAllAvailableBatteries(self):#needs test
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where Not in (select * from resource Natural Inner Joint batteries Natural Inner Join reserved);"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
     
-    def getAllReservedBatteries(self):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getAllReservedBatteries(self):#needs test
+        cursor = self.conn.cursor()
+        query = "select * from resource Natural Inner Join batteries Natural Inner Join reserved);"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getAllRequestedBatteries(self):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getAllRequestedBatteries(self):#needs test
+        cursor = self.conn.cursor()
+        query = "select * from resource Natural Inner Joint batteries Natural Inner Join reserved);"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+    def getBatteryById(self, battery_id): #can be changed to fetch one because ids are unique to only one element
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where battery_id = %s;"
+        cursor.execute(query,(battery_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getBatteryById(self, battery_id):
-        result =  [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
+    def getBatteryByResourceId(self, resource_id):  #can be changed to fetch one because ids are unique to only one element
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where resource_id = %s;"
+        cursor.execute(query,(resource_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getBatteryByResourceId(self, resource_id):
-        result =  [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
-        return result
-
-    def getBatteriesByPowerCapacity(self, power_capacity):
-        result = [
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getBatteriesByPowerCapacity(self, power_capacity):#needs test
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where power_capacity = %s;"
+        cursor.execute(query,(power_capacity,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
     
-    def getBatteriesByPowerCondition(self, power_condition):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getBatteriesByPowerCondition(self, power_condition):#needs test
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where power_condition = %s;"
+        cursor.execute(query,(power_condition,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getBatteriesByType(self, battery_type):
-        result = [
-           [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA']
-        ]
+    def getBatteriesByType(self, battery_type):#needs test
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where battery_type = %s;"
+        cursor.execute(query,(battery_type,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getBatteriesBySupplierId(self, supplier_id):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where supplier_id = %s;"
+        cursor.execute(query,(supplier_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getAllAvailableBatteriesBySupplierId(self, supplier_id):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getAllAvailableBatteriesBySupplierId(self, supplier_id):#needs test
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join batteries where supplier_id = %s and Not in (select * from resource Natural Inner Joint batteries Natural Inner Join reserved);"
+        cursor.execute(query,(supplier_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
     
-    def getAllReservedBatteriesBySupplierId(self, supplier_id):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getAllReservedBatteriesBySupplierId(self, supplier_id): #needs test
+        cursor = self.conn.cursor()
+        query = "select * from resource Natural Inner Joint batteries Natural Inner Join reserved where supplier_id = %s;"
+        cursor.execute(query,(supplier_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getAllRequestedBatteriesBySupplierId(self, supplier_id):
-        result = [
-            [1,2,3,4, "battery", 'Battery', 'Duracel', 10, 7.00, 1.20, 'new', 'AA'],
-            [2,3,4,5, "battery", 'Baterry', 'Energizer',  8, 5.00, 1.5, 'new', 'AAA']
-        ]
+    def getAllRequestedBatteriesBySupplierId(self, supplier_id): #needs test
+        cursor = self.conn.cursor()
+        query = "select * from resource Natural Inner Joint batteries Natural Inner Join request where supplier_id = %s;"
+        cursor.execute(query,(supplier_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
     
-    def getBatteryAddress(self, user_id):
-        result = [1,1, "Urb. La Quinta Calle Cartier F1", "Yauco", "N/A", "Puerto Rico", "00698"]
+    def getBatteryAddress(self, user_id): #needs test
+        cursor = self.conn.cursor()
+        query = "select address from user Natural Inner Join supplier where supplier_id = %s;" 
+        cursor.execute(query,(user_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def insert(self, resource_id, power_condition, power_capacity, battery_type):
         cursor = self.conn.cursor()
-        query = "insert into bateries(resource_id, power_condition, power_capacity, battery_type) values(%s,%s,%s,%s) returning baterry_id"
+        query = "insert into batteries(resource_id, power_condition, power_capacity, battery_type) values(%s,%s,%s,%s) returning battery_id;"
         cursor.execute(query,(resource_id, power_condition, power_capacity, battery_type))
         battery_id = cursor.fetchone()[0]
         self.conn.commit()
         return battery_id
         
-    def update(self,resource_id):
-        resource_id = 1
-        return resource_id
+    def update(self,resource_id, power_capacity, power_condition, battery_type): #needs test
+        cursor = self.conn.cursor()
+        query = "update batteries set power_capacity = %s, power_condition = %s, battery_type = %s where resource_id = %s returning battery_id;"
+        cursor.execute(query,(power_capacity, power_condition, battery_type, resource_id))
+        battery_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return battery_id
     
-    def delete(self, resource_id):
-        resource_id = 1
-        return resource_id
+    def delete(self, resource_id): #needs test
+        cursor = self.conn.cursor()
+        query = "delete from batteries where resource_id = %s returning battery_id;"
+        cursor.execute(query,(resource_id,))
+        battery_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return battery_id
