@@ -11,32 +11,26 @@ class RequestDAO:
     # request = request_id, customer_id, request_title, request_date, request_description, request_status
 
     def getAllRequests(self):
-        result = [
-            [1, 2, "Need Water and Cloth ASAP", "05/02/2020", "I need 10 boxes of water and 15 t-shirts.", "Pending", 1, "water", 10],
-            [1, 2, "Need Water and Cloth ASAP", "05/02/2020", "I need 10 boxes of water and 15 t-shirts.", "Pending", 2, "cloth", 15],
-            [2, 3, "Need Resources ASAP", "05/02/2020", "I need 10 boxes of water and 1 generator.", "Pending", 1, "water", 10],
-            [2, 3, "Need Resources ASAP", "05/02/2020", "I need 10 boxes of water and 1 generator.", "Pending", 7, "generator", 1],
-            [3, 4, "Need Medicine", "05/02/2020", "I need medicine.", "Pending", 5, "medicine", 5]
-        ]  
+        cursor = self.conn.cursor()
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
-        # cursor = self.conn.cursor()
-        # query = "select * from request natural inner join request_category natural inner join category;"
-        # cursor.execute(query)
-        # result = []
-        # for row in cursor:
-        #     result.append(row)
-        # return result
 
     def getRequestById(self, request_id):
         cursor = self.conn.cursor()
-        query = "select * from request natural inner join request_category where request_id = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_id = %s;"
         cursor.execute(query, (request_id,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getRequestsByCustomerId(self, customer_id):
         cursor = self.conn.cursor()
-        query = "select * from request natural inner join request_category where customer_id = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where customer_id = %s;"
         cursor.execute(query, (customer_id,))
         result = []
         for row in cursor:
@@ -45,7 +39,7 @@ class RequestDAO:
 
     def getRequestsByTitle(self, request_title):
         cursor = self.conn.cursor()
-        query = "select * from request natural inner join request_category where request_title = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_title = %s;"
         cursor.execute(query, (request_title,))
         result = []
         for row in cursor:
@@ -54,7 +48,7 @@ class RequestDAO:
 
     def getRequestsByStatus(self, request_status):
         cursor = self.conn.cursor()
-        query = "select * from request natural inner join request_category where request_status = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_status = %s;"
         cursor.execute(query, (request_status,))
         result = []
         for row in cursor:
