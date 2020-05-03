@@ -5,9 +5,9 @@ class OrderHandler:
 
     def build_order_dict(self, row):
         result = {}
-        result['customer_id'] = row[0]
-        result['payment_id'] = row[1]
-        result['order_id'] = row[2]
+        result['order_id'] = row[0]
+        result['customer_id'] = row[1]
+        result['payment_id'] = row[2]
         result['order_date'] = row[3]
         result['order_price'] = row[4]
         result['order_status'] = row[5]
@@ -101,13 +101,12 @@ class OrderHandler:
             payment_id = json['payment_id']
             order_id = json['order_id']
             order_date = json['order_date']
-            order_quantity = json['order_quantity']
             order_price = json['order_price']
             order_status = json['order_status']
 
-            if customer_id and payment_id and order_date and order_quantity and order_price and order_status:
-                dao.update(customer_id, payment_id, order_id, order_date, order_quantity, order_price, order_status)
-                result = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_quantity, order_price, order_status)
+            if customer_id and payment_id and order_date and order_price and order_status:
+                dao.update(order_id,customer_id, payment_id, order_date, order_price, order_status)
+                result = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_price, order_status)
                 return jsonify(Order = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

@@ -20,16 +20,14 @@ class OrderDAO:
     def getOrderById(self, order_id):
         cursor = self.conn.cursor()
         query = "Select * from orders where order_id = %s;"
-        cursor.execute(query,(order_id))
-        result = []
-        for row in cursor:
-            result.append(row)
+        cursor.execute(query,(order_id,))
+        result = cursor.fetchone()
         return result
 
     def getOrderByCustomerId(self, customer_id):#maybe change methods name to ordersBy customer Id 
         cursor = self.conn.cursor()
         query = "Select * from orders where customer_id = %s;"
-        cursor.execute(query,(customer_id))
+        cursor.execute(query,(customer_id,))
         result = []
         for row in cursor:
             result.append(row)
@@ -38,7 +36,7 @@ class OrderDAO:
     def getOrdersByDate(self, order_date):
         cursor = self.conn.cursor()
         query = "Select * from orders where order_date = %s;"
-        cursor.execute(query,(order_date))
+        cursor.execute(query,(order_date,))
         result = []
         for row in cursor:
             result.append(row)
@@ -47,7 +45,7 @@ class OrderDAO:
     def getOrdersByStatus(self, order_status):
         cursor = self.conn.cursor()
         query = "Select * from orders where order_status = %s;"
-        cursor.execute(query,(order_status))
+        cursor.execute(query,(order_status,))
         result = []
         for row in cursor:
             result.append(row)
@@ -72,7 +70,7 @@ class OrderDAO:
 
     def update(self, order_id, customer_id, payment_id, order_date, order_price, order_status):
         cursor = self.conn.cursor()
-        query = "update order set customer_id = %s, payment_id = %s, order_date = %s, order_price = %s, order_status = %s where order_id = %s;"
+        query = "update orders set customer_id = %s, payment_id = %s, order_date = %s, order_price = %s, order_status = %s where order_id = %s"
         cursor.execute(query,(customer_id, payment_id, order_date, order_price, order_status, order_id))
         self.conn.commit()
         return order_id
