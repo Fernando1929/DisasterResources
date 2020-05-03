@@ -27,7 +27,7 @@ class ResourceDAO:
 
     def insert(self, supplier_id, category, name, brand, quantity, price):
         cursor = self.conn.cursor()
-        query = "insert into resource(supplier_id, resource_category, resource_name, resource_brand, resource_quantity, resource_price) values (%s, %s, %s, %s, %s, %s) returning resource_id;"
+        query = "insert into resource(supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price) values (%s, %s, %s, %s, %s, %s) returning resource_id;"
         cursor.execute(query, (supplier_id, category, name, brand, quantity, price))
         resource_id = cursor.fetchone()[0]
         self.conn.commit()

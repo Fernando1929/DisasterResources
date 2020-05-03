@@ -1,7 +1,7 @@
 from flask import jsonify
 from dao.request import RequestDAO
 from dao.customer import CustomerDAO
-from dao.request_category import RequestCategoryDAO
+from dao.requestCategory import RequestCategoryDAO
 
 class RequestHandler:
 
