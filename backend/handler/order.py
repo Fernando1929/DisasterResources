@@ -62,12 +62,15 @@ class OrderHandler:
 
     def getOrderByCustomerId(self, customer_id):
         dao = OrderDAO()
-        row = dao.getOrderByCustomerId(customer_id)
-        if not row:
+        orders_list = dao.getOrderByCustomerId(customer_id)
+        if not orders_list:
             return jsonify(Error = "Order Not Found"), 404
         else:
-            order = self.build_order_dict(row)
-            return jsonify(Order = order)
+            result_list = []
+            for row in orders_list:
+                result = self.build_order_dict(row)
+                result_list.append(result)
+            return jsonify(Orders = result_list)
 
     def insertOrder(self, json):
         customer_id = json['customer_id']

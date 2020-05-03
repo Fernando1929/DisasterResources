@@ -20,7 +20,7 @@ class OrderDAO:
     def getOrderById(self, order_id):
         cursor = self.conn.cursor()
         query = "Select * from orders where order_id = %s;"
-        cursor.execute(query,(order_id,))
+        cursor.execute(query,(order_id))
         result = cursor.fetchone()
         return result
 
