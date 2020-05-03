@@ -8,18 +8,18 @@ class WaterHandler:
 
     def build_water_dict(self, row):
         result = {}
-        result['water_id'] = row[0]
-        result['resource_id'] = row[1]
-        result['supplier_id'] = row[2]
-        result['category'] = row[3]
-        result['water_name'] = row[4]
-        result['water_brand'] = row[5]
-        result['water_quantity'] = row[6]
-        result['water_price'] = row[7]
-        result['water_size'] = row[8]
-        result['water_container'] = row[9]
-        result['water_type'] = row[10]
-        result['water_exp_date'] = row[11]
+        result['resource_id'] = row[0]
+        result['water_id'] = row[1]
+        result['water_size'] = row[2]
+        result['water_container'] = row[3]
+        result['water_type'] = row[4]
+        result['water_exp_date'] = row[5]
+        result['supplier_id'] = row[6]
+        result['category'] = row[7]
+        result['water_name'] = row[8]
+        result['water_brand'] = row[9]
+        result['water_quantity'] = row[10]
+        result['water_price'] = row[11]
         return result
 
     def build_water_attributes(self, water_id, resource_id, supplier_id, category, water_name, water_brand, water_quantity, water_price, water_size, water_container, water_type, water_exp_date):

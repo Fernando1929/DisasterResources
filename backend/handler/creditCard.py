@@ -7,13 +7,13 @@ class CreditCardHandler:
 
     def build_creditcard_dict(self, row):
         result = {}
-        result['creditcard_id'] = row[0]
-        result['payment_id'] = row[1]
-        result['customer_id'] = row[2]
-        result['creditcard_name'] = row[3]
-        result['creditcard_number'] = row[4]
-        result['creditcard_ccv'] = row[5]
-        result['creditcard_exp_date'] = row[6]
+        result['payment_id'] = row[0]
+        result['creditcard_id'] = row[1]
+        result['creditcard_name'] = row[2]
+        result['creditcard_number'] = row[3]
+        result['creditcard_ccv'] = row[4]
+        result['creditcard_exp_date'] = row[5]
+        result['customer_id'] = row[6]
         return result
 
     def build_creditcard_attributes(self, creditcard_id, payment_id, customer_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date):

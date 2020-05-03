@@ -6,7 +6,7 @@ from dao.company import CompanyDAO
 
 class SupplierHandler:
 
-    def build_supplier_attributes(self, user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone):
+    def build_supplier_attributes(self, user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone_id, supplier_phone):
         result = {}
         result['supplier_id'] = supplier_id 
         result['user_id'] = user_id
@@ -14,18 +14,20 @@ class SupplierHandler:
         result['supplier_lastname'] = supplier_lastname
         result['supplier_date_birth'] = supplier_date_birth
         result['supplier_email'] = supplier_email
+        result['supplier_phone_id'] = supplier_phone_id
         result['supplier_phone'] = supplier_phone
         return result
 
     def build_supplier_dict(self, row):
         result = {}
-        result['supplier_id'] = row[0]
-        result['user_id'] = row[1]
+        result['user_id'] = row[0]
+        result['supplier_id'] = row[1]
         result['supplier_firstname'] = row[2]
         result['supplier_lastname'] = row[3]
         result['supplier_date_birth'] = row[4]
         result['supplier_email'] = row[5]
-        result['supplier_phone'] = row[6]
+        result['supplier_phone_id'] = row[6]
+        result['supplier_phone'] = row[7]
         return result 
 
     def build_resource_dict(self, row):
@@ -117,10 +119,10 @@ class SupplierHandler:
             dao_user = UserDAO()
             user_id = dao_user.insert(supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email)
             dao_phone = UserPhoneDAO()
-            dao_phone.insert(user_id, supplier_phone)
+            supplier_phone_id = dao_phone.insert(user_id, supplier_phone)
             dao_supplier = SupplierDAO()
             supplier_id = dao_supplier.insert(user_id)
-            result = self.build_supplier_attributes(supplier_id, user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
+            result = self.build_supplier_attributes(supplier_id, user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone_id, supplier_phone)
             return jsonify(Supplier = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400

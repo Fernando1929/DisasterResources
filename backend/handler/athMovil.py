@@ -7,10 +7,10 @@ class AthMovilHandler:
 
     def build_athMovil_dict(self, row):
         result = {}
-        result['ath_movil_id'] = row[0]
-        result['payment_id'] = row[1]
-        result['customer_id'] = row[2]
-        result['ath_movil_phone'] = row[3]
+        result['payment_id'] = row[0]
+        result['ath_movil_id'] = row[1]
+        result['ath_movil_phone'] = row[2]
+        result['customer_id'] = row[3]
         return result
 
     def build_athMovil_attributes(self, ath_movil_id, payment_id, customer_id, ath_movil_phone):
