@@ -12,7 +12,7 @@ class RequestDAO:
 
     def getAllRequests(self):
         cursor = self.conn.cursor()
-        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category order by request_id;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -21,7 +21,7 @@ class RequestDAO:
 
     def getRequestById(self, request_id):
         cursor = self.conn.cursor()
-        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_id = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_id = %s order by request_id;"
         cursor.execute(query, (request_id,))
         result = []
         for row in cursor:
@@ -30,7 +30,7 @@ class RequestDAO:
 
     def getRequestsByCustomerId(self, customer_id):
         cursor = self.conn.cursor()
-        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where customer_id = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where customer_id = %s order by request_id;"
         cursor.execute(query, (customer_id,))
         result = []
         for row in cursor:
@@ -39,7 +39,7 @@ class RequestDAO:
 
     def getRequestsByTitle(self, request_title):
         cursor = self.conn.cursor()
-        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_title = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_title = %s order by request_id;"
         cursor.execute(query, (request_title,))
         result = []
         for row in cursor:
@@ -48,7 +48,7 @@ class RequestDAO:
 
     def getRequestsByStatus(self, request_status):
         cursor = self.conn.cursor()
-        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_status = %s;"
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where request_status = %s order by request_id;"
         cursor.execute(query, (request_status,))
         result = []
         for row in cursor:
