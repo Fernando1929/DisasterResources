@@ -362,7 +362,10 @@ def getPaypalByCustomerId(customer_id):
 
 @app.route("/DRL/resources", methods=['GET']) 
 def getAllResources():
-    return ResourceHandler().getAllResources()
+    if not request.args:
+        return ResourceHandler().getAllResources()
+    else:
+        return ResourceHandler().searchResources(request.args)
 
 @app.route("/DRL/resources/<int:resource_id>", methods=['GET'])
 def getResourceById(resource_id):
