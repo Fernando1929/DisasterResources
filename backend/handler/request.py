@@ -108,10 +108,9 @@ class RequestHandler:
             request_dao = RequestDAO()
             request_category_dao = RequestCategoryDAO()
             request_id = request_dao.insert(customer_id, request_title, request_date, request_description, request_status)
-            print(request_id)
             for item in resources:
                 request_category_dao.insert(request_id, item["category_id"], item["request_quantity"])
-            result = self.build_request_attributes(request_id, customer_id, request_title, request_date, request_status, request_description, resources)
+            result = self.build_request_attributes(request_id, customer_id, request_title, request_date, request_description, request_status, resources)
             return jsonify(Request = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
