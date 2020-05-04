@@ -8,8 +8,8 @@ class SupplierHandler:
 
     def build_supplier_attributes(self, user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone_id, supplier_phone):
         result = {}
-        result['supplier_id'] = supplier_id 
         result['user_id'] = user_id
+        result['supplier_id'] = supplier_id 
         result['supplier_firstname'] = supplier_firstname
         result['supplier_lastname'] = supplier_lastname
         result['supplier_date_birth'] = supplier_date_birth
@@ -85,7 +85,7 @@ class SupplierHandler:
         supplier_lastname = args.get("supplier_lastname")
         supplier_email = args.get('supplier_email')
         supplier_phone = args.get('supplier_phone')
-        suppplier_date_birth = args.get('suppplier_date_birth')
+        suppplier_date_birth = args.get('supplier_date_birth')
         dao = SupplierDAO()
         supplier_list = []
         if (len(args) == 2) and supplier_firstname and supplier_lastname:
@@ -122,7 +122,7 @@ class SupplierHandler:
             supplier_phone_id = dao_phone.insert(user_id, supplier_phone)
             dao_supplier = SupplierDAO()
             supplier_id = dao_supplier.insert(user_id)
-            result = self.build_supplier_attributes(supplier_id, user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone_id, supplier_phone)
+            result = self.build_supplier_attributes(user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone_id, supplier_phone)
             return jsonify(Supplier = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400

@@ -8,27 +8,27 @@ class FoodHandler:
 
     def build_food_dict(self, row):
         result = {}
-        result['food_id'] = row[0]
-        result['resource_id'] = row[1]
-        result['supplier_id'] = row[2]
-        result['category'] = row[3]
-        result['food_name'] = row[4]
-        result['food_brand'] = row[5]
-        result['food_quantity'] = row[6]
-        result['food_price'] = row[7]
-        result['food_category'] = row[8]
-        result['food_container'] = row[9]
-        result['food_type'] = row[10]
-        result['food_ounces'] = row[11]
-        result['food_expdate'] = row[12]
+        result['resource_id'] = row[0]
+        result['food_id'] = row[1]
+        result['food_category'] = row[2]
+        result['food_container'] = row[3]
+        result['food_type'] = row[4]
+        result['food_expdate'] = row[5]
+        result['food_ounces'] = row[6]
+        result['supplier_id'] = row[7]
+        result['category_id'] = row[8]
+        result['food_name'] = row[9]
+        result['food_brand'] = row[10]
+        result['food_quantity'] = row[11]
+        result['food_price'] = row[12]
         return result
 
-    def build_food_attributes(self, food_id, resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate):
+    def build_food_attributes(self, food_id, resource_id, supplier_id, category_id, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate):
         result = {}
         result['food_id'] = food_id
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
-        result['category'] = category
+        result['category_id'] = category_id
         result['food_name'] = food_name
         result['food_brand'] = food_brand
         result['food_quantity'] = food_quantity
@@ -163,9 +163,9 @@ class FoodHandler:
 
     def getFoodAddress(self, food_id):
         food_dao = FoodDAO()
-        supplier_id = food_dao.getFoodById(food_id)[2]
-        user_dao = UserDAO()
-        if not user_dao.getUserById(supplier_id):
+        supplier_id = food_dao.getFoodById(food_id)[7]
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "User not found."), 404
         else:
             row = food_dao.getFoodAddress(supplier_id)
@@ -206,7 +206,7 @@ class FoodHandler:
 
     def insertFood(self, json):
         supplier_id = json["supplier_id"]
-        category = json["category"]
+        category_id = json["category_id"]
         food_name = json["food_name"]
         food_brand = json["food_brand"]
         food_quantity = json["food_quantity"]
@@ -217,12 +217,12 @@ class FoodHandler:
         food_ounces = json["food_ounces"]
         food_expdate = json["food_expdate"]
 
-        if supplier_id and category and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
+        if supplier_id and category_id and food_name and food_brand and food_quantity and (food_price>=0) and food_category and food_container and food_type and food_ounces and food_expdate:
             resource_dao = ResourceDAO()
-            resource_id = resource_dao.insert(supplier_id, category, food_name, food_brand, food_quantity, food_price)
+            resource_id = resource_dao.insert(supplier_id, category_id, food_name, food_brand, food_quantity, food_price)
             food_dao = FoodDAO()
             food_id = food_dao.insert(resource_id, food_category, food_container, food_type, food_ounces, food_expdate)
-            result = self.build_food_attributes(food_id, resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
+            result = self.build_food_attributes(food_id, resource_id, supplier_id, category_id, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
             return jsonify(Food = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -233,7 +233,7 @@ class FoodHandler:
             return jsonify(Error = "Food not found."), 404
         else:
             supplier_id = json["supplier_id"]
-            category = json["category"]
+            category_id = json["category_id"]
             food_name = json["food_name"]
             food_brand = json["food_brand"]
             food_quantity = json["food_quantity"]
@@ -244,12 +244,12 @@ class FoodHandler:
             food_ounces = json["food_ounces"]
             food_expdate = json["food_expdate"]
             
-            if supplier_id and category and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
+            if supplier_id and category_id and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
                 resource_id = food_dao.update(food_id, food_category, food_container, food_type, food_ounces, food_expdate)
                 resource_dao = ResourceDAO()
-                resource_dao.update(resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price)
+                resource_dao.update(resource_id, supplier_id, category_id, food_name, food_brand, food_quantity, food_price)
              
-                result = self.build_food_attributes(food_id, resource_id, supplier_id, category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
+                result = self.build_food_attributes(food_id, resource_id, supplier_id, category_id, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate)
                 return jsonify(Food = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

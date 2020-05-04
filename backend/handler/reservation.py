@@ -8,17 +8,15 @@ class ReservationHandler:
         result = {}
         result['reservation_id'] = row[0]
         result['customer_id'] = row[1]
-        result['reservation_date'] = row[2]
-        result['reservation_quantity'] = row[3]
-        result['reservation_status'] = row[4]
+        result['reservation_quantity'] = row[2]
+        result['reservation_status'] = row[3]
         return result
 
-    def build_reservation_attributes(self, reservation_id, customer_id, reservation_date, reservation_quantity, reservation_status):
+    def build_reservation_attributes(self, reservation_id, customer_id, reservation_date, reservation_status):
         result = {}
         result['reservation_id'] = reservation_id
         result['customer_id'] = customer_id
         result['reservation_date'] = reservation_date
-        result['reservation_quantity'] = reservation_quantity
         result['reservation_status'] = reservation_status
         return result
 
@@ -76,13 +74,17 @@ class ReservationHandler:
     def insertReservation(self, json):
         customer_id = json["customer_id"]
         reservation_date = json["reservation_date"]
-        reservation_quantity = json["reservation_quantity"]
         reservation_status = json["reservation_status"]
+        resources = json["resources"]
 
-        if customer_id and reservation_date and reservation_quantity and reservation_status:
+        if customer_id and reservation_date and reservation_status and resources:
             reservation_dao = ReservationDAO()
-            reservation_id = reservation_dao.insert(customer_id, reservation_date, reservation_quantity, reservation_status)
-            result = self.build_reservation_attributes(reservation_id, customer_id, reservation_date, reservation_quantity, reservation_status)
+            reservation_id = reservation_dao.insert(customer_id, reservation_date, reservation_status)
+            result = self.build_reservation_attributes(reservation_id, customer_id, reservation_date, reservation_status)
+            
+            for resource in resources:
+                reservation_dao.insertResourceReservation(reservation_id, resource["resource_id"], resource["quantity"])
+
             return jsonify(Reservation = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -94,14 +96,13 @@ class ReservationHandler:
         else:
             customer_id = json["customer_id"]
             reservation_date = json["reservation_date"]
-            reservation_quantity = json["reservation_quantity"]
             reservation_status = json["reservation_status"]
 
-            if customer_id and reservation_date and reservation_quantity and reservation_status:
+            if customer_id and reservation_date and reservation_status:
                 reservation_dao = ReservationDAO()
-                reservation_id = reservation_dao.insert(customer_id, reservation_date, reservation_quantity, reservation_status)
-                result = self.build_reservation_attributes(reservation_id, customer_id, reservation_date, reservation_quantity, reservation_status)
-                return jsonify(Reservation = result), 201
+                reservation_id = reservation_dao.insert(customer_id, reservation_date, reservation_status)
+                result = self.build_reservation_attributes(reservation_id, customer_id, reservation_date, reservation_status)
+                return jsonify(Reservation = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in post request"), 400
 
