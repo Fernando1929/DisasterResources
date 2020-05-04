@@ -184,12 +184,12 @@ class ClothHandler:
 
     def getClothAddress(self, cloth_id):
         cloth_dao = ClothDAO()
-        user_id = cloth_dao.getClothById(cloth_id)[2]
-        user_dao = UserDAO()
-        if not user_dao.getUserById(user_id):
-            return jsonify(Error = "User not found."), 404
+        supplier_id = cloth_dao.getClothById(cloth_id)[7]
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
         else:
-            row = cloth_dao.getClothAddress(user_id)
+            row = cloth_dao.getClothAddress(supplier_id)
             if not row:
                 return jsonify(Error = "Address Not Found"), 404
             else:

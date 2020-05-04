@@ -32,12 +32,13 @@ class SupplierHandler:
 
     def build_resource_dict(self, row):
         result = {}
-        result['supplier_id'] = row[0]
-        result['resource_id'] = row[1]
-        result['resource_name'] = row[2]
-        result['resource_brand'] = row[3]
-        result['resource_quantity'] = row[4]
-        result['resource_price'] = row[5]
+        result['resource_id'] = row[0]
+        result['supplier_id'] = row[1]
+        result['category_id'] = row[2]
+        result['resource_name'] = row[3]
+        result['resource_brand'] = row[4]
+        result['resource_quantity'] = row[5]
+        result['resource_price'] = row[6]
         return result
 
     def getAllSuppliers(self):
