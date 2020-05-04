@@ -2,6 +2,6 @@
 
 pg_config = {
     'user' : 'dbuser',
-    'passwd' : 'marynova',
-    'dbname' : 'drldb2'
+    'passwd' : 'dbdisaster',
+    'dbname' : 'DRLDB'
 }
