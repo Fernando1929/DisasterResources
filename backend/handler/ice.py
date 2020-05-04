@@ -170,7 +170,7 @@ class IceHandler:
 
     def getIceAddress(self,ice_id):
         ice_dao = IceDAO()
-        user_id = ice_dao.getIceById(ice_id)[2]
+        user_id = ice_dao.getIceById(ice_id)[1]
         user_dao = UserDAO()
         if not user_dao.getUserById(user_id):
             return jsonify(Error = "User not found."), 404
