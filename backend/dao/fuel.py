@@ -35,14 +35,14 @@ class FuelDAO:
             result.append(row)
         return result
 
-    def getAllRequestedFuels(self):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM fuel NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedFuels(self):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM fuel NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getFuelById(self, fuel_id):
         cursor = self.conn.cursor()
@@ -121,14 +121,14 @@ class FuelDAO:
             result.append(row)
         return result
 
-    def getAllRequestedFuelsBySupplierId(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM fuel NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-        cursor.execute(query, (supplier_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedFuelsBySupplierId(self, supplier_id):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM fuel NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
+    #     cursor.execute(query, (supplier_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getFuelAddress(self, supplier_id):
         cursor = self.conn.cursor()

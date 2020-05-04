@@ -21,7 +21,7 @@ class ResourceHandler:
         result = {}
         result['resource_id'] = row[0]
         result['supplier_id'] = row[1]
-        result['resource_category'] = row[2]
+        result['resource_category_id'] = row[2]
         result['resource_name'] = row[3]
         result['resource_brand'] = row[4]
         result['resource_quantity'] = row[5]
@@ -46,32 +46,45 @@ class ResourceHandler:
             resource = self.build_resource_dict(row)
             return jsonify(Resource = resource)
 
+    def searchResources(self, args):
+        resource_name = args.get("resource_name")
+        dao = ResourceDAO()
+        resource_list = []
+        if (len(args) == 1) and resource_name:
+            resource_list = dao.getResourcesByName(resource_name)
+        else:
+            return jsonify(Error = "Malformed query string"), 400
+        result_list = []
+        for row in resource_list:
+            result = self.build_resource_dict(row)
+            result_list.append(result)
+        return jsonify(Resources = result_list)
+
     def getResourceFullInfo(self, resource_id):
         resource_dao = ResourceDAO()
         category = resource_dao.getResourceById(resource_id)[2]
         if category in self.valid_categories:
-            if category == "fuel":
+            if category == 1:
                 return FuelHandler().getFuelByResourceId(resource_id)
-            elif category == "food":
+            elif category == 2:
                 return FoodHandler().getFoodByResourceId(resource_id)
-            elif category == "medicine":
+            elif category == 3:
                 return MedicineHandler().getMedicineByResourceId(resource_id)
-            elif category == "tools":
+            elif category == 4:
                 return ToolHandler().getToolByResourceId(resource_id)
-            elif category == "cloth":
+            elif category == 5:
                 return ClothHandler().getClothByResourceId(resource_id)
-            elif category == "heavy_equipment":
+            elif category == 6:
                 return HeavyEquipHandler().getHeavyEquipByResourceId(resource_id)
-            elif category == "water":
+            elif category == 7:
                 return WaterHandler().getWaterByResourceId(resource_id)
-            elif category == "medical_device":
+            elif category == 8:
                 return MedDeviceHandler().getMedDeviceByResourceId(resource_id)
-            elif category == "battery":
+            elif category == 9:
                 return BatteryHandler().getBatteryByResourceId(resource_id)
-            elif category == "generator":
+            elif category == 10:
                 return GeneratorHandler().getGeneratorByResourceId(resource_id)
-            elif category == "ice":
+            elif category == 11:
                 return IceHandler().getIceByResourceId(resource_id)
         else:
             return jsonify(Error = "Invalid category"), 400
-        

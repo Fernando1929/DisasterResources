@@ -39,14 +39,14 @@ class FoodDAO:
             result.append(row)
         return result
 
-    def getAllRequestedFoods(self):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedFoods(self):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getFoodById(self, food_id):
         cursor = self.conn.cursor()
@@ -143,14 +143,14 @@ class FoodDAO:
             result.append(row)
         return result
 
-    def getAllRequestedFoodsBySupplierId(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-        cursor.execute(query, (supplier_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedFoodsBySupplierId(self, supplier_id):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
+    #     cursor.execute(query, (supplier_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getFoodAddress(self, supplier_id):
         cursor = self.conn.cursor()

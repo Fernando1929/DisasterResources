@@ -36,14 +36,14 @@ class ToolDAO:
             result.append(row)
         return result
 
-    def getAllRequestedTools(self):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedTools(self):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getToolById(self, tool_id):
         cursor = self.conn.cursor()
@@ -131,14 +131,14 @@ class ToolDAO:
             result.append(row)
         return result
 
-    def getAllRequestedToolsBySupplierId(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-        cursor.execute(query, (supplier_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedToolsBySupplierId(self, supplier_id):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
+    #     cursor.execute(query, (supplier_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getToolAddress(self, supplier_id):
         cursor = self.conn.cursor()
