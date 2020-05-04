@@ -10,7 +10,7 @@ class ReservationDAO:
     #reservation = reservation_id, customer_id, request_id, reservation_date, reservation_status
     #resource_reservation = id, reservation_id, resource_id, reservation_quantity
 
-    def getAllReservations(self)
+    def getAllReservations(self):
         cursor = self.conn.cursor()
         query = "SELECT reservation_id, customer_id, request_id, reservation_date, reservation_status, resource_id, resource_name, reservation_quantity FROM reservation natural inner join resource_reservations natural inner join resource;"
         cursor.execute(query)
@@ -23,7 +23,9 @@ class ReservationDAO:
         cursor = self.conn.cursor()
         query = "SELECT reservation_id, customer_id, request_id, reservation_date, reservation_status, resource_id, resource_name, reservation_quantity FROM reservation natural inner join resource_reservations natural inner join resource WHERE reservation_id = %s;"
         cursor.execute(query, (reservation_id,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getReservationsByDate(self, reservation_date):
@@ -64,7 +66,7 @@ class ReservationDAO:
 
     def getResourcesByReservationId(self, reservation_id):
         cursor = self.conn.cursor()
-        query = "SELECT resource_id, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM reservation natural inner join resource_reservations natural inner join resources WHERE reservation_id = %s;"
+        query = "SELECT resource_id, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM reservation natural inner join resource_reservations natural inner join resource WHERE reservation_id = %s;"
         cursor.execute(query, (reservation_id,))
         result = []
         for row in cursor:

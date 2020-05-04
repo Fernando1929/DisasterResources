@@ -43,7 +43,7 @@ class ReservationHandler:
                 resources_list.append(row[5:])
             else:
                 resources_list.append(row[5:])
-                result = self.build_request_dict(row[:5], self.createResourceDict(resources_list))
+                result = self.build_reservation_dict(row[:5], self.createResourceDict(resources_list))
                 result_list.append(result)
                 resources_list.clear()
             index += 1
@@ -124,7 +124,7 @@ class ReservationHandler:
             reservation_id = reservation_dao.insert(customer_id, request_id, reservation_date, reservation_status)
 
             for resource in resources:
-                resourceReservation_dao.insert(reservation_id, resource["resource_id"], resource["quantity"])
+                resourceReservation_dao.insert(reservation_id, resource["resource_id"], resource["reservation_quantity"])
 
             # if request_id:
             #     RequestHandler().updateRequest()
