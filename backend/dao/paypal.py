@@ -23,6 +23,13 @@ class PaypalDAO:
         result = cursor.fetchone()
         return result
 
+    def getPaypalByPaymentId(self, payment_id):
+        cursor = self.conn.cursor()
+        query = "select * from paypal natural inner join payment where payment_id = %s;"
+        cursor.execute(query, (payment_id,))
+        result = cursor.fetchone()
+        return result
+
     def getPaypalByUsername(self, paypal_username):
         cursor = self.conn.cursor()
         query = "select * from paypal natural inner join payment where paypal_username = %s;"

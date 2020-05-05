@@ -35,6 +35,15 @@ class OrderDAO:
             result.append(row)
         return result
 
+    # def getOrderByPaymentId(self, payment_id):
+    #     cursor = self.conn.cursor()
+    #     query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where payment_id = %s;"
+    #     cursor.execute(query,(payment_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
+
     def getOrdersByDate(self, order_date):
         cursor = self.conn.cursor()
         query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_date = %s;"

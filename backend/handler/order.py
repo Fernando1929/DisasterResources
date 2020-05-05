@@ -2,6 +2,12 @@ from flask import jsonify
 from dao.order import OrderDAO
 from dao.customer import CustomerDAO
 from dao.resourceOrders import ResourceOrdersDAO
+# from dao.athMovil import AthMovilDAO
+# from dao.creditCard import CreditCardDAO
+# from dao.paypal import PaypalDAO
+from handler.athMovil import AthMovilHandler
+from handler.creditCard import CreditCardHandler
+from handler.paypal import PaypalHandler
 
 class OrderHandler:
 
@@ -98,6 +104,26 @@ class OrderHandler:
             orders_list = dao.getOrderByCustomerId(customer_id)
             result_list = self.fixDict(orders_list)
             return jsonify(Orders = result_list)
+
+    def getPaymentByOrderId(self, order_id):
+        dao = OrderDAO()
+        row = dao.getOrderById(order_id)
+        if not row:
+            return jsonify(Error = "Order Not Found"), 404
+        else:
+            payment_id = row[2]
+            ath_movil = AthMovilHandler().getAthMovilByPaymentId(payment_id)
+            creditcard = CreditCardHandler().getCreditCardByPaymentId(payment_id)
+            paypal = PaypalHandler().getPaypalByPaymentId(payment_id)
+            
+            if ath_movil: 
+                return ath_movil
+            elif creditcard:
+                return creditcard
+            elif paypal:
+                return paypal
+            else:
+                return jsonify(Error = "Payment Not Found"), 404
 
     def insertOrder(self, json):
         customer_id = json['customer_id']

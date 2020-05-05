@@ -97,7 +97,7 @@ class AddressDAO:
 
     def delete(self, address_id):
         cursor = self.conn.cursor()
-        query = "delete form address where address_id = %s ;" #verify query
+        query = "delete from address where address_id = %s ;" #verify query
         cursor.execute(query, (address_id,))
         self.conn.commit()
         return address_id

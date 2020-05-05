@@ -39,6 +39,15 @@ class AthMovilHandler:
             ath_movil = self.build_athMovil_dict(row)
             return jsonify(AthMovil = ath_movil)
 
+    def getAthMovilByPaymentId(self, payment_id):
+        dao = AthMovilDAO()
+        row = dao.getAthMovilByPaymentId(payment_id)
+        if not row:
+            return jsonify(Error = "Ath Movil Not Found"), 404
+        else:
+                ath_movil = self.build_athMovil_dict(row)
+                return jsonify(AthMovil = ath_movil)
+
     def searchAthMovil(self, args):
         ath_movil_phone = args.get("ath_movil_phone")
         dao = AthMovilDAO()

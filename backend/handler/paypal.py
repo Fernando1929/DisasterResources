@@ -68,6 +68,15 @@ class PaypalHandler:
                 paypal = self.build_paypal_dict(row)
                 return jsonify(AthMovil = paypal)
 
+    def getPaypalByPaymentId(self, payment_id):
+        dao = PaypalDAO()
+        row = dao.getPaypalByPaymentId(payment_id)
+        if not row:
+            return jsonify(Error = "Paypal Not Found"), 404
+        else:
+                paypal = self.build_paypal_dict(row)
+                return jsonify(AthMovil = paypal)
+
     def insertPaypal(self, json):
         customer_id = json["customer_id"]
         paypal_username = json["paypal_username"]
