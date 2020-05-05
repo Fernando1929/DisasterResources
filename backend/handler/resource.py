@@ -44,6 +44,20 @@ class ResourceHandler:
             resource = self.build_resource_dict(row)
             return jsonify(Resource = resource)
 
+    def searchResources(self, args):
+        resource_name = args.get("resource_name")
+        dao = ResourceDAO()
+        resource_list = []
+        if (len(args) == 1) and resource_name:
+            resource_list = dao.getResourcesByName(resource_name)
+        else:
+            return jsonify(Error = "Malformed query string"), 400
+        result_list = []
+        for row in resource_list:
+            result = self.build_resource_dict(row)
+            result_list.append(result)
+        return jsonify(Resources = result_list)
+
     def getResourceFullInfo(self, resource_id):
         resource_dao = ResourceDAO()
         category = resource_dao.getResourceById(resource_id)[2]
@@ -71,4 +85,3 @@ class ResourceHandler:
             return IceHandler().getIceByResourceId(resource_id)
         else:
             return jsonify(Error = "Invalid category"), 400
-        

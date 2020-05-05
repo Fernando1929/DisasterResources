@@ -36,14 +36,14 @@ class MedicineDAO:
             result.append(row)
         return result
 
-    def getAllRequestedMedicines(self):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM medicine NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedMedicines(self):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM medicine NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getMedicineById(self, med_id):
         cursor = self.conn.cursor()
@@ -131,14 +131,14 @@ class MedicineDAO:
             result.append(row)
         return result
 
-    def getAllRequestedMedicinesBySupplierId(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "SELECT * FROM medicine NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-        cursor.execute(query, (supplier_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedMedicinesBySupplierId(self, supplier_id):
+    #     cursor = self.conn.cursor()
+    #     query = "SELECT * FROM medicine NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
+    #     cursor.execute(query, (supplier_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getMedicineAddress(self, supplier_id):
         cursor = self.conn.cursor()

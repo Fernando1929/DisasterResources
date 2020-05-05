@@ -242,6 +242,10 @@ def getReservationById(reservation_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route("/DRL/customer/reservations/<int:reservation_id>/resources", methods=['GET'])
+def getResourcesByReservationId(reservation_id):
+    return ReservationHandler().getResourcesByReservationId(reservation_id)
+
 @app.route("/DRL/customer/<int:customer_id>/reservations", methods=['GET'])
 def getReservationsByCustomerId(customer_id):
     return ReservationHandler().getReservationsByCustomerId(customer_id)
@@ -358,7 +362,10 @@ def getPaypalByCustomerId(customer_id):
 
 @app.route("/DRL/resources", methods=['GET']) 
 def getAllResources():
-    return ResourceHandler().getAllResources()
+    if not request.args:
+        return ResourceHandler().getAllResources()
+    else:
+        return ResourceHandler().searchResources(request.args)
 
 @app.route("/DRL/resources/<int:resource_id>", methods=['GET'])
 def getResourceById(resource_id):

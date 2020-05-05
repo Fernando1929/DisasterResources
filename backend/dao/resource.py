@@ -25,6 +25,15 @@ class ResourceDAO:
         result = cursor.fetchone()
         return result
 
+    def getResourcesByName(self, resource_name):
+        cursor = self.conn.cursor()
+        query = "SELECT * FROM resource WHERE resource_name = %s;"
+        cursor.execute(query, (resource_name,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def insert(self, supplier_id, category, name, brand, quantity, price):
         cursor = self.conn.cursor()
         query = "insert into resource(supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price) values (%s, %s, %s, %s, %s, %s) returning resource_id;"
