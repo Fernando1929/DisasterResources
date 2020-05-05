@@ -3,13 +3,12 @@ import psycopg2
 
 class AddressDAO:
     
+    # address: address_id, user_id, addressline, city, state_province, country, zipcode
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], 
                                                             pg_config['user'], 
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # address: address_id, user_id, addressline, city, state_province, country, zipcode
 
     def getAllAddresses(self):
         cursor = self.conn.cursor()
@@ -90,7 +89,15 @@ class AddressDAO:
         return address_id
 
     def update(self, address_id, user_id, addressline, city, state_province, country, zipcode):
+        cursor = self.conn.cursor()
+        query = "update address set user_id = %s, addressline = %s, city = %s, state_province = %s, country = %s, zipcode = %s where address_id = %s;" #verify query
+        cursor.execute(query, (user_id, addressline, city, state_province, country, zipcode, address_id))
+        self.conn.commit()
         return address_id
 
     def delete(self, address_id):
+        cursor = self.conn.cursor()
+        query = "delete form address where address_id = %s ;" #verify query
+        cursor.execute(query, (address_id,))
+        self.conn.commit()
         return address_id

@@ -48,9 +48,7 @@ class IceDAO:
         cursor = self.conn.cursor()
         query = "Select * from resource Natural Inner Join ice where ice_id = %s;"
         cursor.execute(query,(ice_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        result = cursor.fetchone()
         return result  
 
     def getIceByResourceId(self,resource_id): #needs test
@@ -116,10 +114,10 @@ class IceDAO:
             result.append(row)
         return result
     
-    def getIceAddress(self, user_id): #needs test
+    def getIceAddress(self, supplier_id): #needs test
         cursor = self.conn.cursor()
-        query = "Select * from user Natural Inner Join supplier Natural Inner Join Address where supplier_id = %s;"
-        cursor.execute(query,(user_id,))
+        query = "Select * from users Natural Inner Join supplier Natural Inner Join Address where supplier_id = %s;"
+        cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
             result.append(row)

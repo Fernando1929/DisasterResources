@@ -1,6 +1,5 @@
 from flask import jsonify
 from dao.battery import BatteryDAO
-from dao.power import PowerDAO
 from dao.resource import ResourceDAO
 from dao.supplier import SupplierDAO
 from dao.user import UserDAO
@@ -33,7 +32,7 @@ class BatteryHandler:
         result['zipcode'] = row[6]
         return result
 
-    def build_battery_attributes(self, supplier_id, resource_id, battery_id, category_id, battery_name, battery_brand, battery_quantity,battery_price, power_capacity, power_condition, battery_type):
+    def build_battery_attributes(self, supplier_id, resource_id, battery_id, category_id, battery_name, battery_brand, battery_quantity, battery_price, power_capacity, power_condition, battery_type):
         result = {}
         result['supplier_id'] = supplier_id
         result['resource_id'] = resource_id
@@ -176,12 +175,12 @@ class BatteryHandler:
     
     def getBatteryAddress(self, battery_id):
         battery_dao = BatteryDAO()
-        user_id = battery_dao.getBatteryById(battery_id)[2]
-        user_dao = UserDAO()
-        if not user_dao.getUserById(user_id):
-            return jsonify(Error = "User not found."), 404
+        supplier_id = battery_dao.getBatteryById(battery_id)[2]
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
         else:
-            row = battery_dao.getBatteryAddress(user_id)
+            row = battery_dao.getBatteryAddress(supplier_id)
             if not row:
                 return jsonify(Error = "Address not found."), 404
             else:
@@ -214,9 +213,7 @@ class BatteryHandler:
         if not battery_dao.getBatteryById(battery_id):
             return jsonify(Error = "Battery not found."), 404
         else:
-            power_id = battery_dao.delete(battery_id)
-            power_dao = PowerDAO()
-            resource_id = power_dao.delete(power_id)
+            resource_id = battery_dao.delete(battery_id)
             res_dao = ResourceDAO()
             res_dao.delete(resource_id)
             return jsonify(DeleteStatus = "OK"), 200

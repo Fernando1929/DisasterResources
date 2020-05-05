@@ -48,9 +48,7 @@ class BatteryDAO:
         cursor = self.conn.cursor()
         query = "Select * from resource Natural Inner Join batteries where battery_id = %s;"
         cursor.execute(query,(battery_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        result = cursor.fetchone()
         return result
 
     def getBatteryByResourceId(self, resource_id):  #can be changed to fetch one because ids are unique to only one element

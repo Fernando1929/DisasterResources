@@ -7,10 +7,10 @@ class OrderDAO:
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s"% (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-    
-    def getAllOrders(self):
-        cursor = self.conn.cursor()
-        query = "Select * from orders;"
+
+    def getAllOrders(self): #Fix tomorrow put every param in order for the dict
+        cursor = self.conn.cursor() #select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category"
+        query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource;" #Maybe añadir el Join de con category a ver discutirlo mañana
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,9 +19,11 @@ class OrderDAO:
 
     def getOrderById(self, order_id):
         cursor = self.conn.cursor()
-        query = "Select * from orders where order_id = %s;"
-        cursor.execute(query,(order_id))
-        result = cursor.fetchone()
+        query = "Select * from orders natural inner join resource_orders natural inner join resource where order_id = %s;"
+        cursor.execute(query,(order_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getOrderByCustomerId(self, customer_id):#maybe change methods name to ordersBy customer Id 

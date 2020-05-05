@@ -18,7 +18,7 @@ class GeneratorDAO:
     
     def getAllAvailableGenerators(self):#needs test
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join generators where Not in (select * from resource Natural Inner Join generators Natural Inner Join reserved);"
+        query = "select * from generator natural inner join resource where resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -27,7 +27,7 @@ class GeneratorDAO:
     
     def getAllReservedGenerators(self):#needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Join generators Natural Inner Join reserved;"
+        query = "select * from generators natural inner join resource natural inner join resource_reservations;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -36,7 +36,7 @@ class GeneratorDAO:
 
     def getAllRequestedGenerators(self):#needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Join generators Natural Inner Join request;"
+        query = "select * from generators natural inner join resource natural inner join resource_requests;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -47,9 +47,7 @@ class GeneratorDAO:
         cursor = self.conn.cursor()
         query = "Select * from resource Natural Inner Join generators where generator_id = %s;"
         cursor.execute(query,(generator_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        result = cursor.fetchone()
         return result
 
     def getGeneratorsByPowerCapacity(self,power_capacity):#needs test
@@ -135,24 +133,24 @@ class GeneratorDAO:
     
     def insert(self, resource_id, power_capacity, power_condition, generator_fuel):
         cursor = self.conn.cursor()
-        query = "insert into generators(resource_id, power_capacity, power_condition, generator_fuel) values (%s, %s, %s, %s) returning resource_id;"
+        query = "insert into generators(resource_id, power_capacity, power_condition, generator_fuel) values (%s, %s, %s, %s) returning generator_id;"
         cursor.execute(query, (resource_id, power_capacity, power_condition, generator_fuel))
-        resource_id = cursor.fetchone()[0]
+        generator_id = cursor.fetchone()[0]
         self.conn.commit()
-        return resource_id
+        return generator_id
 
-    def update(self, resource_id, power_capacity, power_condition, battery_type):#needs test
+    def update(self, resource_id, power_capacity, power_condition, generator_fuel):#needs test
         cursor = self.conn.cursor()
-        query = "update batteries set power_capacity = %s, power_condition = %s, battery_type = %s where resource_id = %s returning battery_id;"
-        cursor.execute(query,(power_capacity, power_condition, battery_type, resource_id))
-        battery_id = cursor.fetchone()[0]
+        query = "update generators set power_capacity = %s, power_condition = %s, battery_type = %s where resource_id = %s returning generator_id;"
+        cursor.execute(query,(power_capacity, power_condition, generator_fuel, resource_id))
+        generator_id = cursor.fetchone()[0]
         self.conn.commit()
-        return battery_id
+        return generator_id
 
     def delete(self, resource_id):#needs test
         cursor = self.conn.cursor()
-        query = "delete from batteries where resource_id = %s returning battery_id;"
+        query = "delete from generators where resource_id = %s returning generator_id;"
         cursor.execute(query,(resource_id,))
-        battery_id = cursor.fetchone()[0]
+        generator_id = cursor.fetchone()[0]
         self.conn.commit()
-        return battery_id
+        return generator_id

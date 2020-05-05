@@ -1,7 +1,6 @@
 from flask import jsonify
 from dao.supplier import SupplierDAO
 from dao.resource import ResourceDAO
-from dao.power import PowerDAO
 from dao.generator import GeneratorDAO
 from dao.user import UserDAO
 from dao.supplier import SupplierDAO
@@ -34,7 +33,7 @@ class GeneratorHandler:
         result['zipcode'] = row[6]
         return result
 
-    def build_generator_attributes(self, supplier_id, resource_id, generator_id, category, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel):
+    def build_generator_attributes(self, supplier_id, resource_id, generator_id, category_id, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel):
         result = {}
         result['supplier_id'] = supplier_id
         result['resource_id'] = resource_id
@@ -177,12 +176,12 @@ class GeneratorHandler:
 
     def getGeneratorAddress(self, generator_id):
         generator_dao = GeneratorDAO()
-        user_id = generator_dao.getGeneratorById(generator_id)[2]
-        user_dao = UserDAO()
-        if not user_dao.getUserById(user_id):
-            return jsonify(Error = "User not found."), 404
+        supplier_id = generator_dao.getGeneratorById(generator_id)[2]
+        supplier_dao = SupplierDAO()
+        if not supplier_dao.getSupplierById(supplier_id):
+            return jsonify(Error = "Supplier not found."), 404
         else:
-            row = generator_dao.getGeneratorAddress(user_id)
+            row = generator_dao.getGeneratorAddress(supplier_id)
             if not row:
                 return jsonify(Error = "Address not found."), 404
             else:
@@ -215,9 +214,7 @@ class GeneratorHandler:
         if not generator_dao.getGeneratorById(generator_id):
             return jsonify(Error = "Generator not found."), 404
         else:
-            power_id = generator_dao.delete(generator_id)
-            power_dao = PowerDAO()
-            resource_id = power_dao.delete(power_id)
+            resource_id = generator_dao.delete(generator_id)
             res_dao = ResourceDAO()
             res_dao.delete(resource_id)
             return jsonify(DeleteStatus = "OK"), 200
