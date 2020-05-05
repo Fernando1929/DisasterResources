@@ -75,14 +75,14 @@ class GeneratorHandler:
             result_list.append(result)
         return jsonify(Generators = result_list)
 
-    def getAllRequestedGenerators(self): 
-        dao = GeneratorDAO()
-        result = dao.getAllRequestedGenerators()
-        result_list = []
-        for row in result:
-            result = self.build_generator_dict(row)
-            result_list.append(result)
-        return jsonify(Generators = result_list)
+    # def getAllRequestedGenerators(self): 
+    #     dao = GeneratorDAO()
+    #     result = dao.getAllRequestedGenerators()
+    #     result_list = []
+    #     for row in result:
+    #         result = self.build_generator_dict(row)
+    #         result_list.append(result)
+    #     return jsonify(Generators = result_list)
 
     def getGeneratorById(self, generator_id): 
         dao = GeneratorDAO()
@@ -141,18 +141,18 @@ class GeneratorHandler:
                 result_list.append(result)
             return jsonify(Generators = result_list)
 
-    def getAllRequestedGeneratorsBySupplierId(self, supplier_id):
-        supplier_dao = SupplierDAO()
-        if not supplier_dao.getSupplierById(supplier_id):
-            return jsonify(Error = "Supplier Not Found"), 404
-        else:
-            generator_dao = GeneratorDAO()
-            result_list = []
-            generator_list = generator_dao.getAllRequestedGeneratorsBySupplierId(supplier_id)
-            for row in generator_list:
-                result = self.build_generator_dict(row)
-                result_list.append(result)
-            return jsonify(Generators = result_list)
+    # def getAllRequestedGeneratorsBySupplierId(self, supplier_id):
+    #     supplier_dao = SupplierDAO()
+    #     if not supplier_dao.getSupplierById(supplier_id):
+    #         return jsonify(Error = "Supplier Not Found"), 404
+    #     else:
+    #         generator_dao = GeneratorDAO()
+    #         result_list = []
+    #         generator_list = generator_dao.getAllRequestedGeneratorsBySupplierId(supplier_id)
+    #         for row in generator_list:
+    #             result = self.build_generator_dict(row)
+    #             result_list.append(result)
+    #         return jsonify(Generators = result_list)
 
     def searchGenerators(self, args):
         generator_power_capacity = args.get('power_capacity')
