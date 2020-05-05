@@ -19,7 +19,7 @@ class IceDAO:
 
     def getAllAvailableIce(self): #needs test
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join ice where Not in (select * from resource Natural Inner Join ice Natural Inner Join reservation);"
+        query = "select * from resource natural inner join ice where resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -28,7 +28,7 @@ class IceDAO:
 
     def getAllReservedIce(self): #needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Join ice Natural Inner Join reservation;"
+        query = "select * from resource natural inner join ice natural inner join resource_reservations;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -37,7 +37,7 @@ class IceDAO:
     
     def getAllRequestedIce(self): #needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Join ice Natural Inner Join request;"
+        query = "select * from resource natural inner join ice natural inner join resource_requests;"
         cursor.execute(query)
         result = []
         for row in cursor:
