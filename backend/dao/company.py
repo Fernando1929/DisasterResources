@@ -21,9 +21,7 @@ class CompanyDAO:
         cursor = self.conn.cursor()
         query = "Select * from company where company_id = %s;"
         cursor.execute(query,(company_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        result = cursor.fetchone()
         return result
 
     def getCompanyByName(self, company_name): #needs test
