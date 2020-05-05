@@ -1,7 +1,6 @@
 from flask import jsonify
 from dao.supplier import SupplierDAO
 from dao.resource import ResourceDAO
-from dao.power import PowerDAO
 from dao.generator import GeneratorDAO
 from dao.user import UserDAO
 from dao.supplier import SupplierDAO
