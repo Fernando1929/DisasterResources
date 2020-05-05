@@ -137,7 +137,7 @@ class FoodDAO:
     def getAllReservedFoodsBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
         query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations WHERE supplier_id = %s;"
-        cursor.execute(query, (supplier_id))
+        cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
             result.append(row)

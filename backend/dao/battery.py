@@ -38,7 +38,7 @@ class BatteryDAO:
 
     def getAllRequestedBatteries(self):#needs test
         cursor = self.conn.cursor()
-        query = "select * from resource natural inner join batterues natural inner join resource_requests;"
+        query = "select * from resource natural inner join batteries natural inner join resource_requests;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -56,6 +56,13 @@ class BatteryDAO:
         cursor = self.conn.cursor()
         query = "Select * from resource Natural Inner Join batteries where resource_id = %s;"
         cursor.execute(query,(resource_id,))
+        result = cursor.fetchone()
+        return result
+
+    def getBatteriesByBrand(self, resource_brand):
+        cursor = self.conn.cursor()
+        query = "select * from resource natural inner join batteries where resource_brand = %s;"
+        cursor.execute(query,(resource_brand,))
         result = []
         for row in cursor:
             result.append(row)
@@ -99,7 +106,7 @@ class BatteryDAO:
 
     def getAllAvailableBatteriesBySupplierId(self, supplier_id):#needs test
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join batteries where supplier_id = %s and Not in (select * from resource Natural Inner Joint batteries Natural Inner Join reserved);"
+        query = "select * from resource natural inner join batteries where supplier_id = %s and resource_quantity > 0;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -108,7 +115,7 @@ class BatteryDAO:
     
     def getAllReservedBatteriesBySupplierId(self, supplier_id): #needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Joint batteries Natural Inner Join reserved where supplier_id = %s;"
+        query = "select * from resource natural inner join batteries natural inner join resource_reservations where supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -117,7 +124,7 @@ class BatteryDAO:
 
     def getAllRequestedBatteriesBySupplierId(self, supplier_id): #needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Joint batteries Natural Inner Join request where supplier_id = %s;"
+        query = "select * from resource natural inner join batteries natural inner join resource_requests where supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -126,11 +133,9 @@ class BatteryDAO:
     
     def getBatteryAddress(self, user_id): #needs test
         cursor = self.conn.cursor()
-        query = "select address from user Natural Inner Join supplier where supplier_id = %s;" 
+        query = "select * from address Natural Inner Join supplier where supplier_id = %s;" 
         cursor.execute(query,(user_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        result = cursor.fetchone()
         return result
 
     def insert(self, resource_id, power_condition, power_capacity, battery_type):

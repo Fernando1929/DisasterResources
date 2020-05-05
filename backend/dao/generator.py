@@ -18,7 +18,7 @@ class GeneratorDAO:
     
     def getAllAvailableGenerators(self):#needs test
         cursor = self.conn.cursor()
-        query = "select * from generator natural inner join resource where resource_quantity > 0;"
+        query = "select * from generators natural inner join resource where resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -43,11 +43,27 @@ class GeneratorDAO:
             result.append(row)
         return result
 
-    def getGeneratorById(self, generator_id): #can be changed to fetch one to get one only rows id are unique
+    def getGeneratorById(self, generator_id): #needs test
         cursor = self.conn.cursor()
         query = "Select * from resource Natural Inner Join generators where generator_id = %s;"
         cursor.execute(query,(generator_id,))
         result = cursor.fetchone()
+        return result
+
+    def getGeneratorByResourceId(self, resource_id):#needs test
+        cursor = self.conn.cursor()
+        query = "Select * from resource Natural Inner Join generators where resource_id = %s;"
+        cursor.execute(query,(resource_id,))
+        result = cursor.fetchone()
+        return result
+    
+    def getGeneratorByBrand(self, resource_brand):#needs test
+        cursor = self.conn.cursor()
+        query =  "select * from resource Natural Inner Join generators where resource_brand = %s;"
+        cursor.execute(query,(resource_brand,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getGeneratorsByPowerCapacity(self,power_capacity):#needs test
@@ -85,19 +101,10 @@ class GeneratorDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    def getGeneratorsByResourceId(self, resource_id):#needs test
-        cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join generators where resource_id = %s;"
-        cursor.execute(query,(resource_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
     
     def getAllAvailableGeneratorsBySupplierId(self, supplier_id):#needs test
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join generators where supplier_id = %s and Not in (select * from resource Natural Inner Join generators Natural Inner Join reserved);"
+        query = "select * from resource natural inner join generators where supplier_id = %s and resource_quantity > 0;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -106,7 +113,7 @@ class GeneratorDAO:
     
     def getAllReservedGeneratorsBySupplierId(self, supplier_id):#needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Join generators Natural Inner Join reserved where supplier_id = %s;"
+        query = "select * from resource natural inner join generators natural inner join resource_reservations where supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -115,7 +122,7 @@ class GeneratorDAO:
 
     def getAllRequestedGeneratorsBySupplierId(self, supplier_id):#needs test
         cursor = self.conn.cursor()
-        query = "select * from resource Natural Inner Join generators Natural Inner Join request where supplier_id = %s;"
+        query = "select * from resource natural inner join generators natural inner join resource_requests where supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -126,9 +133,7 @@ class GeneratorDAO:
         cursor = self.conn.cursor()
         query = "select * from user Natural Inner Join supplier where supplier_id = %s;" #I think it shoud be supplier id but idk 
         cursor.execute(query,(user_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        result = cursor.fetchone()
         return result
     
     def insert(self, resource_id, power_capacity, power_condition, generator_fuel):
@@ -141,7 +146,7 @@ class GeneratorDAO:
 
     def update(self, resource_id, power_capacity, power_condition, generator_fuel):#needs test
         cursor = self.conn.cursor()
-        query = "update generators set power_capacity = %s, power_condition = %s, battery_type = %s where resource_id = %s returning generator_id;"
+        query = "update generators set power_capacity = %s, power_condition = %s, generator_fuel = %s where resource_id = %s returning generator_id;"
         cursor.execute(query,(power_capacity, power_condition, generator_fuel, resource_id))
         generator_id = cursor.fetchone()[0]
         self.conn.commit()
