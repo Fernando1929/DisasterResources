@@ -1,5 +1,6 @@
 from flask import jsonify
 from dao.order import OrderDAO
+from dao.customer import CustomerDAO
 from dao.resourceOrders import ResourceOrdersDAO
 
 class OrderHandler:
@@ -17,7 +18,7 @@ class OrderHandler:
 
     def build_order_attributes(self, customer_id, payment_id, order_id, order_date, order_price, order_status, resources):
         result = {}
-        result['cutomer_id'] = customer_id
+        result['customer_id'] = customer_id
         result['payment_id'] = payment_id
         result['order_id'] = order_id 
         result['order_date'] = order_date
@@ -84,22 +85,18 @@ class OrderHandler:
             orders_list = dao.getOrdersByStatus(order_status)
         else:
             return jsonify(Error = "Malformed query string"), 400
-        result_list = []
-        for row in orders_list:
-            result = self.build_order_dict(row)
-            result_list.append(result)
+        result_list = self.fixDict(orders_list)
         return jsonify(Orders = result_list)
 
     def getOrderByCustomerId(self, customer_id):
-        dao = OrderDAO()
-        orders_list = dao.getOrderByCustomerId(customer_id)
-        if not orders_list:
-            return jsonify(Error = "Order Not Found"), 404
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer Not Found"), 404
         else:
-            result_list = []
-            for row in orders_list:
-                result = self.build_order_dict(row)
-                result_list.append(result)
+            orders_list = []
+            dao = OrderDAO()
+            orders_list = dao.getOrderByCustomerId(customer_id)
+            result_list = self.fixDict(orders_list)
             return jsonify(Orders = result_list)
 
     def insertOrder(self, json):
