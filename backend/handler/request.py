@@ -85,12 +85,15 @@ class RequestHandler:
     def searchRequests(self, args):
         request_title = args.get("request_title")
         request_status = args.get("request_status")
+        category_name = args.get("category_name")
         dao = RequestDAO()
         request_list = []
         if (len(args) == 1) and request_title:
             request_list = dao.getRequestsByTitle(request_title)
         elif (len(args) == 1) and request_status:
             request_list = dao.getRequestsByStatus(request_status)
+        elif (len(args) == 1) and category_name:
+            request_list = dao.getRequestsByCategoryName(category_name)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = self.fixDict(request_list)
