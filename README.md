@@ -7,7 +7,8 @@ The repository includes the app database's ER diagram, a written report describi
 The *backend* directory includes the DAOs and handlers needed for each entity, and the *main* file containing all the application's routes.
 
 **For Phase 2:**<br/> 
-The repository now includes updated versions of the ER diagram and written report, and a *schema.sql* file with all the necessary CREATE TABLE queries. In addition, the *dbconfig* file has been updated with the credentials for our local PostgreSQL database.<br/>
+The repository now includes updated versions of the ER diagram and written report, and a *schema.sql* file with all the necessary CREATE TABLE queries. Our PostgreSQL database backup file was added, and the *dbconfig* file has been updated with the necessary credentials.<br/>
+In addition, a Postman collection of routes tests was also included.<br/>
 Finally, the DAOs and handlers for the backend code were updated, replacing hard-coded JSON data with database queries. 
 
 **Development Team:**<br/>
