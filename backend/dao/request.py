@@ -55,6 +55,15 @@ class RequestDAO:
             result.append(row)
         return result
 
+    def getRequestsByCategoryName(self, category_name):
+        cursor = self.conn.cursor()
+        query = "select request_id, customer_id, request_title, request_date, request_description, request_status, category_id, category_name, request_quantity from request natural inner join request_category natural inner join category where category_name = %s order by request_id;"
+        cursor.execute(query, (category_name,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def insert(self, customer_id, request_title, request_date, request_description, request_status):
         cursor = self.conn.cursor()
         query = "insert into request(customer_id, request_title, request_date, request_description, request_status) values (%s, %s, %s, %s, %s) returning request_id;"
