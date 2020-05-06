@@ -129,10 +129,10 @@ class GeneratorDAO:
     #         result.append(row)
     #     return result
     
-    def getGeneratorAddress(self, supplier_id): # should be user id or supplier_id ? # we need to verify the location of this method (we are locking for the supplier addres not the object address)
+    def getGeneratorAddress(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from user Natural Inner Join supplier where supplier_id = %s;" #I think it shoud be supplier id but idk 
-        cursor.execute(query,(supplier_id,))
+        query = "select * from address natural inner join supplier where supplier_id = %s;"
+        cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result
     
