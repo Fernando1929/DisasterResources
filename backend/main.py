@@ -273,10 +273,6 @@ def getOrderById(order_id):
     else:
         return jsonify(Error = "Method not allowed"), 405
 
-@app.route('/DRL/customer/orders/payment/<int:payment_id>', methods=['GET'])
-def getOrdersByPaymentId(payment_id):
-    return OrderHandler().getPaymentByOrderId(payment_id)
-
 @app.route('/DRL/customer/orders/<int:order_id>/resources', methods=['GET'])
 def getResourcesByOrderId(order_id):
     return OrderHandler().getResourcesByOrderId(order_id)
