@@ -68,14 +68,14 @@ class CompanyDAO:
         self.conn.commit()
         return company_id
 
-    def update(self, company_id, company_name, company_address, company_phone): #needs test
+    def update(self, company_id, company_name, company_address, company_phone):
         cursor = self.conn.cursor()
         query = "update company set company_name = %s, company_address = %s, company_phone = %s where company_id = %s;"
         cursor.execute(query,(company_name, company_address, company_phone,company_id))
         self.conn.commit()
         return company_id
 
-    def delete(self, company_id): #needs test
+    def delete(self, company_id):
         cursor = self.conn.cursor()
         query = "delete from company where company_id = %s;"
         cursor.execute(query,(company_id))

@@ -90,13 +90,13 @@ class AdminDAO:
         cursor = self.conn.cursor()
         query = "Select * from users Natural Inner Join admin where admin_id = %s returning user_id;"
         cursor.execute(query,(admin_id,))
-        user_id = cursor.fetchone()
+        user_id = cursor.fetchone()[0]
         return user_id
 
     def delete(self, admin_id):
         cursor = self.conn.cursor()
         query = "delete from resource where admin_id = %s returning user_id;"
         cursor.execute(query,(admin_id))
-        user_id = cursor.fetchone()
+        user_id = cursor.fetchone()[0]
         self.conn.commit()
         return user_id

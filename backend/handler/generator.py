@@ -235,9 +235,9 @@ class GeneratorHandler:
             generator_fuel = json['generator_fuel']
 
             if supplier_id and category_id and generator_name  and generator_brand and generator_quantity and generator_price and power_capacity and power_condition and generator_fuel:
+                resource_id = generator_dao.update(generator_id, power_capacity, power_condition, generator_fuel)
                 res_dao = ResourceDAO()
-                resource_id = res_dao.insert(supplier_id, category_id, generator_name, generator_brand, generator_quantity, generator_price)
-                generator_id = generator_dao.insert(resource_id, power_capacity, power_condition, generator_fuel)
+                res_dao.update(resource_id, supplier_id, generator_name, generator+_brand, generator_quantity, generator_price)
                 result = self.build_generator_attributes(supplier_id, resource_id, generator_id, category_id, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel)
                 return jsonify(Generator = result), 200
             else:

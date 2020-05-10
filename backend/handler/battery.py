@@ -234,9 +234,9 @@ class BatteryHandler:
             battery_type = json['battery_type']
 
             if supplier_id and category_id and battery_name and battery_brand and battery_quantity and battery_price and power_capacity and power_condition and battery_type:
+                resource_id = battery_dao.update(battery_id, power_capacity, power_condition, battery_type)
                 res_dao = ResourceDAO()
-                resource_id = res_dao.insert(supplier_id, category_id, battery_name, battery_brand, battery_quantity, battery_price)
-                battery_id = battery_dao.insert(resource_id, power_capacity, power_condition, battery_type)
+                res_dao.update(resource_id, supplier_id, category_id, battery_name, battery_brand, battery_quantity, battery_price)
                 result = self.build_battery_attributes(supplier_id, resource_id, battery_id, category_id, battery_name, battery_brand, battery_quantity, battery_price, power_capacity, power_condition, battery_type)
                 return jsonify(Battery = result), 200
             else:
