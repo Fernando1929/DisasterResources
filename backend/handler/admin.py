@@ -5,7 +5,7 @@ from dao.userPhone import UserPhoneDAO
 
 class AdminHandler:
 
-    def build_admin_attributes(self, user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone):
+    def build_admin_attributes(self, user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone_id, admin_phone):
         result = {}
         result['admin_id'] = admin_id
         result['user_id'] = user_id
@@ -13,6 +13,7 @@ class AdminHandler:
         result['admin_lastname'] = admin_lastname
         result['admin_date_birth'] = admin_date_birth
         result['admin_email'] = admin_email
+        result['admin_phone_id'] = admin_phone_id
         result['admin_phone'] = admin_phone
         return result
 
@@ -24,7 +25,7 @@ class AdminHandler:
         result['admin_lastname'] = row[3]
         result['admin_date_birth'] = row[4]
         result['admin_email'] = row[5]
-        result['phone_id'] = row[6]
+        result['admin_phone_id'] = row[6]
         result['admin_phone'] = row[7]
         return result
 
@@ -85,10 +86,10 @@ class AdminHandler:
             dao_user = UserDAO()
             user_id = dao_user.insert(admin_firstname, admin_lastname, admin_date_birth, admin_email)
             dao_phone = UserPhoneDAO()
-            dao_phone.insert(user_id, admin_phone)   
+            admin_phone_id = dao_phone.insert(user_id, admin_phone)   
             dao_admin = AdminDAO()
             admin_id = dao_admin.insert(user_id)
-            result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
+            result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone_id, admin_phone)
             return jsonify(Admin = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400

@@ -25,6 +25,13 @@ class CreditCardDAO:
         result = cursor.fetchone()
         return result
 
+    def getCreditCardByPaymentId(self, payment_id):
+        cursor = self.conn.cursor()
+        query = "select * from creditcard natural inner join payment where payment_id = %s;"
+        cursor.execute(query, (payment_id,))
+        result = cursor.fetchone()
+        return result
+
     def getCreditCardByName(self, creditcard_name):
         cursor = self.conn.cursor()
         query = "select * from creditcard natural inner join payment where creditcard_name = %s;"

@@ -1,0 +1,6240 @@
+{
+	"info": {
+		"_postman_id": "47648a62-5d31-4ee7-9738-ff6b8856d560",
+		"name": "DB Project Final Tests v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login Routes",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"sgaishson2\",\"password\":\"x6o7r4c28Xo\",\"user_id\":3}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get login by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/login/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"login",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update login",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login_id\": 1,\r\n    \"password\": \"password\",\r\n    \"user_id\": 1,\r\n    \"username\": \"juandelacalle\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/login/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"login",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete login",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/login/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"login",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get login by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/55/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"55",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Address Routes",
+			"item": [
+				{
+					"name": "Get all addresses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get address by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/address/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\n\t\"user_id\":71,\n\t\"addressline\":\"Barrio Caonillas\",\n\t\"city\":\"Utuado\",\n\t\"state_province\":\"Puerto Rico\",\n\t\"country\":\"USA\",\n\t\"zipcode\":\"00641\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address_id\": 1,\r\n    \"addressline\": \"Urb. La Quinta Calle Cartier F1\",\r\n    \"city\": \"Yauco\",\r\n    \"country\": \"Puerto Rico\",\r\n    \"state_province\": \"N/A\",\r\n    \"user_id\": 1,\r\n    \"zipcode\": \"00698\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/address/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete address",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/address/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get addresses by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/1/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"1",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/user/address?city=Vieques",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"user",
+								"address"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Vieques"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Customer Routes",
+			"item": [
+				{
+					"name": "Get all customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer"
+							]
+						},
+						"description": "Route to get all customers with GET."
+					},
+					"response": []
+				},
+				{
+					"name": "Insert new customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \t\"customer_firstname\": \"Eyd\",\r\n  \t\"customer_lastname\": \"Lud\",\r\n  \t\"customer_email\": \"eludfordj21@imdb.com\",\r\n  \t\"customer_date_birth\": \"10/18/1997\",\r\n  \t\"customer_phone\": \"3904115564\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/register/customer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"register",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer?customer_firstname=Klaus",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "customer_firstname",
+									"value": "Klaus"
+								},
+								{
+									"key": "customer_lastname",
+									"value": "Kennington",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get customer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n      \"customer_date_birth\": \"05/15/1992\",\r\n      \"customer_email\": \"alexvargas1@gmail.com\",\r\n      \"customer_firstname\": \"Axel\",\r\n      \"customer_id\": 1,\r\n      \"customer_lastname\": \"Vargas\",\r\n      \"customer_phone\": \"7877777777\",\r\n      \"user_id\": \"1\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "52715a55-2a07-4230-8a7f-34905e9eb034",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "27184302-b667-4d6f-a0ac-c7eab0599571",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Supplier Routes",
+			"item": [
+				{
+					"name": "Get all suppliers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get supplier by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get resources by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier/1/resources",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier",
+								"1",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert supplier",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \t\"supplier_firstname\": \"Waver\",\r\n  \t\"supplier_lastname\": \"Dot\",\r\n  \t\"supplier_email\": \"wdotsonj21@ifeng.com\",\r\n  \t\"supplier_date_birth\": \"03/23/1989\",\r\n  \t\"supplier_phone\": \"9277701355\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/register/supplier",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"register",
+								"supplier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update supplier",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supplier_date_birth\": \"23/01/89\",\r\n    \"supplier_email\": \"jramires@gymail.com\",\r\n    \"supplier_firstname\": \"Julio\",\r\n    \"supplier_id\": 1,\r\n    \"supplier_lastname\": \"Ramires\",\r\n    \"supplier_phone\": \"7879999999\",\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete supplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search supplier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier?supplier_firstname=Alex",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier"
+							],
+							"query": [
+								{
+									"key": "supplier_firstname",
+									"value": "Alex"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get suppliers by company id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier/company/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier",
+								"company",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Admin Routes",
+			"item": [
+				{
+					"name": "Get all admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get admin by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/admin/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"admin",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"admin_firstname\":\"Aveline\",\r\n\t\"admin_lastname\":\"Christol\",\r\n\t\"admin_date_birth\":\"01/21/1994\",\r\n\t\"admin_email\":\"achristol9@myspace.com\",\r\n\t\"admin_phone\":\"5766614945\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/register/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"admin_date_birth\": \"23/12/85\",\r\n    \"admin_email\": \"mtorres@gymail.com\",\r\n    \"admin_firstname\": \"Miranda\",\r\n    \"admin_id\": 2,\r\n    \"admin_lastname\": \"Torres\",\r\n    \"admin_phone\": \"9999999999\",\r\n    \"user_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/admin/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/admin/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/admin?admin_firstname=Mechelle",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"admin"
+							],
+							"query": [
+								{
+									"key": "admin_firstname",
+									"value": "Mechelle"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Company Routes",
+			"item": [
+				{
+					"name": "Get all companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/company",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get company by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/company/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"company",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get company by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/supplier/1/company",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"supplier",
+								"1",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/company?company_name=Wikizz",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"company"
+							],
+							"query": [
+								{
+									"key": "company_name",
+									"value": "Wikizz"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"company_name\":\"Oba\",\n\t\"company_address\":\"55603 Artisan Road\",\n\t\"company_phone\":\"2936609196\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/company",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"company_address\": \"Jayuya\",\r\n    \"company_id\": 1,\r\n    \"company_name\": \"Baxter\",\r\n    \"company_phone\": \"7879999999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/company/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"company",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/company/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"company",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Request Routes",
+			"item": [
+				{
+					"name": "Get all requests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/requests",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"requests"
+							]
+						},
+						"description": "Route to get all customers with GET."
+					},
+					"response": []
+				},
+				{
+					"name": "Insert new request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"customer_id\": 1,\r\n      \"request_date\": \"05/02/2020\",\r\n      \"request_description\": \"I need batteries.\",      \t\r\n      \"request_title\": \"Need Batteries\",\r\n      \"resources\": [\r\n        {\r\n          \"category_id\": 9,\r\n          \"category_name\": \"battery\",\r\n          \"request_quantity\": 20\r\n        }\r\n      ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/requests",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/requests?request_status=Pending",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"requests"
+							],
+							"query": [
+								{
+									"key": "request_status",
+									"value": "Pending"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get request by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/requests/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"requests",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n      \"customer_id\": 1,\r\n      \"request_date\": \"3/16/2020\",\r\n      \"request_id\": 1,\r\n      \"request_quantity\": 10,\r\n      \"request_title\": \"Medical Device Request\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/requests/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"requests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/requests/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"requests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all the request from a customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/5/requests",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"5",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "28f96449-fd8c-4dbb-9a6e-e40bdd53fb0f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9fa34406-1e9a-4312-ac7f-66f979d2c78f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reservation Routes",
+			"item": [
+				{
+					"name": "Get all reservations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/reservations",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reservation by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/reservations/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"reservations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reservations by customer id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/1/reservations",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"1",
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\": 10,\r\n    \"reservation_date\": \"03/05/2020\",\r\n    \"reservation_status\": \"Accepted\",\r\n    \"request_id\": null,\r\n    \"resources\" : [{\r\n    \t\"resource_id\" : 65,\r\n    \t\"reservation_quantity\": 2},\r\n    {\r\n    \t\"resource_id\" : 64,\r\n    \t\"reservation_quantity\": 1},\r\n    {\r\n    \t\"resource_id\" : 68,\r\n    \t\"reservation_quantity\": 5\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/reservations",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update reservation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\": 1,\r\n    \"reservation_date\": \"12/31/2020\",\r\n    \"reservation_id\": 1,\r\n    \"reservation_quantity\": 10,\r\n    \"reservation_status\": \"Accepted\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/reservations/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"reservations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete reservation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/reservations/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"reservations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search reservation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/reservations?reservation_status=Accepted",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"reservations"
+							],
+							"query": [
+								{
+									"key": "reservation_status",
+									"value": "Accepted"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get resources by reservation id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/reservations/3/resources",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"reservations",
+								"3",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Order Routes",
+			"item": [
+				{
+					"name": "Get all orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get orders by customer id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/1/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\": 10,\r\n    \"payment_id\" : 10,\r\n    \"order_date\": \"01/23/2020\",\r\n    \"order_price\": 85,\r\n    \"order_status\": \"Accepted\",\r\n    \"resources\" : [{\r\n    \t\"resource_id\" : 22,\r\n    \t\"order_quantity\": 1,\r\n    \t\"discount\" : 0.20\r\n    }, {\r\n    \t\"resource_id\" : 88,\r\n    \t\"order_quantity\": 5,\r\n    \t\"discount\" : 0.20\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\": 1,\r\n    \"order_date\": \"12/3/20\",\r\n    \"order_id\": 1,\r\n    \"order_quantity\": 3,\r\n    \"order_status\": \"pending\",\r\n    \"order_totalprice\": 30,\r\n    \"payment_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders?order_status=Accepted",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "order_status",
+									"value": "Accepted"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get payment by order id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders/1/payment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders",
+								"1",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get resources by order id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders/1/resources",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"orders",
+								"1",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ath Movil Routes",
+			"item": [
+				{
+					"name": "Get all ath movil",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/athmovil",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"athmovil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ath Movil by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/athmovil/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"athmovil",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Ath Movil",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"customer_id\": 1,\r\n\t\"ath_movil_phone\":\"3167891234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/athmovil",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"athmovil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ath Movil",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"ath_movil_phone\": \"7877778889\",\r\n      \"customer_id\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/athmovil/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"athmovil",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ath Movil",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/athmovil/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"athmovil",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Ath Movil",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/athmovil?ath_movil_phone=3159944952",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"athmovil"
+							],
+							"query": [
+								{
+									"key": "ath_movil_phone",
+									"value": "3159944952"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ath Movil by customer id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/1/athmovil",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"1",
+								"athmovil"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Paypal Routes",
+			"item": [
+				{
+					"name": "Get all Paypal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/paypal",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"paypal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Paypal by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/paypal/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"paypal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Paypal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \t\"customer_id\": 1,\r\n  \t\"paypal_username\": \"Eydie\",\r\n  \t\"paypal_password\": \"Ludford1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/paypal",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"paypal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Paypal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"paypal_password\": \"Samuel1234\",\r\n      \"paypal_username\": \"Sam23\",\r\n      \"customer_id\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/paypal/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"paypal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Paypal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/paypal/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"paypal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Paypal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/paypal?paypal_username=CathrynMc",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"paypal"
+							],
+							"query": [
+								{
+									"key": "paypal_username",
+									"value": "CathrynMc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Paypal by customer id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/21/paypal",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"21",
+								"paypal"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Credit Card Routes",
+			"item": [
+				{
+					"name": "Get all credit card",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/creditcard",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"creditcard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Credit Card by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/creditcard/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"creditcard",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Credit Card",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \t\"customer_id\": 1,\r\n  \t\"creditcard_name\": \"Dieter Woodall\",\r\n  \t\"creditcard_number\": \"3581760837763671\",\r\n  \t\"creditcard_ccv\": 730,\r\n  \t\"creditcard_exp_date\": \"05/23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/creditcard",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"creditcard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Credit Card",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"creditcard_ccv\": \"000\",\r\n      \"creditcard_exp_date\": \"02/23\",\r\n      \"creditcard_name\": \"Samuel Martinez\",\r\n      \"creditcard_number\": \"1234567898765432\",\r\n      \"customer_id\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/creditcard/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"creditcard",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Credit Card",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/creditcard/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"creditcard",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Credit Card",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/creditcard?creditcard_name=Cyndia Dullard",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"creditcard"
+							],
+							"query": [
+								{
+									"key": "creditcard_name",
+									"value": "Cyndia Dullard"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Credit Card by customer id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/customer/11/creditcard",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"customer",
+								"11",
+								"creditcard"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "General Resource Routes",
+			"item": [
+				{
+					"name": "Get all resources",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get resource by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get resource full info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/1/fullinfo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"1",
+								"fullinfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search resources (by name)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources?resource_name=Gasoline",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources"
+							],
+							"query": [
+								{
+									"key": "resource_name",
+									"value": "Gasoline"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Fuel Routes",
+			"item": [
+				{
+					"name": "Get all fuels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get fuel by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert fuel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"supplier_id\": 10,\r\n  \"category_id\": 1,\r\n  \"fuel_name\": \"Gasoline\",\r\n  \"fuel_brand\": \"Shell\",\r\n  \"fuel_quantity\": 1,\r\n  \"fuel_price\": 0.00,\r\n  \"fuel_type\": \"gasoline\",\r\n  \"fuel_gallons\": 12.25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update fuel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fuel_brand\": \"Shell\",\r\n    \"fuel_gallons\": 12,\r\n    \"fuel_id\": 1,\r\n    \"fuel_name\": \"Gasoline\",\r\n    \"fuel_price\": 20.0,\r\n    \"fuel_quantity\": 1,\r\n    \"fuel_type\": \"gasoline\",\r\n    \"resource_id\": 1,\r\n    \"supplier_id\": 1, \r\n    \"category\": \"fuel\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete fuel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available fuels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved fuels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get fuels by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get fuel address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/5/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"5",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available fuel by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/available/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"available",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved fuels by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search fuel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/fuel?fuel_brand=Shell",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"fuel"
+							],
+							"query": [
+								{
+									"key": "fuel_brand",
+									"value": "Shell"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Food Routes",
+			"item": [
+				{
+					"name": "Get all foods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get food by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post food",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"supplier_id\": 10,\r\n  \"category_id\": 2,\r\n  \"food_name\": \"Corned beef\",\r\n  \"food_brand\": \"Great Value\",\r\n  \"food_quantity\": 20,\r\n  \"food_price\": 5.00,\r\n  \"food_category\": \"protein\",\r\n  \"food_container\": \"metal\",\r\n  \"food_type\": \"canned\",\r\n  \"food_ounces\": 16.0,\r\n  \"food_expdate\": \"02/24/2020\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update food",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"food_brand\": \"Del Monte\",\r\n    \"food_category\": \"fruit\",\r\n    \"food_container\": \"aluminum\",\r\n    \"food_expdate\": \"12/31/2020\",\r\n    \"food_id\": 1,\r\n    \"food_name\": \"Canned peaches\",\r\n    \"food_ounces\": 8,\r\n    \"food_price\": 10.0,\r\n    \"food_quantity\": 12,\r\n    \"food_type\": \"canned\",\r\n    \"resource_id\": 1,\r\n    \"supplier_id\": 1,\r\n    \"category\": \"food\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete food",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available foods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved foods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get foods by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get food address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/4/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"4",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available foods by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/available/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"available",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved foods by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search food",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/food?food_brand=Del Monte",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"food"
+							],
+							"query": [
+								{
+									"key": "food_brand",
+									"value": "Del Monte"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Medicine Routes",
+			"item": [
+				{
+					"name": "Get all medicines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get medicine by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post medicine",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"supplier_id\": 10,\r\n  \"category_id\": 3,\r\n  \"med_name\": \"Ibuprofen\",\r\n  \"med_brand\": \"Equate\",\r\n  \"med_quantity\": 1,\r\n  \"med_price\": 2.00,\r\n  \"med_type\": \"pain\",\r\n  \"med_dose\": \"200mg\",\r\n  \"med_prescript\": \"N\",\r\n  \"med_expdate\": \"04/10/2020\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update medicine",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"category\": \"medicine\",\r\n    \"med_brand\": \"Walgreens\",\r\n    \"med_dose\": \"50mg\",\r\n    \"med_expdate\": \"12/31/2020\",\r\n    \"med_id\": 1,\r\n    \"med_name\": \"Sumatriptan\",\r\n    \"med_prescript\": \"Y\",\r\n    \"med_price\": 10.0,\r\n    \"med_quantity\": 1,\r\n    \"med_type\": \"migraine\",\r\n    \"resource_id\": 1,\r\n    \"supplier_id\": 1\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete medicine",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available medicines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved medicines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get medicines by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get medicine address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/3/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"3",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available medicine by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/available/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"available",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved medicine by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search medicine",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicine?med_brand=Walgreens",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicine"
+							],
+							"query": [
+								{
+									"key": "med_brand",
+									"value": "Walgreens"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tool Routes",
+			"item": [
+				{
+					"name": "Get all tools",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tool by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post tool",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"supplier_id\": 10,\r\n  \"category_id\": 4,\r\n  \"tool_name\": \"Screwdriver set\",\r\n  \"tool_brand\": \"Milwaukee\",\r\n  \"tool_quantity\": 1,\r\n  \"tool_price\": 0.00,\r\n  \"tool_material\": \"stainless steel\",\r\n  \"tool_condition\": \"used\",\r\n  \"tool_pwtype\": \"N/A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update tool",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n      \"category\": \"tools\",\r\n      \"resource_id\": 1,\r\n      \"supplier_id\": 1,\r\n      \"tool_brand\": \"Craftsman\",\r\n      \"tool_condition\": \"New\",\r\n      \"tool_id\": 1,\r\n      \"tool_material\": \"stainless steel\",\r\n      \"tool_name\": \"Wrench\",\r\n      \"tool_price\": 40.0,\r\n      \"tool_pwtype\": \"None\",\r\n      \"tool_quantity\": 5\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete tool",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available tools",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved tools",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tools by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tool address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/6/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"6",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available tools by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/available/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"available",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved tools by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search tools",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/tools?tool_brand=Craftsman",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"tools"
+							],
+							"query": [
+								{
+									"key": "tool_brand",
+									"value": "Craftsman"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Water Routes",
+			"item": [
+				{
+					"name": "Get all water",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get water by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert water",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"supplier_id\":1,\r\n\t\"category_id\":7,\r\n\t\"water_name\":\"Water Smartwater\",\r\n\t\"water_brand\":\"Smartwater\",\r\n\t\"water_quantity\":10,\r\n\t\"water_price\":0.80,\r\n\t\"water_size\": \"16oz\",\r\n\t\"water_container\":\"Bottle\",\r\n\t\"water_type\":\"Purified\",\r\n\t\"water_exp_date\":\"02/02/2026\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update water",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supplier_id\": 1,\r\n    \"water_brand\": \"Nikini\",\r\n    \"category\": \"water\",\r\n    \"water_container\": \"Bottle\",\r\n    \"water_exp_date\": \"02/12/2025\",\r\n    \"water_id\": 1,\r\n    \"water_name\": \"Water\",\r\n    \"water_price\": 2.00,\r\n    \"water_quantity\": 10,\r\n    \"water_size\": 16,\r\n    \"water_type\": \"Purified\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete water",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search water",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water?water_brand=Vita",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water"
+							],
+							"query": [
+								{
+									"key": "water_brand",
+									"value": "Vita"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get water by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/supplier/21",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"supplier",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Water address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/4/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"4",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available water",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available water by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/available/supplier/22",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"available",
+								"supplier",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved water",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved water by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/water/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"water",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Heavy Equipment Routes",
+			"item": [
+				{
+					"name": "Get all heavy equipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get heavy equipment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert heavy equipment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"supplier_id\":1,\r\n\t\"category_id\":6,\r\n\t\"hequip_name\":\"Caterpillar Excavator 320D\",\r\n\t\"hequip_brand\":\"Caterpillar\",\r\n\t\"hequip_quantity\":2,\r\n\t\"hequip_price\":110000.00,\r\n\t\"hequip_type\": \"Excavator\",\r\n\t\"hequip_model\":\"320D\",\r\n\t\"hequip_condition\":\"Used\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update heavy equipment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hequip_brand\": \"Caterpillar\",\r\n    \"category\": \"heavy_equipment\",\r\n    \"hequip_condition\": \"New\",\r\n    \"hequip_id\": 1,\r\n    \"hequip_model\": \"320D\",\r\n    \"hequip_name\": \"Heavy Equipment\",\r\n    \"hequip_price\": 128000.00,\r\n    \"hequip_quantity\": 1,\r\n    \"hequip_type\": \"Excavator\",\r\n    \"supplier_id\": 1\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete heavy equipment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search heavy equipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment?hequip_brand=Caterpillar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment"
+							],
+							"query": [
+								{
+									"key": "hequip_brand",
+									"value": "Caterpillar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get heavy equipment by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/supplier/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"supplier",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Heavy Equipment address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/2/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"2",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available heavy equipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available heavy equipment by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/available/supplier/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"available",
+								"supplier",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved heavy equipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved heavy equipment by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"heavyequipment",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Medical Device Routes",
+			"item": [
+				{
+					"name": "Get all medical device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get medical device by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert medical device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"supplier_id\":1,\r\n\t\"category_id\":8,\r\n\t\"med_device_name\":\"A1C Test Kit\",\r\n\t\"med_device_brand\":\"Walgreens\",\r\n\t\"med_device_quantity\":2,\r\n\t\"med_device_price\":28.00,\r\n\t\"med_device_type\": \"Monitor glycemic control\",\r\n\t\"med_device_model\":\"A1C\",\r\n\t\"med_device_condition\":\"Used\",\r\n\t\"med_device_power_type\":\"Batteries\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update medical device",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"mdevice_brand\": \"Forcemech\",\r\n      \"category\": \"medical_device\",\r\n      \"mdevice_condition\": \"Very Good\",\r\n      \"mdevice_id\": 1,\r\n      \"mdevice_model\": \"Voyager R2\",\r\n      \"mdevice_name\": \"Medical Device\",\r\n      \"mdevice_power_type\": \"Lithium battery\",\r\n      \"mdevice_price\": 1700.00,\r\n      \"mdevice_quantity\": 1,\r\n      \"mdevice_type\": \"Electric Wheelchair\",\r\n      \"supplier_id\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete medical device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search medical device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice?med_device_brand=Lumex",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice"
+							],
+							"query": [
+								{
+									"key": "med_device_brand",
+									"value": "Lumex"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get medical device by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/supplier/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"supplier",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Medical Device address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/7/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"7",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available medical device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available medical device by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/available/supplier/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"available",
+								"supplier",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved medical device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved medical device by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"medicaldevice",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cloth Routes",
+			"item": [
+				{
+					"name": "Get all cloth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cloth by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert cloth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"supplier_id\":1,\r\n\t\"category_id\":5,\r\n\t\"cloth_name\":\"Infant Girl\",\r\n\t\"cloth_brand\":\"Carter\",\r\n\t\"cloth_quantity\":35,\r\n\t\"cloth_price\":10.00,\r\n\t\"cloth_size\": \"18-24M\",\r\n\t\"cloth_material\":\"Cotton\",\r\n\t\"cloth_condition\":\"New\",\r\n\t\"cloth_gender\":\"Female\",\r\n\t\"cloth_type\":\"Baby\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update cloth",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cloth_brand\": \"Puma\",\r\n    \"category\": \"cloth\",\r\n    \"cloth_condition\": \"Very Good\",\r\n    \"cloth_gender\": \"F\",\r\n    \"cloth_id\": 2,\r\n    \"cloth_material\": \"Cotton\",\r\n    \"cloth_name\": \"Cloth\",\r\n    \"cloth_price\": 15.00,\r\n    \"cloth_quantity\": 10,\r\n    \"cloth_size\": \"30\",\r\n    \"cloth_type\": \"Pants\",\r\n    \"supplier_id\": 2\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete cloth",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search cloth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth?cloth_brand=Puma",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth"
+							],
+							"query": [
+								{
+									"key": "cloth_brand",
+									"value": "Puma"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cloth by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/supplier/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"supplier",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address Cloth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/2/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"2",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available cloth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available cloth by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/available/supplier/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"available",
+								"supplier",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved cloth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved cloth by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"cloth",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Battery Routes",
+			"item": [
+				{
+					"name": "Get all batteries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get battery by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get batteries by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert battery",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"supplier_id\":10,\r\n\t\"category_id\":9,\r\n\t\"battery_name\":\"Battery\",\r\n\t\"battery_brand\":\"Duracell\",\r\n\t\"battery_quantity\":80,\r\n\t\"battery_price\":87.01,\r\n\t\"power_capacity\":2700,\r\n\t\"power_condition\":\"Used\",\r\n\t\"battery_type\":\"AAAA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update battery",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n      \"battery_brand\": \"Duracel\",\r\n      \"battery_name\": \"Battery\",\r\n      \"battery_price\": 7.0,\r\n      \"battery_quantity\": 10,\r\n      \"battery_type\": \"AA\",\r\n      \"category\": \"battery\",\r\n      \"power_capacity\": 1.2,\r\n      \"power_condition\": \"new\",\r\n      \"supplier_id\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete battery",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available batteries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available batteries by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/available/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"available",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved batteries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved batteries by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search battery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery?battery_type=E",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery"
+							],
+							"query": [
+								{
+									"key": "battery_type",
+									"value": "E"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get battery address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/2/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"battery",
+								"2",
+								"address"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Generator Routes",
+			"item": [
+				{
+					"name": "Get all generators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get generator by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get generators by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert generator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"supplier_id\":10,\r\n\t\"category_id\":10,\r\n\t\"generator_name\":\"Generator\",\r\n\t\"generator_brand\":\"Honda\",\r\n\t\"generator_quantity\":50,\r\n\t\"generator_price\":1349.18,\r\n\t\"power_capacity\":7000,\r\n\t\"power_condition\":\"New\",\r\n\t\"generator_fuel\":\"gas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update generator",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n      \"category\": \"generator\",\r\n      \"generator_brand\": \"WEN\",\r\n      \"generator_fuel\": \"gasoline\",\r\n      \"generator_name\": \"generator\",\r\n      \"generator_price\": 300.0,\r\n      \"generator_quantity\": 10,\r\n      \"power_capacity\": 1.2,\r\n      \"power_condition\": \"new\",\r\n      \"supplier_id\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete generator",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available generators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available generators by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/available/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"available",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved generators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved generators by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search generator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator?generator_fuel=gasoline",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator"
+							],
+							"query": [
+								{
+									"key": "generator_fuel",
+									"value": "gasoline"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get generator address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/7/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"generator",
+								"7",
+								"address"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ice Routes",
+			"item": [
+				{
+					"name": "Get all ice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ice by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ice by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert ice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"supplier_id\":10,\r\n\t\"category_id\":11,\"ice_name\":\"Ice\",\r\n\t\"ice_brand\":\"Crystal Lake Ice Company\",\r\n\t\"ice_quantity\":65,\r\n\t\"ice_price\":19.75,\r\n\t\"ice_weight\":15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update ice",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n      \"category\": \"ice\",\r\n      \"ice_brand\": \"el angel\",\r\n      \"ice_name\": \"ice\",\r\n      \"ice_price\": 2.5,\r\n      \"ice_quantity\": 10,\r\n      \"ice_weight\": 5,\r\n      \"supplier_id\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all available ice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/available",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get available ice by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/available/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"available",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reserved ice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/reserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"reserved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reserved ice by supplier id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/reserved/supplier/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"reserved",
+								"supplier",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search ice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice?ice_brand=El angel",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice"
+							],
+							"query": [
+								{
+									"key": "ice_brand",
+									"value": "El angel"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ice address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/2/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"DRL",
+								"resources",
+								"ice",
+								"2",
+								"address"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

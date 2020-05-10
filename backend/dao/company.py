@@ -20,16 +20,14 @@ class CompanyDAO:
     def getCompanyById(self, company_id): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_id = %s;"
-        cursor.execute(query,(company_id))
-        result = []
-        for row in cursor:
-            result.append(row)
+        cursor.execute(query,(company_id,))
+        result = cursor.fetchone()
         return result
 
     def getCompanyByName(self, company_name): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_name = %s;"
-        cursor.execute(query,(company_name))
+        cursor.execute(query,(company_name,))
         result = []
         for row in cursor:
             result.append(row)
@@ -38,7 +36,7 @@ class CompanyDAO:
     def getCompanyByAddress(self, company_address): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_address = %s;"
-        cursor.execute(query,(company_address))
+        cursor.execute(query,(company_address,))
         result = []
         for row in cursor:
             result.append(row)
@@ -47,7 +45,7 @@ class CompanyDAO:
     def getCompanyByPhone(self, company_phone): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company where company_phone = %s;"
-        cursor.execute(query,(company_phone))
+        cursor.execute(query,(company_phone,))
         result = []
         for row in cursor:
             result.append(row)
@@ -56,7 +54,7 @@ class CompanyDAO:
     def getCompanyBySupplierId(self, supplier_id): #needs test
         cursor = self.conn.cursor()
         query = "Select * from company Natural Inner Join represents where supplier_id = %s;"
-        cursor.execute(query,(supplier_id))
+        cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
             result.append(row)

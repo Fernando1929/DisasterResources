@@ -88,9 +88,7 @@ class CustomerDAO:
         return customer_id
 
     def update(self, customer_id):
-        user_id = 1
-        return user_id
+        return customer_id
 
     def delete(self, customer_id):
-        user_id = 1
-        return user_id
+        return customer_id

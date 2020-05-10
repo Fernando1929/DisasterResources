@@ -36,14 +36,14 @@ class HeavyEquipDAO:
             result.append(row)
         return result
 
-    def getAllRequestedHeavyEquip(self):
-        cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource natural inner join resource_requests;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedHeavyEquip(self):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from heavy_equipment natural inner join resource natural inner join resource_requests;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getHeavyEquipById(self, heavyequip_id):
         cursor = self.conn.cursor()
@@ -113,14 +113,14 @@ class HeavyEquipDAO:
             result.append(row)
         return result
 
-    def getAllRequestedHeavyEquipBySupplierId(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource natural inner join resource_requests where supplier_id = %s;"
-        cursor.execute(query, (supplier_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedHeavyEquipBySupplierId(self, supplier_id):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from heavy_equipment natural inner join resource natural inner join resource_requests where supplier_id = %s;"
+    #     cursor.execute(query, (supplier_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getHeavyEquipAddress(self, supplier_id):
         cursor = self.conn.cursor()

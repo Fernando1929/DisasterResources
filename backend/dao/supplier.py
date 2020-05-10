@@ -21,17 +21,18 @@ class SupplierDAO:
     
     def getSupplierById(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users where user_id = %s;"
+        query = "select * from supplier natural inner join users natural inner join user_phone where user_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result
 
     def getAllSupplierResources(self, supplier_id):
-        result = [
-           [1, 2, 'Battery', 'Duracel', 10, 7.00],
-           [1, 3, 'ice', 'el angel', 10, 2.50],
-           [1, 4, 'generator', 'CAT', 8, 500]
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from resource where supplier_id = %s;"
+        cursor.execute(query, (supplier_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getSuppliersByFirstnameAndLastname(self,supplier_firstname, supplier_lastname):
@@ -89,10 +90,12 @@ class SupplierDAO:
         return result
 
     def getSuppliersByCompanyId(self, company_id):
-        result = [
-            [1, 1, 'Julio', 'Ramires', '23/01/89', 'jramires@gymail.com', '7879999999'],
-            [2, 2, 'Miranda', 'Torres', '23/12/85', 'mtorres@gymail.com', '9999999999']
-        ]
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join users natural inner join user_phone natural inner join represents WHERE company_id = %s;"
+        cursor.execute(query, (company_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def insert(self, user_id):
@@ -104,11 +107,7 @@ class SupplierDAO:
         return supplier_id
 
     def update(self, supplier_id):
-        resource_id = 1
-        return resource_id
+        return supplier_id
 
     def delete(self, supplier_id):
-        resource_id = 1
-        return resource_id
-
-    
+        return supplier_id

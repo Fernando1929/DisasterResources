@@ -1,6 +1,13 @@
 from flask import jsonify
 from dao.order import OrderDAO
+from dao.customer import CustomerDAO
 from dao.resourceOrders import ResourceOrdersDAO
+# from dao.athMovil import AthMovilDAO
+# from dao.creditCard import CreditCardDAO
+# from dao.paypal import PaypalDAO
+from handler.athMovil import AthMovilHandler
+from handler.creditCard import CreditCardHandler
+from handler.paypal import PaypalHandler
 
 class OrderHandler:
 
@@ -17,7 +24,7 @@ class OrderHandler:
 
     def build_order_attributes(self, customer_id, payment_id, order_id, order_date, order_price, order_status, resources):
         result = {}
-        result['cutomer_id'] = customer_id
+        result['customer_id'] = customer_id
         result['payment_id'] = payment_id
         result['order_id'] = order_id 
         result['order_date'] = order_date
@@ -84,23 +91,50 @@ class OrderHandler:
             orders_list = dao.getOrdersByStatus(order_status)
         else:
             return jsonify(Error = "Malformed query string"), 400
-        result_list = []
-        for row in orders_list:
-            result = self.build_order_dict(row)
-            result_list.append(result)
+        result_list = self.fixDict(orders_list)
         return jsonify(Orders = result_list)
 
     def getOrderByCustomerId(self, customer_id):
+        customer_dao = CustomerDAO()
+        if not customer_dao.getCustomerById(customer_id):
+            return jsonify(Error = "Customer Not Found"), 404
+        else:
+            orders_list = []
+            dao = OrderDAO()
+            orders_list = dao.getOrderByCustomerId(customer_id)
+            result_list = self.fixDict(orders_list)
+            return jsonify(Orders = result_list)
+
+    def getPaymentByOrderId(self, order_id):
         dao = OrderDAO()
-        orders_list = dao.getOrderByCustomerId(customer_id)
-        if not orders_list:
+        row = dao.getOrderById(order_id)
+        if not row:
             return jsonify(Error = "Order Not Found"), 404
         else:
-            result_list = []
-            for row in orders_list:
-                result = self.build_order_dict(row)
-                result_list.append(result)
-            return jsonify(Orders = result_list)
+            result = self.fixDict(row)
+            payment_id = result[0]["payment_id"]
+            ath_movil = AthMovilHandler().getAthMovilByPaymentId(payment_id)
+            creditcard = CreditCardHandler().getCreditCardByPaymentId(payment_id)
+            paypal = PaypalHandler().getPaypalByPaymentId(payment_id)
+            
+            if ath_movil: 
+                return ath_movil
+            elif creditcard:
+                return creditcard
+            elif paypal:
+                return paypal
+            else:
+                return jsonify(Error = "Payment Not Found"), 404
+
+    def getResourcesByOrderId(self, order_id):
+        dao = OrderDAO()
+        row = dao.getOrderById(order_id)
+        if not row:
+            return jsonify(Error = "Order Not Found"), 404
+        else:
+            result = self.fixDict(row)
+            resource_list = result[0]["resources"]
+            return jsonify(Resources = resource_list)
 
     def insertOrder(self, json):
         customer_id = json['customer_id']
@@ -140,10 +174,11 @@ class OrderHandler:
             order_date = json['order_date']
             order_price = json['order_price']
             order_status = json['order_status']
+            resources = json['resources']
 
-            if customer_id and payment_id and order_date and order_price and order_status:
+            if customer_id and payment_id and order_date and order_price and order_status and resources:
                 dao.update(order_id,customer_id, payment_id, order_date, order_price, order_status)
-                result = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_price, order_status)
+                result = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_price, order_status,resources)
                 return jsonify(Order = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

@@ -36,7 +36,7 @@ class AdminDAO:
     def getAdminsByLastname(self, admin_lastname):
         cursor = self.conn.cursor()
         query = "Select * from admin Natural Inner Join users Natural Inner Join user_phone where user_lastname = %s;"
-        cursor.execute(query,(admin_lastname))
+        cursor.execute(query,(admin_lastname,))
         result = []
         for row in cursor:
             result.append(row)
@@ -45,7 +45,7 @@ class AdminDAO:
     def getAdminsByEmail(self, admin_email):
         cursor = self.conn.cursor()
         query = "Select * from admin Natural Inner Join users Natural Inner Join user_phone where  user_email = %s;"
-        cursor.execute(query,(admin_email))
+        cursor.execute(query,(admin_email,))
         result = []
         for row in cursor:
             result.append(row)
@@ -62,8 +62,8 @@ class AdminDAO:
     
     def getAdminByPhone(self, admin_phone):
         cursor = self.conn.cursor()
-        query = "Select * from user Natural Inner Join admin Natural Inner Join user_phone where user_phone = %s;"
-        cursor.execute(query,(admin_phone))
+        query = "Select * from users Natural Inner Join admin Natural Inner Join user_phone where user_phone = %s;"
+        cursor.execute(query,(admin_phone,))
         result = []
         for row in cursor:
             result.append(row)
@@ -72,7 +72,7 @@ class AdminDAO:
     def getAdminsByDateOfBirth(self, admin_date_birth):
         cursor = self.conn.cursor()
         query = "Select * from admin Natural Inner Join users Natural Inner Join user_phone where user_date_birth = %s;"
-        cursor.execute(query,(admin_date_birth))
+        cursor.execute(query,(admin_date_birth,))
         result = []
         for row in cursor:
             result.append(row)

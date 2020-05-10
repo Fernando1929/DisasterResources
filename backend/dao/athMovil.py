@@ -25,6 +25,13 @@ class AthMovilDAO:
         result = cursor.fetchone()
         return result
 
+    def getAthMovilByPaymentId(self, payment_id):
+        cursor = self.conn.cursor()
+        query = "select * from ath_movil natural inner join payment where payment_id = %s;"
+        cursor.execute(query, (payment_id,))
+        result = cursor.fetchone()
+        return result
+
     def getAthMovilByPhone(self, ath_movil_phone):
         cursor = self.conn.cursor()
         query = "select * from ath_movil natural inner join payment where ath_movil_phone = %s;"

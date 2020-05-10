@@ -75,6 +75,15 @@ class CreditCardHandler:
                 creditcard = self.build_creditcard_dict(row)
                 return jsonify(CreditCard = creditcard)
 
+    def getCreditCardByPaymentId(self, payment_id):
+        dao = CreditCardDAO()
+        row = dao.getCreditCardByPaymentId(payment_id)
+        if not row:
+            return jsonify(Error = "Credit Card Not Found"), 404
+        else:
+                creditcard = self.build_creditcard_dict(row)
+                return jsonify(CreditCard = creditcard)
+
     def insertCreditCard(self, json):
         customer_id = json["customer_id"]
         creditcard_name = json["creditcard_name"]

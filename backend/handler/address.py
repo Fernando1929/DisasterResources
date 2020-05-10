@@ -119,7 +119,7 @@ class AddressHandler:
                 address_dao = AddressDAO()
                 address_id = address_dao.update(address_id, user_id, addressline, city, state_province, country, zipcode)
                 result = self.build_address_attributes(address_id, user_id, addressline, city, state_province, country, zipcode)
-                return jsonify(Address = result), 201
+                return jsonify(Address = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
 

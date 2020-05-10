@@ -15,8 +15,8 @@ class UserPhoneDAO:
         self.conn.commit()
         return phone_id
 
-    def update(self, user_id, firstname, lastname, date_bith, email, phone):
-        return user_id
+    def update(self, phone_id, phone):
+        return phone_id
 
-    def delete(self, user_id):
-        return user_id
+    def delete(self, phone_id):
+        return phone_id

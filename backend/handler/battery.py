@@ -74,14 +74,14 @@ class BatteryHandler:
             result_list.append(result)
         return jsonify(Batteries = result_list)
 
-    def getAllRequestedBatteries(self): 
-        dao = BatteryDAO()
-        result = dao.getAllRequestedBatteries()
-        result_list = []
-        for row in result:
-            result = self.build_battery_dict(row)
-            result_list.append(result)
-        return jsonify(Batteries = result_list)
+    # def getAllRequestedBatteries(self): 
+    #     dao = BatteryDAO()
+    #     result = dao.getAllRequestedBatteries()
+    #     result_list = []
+    #     for row in result:
+    #         result = self.build_battery_dict(row)
+    #         result_list.append(result)
+    #     return jsonify(Batteries = result_list)
 
     def getBatteryById(self, battery_id): 
         dao = BatteryDAO()
@@ -140,18 +140,18 @@ class BatteryHandler:
                 result_list.append(result)
             return jsonify(Batteries = result_list)
     
-    def getAllRequestedBatteriesBySupplierId(self, supplier_id):
-        supplier_dao = SupplierDAO()
-        if not supplier_dao.getSupplierById(supplier_id):
-            return jsonify(Error = "Supplier Not Found"), 404
-        else:
-            battery_dao = BatteryDAO()
-            result_list = []
-            battery_list = battery_dao.getAllRequestedBatteriesBySupplierId(supplier_id)
-            for row in battery_list:
-                result = self.build_battery_dict(row)
-                result_list.append(result)
-            return jsonify(Batteries = result_list)
+    # def getAllRequestedBatteriesBySupplierId(self, supplier_id):
+    #     supplier_dao = SupplierDAO()
+    #     if not supplier_dao.getSupplierById(supplier_id):
+    #         return jsonify(Error = "Supplier Not Found"), 404
+    #     else:
+    #         battery_dao = BatteryDAO()
+    #         result_list = []
+    #         battery_list = battery_dao.getAllRequestedBatteriesBySupplierId(supplier_id)
+    #         for row in battery_list:
+    #             result = self.build_battery_dict(row)
+    #             result_list.append(result)
+    #         return jsonify(Batteries = result_list)
 
     def searchBatteries(self, args): 
         battery_power_capacity = args.get('power_capacity')

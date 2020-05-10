@@ -36,14 +36,14 @@ class WaterDAO:
             result.append(row)
         return result
 
-    def getAllRequestedWaters(self):
-        cursor = self.conn.cursor()
-        query = "select * from water natural inner join resource natural inner join resource_requests;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedWaters(self):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from water natural inner join resource natural inner join resource_requests;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getWaterById(self, water_id):
         cursor = self.conn.cursor()
@@ -113,14 +113,14 @@ class WaterDAO:
             result.append(row)
         return result
 
-    def getAllRequestedWatersBySupplierId(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "select * from water natural inner join resource natural inner join resource_requests where supplier_id = %s;"
-        cursor.execute(query, (supplier_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedWatersBySupplierId(self, supplier_id):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from water natural inner join resource natural inner join resource_requests where supplier_id = %s;"
+    #     cursor.execute(query, (supplier_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getWaterAddress(self, supplier_id):
         cursor = self.conn.cursor()

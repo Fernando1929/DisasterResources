@@ -36,14 +36,14 @@ class MedDeviceDAO:
             result.append(row)
         return result
 
-    def getAllRequestedMedDevices(self):
-        cursor = self.conn.cursor()
-        query = "select * from medical_device natural inner join resource natural inner join resource_requests;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedMedDevices(self):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from medical_device natural inner join resource natural inner join resource_requests;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getMedDeviceById(self, med_device_id):
         cursor = self.conn.cursor()
@@ -113,14 +113,14 @@ class MedDeviceDAO:
             result.append(row)
         return result
 
-    def getAllRequestedMedDevicesBySupplierId(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "select * from medical_device natural inner join resource natural inner join resource_requests where supplier_id = %s;"
-        cursor.execute(query, (supplier_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def getAllRequestedMedDevicesBySupplierId(self, supplier_id):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from medical_device natural inner join resource natural inner join resource_requests where supplier_id = %s;"
+    #     cursor.execute(query, (supplier_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def getMedDeviceAddress(self, supplier_id):
         cursor = self.conn.cursor()
