@@ -106,8 +106,19 @@ class SupplierDAO:
         self.conn.commit()
         return supplier_id
 
+    # There is nothing to update in customer table. We only need to get the user id to do the update.
     def update(self, supplier_id):
-        return supplier_id
+        cursor = self.conn.cursor()
+        query = "select user_id from supplier where supplier_id = %s;"
+        cursor.execute(query, (supplier_id,))
+        user_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return user_id
 
     def delete(self, supplier_id):
-        return supplier_id
+        cursor = self.conn.cursor()
+        query = "delete from supplier where supplier_id = %s returning user_id;"
+        cursor.execute(query,(supplier_id,))
+        user_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return user_id

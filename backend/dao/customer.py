@@ -87,8 +87,19 @@ class CustomerDAO:
         self.conn.commit()
         return customer_id
 
+    # There is nothing to update in customer table. We only need to get the user id to do the update.
     def update(self, customer_id):
-        return customer_id
+        cursor = self.conn.cursor()
+        query = "select user_id from customer where customer_id = %s;"
+        cursor.execute(query, (customer_id,))
+        user_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return user_id
 
     def delete(self, customer_id):
-        return customer_id
+        cursor = self.conn.cursor()
+        query = "delete from customer where customer_id = %s returning user_id;"
+        cursor.execute(query,(customer_id,))
+        user_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return user_id
