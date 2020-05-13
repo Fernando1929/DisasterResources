@@ -17,7 +17,7 @@ class PaymentDAO:
 
     def update(self, payment_id, user_id):
         cursor = self.conn.cursor()
-        query = "update payment set user_id = %s where payment_id = %s returning payment_id;"
+        query = "update payment set customer_id = %s where payment_id = %s returning payment_id;"
         cursor.execute(query, (user_id, payment_id))
         payment_id = cursor.fetchone()[0]
         self.conn.commit()
