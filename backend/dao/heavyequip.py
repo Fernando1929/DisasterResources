@@ -11,7 +11,7 @@ class HeavyEquipDAO:
 
     def getAllHeavyEquip(self):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -20,7 +20,7 @@ class HeavyEquipDAO:
 
     def getAllAvailableHeavyEquip(self):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where resource_quantity > 0;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -29,7 +29,7 @@ class HeavyEquipDAO:
 
     def getAllReservedHeavyEquip(self):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource natural inner join resource_reservations;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource natural inner join resource_reservations;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -47,21 +47,21 @@ class HeavyEquipDAO:
 
     def getHeavyEquipById(self, heavyequip_id):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where heavyequip_id = %s;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where heavyequip_id = %s;"
         cursor.execute(query, (heavyequip_id,))
         result = cursor.fetchone()
         return result
 
     def getHeavyEquipByResourceId(self, resource_id):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where resource_id = %s;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where resource_id = %s;"
         cursor.execute(query, (resource_id,))
         result = cursor.fetchone()
         return result
 
     def getHeavyEquipByBrand(self, resource_brand):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where resource_brand = %s;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where resource_brand = %s;"
         cursor.execute(query, (resource_brand,))
         result = []
         for row in cursor:
@@ -70,7 +70,7 @@ class HeavyEquipDAO:
 
     def getHeavyEquipByCondition(self, heavyequip_condition):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where heavyequip_condition = %s;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where heavyequip_condition = %s;"
         cursor.execute(query, (heavyequip_condition,))
         result = []
         for row in cursor:
@@ -79,7 +79,7 @@ class HeavyEquipDAO:
 
     def getHeavyEquipByType(self, heavyequip_type):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where heavyequip_type = %s;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where heavyequip_type = %s;"
         cursor.execute(query, (heavyequip_type,))
         result = []
         for row in cursor:
@@ -88,7 +88,7 @@ class HeavyEquipDAO:
 
     def getHeavyEquipBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where supplier_id = %s;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -97,7 +97,7 @@ class HeavyEquipDAO:
 
     def getAllAvailableHeavyEquipBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource where supplier_id = %s and resource_quantity > 0;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource where supplier_id = %s and resource_quantity > 0;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -106,7 +106,7 @@ class HeavyEquipDAO:
 
     def getAllReservedHeavyEquipBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from heavy_equipment natural inner join resource natural inner join resource_reservations where supplier_id = %s;"
+        query = "select resource_id, heavyequip_id, heavyequip_type, heavyequip_model, heavyequip_condition, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from heavy_equipment natural inner join resource natural inner join resource_reservations where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -124,7 +124,7 @@ class HeavyEquipDAO:
 
     def getHeavyEquipAddress(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from address natural inner join supplier where supplier_id = %s;"
+        query = "select address_id, user_id, addressline, city, state_province, country, zipcode from address natural inner join supplier where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result
