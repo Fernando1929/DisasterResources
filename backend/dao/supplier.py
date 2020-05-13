@@ -28,7 +28,7 @@ class SupplierDAO:
 
     def getAllSupplierResources(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from resource where supplier_id = %s;"
+        query = "select resource_id, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from resource where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
