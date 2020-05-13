@@ -11,7 +11,7 @@ class CustomerDAO:
 
     def getAllCustomers(self):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -20,14 +20,14 @@ class CustomerDAO:
 
     def getCustomerById(self, customer_id):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone where customer_id = %s;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone where customer_id = %s;"
         cursor.execute(query, (customer_id,))
         result = cursor.fetchone()
         return result
 
     def getCustomersByFirstname(self, customer_firstname):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone where user_firstname = %s;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone where user_firstname = %s;"
         cursor.execute(query, (customer_firstname,))
         result = []
         for row in cursor:
@@ -36,7 +36,7 @@ class CustomerDAO:
 
     def getCustomersByLastname(self, customer_lastname):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone where user_lastname = %s;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone where user_lastname = %s;"
         cursor.execute(query, (customer_lastname,))
         result = []
         for row in cursor:
@@ -45,7 +45,7 @@ class CustomerDAO:
 
     def getCustomersByFirstnameAndLastname(self, customer_firstname, customer_lastname):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone where user_firstname = %s and user_lastname = %s;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone where user_firstname = %s and user_lastname = %s;"
         cursor.execute(query, (customer_firstname, customer_lastname))
         result = []
         for row in cursor:
@@ -54,7 +54,7 @@ class CustomerDAO:
 
     def getCustomerByEmail(self, customer_email):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone where user_email = %s;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone where user_email = %s;"
         cursor.execute(query, (customer_email,))
         result = []
         for row in cursor:
@@ -63,7 +63,7 @@ class CustomerDAO:
 
     def getCustomerByPhone(self, customer_phone):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone where user_phone = %s;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone where user_phone = %s;"
         cursor.execute(query, (customer_phone,))
         result = []
         for row in cursor:
@@ -72,7 +72,7 @@ class CustomerDAO:
 
     def getCustomersByDateOfBirth(self, customer_date_birth):
         cursor = self.conn.cursor()
-        query = "select * from customer natural inner join users natural inner join user_phone where user_date_birth = %s;"
+        query = "select user_id, customer_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from customer natural inner join users natural inner join user_phone where user_date_birth = %s;"
         cursor.execute(query, (customer_date_birth,))
         result = []
         for row in cursor:
