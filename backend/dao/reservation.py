@@ -87,7 +87,16 @@ class ReservationDAO:
         return reservation_id
 
     def update(self, reservation_id, customer_id, request_id, reservation_date, reservation_status):
+        cursor = self.conn.cursor()
+        query = "update reservation set customer_id = %s, request_id = %s, reservation_date = %s, reservation_status = %s where reservation_id = %s returning reservation_id;"
+        cursor.execute(query, (customer_id, request_id, reservation_date, reservation_status, reservation_id,))
+        reservation_id = cursor.fetchone()[0]
+        self.conn.commit()
         return reservation_id
 
     def delete(self, reservation_id):
+        cursor = self.conn.cursor()
+        query = "delete from reservation where reservation_id = %s;"
+        cursor.execute(query,(reservation_id,))
+        self.conn.commit()
         return reservation_id

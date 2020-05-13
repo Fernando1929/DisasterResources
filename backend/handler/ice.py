@@ -31,9 +31,10 @@ class IceHandler:
         result['zipcode'] = row[6]
         return result
 
-    def build_ice_attributes(self, ice_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight):
+    def build_ice_attributes(self, ice_id, supplier_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price, ice_weight):
         result = {}  
         result['ice_id'] = ice_id
+        result['supplier_id'] = supplier_id
         result['resource_id'] = resource_id
         result['category_id'] = category_id 
         result['ice_name'] = ice_name
@@ -196,7 +197,7 @@ class IceHandler:
             resource_id = resource_dao.insert(supplier_id, category_id, ice_name, ice_brand, ice_quantity, ice_price)
             ice_dao = IceDAO()
             ice_id = ice_dao.insert(resource_id, ice_weight)
-            result = self.build_ice_attributes(ice_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
+            result = self.build_ice_attributes(ice_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price, ice_weight)
             return jsonify(Ice = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
@@ -225,10 +226,10 @@ class IceHandler:
             ice_weight = json['ice_weight']
 
             if supplier_id and category_id and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
-                resource_id = ice_dao.update(ice_id ,ice_weight)
+                resource_id = ice_dao.update(ice_id, ice_weight)
                 res_dao = ResourceDAO()
                 res_dao.update(resource_id, supplier_id, category_id, ice_name, ice_brand, ice_quantity, ice_price)
-                result = self.build_ice_attributes(ice_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
+                result = self.build_ice_attributes(ice_id, supplier_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price , ice_weight)
                 return jsonify(Ice = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

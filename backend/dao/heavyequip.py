@@ -138,9 +138,17 @@ class HeavyEquipDAO:
         return heavyequip_id
 
     def update(self, hequip_id, heavyequip_type, heavyequip_model, heavyequip_condition):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "update heavy_equipment set heavyequip_type = %s, heavyequip_model = %s, heavyequip_condition = %s where heavyequip_id = %s returning resource_id;"
+        cursor.execute(query, (heavyequip_type, heavyequip_model, heavyequip_condition, hequip_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id
 
     def delete(self, equip_id):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from heavy_equipment where heavyequip_id = %s returning resource_id;"
+        cursor.execute(query,(equip_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id

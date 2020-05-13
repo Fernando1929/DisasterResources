@@ -73,7 +73,15 @@ class RequestDAO:
         return request_id
 
     def update(self, request_id, customer_id, request_title, request_date, request_description, request_status):
+        cursor = self.conn.cursor()
+        query = "update request set customer_id = %s, request_title = %s, request_date = %s, request_description = %s, request_status = %s where request_id = %s;"
+        cursor.execute(query, (customer_id, request_title, request_date, request_description, request_status, request_id,))
+        self.conn.commit()
         return request_id
 
     def delete(self, request_id):
+        cursor = self.conn.cursor()
+        query = "delete from request where request_id = %s;"
+        cursor.execute(query,(request_id,))
+        self.conn.commit()
         return request_id

@@ -236,7 +236,7 @@ class MedicineHandler:
             med_prescript = json["med_prescript"]
             med_expdate = json["med_expdate"]
 
-            if supplier_id and category_id and med_name and med_brand and med_quantity and med_price and med_type and med_dose and med_prescript and med_expdate:
+            if supplier_id and category_id and med_name and med_brand and med_quantity and (med_price>=0) and med_type and med_dose and med_prescript and med_expdate:
                 resource_id = med_dao.update(med_id, med_type, med_dose, med_prescript, med_expdate)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, category_id, med_name, med_brand, med_quantity, med_price)

@@ -224,7 +224,7 @@ class FuelHandler:
             fuel_type = json["fuel_type"]
             fuel_gallons = json["fuel_gallons"]
             
-            if supplier_id and category_id and fuel_name and fuel_brand and fuel_quantity and fuel_price and fuel_type and fuel_gallons:
+            if supplier_id and category_id and fuel_name and fuel_brand and fuel_quantity and (fuel_price>=0) and fuel_type and fuel_gallons:
                 resource_id = fuel_dao.update(fuel_id, fuel_type, fuel_gallons)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, category_id, fuel_name, fuel_brand, fuel_quantity, fuel_price)

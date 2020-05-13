@@ -122,23 +122,23 @@ class IceDAO:
     def insert(self,resource_id, ice_weight):
         cursor = self.conn.cursor()
         query = "insert into ice(resource_id, ice_weight) values(%s,%s) returning ice_id;"
-        cursor.execute(query,(resource_id, ice_weight))
+        cursor.execute(query,(resource_id, ice_weight,))
         ice_id = cursor.fetchone()[0]
         self.conn.commit()
         return ice_id
 
-    def delete(self, resource_id): #VI
+    def delete(self, ice_id): #VI
         cursor = self.conn.cursor()
-        query = "delete from ice where resource_id = %s returning ice_id;"
-        cursor.execute(query,(resource_id))
-        ice_id = cursor.fetchone()[0]
+        query = "delete from ice where ice_id = %s returning resource_id;"
+        cursor.execute(query,(ice_id,))
+        resource_id = cursor.fetchone()[0]
         self.conn.commit()
-        return ice_id
+        return resource_id
 
     def update(self, ice_id, ice_weight): #VI
         cursor = self.conn.cursor()
-        query = "update ice set ice_weight = %s where ice_id = %s returning ice_id;"
-        cursor.execute(query,(ice_weight,ice_id))
-        ice_id = cursor.fetchone()[0]
+        query = "update ice set ice_weight = %s where ice_id = %s returning resource_id;"
+        cursor.execute(query,(ice_weight,ice_id,))
+        resource_id = cursor.fetchone()[0]
         self.conn.commit()
-        return ice_id
+        return resource_id

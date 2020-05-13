@@ -156,7 +156,17 @@ class MedicineDAO:
         return med_id
 
     def delete(self, med_id):
-        return med_id
+        cursor = self.conn.cursor()
+        query = "delete from medicine where med_id = %s returning resource_id;"
+        cursor.execute(query,(med_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return resource_id
 
     def update(self, med_id, med_type, med_dose, med_prescript, med_expdate):
-        return med_id
+        cursor = self.conn.cursor()
+        query = "update medicine set med_type = %s, med_dose = %s, med_prescript = %s, med_expdate = %s where med_id = %s returning resource_id;"
+        cursor.execute(query, (med_type, med_dose, med_prescript, med_expdate, med_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return resource_id

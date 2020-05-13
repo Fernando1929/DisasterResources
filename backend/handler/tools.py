@@ -232,7 +232,7 @@ class ToolHandler:
             tool_condition = json["tool_condition"]
             tool_pwtype = json["tool_pwtype"]
 
-            if supplier_id and category_id and tool_name and tool_brand and tool_quantity and tool_price and tool_material and tool_condition and tool_pwtype:
+            if supplier_id and category_id and tool_name and tool_brand and tool_quantity and (tool_price>=0) and tool_material and tool_condition and tool_pwtype:
                 resource_id = tool_dao.update(tool_id, tool_material, tool_condition, tool_pwtype)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, category_id, tool_name, tool_brand, tool_quantity, tool_price)
