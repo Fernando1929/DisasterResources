@@ -9,7 +9,7 @@ class UserDAO:
 
     def getUserById(self, user_id):
         cursor = self.conn.cursor()
-        query = "select * from users where user_id = %s;"
+        query = "select user_id, user_firstname, user_lastname, user_date_birth, user_email from users where user_id = %s;"
         cursor.execute(query, (user_id,))
         result = cursor.fetchone()
         return result
