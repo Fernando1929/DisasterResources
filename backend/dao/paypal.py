@@ -9,7 +9,7 @@ class PaypalDAO:
 
     def getAllPaypal(self):
         cursor = self.conn.cursor()
-        query = "select * from paypal natural inner join payment;"
+        query = "select payment_id, paypal_id, paypal_username, paypal_password, customer_id from paypal natural inner join payment;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -18,21 +18,21 @@ class PaypalDAO:
 
     def getPaypalById(self, paypal_id):
         cursor = self.conn.cursor()
-        query = "select * from paypal natural inner join payment where paypal_id = %s;"
+        query = "select payment_id, paypal_id, paypal_username, paypal_password, customer_id from paypal natural inner join payment where paypal_id = %s;"
         cursor.execute(query, (paypal_id,))
         result = cursor.fetchone()
         return result
 
     def getPaypalByPaymentId(self, payment_id):
         cursor = self.conn.cursor()
-        query = "select * from paypal natural inner join payment where payment_id = %s;"
+        query = "select payment_id, paypal_id, paypal_username, paypal_password, customer_id from paypal natural inner join payment where payment_id = %s;"
         cursor.execute(query, (payment_id,))
         result = cursor.fetchone()
         return result
 
     def getPaypalByUsername(self, paypal_username):
         cursor = self.conn.cursor()
-        query = "select * from paypal natural inner join payment where paypal_username = %s;"
+        query = "select payment_id, paypal_id, paypal_username, paypal_password, customer_id from paypal natural inner join payment where paypal_username = %s;"
         cursor.execute(query, (paypal_username,))
         result = []
         for row in cursor:
@@ -41,7 +41,7 @@ class PaypalDAO:
 
     def getPaypalByPassword(self, paypal_password):
         cursor = self.conn.cursor()
-        query = "select * from paypal natural inner join payment where paypal_password = %s;"
+        query = "select payment_id, paypal_id, paypal_username, paypal_password, customer_id from paypal natural inner join payment where paypal_password = %s;"
         cursor.execute(query, (paypal_password,))
         result = []
         for row in cursor:
@@ -50,7 +50,7 @@ class PaypalDAO:
 
     def getPaypalByCustomerId(self, customer_id):
         cursor = self.conn.cursor()
-        query = "select * from paypal natural inner join payment where customer_id = %s;"
+        query = "select payment_id, paypal_id, paypal_username, paypal_password, customer_id from paypal natural inner join payment where customer_id = %s;"
         cursor.execute(query, (customer_id,))
         result = cursor.fetchone()
         return result

@@ -11,7 +11,7 @@ class AthMovilDAO:
 
     def getAllAthMovil(self):
         cursor = self.conn.cursor()
-        query = "select * from ath_movil natural inner join payment;"
+        query = "select payment_id, ath_movil_id, ath_movil_phone, customer_id from ath_movil natural inner join payment;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -20,21 +20,21 @@ class AthMovilDAO:
 
     def getAthMovilById(self, ath_movil_id):
         cursor = self.conn.cursor()
-        query = "select * from ath_movil natural inner join payment where ath_movil_id = %s;"
+        query = "select payment_id, ath_movil_id, ath_movil_phone, customer_id from ath_movil natural inner join payment where ath_movil_id = %s;"
         cursor.execute(query, (ath_movil_id,))
         result = cursor.fetchone()
         return result
 
     def getAthMovilByPaymentId(self, payment_id):
         cursor = self.conn.cursor()
-        query = "select * from ath_movil natural inner join payment where payment_id = %s;"
+        query = "select payment_id, ath_movil_id, ath_movil_phone, customer_id from ath_movil natural inner join payment where payment_id = %s;"
         cursor.execute(query, (payment_id,))
         result = cursor.fetchone()
         return result
 
     def getAthMovilByPhone(self, ath_movil_phone):
         cursor = self.conn.cursor()
-        query = "select * from ath_movil natural inner join payment where ath_movil_phone = %s;"
+        query = "select payment_id, ath_movil_id, ath_movil_phone, customer_id from ath_movil natural inner join payment where ath_movil_phone = %s;"
         cursor.execute(query, (ath_movil_phone,))
         result = []
         for row in cursor:
@@ -43,7 +43,7 @@ class AthMovilDAO:
 
     def getAthMovilByCustomerId(self, customer_id):
         cursor = self.conn.cursor()
-        query = "select * from ath_movil natural inner join payment where customer_id = %s;"
+        query = "select payment_id, ath_movil_id, ath_movil_phone, customer_id from ath_movil natural inner join payment where customer_id = %s;"
         cursor.execute(query, (customer_id,))
         result = cursor.fetchone()
         return result
