@@ -12,7 +12,7 @@ class SupplierDAO:
 
     def getAllSuppliers(self):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -21,14 +21,14 @@ class SupplierDAO:
     
     def getSupplierById(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where supplier_id = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result
 
     def getAllSupplierResources(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from resource where supplier_id = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from resource where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -37,7 +37,7 @@ class SupplierDAO:
 
     def getSuppliersByFirstnameAndLastname(self,supplier_firstname, supplier_lastname):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where user_firstname = %s and user_lastname = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone where user_firstname = %s and user_lastname = %s;"
         cursor.execute(query, (supplier_firstname, supplier_lastname))
         result = []
         for row in cursor:
@@ -46,7 +46,7 @@ class SupplierDAO:
 
     def getSuppliersByFirstname(self,supplier_firstname):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where user_firstname = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone where user_firstname = %s;"
         cursor.execute(query, (supplier_firstname,))
         result = []
         for row in cursor:
@@ -55,7 +55,7 @@ class SupplierDAO:
 
     def getSuppliersByLastname(self,supplier_lastname):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where user_lastname = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone where user_lastname = %s;"
         cursor.execute(query, (supplier_lastname,))
         result = []
         for row in cursor:
@@ -64,7 +64,7 @@ class SupplierDAO:
         
     def getSupplierByEmail(self,supplier_email):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where user_email = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone where user_email = %s;"
         cursor.execute(query, (supplier_email,))
         result = []
         for row in cursor:
@@ -73,7 +73,7 @@ class SupplierDAO:
     
     def getSupplierByPhone(self,supplier_phone):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where user_phone = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone where user_phone = %s;"
         cursor.execute(query, (supplier_phone,))
         result = []
         for row in cursor:
@@ -82,7 +82,7 @@ class SupplierDAO:
     
     def getSuppliersByDateOfBirth(self,supplier_date_birth):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where user_date_birth = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone where user_date_birth = %s;"
         cursor.execute(query, (supplier_date_birth,))
         result = []
         for row in cursor:
@@ -91,7 +91,7 @@ class SupplierDAO:
 
     def getSuppliersByCompanyId(self, company_id):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone natural inner join represents WHERE company_id = %s;"
+        query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone natural inner join represents WHERE company_id = %s;"
         cursor.execute(query, (company_id,))
         result = []
         for row in cursor:
