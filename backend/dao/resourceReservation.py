@@ -21,8 +21,8 @@ class ResourceReservationDAO:
         cursor.execute(query, (reservation_quantity, reservation_id, resource_id,))
         self.conn.commit()
 
-    def delete(self, reservation_id, resource_id):
+    def delete(self, reservation_id):
         cursor = self.conn.cursor()
-        query = "delete from resource_reservations where reservation_id = %s and resource_id = %s;"
-        cursor.execute(query,(reservation_id, resource_id,))
+        query = "delete from resource_reservations where reservation_id = %s;"
+        cursor.execute(query,(reservation_id,))
         self.conn.commit()

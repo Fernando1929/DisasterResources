@@ -87,15 +87,17 @@ class AdminDAO:
         return admin_id
 
     def update(self, admin_id): #Verify this method and maybe fix implementations (tentative)
-        cursor = self.conn.cursor()
-        query = "Select * from users Natural Inner Join admin Natural Inner Join user_phone where admin_id = %s returning user_id;"
-        cursor.execute(query,(admin_id,))
-        user_id = cursor.fetchone()[0] #verify what it returns 
-        return user_id
+        # cursor = self.conn.cursor()
+        # query = "Select * from users Natural Inner Join admin Natural Inner Join user_phone where admin_id = %s returning user_id;"
+        # cursor.execute(query,(admin_id,))
+        # user_id = cursor.fetchone()[0] #verify what it returns 
+        # return user_id
+        return admin_id
 
-    def delete(self, user_id):
-        cursor = self.conn.cursor()
-        query = "delete from resource where user_id = %s;"
-        cursor.execute(query,(user_id))
-        self.conn.commit()
-        return user_id
+    def delete(self, admin_id):
+        # cursor = self.conn.cursor()
+        # query = "delete from resource where user_id = %s;"
+        # cursor.execute(query,(user_id))
+        # self.conn.commit()
+        # return user_id
+        return admin_id

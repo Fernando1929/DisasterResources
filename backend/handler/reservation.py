@@ -31,7 +31,7 @@ class ReservationHandler:
         result = {}
         result['resource_id'] = row[0]
         result['resource_name'] = row[1]
-        result['reservarion_quantity'] = row[2]
+        result['reservation_quantity'] = row[2]
         return result
 
     def fixDict(self, reservation_list):
@@ -126,8 +126,10 @@ class ReservationHandler:
             for resource in resources:
                 resourceReservation_dao.insert(reservation_id, resource["resource_id"], resource["reservation_quantity"])
 
-            # if request_id:
-            #     RequestHandler().updateRequest()
+            if request_id:
+                request_dao = RequestDAO()
+                request = request_dao.getRequestById(request_id)
+                request_dao.update(request_id, request[0][1], request[0][2], request[0][3], request[0][4], "Accepted")
 
             result = self.build_reservation_attributes(reservation_id, customer_id, request_id, reservation_date, reservation_status, resources)
             return jsonify(Reservation = result), 201
@@ -137,6 +139,7 @@ class ReservationHandler:
 
     def updateReservation(self, reservation_id, json):
         reservation_dao = ReservationDAO()
+        resourceReservation_dao = ResourceReservationDAO()
         if not reservation_dao.getReservationById(reservation_id):
             return jsonify(Error = "Reservation not found."), 404
         else:
@@ -144,19 +147,26 @@ class ReservationHandler:
             request_id = json["request_id"]
             reservation_date = json["reservation_date"]
             reservation_status = json["reservation_status"]
+            resources = json["resources"]
 
-            if customer_id and request_id and reservation_date and reservation_status:
+            if customer_id and reservation_date and reservation_status and resources:
                 reservation_dao = ReservationDAO()
                 reservation_id = reservation_dao.update(reservation_id, customer_id, request_id, reservation_date, reservation_status)
-                result = self.build_reservation_attributes(reservation_id, customer_id, request_id, reservation_date, reservation_status)
+                
+                for resource in resources:
+                    resourceReservation_dao.update(reservation_id, resource["resource_id"], resource["reservation_quantity"])
+                
+                result = self.build_reservation_attributes(reservation_id, customer_id, request_id, reservation_date, reservation_status, resources)
                 return jsonify(Reservation = result), 200
             else:
-                return jsonify(Error = "Unexpected attributes in post request"), 400
+                return jsonify(Error = "Unexpected attributes in put request"), 400
 
     def deleteReservation(self, reservation_id):
         reservation_dao = ReservationDAO()
+        resourceReservation_dao = ResourceReservationDAO()
         if not reservation_dao.getReservationById(reservation_id):
             return jsonify(Error = "Reservation not found."), 404
         else:
+            resourceReservation_dao.delete(reservation_id)
             reservation_dao.delete(reservation_id)
             return jsonify(DeleteStatus = "OK"), 200

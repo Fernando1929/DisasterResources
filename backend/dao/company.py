@@ -78,6 +78,6 @@ class CompanyDAO:
     def delete(self, company_id): #needs test
         cursor = self.conn.cursor()
         query = "delete from company where company_id = %s;"
-        cursor.execute(query,(company_id))
+        cursor.execute(query,(company_id,))
         self.conn.commit()
         return company_id
