@@ -57,9 +57,17 @@ class AthMovilDAO:
         return ath_movil_id
 
     def update(self, ath_movil_id, ath_movil_phone):
-        payment_id = 1
+        cursor = self.conn.cursor()
+        query = "update ath_movil set ath_movil_phone = %s where ath_movil_id = %s returning payment_id;"
+        cursor.execute(query, (ath_movil_phone, ath_movil_id))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id
 
     def delete(self, ath_movil_id):
-        payment_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from ath_movil where ath_movil_id = %s returning payment_id;"
+        cursor.execute(query,(ath_movil_id,))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id

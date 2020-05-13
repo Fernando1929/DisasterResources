@@ -66,9 +66,17 @@ class CreditCardDAO:
         return creditcard_id
 
     def update(self, creditcard_id, creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date):
-        payment_id = 1
+        cursor = self.conn.cursor()
+        query = "update creditcard set creditcard_name = %s, creditcard_number = %s, creditcard_ccv = %s, creditcard_exp_date = %s where creditcard_id = %s returning payment_id;"
+        cursor.execute(query, (creditcard_name, creditcard_number, creditcard_ccv, creditcard_exp_date, creditcard_id))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id
 
     def delete(self, creditcard_id):
-        payment_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from creditcard where creditcard_id = %s returning payment_id;"
+        cursor.execute(query,(creditcard_id,))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id

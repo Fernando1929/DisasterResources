@@ -64,9 +64,17 @@ class PaypalDAO:
         return paypal_id
 
     def update(self, paypal_id, paypal_username, paypal_password):
-        payment_id = 1
+        cursor = self.conn.cursor()
+        query = "update paypal set paypal_username = %s, paypal_password = %s where paypal_id = %s returning payment_id;"
+        cursor.execute(query, (paypal_username, paypal_password, paypal_id))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id
 
     def delete(self, paypal_id):
-        payment_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from paypal where paypal_id = %s returning payment_id;"
+        cursor.execute(query,(paypal_id,))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id
