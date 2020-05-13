@@ -11,7 +11,7 @@ class ClothDAO:
 
     def getAllClothes(self):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -20,7 +20,7 @@ class ClothDAO:
 
     def getAllAvailableClothes(self):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where resource_quantity > 0;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -29,7 +29,7 @@ class ClothDAO:
 
     def getAllReservedClothes(self):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource natural inner join resource_reservations;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource natural inner join resource_reservations;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -47,21 +47,21 @@ class ClothDAO:
 
     def getClothById(self, cloth_id):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where cloth_id = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where cloth_id = %s;"
         cursor.execute(query, (cloth_id,))
         result = cursor.fetchone()
         return result
 
     def getClothByResourceId(self, resource_id):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where resource_id = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where resource_id = %s;"
         cursor.execute(query, (resource_id,))
         result = cursor.fetchone()
         return result
 
     def getClothesByBrand(self, resource_brand):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where resource_brand = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where resource_brand = %s;"
         cursor.execute(query, (resource_brand,))
         result = []
         for row in cursor:
@@ -70,7 +70,7 @@ class ClothDAO:
 
     def getClothesByCondition(self, cloth_condition):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where cloth_condition = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where cloth_condition = %s;"
         cursor.execute(query, (cloth_condition,))
         result = []
         for row in cursor:
@@ -79,7 +79,7 @@ class ClothDAO:
 
     def getClothesByGender(self, cloth_gender):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where cloth_gender = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where cloth_gender = %s;"
         cursor.execute(query, (cloth_gender,))
         result = []
         for row in cursor:
@@ -88,7 +88,7 @@ class ClothDAO:
 
     def getClothesBySize(self, cloth_size):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where cloth_size = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where cloth_size = %s;"
         cursor.execute(query, (cloth_size,))
         result = []
         for row in cursor:
@@ -97,7 +97,7 @@ class ClothDAO:
 
     def getClothesByType(self, cloth_type):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where cloth_type = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where cloth_type = %s;"
         cursor.execute(query, (cloth_type,))
         result = []
         for row in cursor:
@@ -106,7 +106,7 @@ class ClothDAO:
 
     def getClothesBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where supplier_id = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -115,7 +115,7 @@ class ClothDAO:
 
     def getAllAvailableClothesBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource where supplier_id = %s and resource_quantity > 0;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource where supplier_id = %s and resource_quantity > 0;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -124,7 +124,7 @@ class ClothDAO:
 
     def getAllReservedClothesBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from cloth natural inner join resource natural inner join resource_reservations where supplier_id = %s;"
+        query = "select resource_id, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price from cloth natural inner join resource natural inner join resource_reservations where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -142,7 +142,7 @@ class ClothDAO:
 
     def getClothAddress(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from address natural inner join supplier where supplier_id = %s;"
+        query = "select address_id, user_id, addressline, city, state_province, country, zipcode from address natural inner join supplier where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result
