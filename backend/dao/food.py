@@ -168,7 +168,17 @@ class FoodDAO:
         return food_id
 
     def delete(self, food_id):
-        return food_id
+        cursor = self.conn.cursor()
+        query = "delete from food where food_id = %s returning resource_id;"
+        cursor.execute(query,(food_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return resource_id
 
     def update(self, food_id, food_category, food_container, food_type, food_ounces, food_expdate):
-        return food_id
+        cursor = self.conn.cursor()
+        query = "update food set food_category = %s, food_container = %s, food_type = %s, food_ounces = %s, food_expdate = %s where food_id = %s returning resource_id;"
+        cursor.execute(query, (food_category, food_container, food_type, food_ounces, food_expdate, food_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return resource_id

@@ -37,13 +37,23 @@ class ResourceDAO:
     def insert(self, supplier_id, category, name, brand, quantity, price):
         cursor = self.conn.cursor()
         query = "insert into resource(supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price) values (%s, %s, %s, %s, %s, %s) returning resource_id;"
-        cursor.execute(query, (supplier_id, category, name, brand, quantity, price))
+        cursor.execute(query, (supplier_id, category, name, brand, quantity, price,))
         resource_id = cursor.fetchone()[0]
         self.conn.commit()
         return resource_id
 
-    def update(self, resource_id, supplier_id, category, name, brand, quantity, price):
+    def update(self, resource_id, supplier_id, category_id, name, brand, quantity, price):
+        cursor = self.conn.cursor()
+        query = "update resource set supplier_id = %s, category_id = %s, resource_name = %s, resource_brand = %s, resource_quantity = %s, resource_price = %s where resource_id = %s returning resource_id;"
+        cursor.execute(query, (supplier_id, category_id, name, brand, quantity, price, resource_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id
 
     def delete(self, resource_id):
-        return resource_id
+        cursor = self.conn.cursor()
+        query = "delete from resource where resource_id = %s returning resource_id;"
+        cursor.execute(query,(resource_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return resource_id 

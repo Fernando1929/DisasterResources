@@ -156,9 +156,17 @@ class ClothDAO:
         return cloth_id
 
     def update(self, cloth_id, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "update cloth set cloth_size = %s, cloth_material = %s, cloth_condition = %s, cloth_gender = %s, cloth_type = %s where cloth_id = %s returning resource_id;"
+        cursor.execute(query, (cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type, cloth_id))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id
 
     def delete(self, cloth_id):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from cloth where cloth_id = %s returning resource_id;"
+        cursor.execute(query,(cloth_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id

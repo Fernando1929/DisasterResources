@@ -156,7 +156,17 @@ class ToolDAO:
         return tool_id
 
     def delete(self, tool_id):
-        return tool_id
+        cursor = self.conn.cursor()
+        query = "delete from tools where tool_id = %s returning resource_id;"
+        cursor.execute(query,(tool_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return resource_id
 
     def update(self, tool_id, tool_material, tool_condition, tool_pwtype):
-        return tool_id
+        cursor = self.conn.cursor()
+        query = "update tools set tool_material = %s, tool_condition = %s, tool_pwtype = %s where tool_id = %s returning resource_id;"
+        cursor.execute(query, (tool_material, tool_condition, tool_pwtype, tool_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return resource_id

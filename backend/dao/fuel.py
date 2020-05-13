@@ -146,9 +146,17 @@ class FuelDAO:
         return fuel_id
 
     def delete(self, fuel_id):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from fuel where fuel_id = %s returning resource_id;"
+        cursor.execute(query,(fuel_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id
 
     def update(self, fuel_id, fuel_type, fuel_gallons):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "update fuel set fuel_type = %s, fuel_gallons = %s where fuel_id = %s returning resource_id;"
+        cursor.execute(query, (fuel_type, fuel_gallons, fuel_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id

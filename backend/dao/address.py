@@ -90,14 +90,14 @@ class AddressDAO:
 
     def update(self, address_id, user_id, addressline, city, state_province, country, zipcode):
         cursor = self.conn.cursor()
-        query = "update address set user_id = %s, addressline = %s, city = %s, state_province = %s, country = %s, zipcode = %s where address_id = %s;" #verify query
-        cursor.execute(query, (user_id, addressline, city, state_province, country, zipcode, address_id))
+        query = "update address set user_id = %s, addressline = %s, city = %s, state_province = %s, country = %s, zipcode = %s where address_id = %s;"
+        cursor.execute(query, (user_id, addressline, city, state_province, country, zipcode, address_id,))
         self.conn.commit()
         return address_id
 
     def delete(self, address_id):
         cursor = self.conn.cursor()
-        query = "delete from address where address_id = %s ;" #verify query
+        query = "delete from address where address_id = %s;"
         cursor.execute(query, (address_id,))
         self.conn.commit()
         return address_id

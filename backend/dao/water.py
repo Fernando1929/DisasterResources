@@ -138,9 +138,17 @@ class WaterDAO:
         return water_id
 
     def update(self, water_id, water_size, water_container, water_type, water_exp_date):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "update water set water_size = %s, water_container = %s, water_type = %s, water_exp_date = %s where water_id = %s returning resource_id;"
+        cursor.execute(query, (water_size, water_container, water_type, water_exp_date, water_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id
 
     def delete(self, water_id):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from water where water_id = %s returning resource_id;"
+        cursor.execute(query,(water_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id
