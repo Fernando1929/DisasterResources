@@ -11,6 +11,9 @@ The repository now includes updated versions of the ER diagram and written repor
 In addition, a Postman collection of routes tests was also included.<br/>
 Finally, the DAOs and handlers for the backend code were updated, replacing hard-coded JSON data with database queries. 
 
+**For Phase 3:**<br/> 
+The DAOs and handlers for the backend code were updated, now including *update* and *delete* database queries. The ER diagram and written report kept the previous design (V2).
+
 **Development Team:**<br/>
 * Maria D. Vilanova Garcia
 * Luis F. Quiles Ruiz 
