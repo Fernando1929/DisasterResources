@@ -4,6 +4,7 @@ import psycopg2
 class AdminDAO:
     
     #admin = user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone
+    
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s"% (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
@@ -51,7 +52,7 @@ class AdminDAO:
             result.append(row)
         return result
 
-    def getAdminsByFirstnameAndLastname(self, admin_firstname, admin_lastname):#verify if is need to change the var admin_name to user_name
+    def getAdminsByFirstnameAndLastname(self, admin_firstname, admin_lastname):
         cursor = self.conn.cursor()
         query = "Select * from admin Natural Inner Join users Natural Inner Join user_phone where  user_firstname = %s and user_lastname = %s;"
         cursor.execute(query,(admin_firstname, admin_lastname))
