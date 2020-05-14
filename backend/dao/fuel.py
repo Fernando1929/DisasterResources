@@ -2,11 +2,11 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class FuelDAO:
+
+    # fuel = fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # fuel = fuel_id, resource_id, supplier_id, fuel_name, fuel_brand, fuel_quantity, fuel_price, fuel_type, fuel_gallons
 
     def getAllFuels(self):
         cursor = self.conn.cursor()
@@ -34,15 +34,6 @@ class FuelDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedFuels(self):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM fuel NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getFuelById(self, fuel_id):
         cursor = self.conn.cursor()
@@ -120,15 +111,6 @@ class FuelDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedFuelsBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM fuel NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getFuelAddress(self, supplier_id):
         cursor = self.conn.cursor()

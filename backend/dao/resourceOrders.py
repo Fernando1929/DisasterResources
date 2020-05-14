@@ -14,14 +14,14 @@ class ResourceOrdersDAO:
         cursor.execute(query, (order_id, resource_id, order_quantity, discount))
         self.conn.commit()
 
-    def update(self, order_id, resource_id, order_quantity, discount): #VI
+    def update(self, order_id, resource_id, order_quantity, discount):
         cursor = self.conn.cursor()
         query = "update resource_orders set order_quantity = %s, discount = %s where order_id = %s and resource_id = %s"
-        cursor.execute(query, (order_id, resource_id))
+        cursor.execute(query, (order_quantity, discount, order_id, resource_id))
         self.conn.commit()
 
-    def delete(self, order_id, resource_id): #VI
+    def delete(self, order_id):
         cursor = self.conn.cursor()
-        query = "delete from resource_orders where order_id = %s and resource_id = %s"
-        cursor.execute(query, (order_id, resource_id))
+        query = "delete from resource_orders where order_id = %s"
+        cursor.execute(query, (order_id,))
         self.conn.commit()

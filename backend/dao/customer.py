@@ -1,13 +1,13 @@
 from config.dbconfig import pg_config
 import psycopg2
 class CustomerDAO:
+    
+    # customer = customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # customer = customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone
 
     def getAllCustomers(self):
         cursor = self.conn.cursor()

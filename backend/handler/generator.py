@@ -10,16 +10,16 @@ class GeneratorHandler:
     def build_generator_dict(self, row): 
         result = {}
         result['resource_id'] = row[0]
-        result['supplier_id'] = row[1]
-        result['category_id'] = row[2]
-        result['generator_name'] = row[3]
-        result['generator_brand'] = row[4]
-        result['generator_quantity'] = row[5]
-        result['generator_price'] = row[6]
-        result['generator_id'] = row[7]
-        result['power_capacity'] = row[8]
-        result['power_condition'] = row[9]
-        result['generator_fuel'] = row[10]
+        result['generator_id'] = row[1]
+        result['power_capacity'] = row[2]
+        result['power_condition'] = row[3]
+        result['generator_fuel'] = row[4]
+        result['supplier_id'] = row[5]
+        result['category_id'] = row[6]
+        result['generator_name'] = row[7]
+        result['generator_brand'] = row[8]
+        result['generator_quantity'] = row[9]
+        result['generator_price'] = row[10]
         return result
 
     def build_address_dic(self,row):
@@ -74,15 +74,6 @@ class GeneratorHandler:
             result = self.build_generator_dict(row)
             result_list.append(result)
         return jsonify(Generators = result_list)
-
-    # def getAllRequestedGenerators(self): 
-    #     dao = GeneratorDAO()
-    #     result = dao.getAllRequestedGenerators()
-    #     result_list = []
-    #     for row in result:
-    #         result = self.build_generator_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Generators = result_list)
 
     def getGeneratorById(self, generator_id): 
         dao = GeneratorDAO()
@@ -141,19 +132,6 @@ class GeneratorHandler:
                 result_list.append(result)
             return jsonify(Generators = result_list)
 
-    # def getAllRequestedGeneratorsBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier Not Found"), 404
-    #     else:
-    #         generator_dao = GeneratorDAO()
-    #         result_list = []
-    #         generator_list = generator_dao.getAllRequestedGeneratorsBySupplierId(supplier_id)
-    #         for row in generator_list:
-    #             result = self.build_generator_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(Generators = result_list)
-
     def searchGenerators(self, args):
         generator_power_capacity = args.get('power_capacity')
         generator_power_condition = args.get('power_condition')
@@ -202,7 +180,7 @@ class GeneratorHandler:
         power_condition =json['power_condition'] 
         generator_fuel = json['generator_fuel'] 
 
-        if supplier_id and category_id and generator_name and generator_brand and generator_quantity and generator_price and power_capacity and power_condition and generator_fuel:
+        if supplier_id and category_id and generator_name and generator_brand and generator_quantity and (generator_price>=0) and power_capacity and power_condition and generator_fuel:
             res_dao = ResourceDAO()
             resource_id = res_dao.insert(supplier_id, category_id, generator_name, generator_brand, generator_quantity, generator_price)            
             generator_dao = GeneratorDAO()
@@ -237,7 +215,7 @@ class GeneratorHandler:
             power_condition = json['power_condition']
             generator_fuel = json['generator_fuel']
 
-            if supplier_id and category_id and generator_name  and generator_brand and generator_quantity and generator_price and power_capacity and power_condition and generator_fuel:
+            if supplier_id and category_id and generator_name  and generator_brand and generator_quantity and (generator_price>=0) and power_capacity and power_condition and generator_fuel:
                 resource_id = generator_dao.update(generator_id, power_capacity, power_condition, generator_fuel)
                 res_dao = ResourceDAO()
                 res_dao.update(resource_id, supplier_id, generator_name, generator+_brand, generator_quantity, generator_price)

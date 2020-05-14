@@ -2,11 +2,11 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class LoginDAO:
+    
+    # login = login_id, user_id, username, password
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # login = login_id, user_id, username, password
 
     def getLoginById(self, login_id):
         cursor = self.conn.cursor()

@@ -1,5 +1,6 @@
 from config.dbconfig import pg_config
 import psycopg2
+
 class UserDAO:
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],

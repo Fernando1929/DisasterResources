@@ -2,14 +2,13 @@ from config.dbconfig import pg_config
 import psycopg2
 class SupplierDAO:
 
+    #supplier = user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
         
-    #supplier = user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone
-
     def getAllSuppliers(self):
         cursor = self.conn.cursor()
         query = "select user_id, supplier_id, user_firstname, user_lastname, user_date_birth, user_email, phone_id, user_phone from supplier natural inner join users natural inner join user_phone;"

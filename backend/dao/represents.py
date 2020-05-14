@@ -13,18 +13,15 @@ class RepresentsDAO:
         query = "insert into represents(company_id, supplier_id) values (%s, %s);"
         cursor.execute(query, (company_id, supplier_id))
         self.conn.commit()
-        return None #Maybe return the tuple
 
-    def update(self, company_id, supplier_id): #Verify implementation Maybe Not necesary (Verify later)
+    def update(self, company_id, supplier_id):
         cursor = self.conn.cursor()
         query = "update represents set company_id = %s where supplier_id = %s;"
         cursor.execute(query, (company_id, supplier_id))
         self.conn.commit()
-        return None #Maybe return tuple 
 
-    def delete(self, company_id, supplier_id): #Verify implementation
+    def delete(self, company_id, supplier_id):
         cursor = self.conn.cursor()
         query = "delete from represent where company_id = %s and supplier_id = %s;"
         cursor.execute(query, (company_id, supplier_id))
         self.conn.commit()
-        return None #Maybe return the tuple

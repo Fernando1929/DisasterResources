@@ -2,12 +2,11 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class ToolDAO:
+
+    # tools = tool_id, resource_id, supplier_id, resource_category, tool_name, tool_brand, tool_quantity, tool_price,tool_material, tool_condition, tool_pwtype
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # tools = tool_id, resource_id, supplier_id, resource_category, tool_name, tool_brand, tool_quantity, tool_price, 
-    #           tool_material, tool_condition, tool_pwtype
 
     def getAllTools(self):
         cursor = self.conn.cursor()
@@ -35,15 +34,6 @@ class ToolDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedTools(self):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getToolById(self, tool_id):
         cursor = self.conn.cursor()
@@ -130,15 +120,6 @@ class ToolDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedToolsBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getToolAddress(self, supplier_id):
         cursor = self.conn.cursor()

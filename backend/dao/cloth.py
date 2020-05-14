@@ -3,7 +3,6 @@ import psycopg2
 class ClothDAO:
 
     # cloth = cloth_id, resource_id, supplier_id, category, cloth_name, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type
-    
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],

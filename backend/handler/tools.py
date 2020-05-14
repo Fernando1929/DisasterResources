@@ -73,15 +73,6 @@ class ToolHandler:
             result_list.append(result)
         return jsonify(Tools = result_list)
 
-    # def getAllRequestedTools(self):
-    #     dao = ToolDAO()
-    #     tool_list = dao.getAllRequestedTools()
-    #     result_list = []
-    #     for row in tool_list:
-    #         result = self.build_tool_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Tools = result_list)
-
     def getToolById(self, tool_id):
         dao = ToolDAO()
         row = dao.getToolById(tool_id)
@@ -141,20 +132,6 @@ class ToolHandler:
                 result = self.build_tool_dict(row)
                 result_list.append(result)
             return jsonify(Tools = result_list)
-
-    # def getAllRequestedToolsBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier not found."), 404
-    #     else:
-    #         tool_list = []
-    #         result_list = []
-    #         tool_dao = ToolDAO()
-    #         tool_list = tool_dao.getAllRequestedToolsBySupplierId(supplier_id)
-    #         for row in tool_list:
-    #             result = self.build_tool_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(Tools = result_list)
 
     def getToolAddress(self, tool_id):
         tool_dao = ToolDAO()

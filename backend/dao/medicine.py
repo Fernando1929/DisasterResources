@@ -2,12 +2,11 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class MedicineDAO:
+    
+    # medicine = med_id, resource_id, supplier_id, resource_category, med_name, med_brand, med_quantity, med_price,med_type, med_dose, med_prescript, med_expdate
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # medicine = med_id, resource_id, supplier_id, resource_category, med_name, med_brand, med_quantity, med_price, 
-    #               med_type, med_dose, med_prescript, med_expdate
 
     def getAllMedicines(self):
         cursor = self.conn.cursor()
@@ -35,15 +34,6 @@ class MedicineDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedMedicines(self):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM medicine NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getMedicineById(self, med_id):
         cursor = self.conn.cursor()
@@ -130,15 +120,6 @@ class MedicineDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedMedicinesBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM medicine NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getMedicineAddress(self, supplier_id):
         cursor = self.conn.cursor()
