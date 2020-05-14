@@ -76,15 +76,6 @@ class MedDeviceHandler:
             result_list.append(result)
         return jsonify(MedicalDevices = result_list)
 
-    # def getAllRequestedMedDevices(self):
-    #     dao = MedDeviceDAO()
-    #     med_device_list = dao.getAllRequestedMedDevices()
-    #     result_list = []
-    #     for row in med_device_list:
-    #         result = self.build_med_device_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(MedicalDevices = result_list)
-
     def getMedDeviceById(self, med_device_id):
         dao = MedDeviceDAO()
         row = dao.getMedDeviceById(med_device_id)
@@ -145,20 +136,6 @@ class MedDeviceHandler:
                 result_list.append(result)
             return jsonify(MedicalDevices = result_list)
 
-    # def getAllRequestedMedDevicesBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier not found."), 404
-    #     else:
-    #         med_device_list = []
-    #         result_list = []
-    #         med_device_dao = MedDeviceDAO()
-    #         med_device_list = med_device_dao.getAllRequestedMedDevicesBySupplierId(supplier_id)
-    #         for row in med_device_list:
-    #             result = self.build_med_device_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(MedicalDevice = result_list)
-
     def searchMedDevices(self, args):
         med_device_brand = args.get("med_device_brand")
         med_device_type = args.get("med_device_type")
@@ -181,7 +158,10 @@ class MedDeviceHandler:
 
     def getMedDeviceAddress(self, med_device_id):
         med_device_dao = MedDeviceDAO()
-        supplier_id = med_device_dao.getMedDeviceById(med_device_id)[6]
+        try:
+            supplier_id = med_device_dao.getMedDeviceById(med_device_id)[6]
+        except Exception:
+            return jsonify(Error = "Medical Device not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "User not found."), 404

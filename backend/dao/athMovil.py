@@ -1,13 +1,14 @@
 from config.dbconfig import pg_config
 import psycopg2
 class AthMovilDAO:
+
+    # ath movil = ath_movil_id, payment_id, customer_id, ath_movil_phone
+
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # ath movil = ath_movil_id, payment_id, customer_id, ath_movil_phone
 
     def getAllAthMovil(self):
         cursor = self.conn.cursor()

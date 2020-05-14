@@ -1,13 +1,14 @@
 from config.dbconfig import pg_config
 import psycopg2
+
 class HeavyEquipDAO:
+
+    # heavy_equipment = hequip_id, resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # heavy_equipment = hequip_id, resource_id, supplier_id, category, hequip_name, hequip_brand, hequip_quantity, hequip_price, hequip_type, hequip_model, hequip_condition
 
     def getAllHeavyEquip(self):
         cursor = self.conn.cursor()
@@ -35,15 +36,6 @@ class HeavyEquipDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedHeavyEquip(self):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from heavy_equipment natural inner join resource natural inner join resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getHeavyEquipById(self, heavyequip_id):
         cursor = self.conn.cursor()
@@ -112,15 +104,6 @@ class HeavyEquipDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedHeavyEquipBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from heavy_equipment natural inner join resource natural inner join resource_requests where supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getHeavyEquipAddress(self, supplier_id):
         cursor = self.conn.cursor()

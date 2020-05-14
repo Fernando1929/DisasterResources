@@ -79,15 +79,6 @@ class ClothHandler:
             result_list.append(result)
         return jsonify(Clothes = result_list)
 
-    # def getAllRequestedClothes(self):
-    #     dao = ClothDAO()
-    #     cloth_list = dao.getAllRequestedClothes()
-    #     result_list = []
-    #     for row in cloth_list:
-    #         result = self.build_cloth_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Clothes = result_list)
-
     def getClothById(self, cloth_id):
         dao = ClothDAO()
         row = dao.getClothById(cloth_id)
@@ -148,20 +139,6 @@ class ClothHandler:
                 result_list.append(result)
             return jsonify(Clothes = result_list)
 
-    # def getAllRequestedClothesBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier not found."), 404
-    #     else:
-    #         cloth_list = []
-    #         result_list = []
-    #         cloth_dao = ClothDAO()
-    #         cloth_list = cloth_dao.getAllRequestedClothesBySupplierId(supplier_id)
-    #         for row in cloth_list:
-    #             result = self.build_cloth_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(Clothes = result_list)
-
     def searchClothes(self, args):
         cloth_brand = args.get("cloth_brand")
         cloth_gender = args.get("cloth_gender")
@@ -184,7 +161,10 @@ class ClothHandler:
 
     def getClothAddress(self, cloth_id):
         cloth_dao = ClothDAO()
-        supplier_id = cloth_dao.getClothById(cloth_id)[7]
+        try:
+            supplier_id = cloth_dao.getClothById(cloth_id)[7]
+        except Exception:
+            return jsonify(Error = "Cloth not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404

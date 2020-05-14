@@ -1,13 +1,13 @@
 from config.dbconfig import pg_config
 import psycopg2
 class ClothDAO:
+
+    # cloth = cloth_id, resource_id, supplier_id, category, cloth_name, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # cloth = cloth_id, resource_id, supplier_id, category, cloth_name, cloth_quantity, cloth_price, cloth_size, cloth_material, cloth_condition, cloth_gender, cloth_type
 
     def getAllClothes(self):
         cursor = self.conn.cursor()
@@ -35,15 +35,6 @@ class ClothDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedClothes(self):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from cloth natural inner join resource natural inner join resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getClothById(self, cloth_id):
         cursor = self.conn.cursor()
@@ -130,15 +121,6 @@ class ClothDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedClothesBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from cloth natural inner join resource natural inner join resource_requests where supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getClothAddress(self, supplier_id):
         cursor = self.conn.cursor()

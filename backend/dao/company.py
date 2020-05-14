@@ -17,14 +17,14 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyById(self, company_id): #needs test
+    def getCompanyById(self, company_id):
         cursor = self.conn.cursor()
         query = "Select * from company where company_id = %s;"
         cursor.execute(query,(company_id,))
         result = cursor.fetchone()
         return result
 
-    def getCompanyByName(self, company_name): #needs test
+    def getCompanyByName(self, company_name):
         cursor = self.conn.cursor()
         query = "Select * from company where company_name = %s;"
         cursor.execute(query,(company_name,))
@@ -33,7 +33,7 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyByAddress(self, company_address): #needs test
+    def getCompanyByAddress(self, company_address):
         cursor = self.conn.cursor()
         query = "Select * from company where company_address = %s;"
         cursor.execute(query,(company_address,))
@@ -51,7 +51,7 @@ class CompanyDAO:
             result.append(row)
         return result
 
-    def getCompanyBySupplierId(self, supplier_id): #needs test
+    def getCompanyBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
         query = "Select * from company Natural Inner Join represents where supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
@@ -68,14 +68,14 @@ class CompanyDAO:
         self.conn.commit()
         return company_id
 
-    def update(self, company_id, company_name, company_address, company_phone): #needs test
+    def update(self, company_id, company_name, company_address, company_phone):
         cursor = self.conn.cursor()
         query = "update company set company_name = %s, company_address = %s, company_phone = %s where company_id = %s;"
         cursor.execute(query,(company_name, company_address, company_phone,company_id))
         self.conn.commit()
         return company_id
 
-    def delete(self, company_id): #needs test
+    def delete(self, company_id):
         cursor = self.conn.cursor()
         query = "delete from company where company_id = %s;"
         cursor.execute(query,(company_id,))

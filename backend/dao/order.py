@@ -10,7 +10,7 @@ class OrderDAO:
 
     def getAllOrders(self):
         cursor = self.conn.cursor() 
-        query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource;" #Maybe añadir el Join de con category a ver discutirlo mañana
+        query = "select order_id, customer_id, payment_id, request_id, order_date, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource;" #Maybe añadir el Join de con category a ver discutirlo mañana
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,7 +19,7 @@ class OrderDAO:
 
     def getOrderById(self, order_id):
         cursor = self.conn.cursor()
-        query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_id = %s;"
+        query = "select order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_id = %s;"
         cursor.execute(query,(order_id,))
         result = []
         for row in cursor:
@@ -28,7 +28,7 @@ class OrderDAO:
 
     def getOrderByCustomerId(self, customer_id):
         cursor = self.conn.cursor()
-        query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where customer_id = %s;"
+        query = "select order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where customer_id = %s;"
         cursor.execute(query,(customer_id,))
         result = []
         for row in cursor:
@@ -37,7 +37,7 @@ class OrderDAO:
 
     def getOrdersByDate(self, order_date):
         cursor = self.conn.cursor()
-        query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_date = %s;"
+        query = "select order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_date = %s;"
         cursor.execute(query,(order_date,))
         result = []
         for row in cursor:
@@ -46,7 +46,7 @@ class OrderDAO:
 
     def getOrdersByStatus(self, order_status):
         cursor = self.conn.cursor()
-        query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_status = %s;"
+        query = "select order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_status = %s;"
         cursor.execute(query,(order_status,))
         result = []
         for row in cursor:
@@ -55,25 +55,29 @@ class OrderDAO:
 
     def getOrdersByDateAndStatus(self, order_date, order_status):
         cursor = self.conn.cursor()
-        query = "select order_id, customer_id, payment_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_date = %s and order_status = %s;"
-        cursor.execute(query,(order_date, order_status))
+        query = "select order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource where order_date = %s and order_status = %s;"
+        cursor.execute(query,(order_date, order_status,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def insert(self, customer_id, payment_id, order_date, order_price, order_status):
+    def insert(self, customer_id, payment_id, request_id, order_date, order_price, order_status):
         cursor = self.conn.cursor()
-        query = "insert into orders(customer_id, payment_id, order_date, order_price, order_status) values(%s,%s,%s,%s,%s) returning order_id;"
-        cursor.execute(query,(customer_id, payment_id, order_date, order_price, order_status))
+        if request_id:
+            query = "insert into orders(customer_id, payment_id, request_id, order_date, order_price, order_status) values(%s,%s,%s,%s,%s,%s) returning order_id;"
+            cursor.execute(query,(customer_id, payment_id, request_id, order_date, order_price, order_status,))
+        else:
+            query = "insert into orders(customer_id, payment_id, order_date, order_price, order_status) values(%s,%s,%s,%s,%s) returning order_id;"
+            cursor.execute(query,(customer_id, payment_id, order_date, order_price, order_status,))
         order_id = cursor.fetchone()[0]
         self.conn.commit()
         return order_id
 
-    def update(self, order_id, customer_id, payment_id, order_date, order_price, order_status):
+    def update(self, order_id, customer_id, payment_id, request_id, order_date, order_price, order_status):
         cursor = self.conn.cursor()
-        query = "update orders set customer_id = %s, payment_id = %s, order_date = %s, order_price = %s, order_status = %s where order_id = %s"
-        cursor.execute(query,(customer_id, payment_id, order_date, order_price, order_status, order_id))
+        query = "update orders set customer_id = %s, payment_id = %s, request_id = %s, order_date = %s, order_price = %s, order_status = %s where order_id = %s"
+        cursor.execute(query,(customer_id, payment_id, request_id, order_date, order_price, order_status, order_id,))
         self.conn.commit()
         return order_id
 

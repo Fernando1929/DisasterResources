@@ -9,16 +9,16 @@ class BatteryHandler:
     def build_battery_dict(self, row): 
         result = {}
         result['resource_id'] = row[0]
-        result['supplier_id'] = row[1]
-        result['category_id'] = row[2]
-        result['battery_name'] = row[3]
-        result['battery_brand'] = row[4]
-        result['battery_quantity'] = row[5]
-        result['battery_price'] = row[6]
-        result['battery_id'] = row[7]
-        result['power_capacity'] = row[8]
-        result['power_condition'] = row[9]
-        result['battery_type'] = row[10]
+        result['battery_id'] = row[1]
+        result['power_capacity'] = row[2]
+        result['power_condition'] = row[3]
+        result['battery_type'] = row[4]
+        result['supplier_id'] = row[5]
+        result['category_id'] = row[6]
+        result['battery_name'] = row[7]
+        result['battery_brand'] = row[8]
+        result['battery_quantity'] = row[9]
+        result['battery_price'] = row[10]
         return result
 
     def build_address_dic(self,row):
@@ -73,15 +73,6 @@ class BatteryHandler:
             result = self.build_battery_dict(row)
             result_list.append(result)
         return jsonify(Batteries = result_list)
-
-    # def getAllRequestedBatteries(self): 
-    #     dao = BatteryDAO()
-    #     result = dao.getAllRequestedBatteries()
-    #     result_list = []
-    #     for row in result:
-    #         result = self.build_battery_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Batteries = result_list)
 
     def getBatteryById(self, battery_id): 
         dao = BatteryDAO()
@@ -139,19 +130,6 @@ class BatteryHandler:
                 result = self.build_battery_dict(row)
                 result_list.append(result)
             return jsonify(Batteries = result_list)
-    
-    # def getAllRequestedBatteriesBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier Not Found"), 404
-    #     else:
-    #         battery_dao = BatteryDAO()
-    #         result_list = []
-    #         battery_list = battery_dao.getAllRequestedBatteriesBySupplierId(supplier_id)
-    #         for row in battery_list:
-    #             result = self.build_battery_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(Batteries = result_list)
 
     def searchBatteries(self, args): 
         battery_power_capacity = args.get('power_capacity')
@@ -175,7 +153,10 @@ class BatteryHandler:
     
     def getBatteryAddress(self, battery_id):
         battery_dao = BatteryDAO()
-        supplier_id = battery_dao.getBatteryById(battery_id)[2]
+        try:
+            supplier_id = battery_dao.getBatteryById(battery_id)[2]
+        except Exception:
+            return jsonify(Error = "Battery not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
@@ -198,7 +179,7 @@ class BatteryHandler:
         power_condition =json['power_condition'] 
         battery_type =json['battery_type']
 
-        if supplier_id and category_id and battery_name and battery_brand and battery_quantity and battery_price and power_capacity and power_condition and battery_type:
+        if supplier_id and category_id and battery_name and battery_brand and battery_quantity and (battery_price>=0) and power_capacity and power_condition and battery_type:
             res_dao = ResourceDAO()
             resource_id = res_dao.insert(supplier_id, category_id, battery_name, battery_brand, battery_quantity, battery_price)
             battery_dao = BatteryDAO()
@@ -233,10 +214,10 @@ class BatteryHandler:
             power_condition = json['power_condition']
             battery_type = json['battery_type']
 
-            if supplier_id and category_id and battery_name and battery_brand and battery_quantity and battery_price and power_capacity and power_condition and battery_type:
+            if supplier_id and category_id and battery_name and battery_brand and battery_quantity and (battery_price>=0) and power_capacity and power_condition and battery_type:
+                resource_id = battery_dao.update(battery_id, power_capacity, power_condition, battery_type)
                 res_dao = ResourceDAO()
-                resource_id = res_dao.insert(supplier_id, category_id, battery_name, battery_brand, battery_quantity, battery_price)
-                battery_id = battery_dao.insert(resource_id, power_capacity, power_condition, battery_type)
+                res_dao.update(resource_id, supplier_id, category_id, battery_name, battery_brand, battery_quantity, battery_price)
                 result = self.build_battery_attributes(supplier_id, resource_id, battery_id, category_id, battery_name, battery_brand, battery_quantity, battery_price, power_capacity, power_condition, battery_type)
                 return jsonify(Battery = result), 200
             else:

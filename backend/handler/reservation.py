@@ -150,8 +150,7 @@ class ReservationHandler:
             resources = json["resources"]
 
             if customer_id and reservation_date and reservation_status and resources:
-                reservation_dao = ReservationDAO()
-                reservation_id = reservation_dao.update(reservation_id, customer_id, request_id, reservation_date, reservation_status)
+                reservation_dao.update(reservation_id, customer_id, request_id, reservation_date, reservation_status)
                 
                 for resource in resources:
                     resourceReservation_dao.update(reservation_id, resource["resource_id"], resource["reservation_quantity"])

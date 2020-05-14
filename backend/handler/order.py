@@ -2,9 +2,6 @@ from flask import jsonify
 from dao.order import OrderDAO
 from dao.customer import CustomerDAO
 from dao.resourceOrders import ResourceOrdersDAO
-# from dao.athMovil import AthMovilDAO
-# from dao.creditCard import CreditCardDAO
-# from dao.paypal import PaypalDAO
 from handler.athMovil import AthMovilHandler
 from handler.creditCard import CreditCardHandler
 from handler.paypal import PaypalHandler
@@ -16,16 +13,18 @@ class OrderHandler:
         result['order_id'] = row[0]
         result['customer_id'] = row[1]
         result['payment_id'] = row[2]
-        result['order_date'] = row[3]
-        result['order_price'] = row[4]
-        result['order_status'] = row[5]
+        result['request_id'] = row[3]
+        result['order_date'] = row[4]
+        result['order_price'] = row[5]
+        result['order_status'] = row[6]
         result['resources'] =  resources
         return result
 
-    def build_order_attributes(self, customer_id, payment_id, order_id, order_date, order_price, order_status, resources):
+    def build_order_attributes(self, order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resources):
         result = {}
         result['customer_id'] = customer_id
         result['payment_id'] = payment_id
+        result['request_id'] = request_id
         result['order_id'] = order_id 
         result['order_date'] = order_date
         result['order_price'] = order_price
@@ -139,6 +138,7 @@ class OrderHandler:
     def insertOrder(self, json):
         customer_id = json['customer_id']
         payment_id = json['payment_id']
+        request_id = json['request_id']
         order_date = json['order_date'] 
         order_price = json['order_price'] 
         order_status = json['order_status']
@@ -146,30 +146,36 @@ class OrderHandler:
 
         if customer_id and payment_id and order_date and order_price and order_status and resources:
             order_dao = OrderDAO()
-            order_id = order_dao.insert(customer_id, payment_id, order_date, order_price, order_status)
             resourceOrders_dao = ResourceOrdersDAO()
-            for item in resources:
-                resourceOrders_dao.insert(order_id, item["resource_id"], item["order_quantity"], item["discount"])
-            result = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_price, order_status, resources)
+            order_id = order_dao.insert(customer_id, payment_id, request_id, order_date, order_price, order_status)
+
+            for resource in resources:
+                resourceOrders_dao.insert(order_id, resource["resource_id"], resource["order_quantity"], resource["discount"])
+
+            result = self.build_order_attributes(order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resources)
             return jsonify(Order = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400
 
     def deleteOrder(self, order_id):
-        dao = OrderDAO()
-        if not dao.getOrderById(order_id):
+        order_dao = OrderDAO()
+        resourceOrders_dao =  ResourceOrdersDAO()
+        if not order_dao.getOrderById(order_id):
             return jsonify(Error = "Order not found."), 404
         else:
-            dao.delete(order_id)
+            order_dao.delete(order_id)
+            resourceOrders_dao.delete(order_id)
             return jsonify(DeleteStatus = "OK"), 200
 
     def updateOrder(self, order_id, json):
-        dao = OrderDAO()
-        if not dao.getOrderById(order_id):
+        order_dao = OrderDAO()
+        resourceOrders_dao =  ResourceOrdersDAO()
+        if not order_dao.getOrderById(order_id):
             return jsonify(Error = "Order not found."), 404
         else:
             customer_id = json['customer_id']
             payment_id = json['payment_id']
+            request_id = json['request_id']
             order_id = json['order_id']
             order_date = json['order_date']
             order_price = json['order_price']
@@ -177,8 +183,12 @@ class OrderHandler:
             resources = json['resources']
 
             if customer_id and payment_id and order_date and order_price and order_status and resources:
-                dao.update(order_id,customer_id, payment_id, order_date, order_price, order_status)
-                result = self.build_order_attributes(customer_id, payment_id, order_id, order_date, order_price, order_status,resources)
+                order_dao.update(order_id, customer_id, payment_id, request_id, order_date, order_price, order_status)
+
+                for resource in resources:
+                    resourceOrders_dao.update(order_id, resource["resource_id"], resource["order_quantity"], resource["discount"])
+
+                result = self.build_order_attributes(order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resources)
                 return jsonify(Order = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

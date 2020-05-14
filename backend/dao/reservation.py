@@ -3,12 +3,11 @@ import psycopg2
 
 class ReservationDAO:
     
+    #reservation = reservation_id, customer_id, request_id, reservation_date, reservation_status
+    #resource_reservation = id, reservation_id, resource_id, reservation_quantity
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    #reservation = reservation_id, customer_id, request_id, reservation_date, reservation_status
-    #resource_reservation = id, reservation_id, resource_id, reservation_quantity
 
     def getAllReservations(self):
         cursor = self.conn.cursor()

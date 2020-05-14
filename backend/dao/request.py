@@ -2,13 +2,12 @@ from config.dbconfig import pg_config
 import psycopg2
 class RequestDAO:
 
+    # request = request_id, customer_id, request_title, request_date, request_description, request_status
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # request = request_id, customer_id, request_title, request_date, request_description, request_status
 
     def getAllRequests(self):
         cursor = self.conn.cursor()

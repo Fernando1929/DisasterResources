@@ -10,7 +10,7 @@ class IceDAO:
 
     def getAllIce(self):
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join ice;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,7 +19,7 @@ class IceDAO:
 
     def getAllAvailableIce(self):
         cursor = self.conn.cursor()
-        query = "select * from resource natural inner join ice where resource_quantity > 0;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice WHERE resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -28,39 +28,30 @@ class IceDAO:
 
     def getAllReservedIce(self): 
         cursor = self.conn.cursor()
-        query = "select * from resource natural inner join ice natural inner join resource_reservations;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice NATURAL INNER JOIN resource_reservations;"
         cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
         return result
-    
-    # def getAllRequestedIce(self): 
-    #     cursor = self.conn.cursor()
-    #     query = "select * from resource natural inner join ice natural inner join resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getIceById(self,ice_id):
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join ice where ice_id = %s;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice WHERE ice_id = %s;"
         cursor.execute(query,(ice_id,))
         result = cursor.fetchone()
         return result  
 
     def getIceByResourceId(self,resource_id):
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join ice where resource_id = %s;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice WHERE resource_id = %s;"
         cursor.execute(query,(resource_id,))
         result = cursor.fetchone()
         return result
     
     def getIceByBrand(self, resource_brand):
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join ice where resource_brand = %s;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice WHERE resource_brand = %s;"
         cursor.execute(query,(resource_brand,))
         result = []
         for row in cursor:
@@ -69,7 +60,7 @@ class IceDAO:
 
     def getIceByWeight(self,ice_weight):
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join ice where ice_weight = %s;" #maybe añadir que no este reserved
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice WHERE ice_weight = %s;"
         cursor.execute(query,(ice_weight,))
         result = []
         for row in cursor:
@@ -78,7 +69,7 @@ class IceDAO:
     
     def getIceBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "Select * from resource Natural Inner Join ice where supplier_id = %s;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice WHERE supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -87,7 +78,7 @@ class IceDAO:
     
     def getAllAvailableIceBySypplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from resource natural inner join ice where resource_quantity > 0 and supplier_id = %s;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice WHERE resource_quantity > 0 and supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
@@ -96,25 +87,16 @@ class IceDAO:
 
     def getAllReservedIceBySypplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from resource natural inner join ice natural inner join resource_reservations where supplier_id = %s;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM resource NATURAL INNER JOIN ice NATURAL INNER JOIN resource_reservations WHERE supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedIceBySypplierId(self, supplier_id): 
-    #     cursor = self.conn.cursor()
-    #     query = "select * from resource natural inner join ice natural inner join resource_requests where supplier_id = %s;"
-    #     cursor.execute(query,(supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
     
     def getIceAddress(self, supplier_id): 
         cursor = self.conn.cursor()
-        query = "Select * from users Natural Inner Join supplier Natural Inner Join Address where supplier_id = %s;"
+        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM users NATURAL INNER JOIN supplier NATURAL INNER JOIN Address WHERE supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = cursor.fetchone()
         return result
@@ -127,7 +109,7 @@ class IceDAO:
         self.conn.commit()
         return ice_id
 
-    def delete(self, ice_id): #VI
+    def delete(self, ice_id):
         cursor = self.conn.cursor()
         query = "delete from ice where ice_id = %s returning resource_id;"
         cursor.execute(query,(ice_id,))

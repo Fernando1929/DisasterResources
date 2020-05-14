@@ -2,12 +2,11 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class ResourceReservationDAO:
-    
+
+    #resource_reservation = id, reservation id, resource id, reservation quantity    
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    #resource_reservation = id, reservation id, resource id, reservation quantity
 
     def insert(self, reservation_id, resource_id, quantity):
         cursor = self.conn.cursor()

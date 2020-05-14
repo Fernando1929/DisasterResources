@@ -1,13 +1,13 @@
 from config.dbconfig import pg_config
 import psycopg2
 class WaterDAO:
+
+    # water = water_id, resource_id, supplier_id, category, water_name, water_quantity, water_price, water_size, water_container, water_type, water_exp_date
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # water = water_id, resource_id, supplier_id, category, water_name, water_quantity, water_price, water_size, water_container, water_type, water_exp_date
 
     def getAllWaters(self):
         cursor = self.conn.cursor()
@@ -35,15 +35,6 @@ class WaterDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedWaters(self):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from water natural inner join resource natural inner join resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getWaterById(self, water_id):
         cursor = self.conn.cursor()
@@ -112,15 +103,6 @@ class WaterDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedWatersBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from water natural inner join resource natural inner join resource_requests where supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getWaterAddress(self, supplier_id):
         cursor = self.conn.cursor()

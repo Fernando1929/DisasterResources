@@ -73,15 +73,6 @@ class ToolHandler:
             result_list.append(result)
         return jsonify(Tools = result_list)
 
-    # def getAllRequestedTools(self):
-    #     dao = ToolDAO()
-    #     tool_list = dao.getAllRequestedTools()
-    #     result_list = []
-    #     for row in tool_list:
-    #         result = self.build_tool_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Tools = result_list)
-
     def getToolById(self, tool_id):
         dao = ToolDAO()
         row = dao.getToolById(tool_id)
@@ -142,23 +133,12 @@ class ToolHandler:
                 result_list.append(result)
             return jsonify(Tools = result_list)
 
-    # def getAllRequestedToolsBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier not found."), 404
-    #     else:
-    #         tool_list = []
-    #         result_list = []
-    #         tool_dao = ToolDAO()
-    #         tool_list = tool_dao.getAllRequestedToolsBySupplierId(supplier_id)
-    #         for row in tool_list:
-    #             result = self.build_tool_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(Tools = result_list)
-
     def getToolAddress(self, tool_id):
         tool_dao = ToolDAO()
-        supplier_id = tool_dao.getToolById(tool_id)[5]
+        try:
+            supplier_id = tool_dao.getToolById(tool_id)[5]
+        except Exception:
+            return jsonify(Error = "Tool not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "User not found."), 404
@@ -207,7 +187,7 @@ class ToolHandler:
         tool_condition = json["tool_condition"]
         tool_pwtype = json["tool_pwtype"]
 
-        if supplier_id and category_id and tool_name and tool_brand and tool_quantity and (tool_price>=0) and tool_material and tool_condition and tool_pwtype:
+        if supplier_id and category_id and tool_name and tool_brand and (tool_quantity>=0) and (tool_price>=0) and tool_material and tool_condition and tool_pwtype:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category_id, tool_name, tool_brand, tool_quantity, tool_price)
             tool_dao = ToolDAO()
@@ -232,7 +212,7 @@ class ToolHandler:
             tool_condition = json["tool_condition"]
             tool_pwtype = json["tool_pwtype"]
 
-            if supplier_id and category_id and tool_name and tool_brand and tool_quantity and (tool_price>=0) and tool_material and tool_condition and tool_pwtype:
+            if supplier_id and category_id and tool_name and tool_brand and (tool_quantity>=0) and (tool_price>=0) and tool_material and tool_condition and tool_pwtype:
                 resource_id = tool_dao.update(tool_id, tool_material, tool_condition, tool_pwtype)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, category_id, tool_name, tool_brand, tool_quantity, tool_price)

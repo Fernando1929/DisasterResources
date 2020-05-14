@@ -10,14 +10,14 @@ class IceHandler:
     def build_ice_dict(self, row): 
         result = {} 
         result['resource_id'] = row[0]
-        result['supplier_id'] = row[1]
-        result['category_id'] = row[2]
-        result['ice_name'] = row[3]
-        result['ice_brand'] = row[4]
-        result['ice_quantity'] = row[5]
-        result['ice_price'] = row[6]
-        result['ice_id'] = row[7]
-        result['ice_weight'] = row[8]
+        result['ice_id'] = row[1]
+        result['ice_weight'] = row[2]
+        result['supplier_id'] = row[3]
+        result['category_id'] = row[4]
+        result['ice_name'] = row[5]
+        result['ice_brand'] = row[6]
+        result['ice_quantity'] = row[7]
+        result['ice_price'] = row[8]
         return result
 
     def build_address_dic(self,row):
@@ -70,15 +70,6 @@ class IceHandler:
             result = self.build_ice_dict(row)
             result_list.append(result)
         return jsonify(Ice = result_list)
-
-    # def getAllRequestedIce(self):
-    #     dao = IceDAO()
-    #     result = dao.getAllRequestedIce()
-    #     result_list = []
-    #     for row in result:
-    #         result = self.build_ice_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Ice = result_list)
     
     def getIceById(self, ice_id):
         dao = IceDAO()
@@ -136,19 +127,6 @@ class IceHandler:
                 result = self.build_ice_dict(row)
                 result_list.append(result)
             return jsonify(Ice = result_list)
-
-    # def getAllRequestedIceBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier Not Found"), 404
-    #     else:
-    #         ice_dao = IceDAO()
-    #         result_list = []
-    #         ice_list = ice_dao.getAllRequestedIceBySypplierId(supplier_id)
-    #         for row in ice_list:
-    #             result = self.build_ice_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(Ice = result_list)
     
     def searchIce(self, args):
         brand =  args.get('ice_brand')
@@ -170,7 +148,10 @@ class IceHandler:
 
     def getIceAddress(self,ice_id):
         ice_dao = IceDAO()
-        supplier_id = ice_dao.getIceById(ice_id)[1]
+        try:
+            supplier_id = ice_dao.getIceById(ice_id)[1]
+        except Exception:
+            return jsonify(Error = "Ice not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
@@ -192,7 +173,7 @@ class IceHandler:
         ice_price = json['ice_price']
         ice_weight = json['ice_weight']
 
-        if supplier_id and category_id and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
+        if supplier_id and category_id and ice_name and ice_brand and ice_quantity and (ice_price>=0) and ice_weight:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category_id, ice_name, ice_brand, ice_quantity, ice_price)
             ice_dao = IceDAO()
@@ -225,7 +206,7 @@ class IceHandler:
             ice_price = json['ice_price']
             ice_weight = json['ice_weight']
 
-            if supplier_id and category_id and ice_name and ice_brand and ice_quantity and ice_price and ice_weight:
+            if supplier_id and category_id and ice_name and ice_brand and ice_quantity and (ice_price>=0) and ice_weight:
                 resource_id = ice_dao.update(ice_id, ice_weight)
                 res_dao = ResourceDAO()
                 res_dao.update(resource_id, supplier_id, category_id, ice_name, ice_brand, ice_quantity, ice_price)

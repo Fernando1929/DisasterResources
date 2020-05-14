@@ -2,19 +2,17 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class FoodDAO:
+
+    # food = food_id, resource_id, supplier_id, resource_category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate
+    # food_type = food resource subtype: baby, canned or dry food
+    # food_category = food category/group: fruit, grains, vegetables, dairy, protein, fats, etc
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
-    # food = food_id, resource_id, supplier_id, resource_category, food_name, food_brand, food_quantity, food_price, 
-    #           food_category, food_container, food_type, food_ounces, food_expdate
-
-    # food_type = food resource subtype: baby, canned or dry food
-    # food_category = food category/group: fruit, grains, vegetables, dairy, protein, fats, etc
-
     def getAllFoods(self):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -23,7 +21,7 @@ class FoodDAO:
 
     def getAllAvailableFoods(self):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE resource_quantity > 0;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -32,39 +30,30 @@ class FoodDAO:
 
     def getAllReservedFoods(self):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations;"
         cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    # def getAllRequestedFoods(self):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-
     def getFoodById(self, food_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE food_id = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE food_id = %s;"
         cursor.execute(query, (food_id,))
         result = cursor.fetchone()
         return result
 
     def getFoodByResourceId(self, resource_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE resource_id = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE resource_id = %s;"
         cursor.execute(query, (resource_id,))
         result = cursor.fetchone()
         return result
 
     def getFoodsByBrand(self, resource_brand):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE resource_brand = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE resource_brand = %s;"
         cursor.execute(query, (resource_brand,))
         result = []
         for row in cursor:
@@ -73,7 +62,7 @@ class FoodDAO:
 
     def getFoodsByCategory(self, food_category):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE food_category = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE food_category = %s;"
         cursor.execute(query, (food_category,))
         result = []
         for row in cursor:
@@ -82,7 +71,7 @@ class FoodDAO:
 
     def getFoodsByContainer(self, food_container):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE food_container = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE food_container = %s;"
         cursor.execute(query, (food_container,))
         result = []
         for row in cursor:
@@ -91,7 +80,7 @@ class FoodDAO:
 
     def getFoodsByType(self, food_type):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE food_type = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE food_type = %s;"
         cursor.execute(query, (food_type,))
         result = []
         for row in cursor:
@@ -100,7 +89,7 @@ class FoodDAO:
 
     def getFoodsByOunces(self, food_ounces):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE food_ounces = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE food_ounces = %s;"
         cursor.execute(query, (food_ounces,))
         result = []
         for row in cursor:
@@ -109,7 +98,7 @@ class FoodDAO:
 
     def getFoodsByCategoryAndType(self, food_category, food_type):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE food_category = %s AND food_type = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE food_category = %s AND food_type = %s;"
         cursor.execute(query, (food_category, food_type,))
         result = []
         for row in cursor:
@@ -118,7 +107,7 @@ class FoodDAO:
 
     def getFoodsBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE supplier_id = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -127,7 +116,7 @@ class FoodDAO:
 
     def getAllAvailableFoodsBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource WHERE supplier_id = %s AND resource_quantity > 0;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource WHERE supplier_id = %s AND resource_quantity > 0;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -136,25 +125,16 @@ class FoodDAO:
 
     def getAllReservedFoodsBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations WHERE supplier_id = %s;"
+        query = "SELECT resource_id, food_id, food_category, food_container, food_type, food_expdate, food_ounces, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations WHERE supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    # def getAllRequestedFoodsBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-
     def getFoodAddress(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result
