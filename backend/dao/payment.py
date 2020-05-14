@@ -16,7 +16,17 @@ class PaymentDAO:
         return payment_id
 
     def update(self, payment_id, user_id):
+        cursor = self.conn.cursor()
+        query = "update payment set customer_id = %s where payment_id = %s returning payment_id;"
+        cursor.execute(query, (user_id, payment_id))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id
     
     def delete(self, payment_id):
+        cursor = self.conn.cursor()
+        query = "delete from payment where payment_id = %s returning payment_id;"
+        cursor.execute(query,(payment_id,))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
         return payment_id

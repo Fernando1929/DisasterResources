@@ -202,7 +202,7 @@ class HeavyEquipHandler:
         hequip_model = json["hequip_model"]
         hequip_condition = json["hequip_condition"]
 
-        if supplier_id and category_id and hequip_name and hequip_brand and hequip_quantity and hequip_price and hequip_type and hequip_model and hequip_condition:
+        if supplier_id and category_id and hequip_name and hequip_brand and hequip_quantity and (hequip_price>=0) and hequip_type and hequip_model and hequip_condition:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category_id, hequip_name, hequip_brand, hequip_quantity, hequip_price)
             hequip_dao = HeavyEquipDAO()

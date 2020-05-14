@@ -3,5 +3,5 @@
 pg_config = {
     'user' : 'dbuser',
     'passwd' : 'dbdisaster',
-    'dbname' : 'DRLDB'
+    'dbname' : 'drldbtest'
 }

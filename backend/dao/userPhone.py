@@ -16,7 +16,17 @@ class UserPhoneDAO:
         return phone_id
 
     def update(self, phone_id, phone):
-        return phone_id
+        cursor = self.conn.cursor()
+        query = "update user_phone set user_phone = %s where phone_id = %s returning user_id;"
+        cursor.execute(query, (phone, phone_id))
+        user_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return user_id
 
     def delete(self, phone_id):
-        return phone_id
+        cursor = self.conn.cursor()
+        query = "delete from user_phone where phone_id = %s returning user_id;"
+        cursor.execute(query,(phone_id,))
+        user_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return user_id

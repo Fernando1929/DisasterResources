@@ -135,6 +135,8 @@ class SupplierHandler:
             return jsonify(Error = "Supplier not found."), 404
         else:
             user_id = supplier_dao.delete(supplier_id)
+            dao_phone = UserPhoneDAO()
+            dao_phone.delete(user_id)
             user_dao = UserDAO()
             user_dao.delete(user_id)
             return jsonify(DeleteStatus = "OK"), 200
@@ -154,7 +156,9 @@ class SupplierHandler:
 
             if supplier_firstname and supplier_lastname and supplier_date_birth and supplier_email and supplier_phone and supplier_phone_id:
                 user_id = dao_supplier.update(supplier_id)
-                dao_user.update(user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone)
+                dao_user.update(user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email)
+                dao_phone = UserPhoneDAO()
+                supplier_phone_id = dao_phone.update(user_id, supplier_phone) 
                 result = self.build_supplier_attributes(user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone_id, supplier_phone)
                 return jsonify(Supplier = result), 200
             else:

@@ -109,7 +109,9 @@ class CustomerHandler:
             if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone_id and customer_phone:
                 user_id = customer_dao.update(customer_id)
                 user_dao = UserDAO()
-                user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+                user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email)
+                dao_phone = UserPhoneDAO()
+                customer_phone_id = dao_phone.update(user_id, customer_phone) 
                 result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone_id, customer_phone)
                 return jsonify(Customer = result), 200
             else:
@@ -121,6 +123,8 @@ class CustomerHandler:
             return jsonify(Error = "Customer not found."), 404
         else:
             user_id = customer_dao.delete(customer_id)
+            dao_phone = UserPhoneDAO()
+            dao_phone.delete(user_id)
             user_dao = UserDAO()
             user_dao.delete(user_id)
             return jsonify(DeleteStatus = "OK"), 200

@@ -209,7 +209,7 @@ class ClothHandler:
         cloth_gender = json["cloth_gender"]
         cloth_type = json["cloth_type"]
 
-        if supplier_id and category_id and cloth_name and cloth_brand and cloth_quantity and cloth_price and cloth_size and cloth_material and cloth_condition and cloth_gender and cloth_type:
+        if supplier_id and category_id and cloth_name and cloth_brand and cloth_quantity and (cloth_price>=0) and cloth_size and cloth_material and cloth_condition and cloth_gender and cloth_type:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category_id, cloth_name, cloth_brand, cloth_quantity, cloth_price)
             cloth_dao = ClothDAO()

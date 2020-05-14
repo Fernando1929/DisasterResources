@@ -205,7 +205,7 @@ class WaterHandler:
         water_type = json["water_type"]
         water_exp_date = json["water_exp_date"]
 
-        if supplier_id and category_id and water_name and water_brand and water_quantity and water_price and water_size and water_container and water_type and water_exp_date:
+        if supplier_id and category_id and water_name and water_brand and water_quantity and (water_price>=0) and water_size and water_container and water_type and water_exp_date:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category_id, water_name, water_brand, water_quantity, water_price)
             water_dao = WaterDAO()
