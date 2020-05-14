@@ -21,7 +21,7 @@ class SupplierDAO:
     
     def getSupplierById(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join users natural inner join user_phone where user_id = %s;"
+        query = "select * from supplier natural inner join users natural inner join user_phone where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result

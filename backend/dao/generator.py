@@ -146,11 +146,11 @@ class GeneratorDAO:
 
     def update(self, generator_id, power_capacity, power_condition, generator_fuel):#VI
         cursor = self.conn.cursor()
-        query = "update generators set power_capacity = %s, power_condition = %s, generator_fuel = %s where resource_id = %s returning generator_id;"
-        cursor.execute(query,(power_capacity, power_condition, generator_fuel, resource_id))
-        generator_id = cursor.fetchone()[0]
+        query = "update generators set power_capacity = %s, power_condition = %s, generator_fuel = %s where generator_id = %s returning resource_id;"
+        cursor.execute(query,(power_capacity, power_condition, generator_fuel, generator_id))
+        resource_id = cursor.fetchone()[0]
         self.conn.commit()
-        return generator_id
+        return resource_id
 
     def delete(self, generator_id):#VI
         cursor = self.conn.cursor()

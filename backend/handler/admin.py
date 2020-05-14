@@ -114,12 +114,13 @@ class AdminHandler:
             admin_date_birth = json['admin_date_birth']
             admin_email = json['admin_email']
             admin_phone = json['admin_phone']
+            admin_phone_id = json["admin_phone_id"]
 
-            if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone:
+            if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone and admin_phone_id:
                 user_id = dao_admin.update(admin_id)
                 dao_user = UserDAO()
                 dao_user.update(user_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
-                result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
+                result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone_id, admin_phone)
                 return jsonify(Admin = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400

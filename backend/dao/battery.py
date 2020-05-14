@@ -146,15 +146,15 @@ class BatteryDAO:
         self.conn.commit()
         return battery_id
         
-    def update(self, battery_id, power_capacity, power_condition, battery_type):
+    def update(self,battery_id, power_capacity, power_condition, battery_type):
         cursor = self.conn.cursor()
         query = "update batteries set power_capacity = %s, power_condition = %s, battery_type = %s where battery_id = %s returning resource_id;"
-        cursor.execute(query,(power_capacity, power_condition, battery_type, resource_id))
+        cursor.execute(query,(power_capacity, power_condition, battery_type, battery_id))
         resource_id = cursor.fetchone()[0]
         self.conn.commit()
         return resource_id
     
-    def delete(self, battery_id):
+    def delete(self, battery_id): #needs test
         cursor = self.conn.cursor()
         query = "delete from batteries where battery_id = %s returning resource_id;"
         cursor.execute(query,(battery_id,))

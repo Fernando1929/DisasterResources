@@ -95,13 +95,17 @@ class AddressHandler:
         country = json["country"]
         zipcode = json["zipcode"]
 
-        if user_id and addressline and city and state_province and country and zipcode:
-            address_dao = AddressDAO()
-            address_id = address_dao.insert(user_id, addressline, city, state_province, country, zipcode)
-            result = self.build_address_attributes(address_id, user_id, addressline, city, state_province, country, zipcode)
-            return jsonify(Address = result), 201
+        user_dao = UserDAO()
+        if not user_dao.getUserById(user_id):
+            return jsonify(Error = "User not found."), 404
         else:
-            return jsonify(Error = "Unexpected attributes in post request"), 400
+            if user_id and addressline and city and state_province and country and zipcode:
+                address_dao = AddressDAO()
+                address_id = address_dao.insert(user_id, addressline, city, state_province, country, zipcode)
+                result = self.build_address_attributes(address_id, user_id, addressline, city, state_province, country, zipcode)
+                return jsonify(Address = result), 201
+            else:
+                return jsonify(Error = "Unexpected attributes in post request"), 400
 
     def updateAddress(self, address_id, json):
         address_dao = AddressDAO()

@@ -138,9 +138,17 @@ class MedDeviceDAO:
         return med_device_id
 
     def update(self, mdevice_id, med_device_type, med_device_model, med_device_condition, med_device_power_type):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "update medical_device set med_device_type = %s, med_device_model = %s, med_device_condition = %s, med_device_power_type = %s where med_device_id = %s returning resource_id;"
+        cursor.execute(query, (med_device_type, med_device_model, med_device_condition, med_device_power_type, mdevice_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id
 
     def delete(self, mdevice_id):
-        resource_id = 1
+        cursor = self.conn.cursor()
+        query = "delete from medical_device where med_device_id = %s returning resource_id;"
+        cursor.execute(query,(mdevice_id,))
+        resource_id = cursor.fetchone()[0]
+        self.conn.commit()
         return resource_id

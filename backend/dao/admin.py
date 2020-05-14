@@ -86,7 +86,7 @@ class AdminDAO:
         self.conn.commit()
         return admin_id
 
-    def update(self, admin_id):
+    def update(self, admin_id): #Fix like customer***
         cursor = self.conn.cursor()
         query = "Select * from users Natural Inner Join admin where admin_id = %s returning user_id;"
         cursor.execute(query,(admin_id,))
@@ -95,8 +95,8 @@ class AdminDAO:
 
     def delete(self, admin_id):
         cursor = self.conn.cursor()
-        query = "delete from resource where admin_id = %s returning user_id;"
-        cursor.execute(query,(admin_id))
+        query = "delete from admin where admin_id = %s returning user_id;"
+        cursor.execute(query,(admin_id,))
         user_id = cursor.fetchone()[0]
         self.conn.commit()
         return user_id

@@ -243,7 +243,7 @@ class FoodHandler:
             food_ounces = json["food_ounces"]
             food_expdate = json["food_expdate"]
             
-            if supplier_id and category_id and food_name and food_brand and food_quantity and food_price and food_category and food_container and food_type and food_ounces and food_expdate:
+            if supplier_id and category_id and food_name and food_brand and food_quantity and (food_price>=0) and food_category and food_container and food_type and food_ounces and food_expdate:
                 resource_id = food_dao.update(food_id, food_category, food_container, food_type, food_ounces, food_expdate)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, category_id, food_name, food_brand, food_quantity, food_price)

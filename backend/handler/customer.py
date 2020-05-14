@@ -104,12 +104,13 @@ class CustomerHandler:
             customer_date_birth = json["customer_date_birth"]
             customer_email = json["customer_email"]
             customer_phone = json["customer_phone"]
+            customer_phone_id = json["customer_phone_id"]
             
-            if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone:
+            if customer_firstname and customer_lastname and customer_date_birth and customer_email and customer_phone_id and customer_phone:
                 user_id = customer_dao.update(customer_id)
                 user_dao = UserDAO()
                 user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
-                result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone)
+                result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone_id, customer_phone)
                 return jsonify(Customer = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
