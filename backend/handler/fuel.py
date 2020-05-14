@@ -156,7 +156,10 @@ class FuelHandler:
 
     def getFuelAddress(self, fuel_id):
         fuel_dao = FuelDAO()
-        supplier_id = fuel_dao.getFuelById(fuel_id)[4]
+        try:
+            supplier_id = fuel_dao.getFuelById(fuel_id)[4]
+        except Exception:
+            return jsonify(Error = "Fuel not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404
@@ -200,7 +203,7 @@ class FuelHandler:
         fuel_type = json["fuel_type"]
         fuel_gallons = json["fuel_gallons"]
 
-        if supplier_id and category_id and fuel_name and fuel_brand and fuel_quantity and (fuel_price>=0) and fuel_type and fuel_gallons:
+        if supplier_id and category_id and fuel_name and fuel_brand and (fuel_quantity>=0) and (fuel_price>=0) and fuel_type and fuel_gallons:
             resource_dao = ResourceDAO()
             resource_id = resource_dao.insert(supplier_id, category_id, fuel_name, fuel_brand, fuel_quantity, fuel_price)
             fuel_dao = FuelDAO()
@@ -224,7 +227,7 @@ class FuelHandler:
             fuel_type = json["fuel_type"]
             fuel_gallons = json["fuel_gallons"]
             
-            if supplier_id and category_id and fuel_name and fuel_brand and fuel_quantity and (fuel_price>=0) and fuel_type and fuel_gallons:
+            if supplier_id and category_id and fuel_name and fuel_brand and (fuel_quantity>=0) and (fuel_price>=0) and fuel_type and fuel_gallons:
                 resource_id = fuel_dao.update(fuel_id, fuel_type, fuel_gallons)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, category_id, fuel_name, fuel_brand, fuel_quantity, fuel_price)

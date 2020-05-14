@@ -179,7 +179,10 @@ class HeavyEquipHandler:
 
     def getHeavyEquipAddress(self, hequip_id):
         hequip_dao = HeavyEquipDAO()
-        supplier_id = hequip_dao.getHeavyEquipById(hequip_id)[6]
+        try:
+            supplier_id = hequip_dao.getHeavyEquipById(hequip_id)[6]
+        except Exception:
+            return jsonify(Error = "Heavy Equipment not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404

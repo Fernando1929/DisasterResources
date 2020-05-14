@@ -181,7 +181,10 @@ class WaterHandler:
 
     def getWaterAddress(self, water_id):
         water_dao = WaterDAO()
-        supplier_id = water_dao.getWaterById(water_id)[6]
+        try:
+            supplier_id = water_dao.getWaterById(water_id)[6]
+        except Exception:
+            return jsonify(Error = "Water not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404

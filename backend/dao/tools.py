@@ -11,7 +11,7 @@ class ToolDAO:
 
     def getAllTools(self):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -20,7 +20,7 @@ class ToolDAO:
 
     def getAllAvailableTools(self):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE resource_quantity > 0;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE resource_quantity > 0;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -29,7 +29,7 @@ class ToolDAO:
 
     def getAllReservedTools(self):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -47,21 +47,21 @@ class ToolDAO:
 
     def getToolById(self, tool_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE tool_id = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE tool_id = %s;"
         cursor.execute(query, (tool_id,))
         result = cursor.fetchone()
         return result
 
     def getToolByResourceId(self, resource_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE resource_id = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE resource_id = %s;"
         cursor.execute(query, (resource_id,))
         result = cursor.fetchone()
         return result
 
     def getToolsByBrand(self, resource_brand):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE resource_brand = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE resource_brand = %s;"
         cursor.execute(query, (resource_brand,))
         result = []
         for row in cursor:
@@ -70,7 +70,7 @@ class ToolDAO:
 
     def getToolsByMaterial(self, tool_material):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE tool_material = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE tool_material = %s;"
         cursor.execute(query, (tool_material,))
         result = []
         for row in cursor:
@@ -79,7 +79,7 @@ class ToolDAO:
 
     def getToolsByCondition(self, tool_condition):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE tool_condition = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE tool_condition = %s;"
         cursor.execute(query, (tool_condition,))
         result = []
         for row in cursor:
@@ -88,7 +88,7 @@ class ToolDAO:
 
     def getToolsByPowerType(self, tool_pwtype):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE tool_pwtype = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE tool_pwtype = %s;"
         cursor.execute(query, (tool_pwtype,))
         result = []
         for row in cursor:
@@ -97,7 +97,7 @@ class ToolDAO:
 
     def getToolsByMaterialAndPowerType(self, tool_material, tool_pwtype):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE tool_material = %s AND tool_pwtype = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE tool_material = %s AND tool_pwtype = %s;"
         cursor.execute(query, (tool_material, tool_pwtype,))
         result = []
         for row in cursor:
@@ -106,7 +106,7 @@ class ToolDAO:
 
     def getToolsBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE supplier_id = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -115,7 +115,7 @@ class ToolDAO:
 
     def getAllAvailableToolsBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource WHERE supplier_id = %s AND resource_quantity > 0;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource WHERE supplier_id = %s AND resource_quantity > 0;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -124,7 +124,7 @@ class ToolDAO:
 
     def getAllReservedToolsBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations WHERE supplier_id = %s;"
+        query = "SELECT resource_id, tool_id, tool_material, tool_condition, tool_pwtype, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM tools NATURAL INNER JOIN resource NATURAL INNER JOIN resource_reservations WHERE supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = []
         for row in cursor:
@@ -142,7 +142,7 @@ class ToolDAO:
 
     def getToolAddress(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result

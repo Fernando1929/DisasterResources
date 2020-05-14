@@ -175,7 +175,10 @@ class BatteryHandler:
     
     def getBatteryAddress(self, battery_id):
         battery_dao = BatteryDAO()
-        supplier_id = battery_dao.getBatteryById(battery_id)[2]
+        try:
+            supplier_id = battery_dao.getBatteryById(battery_id)[2]
+        except Exception:
+            return jsonify(Error = "Battery not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404

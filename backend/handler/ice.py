@@ -170,7 +170,10 @@ class IceHandler:
 
     def getIceAddress(self,ice_id):
         ice_dao = IceDAO()
-        supplier_id = ice_dao.getIceById(ice_id)[1]
+        try:
+            supplier_id = ice_dao.getIceById(ice_id)[1]
+        except Exception:
+            return jsonify(Error = "Ice not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404

@@ -176,7 +176,10 @@ class GeneratorHandler:
 
     def getGeneratorAddress(self, generator_id):
         generator_dao = GeneratorDAO()
-        supplier_id = generator_dao.getGeneratorById(generator_id)[2]
+        try:
+            supplier_id = generator_dao.getGeneratorById(generator_id)[2]
+        except Exception:
+            return jsonify(Error = "Generator not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "Supplier not found."), 404

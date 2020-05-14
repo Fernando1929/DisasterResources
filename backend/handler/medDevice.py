@@ -181,7 +181,10 @@ class MedDeviceHandler:
 
     def getMedDeviceAddress(self, med_device_id):
         med_device_dao = MedDeviceDAO()
-        supplier_id = med_device_dao.getMedDeviceById(med_device_id)[6]
+        try:
+            supplier_id = med_device_dao.getMedDeviceById(med_device_id)[6]
+        except Exception:
+            return jsonify(Error = "Medical Device not found."), 404
         supplier_dao = SupplierDAO()
         if not supplier_dao.getSupplierById(supplier_id):
             return jsonify(Error = "User not found."), 404

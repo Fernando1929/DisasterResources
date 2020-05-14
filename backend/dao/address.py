@@ -12,7 +12,7 @@ class AddressDAO:
 
     def getAllAddresses(self):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -21,14 +21,14 @@ class AddressDAO:
 
     def getAddressById(self, address_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address WHERE address_id = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address WHERE address_id = %s;"
         cursor.execute(query, (address_id,))
         result = cursor.fetchone()
         return result
 
     def getAddressesByCity(self, city):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address WHERE city = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address WHERE city = %s;"
         cursor.execute(query, (city,))
         result = []
         for row in cursor:
@@ -37,7 +37,7 @@ class AddressDAO:
 
     def getAddressesByCountry(self, country):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address WHERE country = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address WHERE country = %s;"
         cursor.execute(query, (country,))
         result = []
         for row in cursor:
@@ -46,7 +46,7 @@ class AddressDAO:
 
     def getAddressesByZipcode(self, zipcode):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address WHERE zipcode = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address WHERE zipcode = %s;"
         cursor.execute(query, (zipcode,))
         result = []
         for row in cursor:
@@ -55,7 +55,7 @@ class AddressDAO:
 
     def getAddressesByStateOrProvince(self, state_province):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address WHERE state_province = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address WHERE state_province = %s;"
         cursor.execute(query, (state_province,))
         result = []
         for row in cursor:
@@ -64,7 +64,7 @@ class AddressDAO:
 
     def getAddressesByCityAndCountry(self, city, country):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address WHERE city = %s AND country = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address WHERE city = %s AND country = %s;"
         cursor.execute(query, (city, country,))
         result = []
         for row in cursor:
@@ -73,7 +73,7 @@ class AddressDAO:
 
     def getAddressesByUserId(self, user_id):
         cursor = self.conn.cursor()
-        query = "SELECT * FROM address WHERE user_id = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address WHERE user_id = %s;"
         cursor.execute(query, (user_id,))
         result = []
         for row in cursor:
