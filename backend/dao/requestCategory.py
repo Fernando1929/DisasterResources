@@ -14,7 +14,13 @@ class RequestCategoryDAO:
         self.conn.commit()
 
     def update(self, request_id, category_id, request_quantity):
-        return None
+        cursor = self.conn.cursor()
+        query = "update request_category set request_quantity = %s where request_id = %s and category_id = %s;"
+        cursor.execute(query, (request_quantity, request_id, category_id))
+        self.conn.commit()
 
-    def delete(self, request_id, category_id):
-        return None
+    def delete(self, request_id):
+        cursor = self.conn.cursor()
+        query = "delete from request_category where request_id = %s;"
+        cursor.execute(query, (request_id,))
+        self.conn.commit()

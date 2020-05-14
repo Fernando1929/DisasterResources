@@ -128,10 +128,14 @@ class RequestHandler:
             request_date = json["request_date"]
             request_description = json["request_description"]
             request_status = "Pending"
+            resources = json["resources"]
 
-            if customer_id and request_title and request_date and request_status and request_description:
+            if customer_id and request_title and request_date and request_status and request_description and resources:
                 request_dao = RequestDAO()
+                request_category_dao = RequestCategoryDAO()
                 request_id = request_dao.update(request_id, customer_id, request_title, request_date, request_status, request_description)
+                for item in resources:
+                    request_category_dao.update(request_id, item["category_id"], item["request_quantity"])
                 result = self.build_request_attributes(request_id, customer_id, request_title, request_date, request_status, request_description)
                 return jsonify(Request = result), 200
             else:
@@ -139,8 +143,10 @@ class RequestHandler:
 
     def deleteRequest(self, request_id):
         request_dao = RequestDAO()
+        request_category_dao = RequestCategoryDAO()
         if not request_dao.getRequestById(request_id):
-            return jsonify(Error = "request not found."), 404
+            return jsonify(Error = "Request not found."), 404
         else:
+            request_category_dao.delete(request_id)
             request_dao.delete(request_id)
             return jsonify(DeleteStatus = "OK"), 200
