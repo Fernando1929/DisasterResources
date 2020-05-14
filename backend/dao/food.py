@@ -2,15 +2,13 @@ from config.dbconfig import pg_config
 import psycopg2
 
 class FoodDAO:
+
+    # food = food_id, resource_id, supplier_id, resource_category, food_name, food_brand, food_quantity, food_price, food_category, food_container, food_type, food_ounces, food_expdate
+    # food_type = food resource subtype: baby, canned or dry food
+    # food_category = food category/group: fruit, grains, vegetables, dairy, protein, fats, etc
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'], pg_config['user'], pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # food = food_id, resource_id, supplier_id, resource_category, food_name, food_brand, food_quantity, food_price, 
-    #           food_category, food_container, food_type, food_ounces, food_expdate
-
-    # food_type = food resource subtype: baby, canned or dry food
-    # food_category = food category/group: fruit, grains, vegetables, dairy, protein, fats, etc
 
     def getAllFoods(self):
         cursor = self.conn.cursor()
@@ -38,15 +36,6 @@ class FoodDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedFoods(self):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getFoodById(self, food_id):
         cursor = self.conn.cursor()
@@ -142,15 +131,6 @@ class FoodDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedFoodsBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "SELECT * FROM food NATURAL INNER JOIN resource NATURAL INNER JOIN resource_requests WHERE supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getFoodAddress(self, supplier_id):
         cursor = self.conn.cursor()

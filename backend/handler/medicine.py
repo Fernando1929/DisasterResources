@@ -76,15 +76,6 @@ class MedicineHandler:
             result_list.append(result)
         return jsonify(Medicines = result_list)
 
-    # def getAllRequestedMedicines(self):
-    #     dao = MedicineDAO()
-    #     med_list = dao.getAllRequestedMedicines()
-    #     result_list = []
-    #     for row in med_list:
-    #         result = self.build_medicine_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Medicines = result_list)
-
     def getMedicineById(self, med_id):
         dao = MedicineDAO()
         row = dao.getMedicineById(med_id)

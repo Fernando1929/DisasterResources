@@ -74,15 +74,6 @@ class HeavyEquipHandler:
             result_list.append(result)
         return jsonify(HeavyEquipment = result_list)
 
-    # def getAllRequestedHeavyEquip(self):
-    #     dao = HeavyEquipDAO()
-    #     hequip_list = dao.getAllRequestedHeavyEquip()
-    #     result_list = []
-    #     for row in hequip_list:
-    #         result = self.build_hequip_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(HeavyEquipment = result_list)
-
     def getHeavyEquipById(self, hequip_id):
         dao = HeavyEquipDAO()
         row = dao.getHeavyEquipById(hequip_id)
@@ -142,20 +133,6 @@ class HeavyEquipHandler:
                 result = self.build_hequip_dict(row)
                 result_list.append(result)
             return jsonify(HeavyEquipment = result_list)
-
-    # def getAllRequestedHeavyEquipBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier not found."), 404
-    #     else:
-    #         hequip_list = []
-    #         result_list = []
-    #         hequip_dao = HeavyEquipDAO()
-    #         hequip_list = hequip_dao.getAllRequestedHeavyEquipBySupplierId(supplier_id)
-    #         for row in hequip_list:
-    #             result = self.build_hequip_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(HeavyEquipment = result_list)
 
     def searchHeavyEquip(self, args):
         hequip_brand = args.get("hequip_brand")

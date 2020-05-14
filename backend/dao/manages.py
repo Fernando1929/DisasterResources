@@ -13,18 +13,15 @@ class ManagesDAO:
         query = "insert into manages(admin_id, user_id) values (%s, %s);"
         cursor.execute(query, (user_id, admin_id))
         self.conn.commit()
-        return None #Maybe return the tuple
 
-    def update(self, admin_id, user_id): #Verify implementation Maybe Not necesary (Verify later)
+    def update(self, admin_id, user_id):
         cursor = self.conn.cursor()
         query = "update manages set user_id = %s where admin_id = %s;"
         cursor.execute(query, (user_id, admin_id))
         self.conn.commit()
-        return None #Maybe return tuple 
 
-    def delete(self, admin_id, user_id): #Verify implementation
+    def delete(self, admin_id, user_id):
         cursor = self.conn.cursor()
         query = "delete from manages where user_id = %s and admin_id = %s;"
         cursor.execute(query, (user_id, admin_id))
         self.conn.commit()
-        return None #Maybe return the tuple

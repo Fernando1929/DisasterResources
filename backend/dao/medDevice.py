@@ -1,13 +1,13 @@
 from config.dbconfig import pg_config
 import psycopg2
 class MedDeviceDAO:
+
+    # med_device = mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-
-    # med_device = mdevice_id, resource_id, supplier_id, category, mdevice_name, mdevice_brand, mdevice_quantity, mdevice_price, mdevice_type, mdevice_model, mdevice_condition, mdevice_power
 
     def getAllMedDevices(self):
         cursor = self.conn.cursor()
@@ -35,15 +35,6 @@ class MedDeviceDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedMedDevices(self):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from medical_device natural inner join resource natural inner join resource_requests;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getMedDeviceById(self, med_device_id):
         cursor = self.conn.cursor()
@@ -112,15 +103,6 @@ class MedDeviceDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    # def getAllRequestedMedDevicesBySupplierId(self, supplier_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from medical_device natural inner join resource natural inner join resource_requests where supplier_id = %s;"
-    #     cursor.execute(query, (supplier_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
 
     def getMedDeviceAddress(self, supplier_id):
         cursor = self.conn.cursor()
