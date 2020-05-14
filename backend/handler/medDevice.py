@@ -231,7 +231,7 @@ class MedDeviceHandler:
             med_device_condition = json["med_device_condition"]
             med_device_power_type = json["med_device_power_type"]
             
-            if supplier_id and category_id and med_device_name and med_device_brand and med_device_quantity and med_device_price and med_device_type and med_device_model and med_device_condition and med_device_power_type:
+            if supplier_id and category_id and med_device_name and med_device_brand and med_device_quantity and (med_device_price>=0) and med_device_type and med_device_model and med_device_condition and med_device_power_type:
                 resource_id = med_device_dao.update(med_device_id, med_device_type, med_device_model, med_device_condition, med_device_power_type)
                 resource_dao = ResourceDAO()
                 resource_dao.update(resource_id, supplier_id, category_id, med_device_name, med_device_brand, med_device_quantity, med_device_price)
