@@ -136,20 +136,6 @@ class MedicineHandler:
                 result_list.append(result)
             return jsonify(Medicines = result_list)
 
-    # def getAllRequestedMedicinesBySupplierId(self, supplier_id):
-    #     supplier_dao = SupplierDAO()
-    #     if not supplier_dao.getSupplierById(supplier_id):
-    #         return jsonify(Error = "Supplier not found."), 404
-    #     else:
-    #         med_list = []
-    #         result_list = []
-    #         med_dao = MedicineDAO()
-    #         med_list = med_dao.getAllRequestedMedicinesBySupplierId(supplier_id)
-    #         for row in med_list:
-    #             result = self.build_medicine_dict(row)
-    #             result_list.append(result)
-    #         return jsonify(Medicines = result_list)
-
     def getMedicineAddress(self, med_id):
         med_dao = MedicineDAO()
         try:
