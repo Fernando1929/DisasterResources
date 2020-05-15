@@ -100,7 +100,9 @@ class AdminHandler:
             return jsonify(Error = "Admin not found."), 404
         else:
             dao_user = UserDAO()
+            dao_phone = UserPhoneDAO()
             user_id = dao_admin.delete(admin_id)
+            dao_phone.delete(user_id)
             dao_user.delete(user_id)
             return jsonify(DeleteStatus = "OK"), 200
 
@@ -119,7 +121,9 @@ class AdminHandler:
             if admin_firstname and admin_lastname and admin_date_birth and admin_email and admin_phone and admin_phone_id:
                 user_id = dao_admin.update(admin_id)
                 dao_user = UserDAO()
-                dao_user.update(user_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone)
+                dao_user.update(user_id, admin_firstname, admin_lastname, admin_date_birth, admin_email)
+                dao_phone = UserPhoneDAO()
+                dao_phone.update(user_id, admin_phone) 
                 result = self.build_admin_attributes(user_id, admin_id, admin_firstname, admin_lastname, admin_date_birth, admin_email, admin_phone_id, admin_phone)
                 return jsonify(Admin = result), 200
             else:
