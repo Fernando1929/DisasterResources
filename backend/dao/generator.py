@@ -114,7 +114,7 @@ class GeneratorDAO:
     
     def getGeneratorAddress(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT resource_id, generator_id, power_capacity, power_condition, generator_fuel, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result

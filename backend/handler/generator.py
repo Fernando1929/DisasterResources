@@ -155,7 +155,7 @@ class GeneratorHandler:
     def getGeneratorAddress(self, generator_id):
         generator_dao = GeneratorDAO()
         try:
-            supplier_id = generator_dao.getGeneratorById(generator_id)[2]
+            supplier_id = generator_dao.getGeneratorById(generator_id)[5]
         except Exception:
             return jsonify(Error = "Generator not found."), 404
         supplier_dao = SupplierDAO()
@@ -218,7 +218,7 @@ class GeneratorHandler:
             if supplier_id and category_id and generator_name  and generator_brand and generator_quantity and (generator_price>=0) and power_capacity and power_condition and generator_fuel:
                 resource_id = generator_dao.update(generator_id, power_capacity, power_condition, generator_fuel)
                 res_dao = ResourceDAO()
-                res_dao.update(resource_id, supplier_id, generator_name, generator+_brand, generator_quantity, generator_price)
+                res_dao.update(resource_id, supplier_id, category_id, generator_name, generator_brand, generator_quantity, generator_price)
                 result = self.build_generator_attributes(supplier_id, resource_id, generator_id, category_id, generator_name, generator_brand, generator_quantity, generator_price, power_capacity, power_condition, generator_fuel)
                 return jsonify(Generator = result), 200
             else:
