@@ -22,8 +22,8 @@ class RequestHandler:
         result['customer_id'] = customer_id 
         result['request_title'] = request_title
         result['request_date'] = request_date
-        result['request_status'] = request_status
         result['request_description'] = request_description
+        result['request_status'] = request_status
         result['resources'] = resources
         return result
 
@@ -127,16 +127,16 @@ class RequestHandler:
             request_title = json["request_title"]
             request_date = json["request_date"]
             request_description = json["request_description"]
-            request_status = "Pending"
+            request_status = json['request_status']
             resources = json["resources"]
 
             if customer_id and request_title and request_date and request_status and request_description and resources:
                 request_dao = RequestDAO()
                 request_category_dao = RequestCategoryDAO()
-                request_id = request_dao.update(request_id, customer_id, request_title, request_date, request_status, request_description)
+                request_id = request_dao.update(request_id, customer_id, request_title, request_date, request_description, request_status)
                 for item in resources:
                     request_category_dao.update(request_id, item["category_id"], item["request_quantity"])
-                result = self.build_request_attributes(request_id, customer_id, request_title, request_date, request_status, request_description)
+                result = self.build_request_attributes(request_id, customer_id, request_title, request_date, request_description, request_status, resources)
                 return jsonify(Request = result), 200
             else:
                 return jsonify(Error = "Unexpected attributes in update request"), 400
