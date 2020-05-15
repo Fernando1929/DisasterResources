@@ -111,7 +111,7 @@ class CustomerHandler:
                 user_dao = UserDAO()
                 user_dao.update(user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email)
                 dao_phone = UserPhoneDAO()
-                customer_phone_id = dao_phone.update(user_id, customer_phone) 
+                dao_phone.update(user_id, customer_phone) 
                 result = self.build_customer_attributes(customer_id, user_id, customer_firstname, customer_lastname, customer_date_birth, customer_email, customer_phone_id, customer_phone)
                 return jsonify(Customer = result), 200
             else:

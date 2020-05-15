@@ -158,7 +158,7 @@ class SupplierHandler:
                 user_id = dao_supplier.update(supplier_id)
                 dao_user.update(user_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email)
                 dao_phone = UserPhoneDAO()
-                supplier_phone_id = dao_phone.update(user_id, supplier_phone) 
+                dao_phone.update(user_id, supplier_phone) 
                 result = self.build_supplier_attributes(user_id, supplier_id, supplier_firstname, supplier_lastname, supplier_date_birth, supplier_email, supplier_phone_id, supplier_phone)
                 return jsonify(Supplier = result), 200
             else:
