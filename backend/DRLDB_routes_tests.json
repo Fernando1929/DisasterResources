@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d0930735-4c87-4dec-807c-44effe916335",
+		"_postman_id": "8fe9b067-2965-4220-b035-a254919430d4",
 		"name": "DB Project Final Tests v3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -537,7 +537,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "fbdb2db0-6cd9-4fa9-8dd0-a359555d5ace",
+						"id": "26e53318-1471-4f2d-81de-33fe4232433f",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -547,7 +547,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ad39d808-29d2-445a-8a0f-4983e8f3923b",
+						"id": "316ca42d-604c-424c-b02c-e3c4b3d68a65",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1357,7 +1357,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "82e74865-094a-4390-a4ec-378247ea6b9a",
+						"id": "9efc75a1-24fb-40cb-9de3-b8dce811d6db",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1367,7 +1367,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "620d2931-5ac4-4faf-881e-d5db961c67dc",
+						"id": "71897595-1507-40cf-ae12-6ea084cd3c45",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1810,7 +1810,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/customer/orders/1/payment",
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders/5/payment",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1823,7 +1823,7 @@
 								"DRL",
 								"customer",
 								"orders",
-								"1",
+								"5",
 								"payment"
 							]
 						}
@@ -1836,7 +1836,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/customer/orders/1/resources",
+							"raw": "http://127.0.0.1:5000/DRL/customer/orders/5/resources",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1849,7 +1849,7 @@
 								"DRL",
 								"customer",
 								"orders",
-								"1",
+								"5",
 								"resources"
 							]
 						}
@@ -3030,7 +3030,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/food/2",
+							"raw": "http://127.0.0.1:5000/DRL/resources/food/8",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -3043,7 +3043,7 @@
 								"DRL",
 								"resources",
 								"food",
-								"2"
+								"8"
 							]
 						}
 					},
@@ -4443,7 +4443,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/2/address",
+							"raw": "http://127.0.0.1:5000/DRL/resources/heavyequipment/5/address",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -4456,7 +4456,7 @@
 								"DRL",
 								"resources",
 								"heavyequipment",
-								"2",
+								"5",
 								"address"
 							]
 						}
@@ -4695,7 +4695,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/2",
+							"raw": "http://127.0.0.1:5000/DRL/resources/medicaldevice/7",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -4708,7 +4708,7 @@
 								"DRL",
 								"resources",
 								"medicaldevice",
-								"2"
+								"7"
 							]
 						}
 					},
@@ -5109,7 +5109,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/2/address",
+							"raw": "http://127.0.0.1:5000/DRL/resources/cloth/5/address",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -5122,7 +5122,7 @@
 								"DRL",
 								"resources",
 								"cloth",
-								"2",
+								"5",
 								"address"
 							]
 						}
@@ -5546,7 +5546,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/battery/2/address",
+							"raw": "http://127.0.0.1:5000/DRL/resources/battery/5/address",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -5559,7 +5559,7 @@
 								"DRL",
 								"resources",
 								"battery",
-								"2",
+								"5",
 								"address"
 							]
 						}
@@ -5720,7 +5720,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/generator/2",
+							"raw": "http://127.0.0.1:5000/DRL/resources/generator/5",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -5733,7 +5733,7 @@
 								"DRL",
 								"resources",
 								"generator",
-								"2"
+								"5"
 							]
 						}
 					},
@@ -6182,7 +6182,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/ice?ice_brand=El angel",
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice?ice_brand=Crystal Lake Ice Company",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -6199,7 +6199,7 @@
 							"query": [
 								{
 									"key": "ice_brand",
-									"value": "El angel"
+									"value": "Crystal Lake Ice Company"
 								}
 							]
 						}
@@ -6212,7 +6212,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/DRL/resources/ice/2/address",
+							"raw": "http://127.0.0.1:5000/DRL/resources/ice/4/address",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -6225,7 +6225,7 @@
 								"DRL",
 								"resources",
 								"ice",
-								"2",
+								"4",
 								"address"
 							]
 						}
