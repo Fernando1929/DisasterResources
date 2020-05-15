@@ -149,7 +149,7 @@ class IceHandler:
     def getIceAddress(self,ice_id):
         ice_dao = IceDAO()
         try:
-            supplier_id = ice_dao.getIceById(ice_id)[1]
+            supplier_id = ice_dao.getIceById(ice_id)[3]
         except Exception:
             return jsonify(Error = "Ice not found."), 404
         supplier_dao = SupplierDAO()
@@ -178,7 +178,7 @@ class IceHandler:
             resource_id = resource_dao.insert(supplier_id, category_id, ice_name, ice_brand, ice_quantity, ice_price)
             ice_dao = IceDAO()
             ice_id = ice_dao.insert(resource_id, ice_weight)
-            result = self.build_ice_attributes(ice_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price, ice_weight)
+            result = self.build_ice_attributes(ice_id, supplier_id, resource_id, category_id, ice_name, ice_brand, ice_quantity, ice_price, ice_weight)
             return jsonify(Ice = result), 201
         else:
             return jsonify(Error = "Unexpected attributes in post request"), 400

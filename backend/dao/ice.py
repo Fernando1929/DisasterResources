@@ -96,7 +96,7 @@ class IceDAO:
     
     def getIceAddress(self, supplier_id): 
         cursor = self.conn.cursor()
-        query = "SELECT resource_id, ice_id, ice_weight, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM users NATURAL INNER JOIN supplier NATURAL INNER JOIN Address WHERE supplier_id = %s;"
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM users NATURAL INNER JOIN supplier NATURAL INNER JOIN Address WHERE supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = cursor.fetchone()
         return result
