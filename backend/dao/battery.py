@@ -113,10 +113,10 @@ class BatteryDAO:
             result.append(row)
         return result
     
-    def getBatteryAddress(self, user_id):
+    def getBatteryAddress(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "SELECT resource_id, battery_id, power_capacity, power_condition, battery_type, supplier_id, category_id, resource_name, resource_brand, resource_quantity, resource_price FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;" 
-        cursor.execute(query,(user_id,))
+        query = "SELECT address_id, user_id, addressline, city, state_province, country, zipcode FROM address NATURAL INNER JOIN supplier WHERE supplier_id = %s;" 
+        cursor.execute(query,(supplier_id,))
         result = cursor.fetchone()
         return result
 
