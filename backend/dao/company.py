@@ -10,7 +10,7 @@ class CompanyDAO:
     
     def getAllCompanies(self):
         cursor = self.conn.cursor()
-        query = "Select * from company;"
+        query = "Select company_id, company_name, company_address, company_phone from company;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,14 +19,14 @@ class CompanyDAO:
 
     def getCompanyById(self, company_id):
         cursor = self.conn.cursor()
-        query = "Select * from company where company_id = %s;"
+        query = "Select company_id, company_name, company_address, company_phone from company where company_id = %s;"
         cursor.execute(query,(company_id,))
         result = cursor.fetchone()
         return result
 
     def getCompanyByName(self, company_name):
         cursor = self.conn.cursor()
-        query = "Select * from company where company_name = %s;"
+        query = "Select company_id, company_name, company_address, company_phone from company where company_name = %s;"
         cursor.execute(query,(company_name,))
         result = []
         for row in cursor:
@@ -35,7 +35,7 @@ class CompanyDAO:
 
     def getCompanyByAddress(self, company_address):
         cursor = self.conn.cursor()
-        query = "Select * from company where company_address = %s;"
+        query = "Select company_id, company_name, company_address, company_phone from company where company_address = %s;"
         cursor.execute(query,(company_address,))
         result = []
         for row in cursor:
@@ -44,7 +44,7 @@ class CompanyDAO:
 
     def getCompanyByPhone(self, company_phone): #needs test
         cursor = self.conn.cursor()
-        query = "Select * from company where company_phone = %s;"
+        query = "Select company_id, company_name, company_address, company_phone from company where company_phone = %s;"
         cursor.execute(query,(company_phone,))
         result = []
         for row in cursor:
@@ -53,7 +53,7 @@ class CompanyDAO:
 
     def getCompanyBySupplierId(self, supplier_id):
         cursor = self.conn.cursor()
-        query = "Select * from company Natural Inner Join represents where supplier_id = %s;"
+        query = "Select company_id, company_name, company_address, company_phone from company Natural Inner Join represents where supplier_id = %s;"
         cursor.execute(query,(supplier_id,))
         result = []
         for row in cursor:

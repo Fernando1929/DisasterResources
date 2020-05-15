@@ -89,7 +89,7 @@ class AdminDAO:
 
     def update(self, admin_id):
         cursor = self.conn.cursor()
-        query = "Select user_id from admin where suppliadmin_ider_id = %s;"
+        query = "Select user_id from admin where admin_id = %s;"
         cursor.execute(query,(admin_id,))
         user_id = cursor.fetchone()[0]
         return user_id

@@ -77,7 +77,7 @@ class OrderDAO:
     def update(self, order_id, customer_id, payment_id, request_id, order_date, order_price, order_status):
         cursor = self.conn.cursor()
         query = "update orders set customer_id = %s, payment_id = %s, request_id = %s, order_date = %s, order_price = %s, order_status = %s where order_id = %s"
-        cursor.execute(query,(customer_id, payment_id, request_id, order_date, order_price, order_status, order_id,))
+        cursor.execute(query,(customer_id, payment_id, request_id, order_date, order_price, order_status, order_id))
         self.conn.commit()
         return order_id
 

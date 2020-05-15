@@ -163,8 +163,8 @@ class OrderHandler:
         if not order_dao.getOrderById(order_id):
             return jsonify(Error = "Order not found."), 404
         else:
-            order_dao.delete(order_id)
             resourceOrders_dao.delete(order_id)
+            order_dao.delete(order_id)
             return jsonify(DeleteStatus = "OK"), 200
 
     def updateOrder(self, order_id, json):
@@ -176,7 +176,6 @@ class OrderHandler:
             customer_id = json['customer_id']
             payment_id = json['payment_id']
             request_id = json['request_id']
-            order_id = json['order_id']
             order_date = json['order_date']
             order_price = json['order_price']
             order_status = json['order_status']
