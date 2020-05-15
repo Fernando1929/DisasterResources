@@ -10,7 +10,7 @@ class OrderDAO:
 
     def getAllOrders(self):
         cursor = self.conn.cursor() 
-        query = "select order_id, customer_id, payment_id, request_id, order_date, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource;" #Maybe añadir el Join de con category a ver discutirlo mañana
+        query = "select order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resource_id, resource_name, order_quantity, discount from orders natural inner join resource_orders natural inner join resource;" #Maybe añadir el Join de con category a ver discutirlo mañana
         cursor.execute(query)
         result = []
         for row in cursor:

@@ -2,6 +2,7 @@ from flask import jsonify
 from dao.order import OrderDAO
 from dao.customer import CustomerDAO
 from dao.resourceOrders import ResourceOrdersDAO
+from dao.request import RequestDAO
 from handler.athMovil import AthMovilHandler
 from handler.creditCard import CreditCardHandler
 from handler.paypal import PaypalHandler
@@ -46,10 +47,10 @@ class OrderHandler:
         index = 1
         for row in request_list:
             if index < len(request_list) and row[0] == request_list[index][0]:
-                resources_list.append(row[6:])
+                resources_list.append(row[7:])
             else:
-                resources_list.append(row[6:])
-                result = self.build_order_dict(row[:6], self.createResourceDict(resources_list))
+                resources_list.append(row[7:])
+                result = self.build_order_dict(row[:7], self.createResourceDict(resources_list))
                 result_list.append(result)
                 resources_list.clear()
             index += 1
@@ -151,6 +152,11 @@ class OrderHandler:
 
             for resource in resources:
                 resourceOrders_dao.insert(order_id, resource["resource_id"], resource["order_quantity"], resource["discount"])
+
+            if request_id:
+                request_dao = RequestDAO()
+                request = request_dao.getRequestById(request_id)
+                request_dao.update(request_id, request[0][1], request[0][2], request[0][3], request[0][4], "Accepted")
 
             result = self.build_order_attributes(order_id, customer_id, payment_id, request_id, order_date, order_price, order_status, resources)
             return jsonify(Order = result), 201
