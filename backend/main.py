@@ -894,7 +894,3 @@ def getAllReservedMedDevices():
 @app.route('/DRL/resources/medicaldevice/reserved/supplier/<int:supplier_id>', methods = ['GET'])
 def getAllReservedMedDevicesBySupplierId(supplier_id):
     return MedDeviceHandler().getAllReservedMedDevicesBySupplierId(supplier_id)
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
